@@ -3,75 +3,141 @@
 
 package dev.octri.showcase.resend
 
-
 class DomainsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a domain for sending or receiving email. Supply `name` and configure the sending region, tracking options, TLS mode, and capabilities as needed; at least one domain capability must be enabled.
+     * Creates a domain for sending or receiving email. Supply `name` and configure the sending
+     * region, tracking options, TLS mode, and capabilities as needed; at least one domain
+     * capability must be enabled.
      */
-    fun create(request: dev.octri.showcase.resend.methods.Domains.DomainsCreateRequest, options: RequestOptions? = null): CreateDomainResponse {
-        return dev.octri.showcase.resend.methods.Domains.domainsCreate(clientConfig, request, options)
+    fun create(
+        request: dev.octri.showcase.resend.methods.Domains.DomainsCreateRequest,
+        options: RequestOptions? = null,
+    ): CreateDomainResponse {
+        return dev.octri.showcase.resend.methods.Domains.domainsCreate(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Lists domains in the account. Use `limit` to control the number of results and `after` or `before` to navigate the cursor-based list.
+     * Lists domains in the account. Use `limit` to control the number of results and `after` or
+     * `before` to navigate the cursor-based list.
      */
-    fun list(limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListDomainsResponse {
-        return dev.octri.showcase.resend.methods.Domains.domainsList(clientConfig, limit, after, before, options)
+    fun list(
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListDomainsResponse {
+        return dev.octri.showcase.resend.methods.Domains.domainsList(
+            clientConfig,
+            limit,
+            after,
+            before,
+            options,
+        )
     }
 
     /**
-     * Retrieves a domain by its identifier. Use `domain_id` to select the domain and view its status, configuration, capabilities, and DNS records.
+     * Retrieves a domain by its identifier. Use `domain_id` to select the domain and view its
+     * status, configuration, capabilities, and DNS records.
      */
     fun get(domainId: String, options: RequestOptions? = null): Domain {
         return dev.octri.showcase.resend.methods.Domains.domainsGet(clientConfig, domainId, options)
     }
 
     /**
-     * Updates the configuration of an existing domain. Supply only the settings you want to change, such as tracking options, TLS mode, capabilities, or the tracking subdomain.
+     * Updates the configuration of an existing domain. Supply only the settings you want to change,
+     * such as tracking options, TLS mode, capabilities, or the tracking subdomain.
      */
-    fun update(request: dev.octri.showcase.resend.methods.Domains.DomainsUpdateRequest, options: RequestOptions? = null): UpdateDomainResponseSuccess {
-        return dev.octri.showcase.resend.methods.Domains.domainsUpdate(clientConfig, request, options)
+    fun update(
+        request: dev.octri.showcase.resend.methods.Domains.DomainsUpdateRequest,
+        options: RequestOptions? = null,
+    ): UpdateDomainResponseSuccess {
+        return dev.octri.showcase.resend.methods.Domains.domainsUpdate(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Deletes an existing domain. Use `domain_id` to select the domain to remove; the response indicates whether deletion succeeded.
+     * Deletes an existing domain. Use `domain_id` to select the domain to remove; the response
+     * indicates whether deletion succeeded.
      */
     fun remove(domainId: String, options: RequestOptions? = null): DeleteDomainResponse {
-        return dev.octri.showcase.resend.methods.Domains.domainsRemove(clientConfig, domainId, options)
+        return dev.octri.showcase.resend.methods.Domains.domainsRemove(
+            clientConfig,
+            domainId,
+            options,
+        )
     }
 
     /**
-     * Triggers verification of a domain's DNS records, including DKIM, SPF, and the tracking CNAME when a tracking subdomain is configured. Use this operation after adding the required DNS records to check the domain's verification status.
+     * Triggers verification of a domain's DNS records, including DKIM, SPF, and the tracking CNAME
+     * when a tracking subdomain is configured. Use this operation after adding the required DNS
+     * records to check the domain's verification status.
      *
-     * Triggers verification of the domain's DNS records including DKIM, SPF, and the tracking CNAME (if a tracking subdomain is configured).
+     * Triggers verification of the domain's DNS records including DKIM, SPF, and the tracking CNAME
+     * (if a tracking subdomain is configured).
      */
     fun verify(domainId: String, options: RequestOptions? = null): VerifyDomainResponse {
-        return dev.octri.showcase.resend.methods.Domains.domainsVerify(clientConfig, domainId, options)
+        return dev.octri.showcase.resend.methods.Domains.domainsVerify(
+            clientConfig,
+            domainId,
+            options,
+        )
     }
 
     /**
-     * Start a claim for a domain that another Resend account has already verified. The domain is recreated under your account with fresh DKIM keys, so the previous account's DNS records cannot be reused. Returns a TXT record to add to your DNS to prove ownership. Uses the same request body as creating a domain.
+     * Start a claim for a domain that another Resend account has already verified. The domain is
+     * recreated under your account with fresh DKIM keys, so the previous account's DNS records
+     * cannot be reused. Returns a TXT record to add to your DNS to prove ownership. Uses the same
+     * request body as creating a domain.
      */
-    fun createClaim(request: dev.octri.showcase.resend.methods.Domains.DomainsCreateClaimRequest, options: RequestOptions? = null): DomainClaim {
-        return dev.octri.showcase.resend.methods.Domains.domainsCreateClaim(clientConfig, request, options)
+    fun createClaim(
+        request: dev.octri.showcase.resend.methods.Domains.DomainsCreateClaimRequest,
+        options: RequestOptions? = null,
+    ): DomainClaim {
+        return dev.octri.showcase.resend.methods.Domains.domainsCreateClaim(
+            clientConfig,
+            request,
+            options,
+        )
     }
 
     /**
-     * Retrieves the latest claim for the placeholder domain created by a domain claim. Use the claim status and TXT `record` details to track verification and prove ownership of the claimed domain.
+     * Retrieves the latest claim for the placeholder domain created by a domain claim. Use the
+     * claim status and TXT `record` details to track verification and prove ownership of the
+     * claimed domain.
      *
      * Retrieve the latest claim for the placeholder domain created by the claim.
      */
     fun getClaim(domainId: String, options: RequestOptions? = null): DomainClaim {
-        return dev.octri.showcase.resend.methods.Domains.domainsGetClaim(clientConfig, domainId, options)
+        return dev.octri.showcase.resend.methods.Domains.domainsGetClaim(
+            clientConfig,
+            domainId,
+            options,
+        )
     }
 
     /**
-     * Triggers asynchronous DNS verification and ownership transfer for a domain claim. The claim remains `pending` while verification runs, so retrieve the claim to check its status. Once the claim is `completed`, add the transferred domain's new DKIM records to DNS and verify them with the standard domain verification endpoint.
+     * Triggers asynchronous DNS verification and ownership transfer for a domain claim. The claim
+     * remains `pending` while verification runs, so retrieve the claim to check its status. Once
+     * the claim is `completed`, add the transferred domain's new DKIM records to DNS and verify
+     * them with the standard domain verification endpoint.
      *
-     * Trigger asynchronous DNS verification and ownership transfer for a domain claim. The claim stays `pending` while verification runs; poll the retrieve endpoint for status. Once `completed`, the transferred domain has new DKIM records that must be added to DNS and verified via the standard domain verify endpoint.
+     * Trigger asynchronous DNS verification and ownership transfer for a domain claim. The claim
+     * stays `pending` while verification runs; poll the retrieve endpoint for status. Once
+     * `completed`, the transferred domain has new DKIM records that must be added to DNS and
+     * verified via the standard domain verify endpoint.
      */
     fun verifyClaim(domainId: String, options: RequestOptions? = null): DomainClaim {
-        return dev.octri.showcase.resend.methods.Domains.domainsVerifyClaim(clientConfig, domainId, options)
+        return dev.octri.showcase.resend.methods.Domains.domainsVerifyClaim(
+            clientConfig,
+            domainId,
+            options,
+        )
     }
-
 }

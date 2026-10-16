@@ -5,24 +5,14 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `WebhookEventClick` API schema.
- */
+/** Typed representation of the `WebhookEventClick` API schema. */
 data class WebhookEventClick(
-    /**
-     * IP address of the user who clicked the link.
-     */
+    /** IP address of the user who clicked the link. */
     val ipAddress: String,
-    /**
-     * The URL that was clicked.
-     */
+    /** The URL that was clicked. */
     val link: String,
-    /**
-     * Timestamp when the click occurred.
-     */
+    /** Timestamp when the click occurred. */
     val timestamp: OffsetDateTime,
-    /**
-     * User agent string of the browser that clicked the link.
-     */
-    val userAgent: String
+    /** User agent string of the browser that clicked the link. */
+    val userAgent: String,
 )

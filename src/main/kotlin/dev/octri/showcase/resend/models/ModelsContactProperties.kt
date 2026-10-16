@@ -3,150 +3,94 @@
 
 package dev.octri.showcase.resend.models
 
-/**
- * Typed representation of the `CreateContactPropertyOptions` API schema.
- */
+/** Typed representation of the `CreateContactPropertyOptions` API schema. */
 data class CreateContactPropertyOptions(
     /**
-     * The property key. Max length is 50 characters. Only alphanumeric characters and underscores are allowed.
+     * The property key. Max length is 50 characters. Only alphanumeric characters and underscores
+     * are allowed.
      */
     val key: String,
-    /**
-     * The property type.
-     */
+    /** The property type. */
     val type: CreateContactPropertyOptionsTypeEnum,
     /**
-     * The default value to use when the property is not set for a contact. Must match the type specified in the type field.
+     * The default value to use when the property is not set for a contact. Must match the type
+     * specified in the type field.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("fallback_value") val fallbackValue: Any? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("fallback_value") val fallbackValue: Any? = null,
 )
 
-/**
- * Typed representation of the `CreateContactPropertyResponseSuccess` API schema.
- */
+/** Typed representation of the `CreateContactPropertyResponseSuccess` API schema. */
 data class CreateContactPropertyResponseSuccess(
-    /**
-     * The ID of the contact property.
-     */
+    /** The ID of the contact property. */
     val id: String? = null,
-    /**
-     * The object type of the response.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null
+    /** The object type of the response. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
 )
 
-/**
- * Typed representation of the `GetContactPropertyResponseSuccess` API schema.
- */
+/** Typed representation of the `GetContactPropertyResponseSuccess` API schema. */
 data class GetContactPropertyResponseSuccess(
-    /**
-     * The object type.
-     */
+    /** The object type. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * The ID of the contact property.
-     */
+    /** The ID of the contact property. */
     val id: String? = null,
-    /**
-     * The property key.
-     */
+    /** The property key. */
     val key: String? = null,
-    /**
-     * The property type.
-     */
+    /** The property type. */
     val type: String? = null,
-    /**
-     * The default value when the property is not set for a contact.
-     */
+    /** The default value when the property is not set for a contact. */
     @com.fasterxml.jackson.annotation.JsonProperty("fallback_value") val fallbackValue: Any? = null,
-    /**
-     * Timestamp indicating when the contact property was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
+    /** Timestamp indicating when the contact property was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
 )
 
-/**
- * Required object value serialized in the `data[]` wire field.
- */
+/** Required object value serialized in the `data[]` wire field. */
 data class ListContactPropertiesResponseSuccessDataItem(
-    /**
-     * Unique identifier for the contact property.
-     */
+    /** Unique identifier for the contact property. */
     val id: String? = null,
-    /**
-     * The property key.
-     */
+    /** The property key. */
     val key: String? = null,
-    /**
-     * The property type.
-     */
+    /** The property type. */
     val type: String? = null,
-    /**
-     * The default value when the property is not set for a contact.
-     */
+    /** The default value when the property is not set for a contact. */
     @com.fasterxml.jackson.annotation.JsonProperty("fallback_value") val fallbackValue: Any? = null,
-    /**
-     * Timestamp indicating when the contact property was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
+    /** Timestamp indicating when the contact property was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
 )
 
-/**
- * Typed representation of the `ListContactPropertiesResponseSuccess` API schema.
- */
+/** Typed representation of the `ListContactPropertiesResponseSuccess` API schema. */
 data class ListContactPropertiesResponseSuccess(
-    /**
-     * Type of the response object.
-     */
+    /** Type of the response object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * Indicates if there are more results available.
-     */
+    /** Indicates if there are more results available. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /**
-     * Array containing contact property information.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ListContactPropertiesResponseSuccessDataItem>? = null
+    /** Array containing contact property information. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: List<ListContactPropertiesResponseSuccessDataItem>? = null,
 )
 
-/**
- * Typed representation of the `RemoveContactPropertyResponseSuccess` API schema.
- */
+/** Typed representation of the `RemoveContactPropertyResponseSuccess` API schema. */
 data class RemoveContactPropertyResponseSuccess(
-    /**
-     * The ID of the contact property.
-     */
+    /** The ID of the contact property. */
     val id: String? = null,
-    /**
-     * The object type.
-     */
+    /** The object type. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * Indicates whether the contact property was successfully deleted.
-     */
-    val deleted: Boolean? = null
+    /** Indicates whether the contact property was successfully deleted. */
+    val deleted: Boolean? = null,
 )
 
-/**
- * Typed representation of the `UpdateContactPropertyOptions` API schema.
- */
+/** Typed representation of the `UpdateContactPropertyOptions` API schema. */
 data class UpdateContactPropertyOptions(
     /**
-     * The default value to use when the property is not set for a contact. Must match the type of the property.
+     * The default value to use when the property is not set for a contact. Must match the type of
+     * the property.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("fallback_value") val fallbackValue: Any? = null
 )
 
-/**
- * Typed representation of the `UpdateContactPropertyResponseSuccess` API schema.
- */
+/** Typed representation of the `UpdateContactPropertyResponseSuccess` API schema. */
 data class UpdateContactPropertyResponseSuccess(
-    /**
-     * The ID of the contact property.
-     */
+    /** The ID of the contact property. */
     val id: String? = null,
-    /**
-     * The object type.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null
+    /** The object type. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
 )

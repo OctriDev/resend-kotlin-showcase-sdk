@@ -5,118 +5,72 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `ListInboxDraftsResponseSuccess` API schema.
- */
+/** Typed representation of the `ListInboxDraftsResponseSuccess` API schema. */
 data class ListInboxDraftsResponseSuccess(
-    /**
-     * Type of the response object.
-     */
+    /** Type of the response object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * Indicates if there are more results available.
-     */
+    /** Indicates if there are more results available. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /**
-     * The unsent drafts on this page, most recently updated first.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<InboxDraftListItem>
+    /** The unsent drafts on this page, most recently updated first. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<InboxDraftListItem>,
 )
 
-/**
- * Required object value serialized in the `data[]` wire field.
- */
+/** Required object value serialized in the `data[]` wire field. */
 data class ListInboxesResponseSuccessDataItem(
-    /**
-     * The ID of the inbox.
-     */
+    /** The ID of the inbox. */
     val id: String,
-    /**
-     * Internal name for the inbox. Recipients do not see it.
-     */
+    /** Internal name for the inbox. Recipients do not see it. */
     @com.fasterxml.jackson.annotation.JsonProperty("name", required = true) val name: String?,
-    /**
-     * The address of the inbox.
-     */
+    /** The address of the inbox. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String,
-    /**
-     * The name recipients see when mail is sent from this inbox. `null` when not set.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("from_name", required = true) val fromName: String?,
-    /**
-     * The number of unread threads in the Inbox folder.
-     */
+    /** The name recipients see when mail is sent from this inbox. `null` when not set. */
+    @com.fasterxml.jackson.annotation.JsonProperty("from_name", required = true)
+    val fromName: String?,
+    /** The number of unread threads in the Inbox folder. */
     val unread: Long,
     /**
-     * ISO 8601 timestamp of the newest received email in the Inbox folder. `null` when the folder has no received email.
+     * ISO 8601 timestamp of the newest received email in the Inbox folder. `null` when the folder
+     * has no received email.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_received", required = true) val lastReceived: OffsetDateTime?
+    @com.fasterxml.jackson.annotation.JsonProperty("last_received", required = true)
+    val lastReceived: OffsetDateTime?,
 )
 
-/**
- * Typed representation of the `ListInboxesResponseSuccess` API schema.
- */
+/** Typed representation of the `ListInboxesResponseSuccess` API schema. */
 data class ListInboxesResponseSuccess(
-    /**
-     * Type of the response object.
-     */
+    /** Type of the response object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * Indicates if there are more results available.
-     */
+    /** Indicates if there are more results available. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /**
-     * Array containing inbox information.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ListInboxesResponseSuccessDataItem>
+    /** Array containing inbox information. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: List<ListInboxesResponseSuccessDataItem>,
 )
 
-/**
- * Typed representation of the `ListInboxLabelsResponseSuccess` API schema.
- */
+/** Typed representation of the `ListInboxLabelsResponseSuccess` API schema. */
 data class ListInboxLabelsResponseSuccess(
-    /**
-     * Type of the response object.
-     */
+    /** Type of the response object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * The labels on the inbox, oldest first.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<InboxLabel>
+    /** The labels on the inbox, oldest first. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<InboxLabel>,
 )
 
-/**
- * Typed representation of the `ListInboxThreadEmailsResponseSuccess` API schema.
- */
+/** Typed representation of the `ListInboxThreadEmailsResponseSuccess` API schema. */
 data class ListInboxThreadEmailsResponseSuccess(
-    /**
-     * Type of the response object.
-     */
+    /** Type of the response object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * Indicates if there are more results available.
-     */
+    /** Indicates if there are more results available. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /**
-     * The messages of the thread on this page, oldest first.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<InboxThreadEmail>
+    /** The messages of the thread on this page, oldest first. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<InboxThreadEmail>,
 )
 
-/**
- * Typed representation of the `ListInboxThreadsResponseSuccess` API schema.
- */
+/** Typed representation of the `ListInboxThreadsResponseSuccess` API schema. */
 data class ListInboxThreadsResponseSuccess(
-    /**
-     * Type of the response object.
-     */
+    /** Type of the response object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * Indicates if there are more results available.
-     */
+    /** Indicates if there are more results available. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /**
-     * The matching threads, most recently active first.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<InboxThread>
+    /** The matching threads, most recently active first. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<InboxThread>,
 )

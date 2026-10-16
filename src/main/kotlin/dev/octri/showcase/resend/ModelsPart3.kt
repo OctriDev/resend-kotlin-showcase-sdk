@@ -5,35 +5,43 @@ package dev.octri.showcase.resend
 
 typealias UpdateTemplateOptions = dev.octri.showcase.resend.models.UpdateTemplateOptions
 
-typealias UpdateTemplateResponseSuccess = dev.octri.showcase.resend.models.UpdateTemplateResponseSuccess
+typealias UpdateTemplateResponseSuccess =
+    dev.octri.showcase.resend.models.UpdateTemplateResponseSuccess
 
 typealias UpdateTopicOptions = dev.octri.showcase.resend.models.UpdateTopicOptions
 
-typealias UpdateTopicOptionsVisibilityEnum = dev.octri.showcase.resend.models.UpdateTopicOptionsVisibilityEnum
+typealias UpdateTopicOptionsVisibilityEnum =
+    dev.octri.showcase.resend.models.UpdateTopicOptionsVisibilityEnum
 
 typealias UpdateTopicResponseSuccess = dev.octri.showcase.resend.models.UpdateTopicResponseSuccess
 
 typealias UpdateWebhookRequest = dev.octri.showcase.resend.models.UpdateWebhookRequest
 
-typealias UpdateWebhookRequestStatusEnum = dev.octri.showcase.resend.models.UpdateWebhookRequestStatusEnum
+typealias UpdateWebhookRequestStatusEnum =
+    dev.octri.showcase.resend.models.UpdateWebhookRequestStatusEnum
 
 typealias UpdateWebhookResponse = dev.octri.showcase.resend.models.UpdateWebhookResponse
 
-typealias ValueUpdateInboxAgentOptions = dev.octri.showcase.resend.models.ValueUpdateInboxAgentOptions
+typealias ValueUpdateInboxAgentOptions =
+    dev.octri.showcase.resend.models.ValueUpdateInboxAgentOptions
 
-typealias ValueUpdateInboxDraftOptions = dev.octri.showcase.resend.models.ValueUpdateInboxDraftOptions
+typealias ValueUpdateInboxDraftOptions =
+    dev.octri.showcase.resend.models.ValueUpdateInboxDraftOptions
 
 typealias ValueUpdateInboxOptions = dev.octri.showcase.resend.models.ValueUpdateInboxOptions
 
-typealias ValueUpdateInboxThreadOptions = dev.octri.showcase.resend.models.ValueUpdateInboxThreadOptions
+typealias ValueUpdateInboxThreadOptions =
+    dev.octri.showcase.resend.models.ValueUpdateInboxThreadOptions
 
 typealias VerifyDomainResponse = dev.octri.showcase.resend.models.VerifyDomainResponse
 
 typealias WebhookDomainRecord = dev.octri.showcase.resend.models.WebhookDomainRecord
 
-typealias WebhookDomainRecordRecordEnum = dev.octri.showcase.resend.models.WebhookDomainRecordRecordEnum
+typealias WebhookDomainRecordRecordEnum =
+    dev.octri.showcase.resend.models.WebhookDomainRecordRecordEnum
 
-typealias WebhookDomainRecordStatusEnum = dev.octri.showcase.resend.models.WebhookDomainRecordStatusEnum
+typealias WebhookDomainRecordStatusEnum =
+    dev.octri.showcase.resend.models.WebhookDomainRecordStatusEnum
 
 typealias WebhookDomainRecordTypeEnum = dev.octri.showcase.resend.models.WebhookDomainRecordTypeEnum
 
@@ -41,7 +49,8 @@ typealias WebhookEventAttachment = dev.octri.showcase.resend.models.WebhookEvent
 
 typealias WebhookEventBounce = dev.octri.showcase.resend.models.WebhookEventBounce
 
-typealias WebhookEventBounceSubTypeEnum = dev.octri.showcase.resend.models.WebhookEventBounceSubTypeEnum
+typealias WebhookEventBounceSubTypeEnum =
+    dev.octri.showcase.resend.models.WebhookEventBounceSubTypeEnum
 
 typealias WebhookEventBounceTypeEnum = dev.octri.showcase.resend.models.WebhookEventBounceTypeEnum
 
@@ -51,6 +60,8 @@ typealias WebhookEventFailed = dev.octri.showcase.resend.models.WebhookEventFail
 
 typealias WebhookEventSuppressed = dev.octri.showcase.resend.models.WebhookEventSuppressed
 
-typealias WebhookEventSuppressedReasonEnum = dev.octri.showcase.resend.models.WebhookEventSuppressedReasonEnum
+typealias WebhookEventSuppressedReasonEnum =
+    dev.octri.showcase.resend.models.WebhookEventSuppressedReasonEnum
 
-typealias WebhookEventSuppressedTypeEnum = dev.octri.showcase.resend.models.WebhookEventSuppressedTypeEnum
+typealias WebhookEventSuppressedTypeEnum =
+    dev.octri.showcase.resend.models.WebhookEventSuppressedTypeEnum
