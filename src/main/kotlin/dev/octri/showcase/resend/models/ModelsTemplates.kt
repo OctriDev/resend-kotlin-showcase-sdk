@@ -3,322 +3,186 @@
 
 package dev.octri.showcase.resend.models
 
-/**
- * Typed representation of the `CreateTemplateRequest` API schema.
- */
+/** Typed representation of the `CreateTemplateRequest` API schema. */
 data class CreateTemplateRequest(
-    /**
-     * The name of the template.
-     */
+    /** The name of the template. */
     val name: String,
-    /**
-     * The HTML version of the template.
-     */
+    /** The HTML version of the template. */
     val html: String,
-    /**
-     * The alias of the template.
-     */
+    /** The alias of the template. */
     val alias: String? = null,
     /**
-     * Sender email address. To include a friendly name, use the format "Your Name <sender@domain.com>".
+     * Sender email address. To include a friendly name, use the format "Your Name
+     * <sender@domain.com>".
      */
     val from: String? = null,
-    /**
-     * Email subject.
-     */
+    /** Email subject. */
     val subject: String? = null,
-    /**
-     * Reply-to email addresses.
-     */
+    /** Reply-to email addresses. */
     @com.fasterxml.jackson.annotation.JsonProperty("reply_to") val replyTo: List<String>? = null,
-    /**
-     * The plain text version of the template.
-     */
+    /** The plain text version of the template. */
     val text: String? = null,
-    /**
-     * Optional array value serialized in the `variables` wire field.
-     */
-    val variables: List<TemplateVariableInput>? = null
+    /** Optional array value serialized in the `variables` wire field. */
+    val variables: List<TemplateVariableInput>? = null,
 )
 
-/**
- * Typed representation of the `CreateTemplateResponseSuccess` API schema.
- */
+/** Typed representation of the `CreateTemplateResponseSuccess` API schema. */
 data class CreateTemplateResponseSuccess(
-    /**
-     * The ID of the template.
-     */
+    /** The ID of the template. */
     val id: String? = null,
-    /**
-     * The object type of the response.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null
+    /** The object type of the response. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
 )
 
-/**
- * Typed representation of the `DuplicateTemplateResponseSuccess` API schema.
- */
+/** Typed representation of the `DuplicateTemplateResponseSuccess` API schema. */
 data class DuplicateTemplateResponseSuccess(
-    /**
-     * The ID of the duplicated template.
-     */
+    /** The ID of the duplicated template. */
     val id: String? = null,
-    /**
-     * The object type of the response.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null
+    /** The object type of the response. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
 )
 
-/**
- * Typed representation of the `ListTemplatesResponseSuccess` API schema.
- */
+/** Typed representation of the `ListTemplatesResponseSuccess` API schema. */
 data class ListTemplatesResponseSuccess(
-    /**
-     * Type of the response object.
-     */
+    /** Type of the response object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * Array containing templates information.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<TemplateListItem>? = null,
-    /**
-     * Indicates if there are more templates to retrieve.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null
+    /** Array containing templates information. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: List<TemplateListItem>? = null,
+    /** Indicates if there are more templates to retrieve. */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
 )
 
-/**
- * Typed representation of the `PublishTemplateResponseSuccess` API schema.
- */
+/** Typed representation of the `PublishTemplateResponseSuccess` API schema. */
 data class PublishTemplateResponseSuccess(
-    /**
-     * The ID of the template.
-     */
+    /** The ID of the template. */
     val id: String? = null,
-    /**
-     * The object type of the response.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null
+    /** The object type of the response. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
 )
 
-/**
- * Typed representation of the `RemoveTemplateResponseSuccess` API schema.
- */
+/** Typed representation of the `RemoveTemplateResponseSuccess` API schema. */
 data class RemoveTemplateResponseSuccess(
-    /**
-     * Type of the response object.
-     */
+    /** Type of the response object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * The ID of the template.
-     */
+    /** The ID of the template. */
     val id: String? = null,
-    /**
-     * Indicates whether the template was successfully deleted.
-     */
-    val deleted: Boolean? = null
+    /** Indicates whether the template was successfully deleted. */
+    val deleted: Boolean? = null,
 )
 
-/**
- * Typed representation of the `Template` API schema.
- */
+/** Typed representation of the `Template` API schema. */
 data class Template(
-    /**
-     * The type of object.
-     */
+    /** The type of object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * The ID of the template.
-     */
+    /** The ID of the template. */
     val id: String? = null,
-    /**
-     * The ID of the current version of the template.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("current_version_id") val currentVersionId: String? = null,
-    /**
-     * The name of the template.
-     */
+    /** The ID of the current version of the template. */
+    @com.fasterxml.jackson.annotation.JsonProperty("current_version_id")
+    val currentVersionId: String? = null,
+    /** The name of the template. */
     val name: String? = null,
-    /**
-     * The alias of the template.
-     */
+    /** The alias of the template. */
     val alias: String? = null,
     /**
-     * Sender email address. To include a friendly name, use the format "Your Name <sender@domain.com>".
+     * Sender email address. To include a friendly name, use the format "Your Name
+     * <sender@domain.com>".
      */
     val from: String? = null,
-    /**
-     * Email subject.
-     */
+    /** Email subject. */
     val subject: String? = null,
-    /**
-     * Reply-to email addresses.
-     */
+    /** Reply-to email addresses. */
     @com.fasterxml.jackson.annotation.JsonProperty("reply_to") val replyTo: List<String>? = null,
-    /**
-     * The HTML version of the template.
-     */
+    /** The HTML version of the template. */
     val html: String? = null,
-    /**
-     * The plain text version of the template.
-     */
+    /** The plain text version of the template. */
     val text: String? = null,
-    /**
-     * Optional array value serialized in the `variables` wire field.
-     */
+    /** Optional array value serialized in the `variables` wire field. */
     val variables: List<TemplateVariable>? = null,
-    /**
-     * Timestamp indicating when the template was created.
-     */
+    /** Timestamp indicating when the template was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /**
-     * Timestamp indicating when the template was last updated.
-     */
+    /** Timestamp indicating when the template was last updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null,
-    /**
-     * The publication status of the template.
-     */
+    /** The publication status of the template. */
     val status: TemplateStatusEnum? = null,
-    /**
-     * Timestamp indicating when the template was published.
-     */
+    /** Timestamp indicating when the template was published. */
     @com.fasterxml.jackson.annotation.JsonProperty("published_at") val publishedAt: String? = null,
-    /**
-     * Indicates whether the template has unpublished versions.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_unpublished_versions") val hasUnpublishedVersions: Boolean? = null
+    /** Indicates whether the template has unpublished versions. */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_unpublished_versions")
+    val hasUnpublishedVersions: Boolean? = null,
 )
 
-/**
- * Typed representation of the `TemplateListItem` API schema.
- */
+/** Typed representation of the `TemplateListItem` API schema. */
 data class TemplateListItem(
-    /**
-     * The ID of the template.
-     */
+    /** The ID of the template. */
     val id: String? = null,
-    /**
-     * The name of the template.
-     */
+    /** The name of the template. */
     val name: String? = null,
-    /**
-     * The publication status of the template.
-     */
+    /** The publication status of the template. */
     val status: TemplateListItemStatusEnum? = null,
-    /**
-     * Timestamp indicating when the template was published.
-     */
+    /** Timestamp indicating when the template was published. */
     @com.fasterxml.jackson.annotation.JsonProperty("published_at") val publishedAt: String? = null,
-    /**
-     * Timestamp indicating when the template was created.
-     */
+    /** Timestamp indicating when the template was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /**
-     * Timestamp indicating when the template was last updated.
-     */
+    /** Timestamp indicating when the template was last updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null,
-    /**
-     * The alias of the template.
-     */
-    val alias: String? = null
+    /** The alias of the template. */
+    val alias: String? = null,
 )
 
-/**
- * Typed representation of the `TemplateVariable` API schema.
- */
+/** Typed representation of the `TemplateVariable` API schema. */
 data class TemplateVariable(
-    /**
-     * The key of the variable.
-     */
+    /** The key of the variable. */
     val key: String,
-    /**
-     * The type of the variable.
-     */
+    /** The type of the variable. */
     val type: TemplateVariableTypeEnum,
-    /**
-     * The ID of the template variable.
-     */
+    /** The ID of the template variable. */
     val id: String? = null,
-    /**
-     * The fallback value of the variable.
-     */
+    /** The fallback value of the variable. */
     @com.fasterxml.jackson.annotation.JsonProperty("fallback_value") val fallbackValue: Any? = null,
-    /**
-     * Timestamp indicating when the variable was created.
-     */
+    /** Timestamp indicating when the variable was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /**
-     * Timestamp indicating when the variable was last updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null
+    /** Timestamp indicating when the variable was last updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null,
 )
 
-/**
- * Typed representation of the `TemplateVariableInput` API schema.
- */
+/** Typed representation of the `TemplateVariableInput` API schema. */
 data class TemplateVariableInput(
-    /**
-     * The key of the variable.
-     */
+    /** The key of the variable. */
     val key: String,
-    /**
-     * The type of the variable.
-     */
+    /** The type of the variable. */
     val type: TemplateVariableInputTypeEnum,
-    /**
-     * The fallback value of the variable.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("fallback_value") val fallbackValue: Any? = null
+    /** The fallback value of the variable. */
+    @com.fasterxml.jackson.annotation.JsonProperty("fallback_value") val fallbackValue: Any? = null,
 )
 
-/**
- * Typed representation of the `UpdateTemplateOptions` API schema.
- */
+/** Typed representation of the `UpdateTemplateOptions` API schema. */
 data class UpdateTemplateOptions(
-    /**
-     * The name of the template.
-     */
+    /** The name of the template. */
     val name: String? = null,
-    /**
-     * The alias of the template.
-     */
+    /** The alias of the template. */
     val alias: String? = null,
     /**
-     * Sender email address. To include a friendly name, use the format "Your Name <sender@domain.com>".
+     * Sender email address. To include a friendly name, use the format "Your Name
+     * <sender@domain.com>".
      */
     val from: String? = null,
-    /**
-     * Email subject.
-     */
+    /** Email subject. */
     val subject: String? = null,
-    /**
-     * Reply-to email addresses.
-     */
+    /** Reply-to email addresses. */
     @com.fasterxml.jackson.annotation.JsonProperty("reply_to") val replyTo: List<String>? = null,
-    /**
-     * The HTML version of the template.
-     */
+    /** The HTML version of the template. */
     val html: String? = null,
-    /**
-     * The plain text version of the template.
-     */
+    /** The plain text version of the template. */
     val text: String? = null,
-    /**
-     * Optional array value serialized in the `variables` wire field.
-     */
-    val variables: List<TemplateVariableInput>? = null
+    /** Optional array value serialized in the `variables` wire field. */
+    val variables: List<TemplateVariableInput>? = null,
 )
 
-/**
- * Typed representation of the `UpdateTemplateResponseSuccess` API schema.
- */
+/** Typed representation of the `UpdateTemplateResponseSuccess` API schema. */
 data class UpdateTemplateResponseSuccess(
-    /**
-     * The ID of the template.
-     */
+    /** The ID of the template. */
     val id: String? = null,
-    /**
-     * The object type of the response.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null
+    /** The object type of the response. */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
 )

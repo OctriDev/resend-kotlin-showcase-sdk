@@ -5,34 +5,20 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `InboxDeletedEvent` API schema.
- */
+/** Typed representation of the `InboxDeletedEvent` API schema. */
 data class InboxDeletedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: InboxDeletedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * The data of an `inbox.deleted` event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxDeletedEventData
+    /** The data of an `inbox.deleted` event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxDeletedEventData,
 )
 
-/**
- * The data of an `inbox.deleted` event.
- */
+/** The data of an `inbox.deleted` event. */
 data class InboxDeletedEventData(
-    /**
-     * What made the change.
-     */
+    /** What made the change. */
     val source: InboxEventSource,
-    /**
-     * The ID of the inbox.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("inbox_id") val inboxId: String
+    /** The ID of the inbox. */
+    @com.fasterxml.jackson.annotation.JsonProperty("inbox_id") val inboxId: String,
 )

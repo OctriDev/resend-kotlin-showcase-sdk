@@ -5,48 +5,28 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/**
- * Required object value serialized in the `topics[]` wire field.
- */
+/** Required object value serialized in the `topics[]` wire field. */
 data class ContactTopicsEventDataTopicsItem(
-    /**
-     * Unique identifier for the topic.
-     */
+    /** Unique identifier for the topic. */
     val id: String,
-    /**
-     * The new subscription status for this topic.
-     */
-    val subscription: ContactTopicsEventDataTopicsItemSubscriptionEnum
+    /** The new subscription status for this topic. */
+    val subscription: ContactTopicsEventDataTopicsItemSubscriptionEnum,
 )
 
-/**
- * Typed representation of the `ContactTopicsEventData` API schema.
- */
+/** Typed representation of the `ContactTopicsEventData` API schema. */
 data class ContactTopicsEventData(
-    /**
-     * Contact's email address.
-     */
+    /** Contact's email address. */
     val email: String,
-    /**
-     * Topics whose subscription changed in this update.
-     */
-    val topics: List<ContactTopicsEventDataTopicsItem>
+    /** Topics whose subscription changed in this update. */
+    val topics: List<ContactTopicsEventDataTopicsItem>,
 )
 
-/**
- * Typed representation of the `ContactTopicsUpdatedEvent` API schema.
- */
+/** Typed representation of the `ContactTopicsUpdatedEvent` API schema. */
 data class ContactTopicsUpdatedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: ContactTopicsUpdatedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Required object value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: ContactTopicsEventData
+    /** Required object value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: ContactTopicsEventData,
 )

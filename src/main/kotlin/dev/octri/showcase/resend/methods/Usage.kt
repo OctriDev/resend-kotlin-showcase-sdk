@@ -10,20 +10,27 @@ import dev.octri.showcase.resend.SdkClient
 
 object Usage {
 
-
     /**
-     * Retrieves current account usage and plan limits. Use the response to review consumption and limits across email, contacts, segments, broadcasts, AI credits, automation runs, domains, and rate limits.
+     * Retrieves current account usage and plan limits. Use the response to review consumption and
+     * limits across email, contacts, segments, broadcasts, AI credits, automation runs, domains,
+     * and rate limits.
      *
      * Retrieve your account's current usage and plan limits.
      */
-    fun usageGet(clientConfig: ClientConfig, options: RequestOptions? = null): GetUsageResponseSuccess {
-        return SdkClient.request<GetUsageResponseSuccess>(SdkClient.RequestSpec("GET", "/usage", config = clientConfig, operationId = "usageGet", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun usageGet(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): GetUsageResponseSuccess {
+        return SdkClient.request<GetUsageResponseSuccess>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/usage",
+                    config = clientConfig,
+                    operationId = "usageGet",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

@@ -12,41 +12,66 @@ import dev.octri.showcase.resend.Validation
 
 object Oauth {
 
-
     /**
-     * Lists OAuth grants available to the authenticated user. Use `after` or `before` to navigate the results with a cursor, and `limit` to control the number of grants returned.
+     * Lists OAuth grants available to the authenticated user. Use `after` or `before` to navigate
+     * the results with a cursor, and `limit` to control the number of grants returned.
      *
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun listGrants(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListOAuthGrantsResponse {
+    fun listGrants(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListOAuthGrantsResponse {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
-        return SdkClient.request<ListOAuthGrantsResponse>(SdkClient.RequestSpec("GET", "/oauth/grants", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "listGrants", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+        return SdkClient.request<ListOAuthGrantsResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/oauth/grants",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                            "before" to SdkClient.queryValue(before, "form", true),
+                        ),
+                    operationId = "listGrants",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Revokes an OAuth grant, removing the authorization associated with it. Supply the grant's ID to identify which authorization to revoke. The response includes the revocation time and reason.
+     * Revokes an OAuth grant, removing the authorization associated with it. Supply the grant's ID
+     * to identify which authorization to revoke. The response includes the revocation time and
+     * reason.
      *
      * @param oauthGrantId The OAuth grant ID.
      */
-    fun revokeGrant(clientConfig: ClientConfig, oauthGrantId: String, options: RequestOptions? = null): RevokeOAuthGrantResponse {
-        return SdkClient.request<RevokeOAuthGrantResponse>(SdkClient.RequestSpec("DELETE", "/oauth/grants/${SdkClient.encodePathSegment(oauthGrantId)}", config = clientConfig, operationId = "revokeGrant", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun revokeGrant(
+        clientConfig: ClientConfig,
+        oauthGrantId: String,
+        options: RequestOptions? = null,
+    ): RevokeOAuthGrantResponse {
+        return SdkClient.request<RevokeOAuthGrantResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/oauth/grants/${SdkClient.encodePathSegment(oauthGrantId)}",
+                    config = clientConfig,
+                    operationId = "revokeGrant",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }
