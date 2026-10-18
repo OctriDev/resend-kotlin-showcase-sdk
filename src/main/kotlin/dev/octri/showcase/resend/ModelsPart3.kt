@@ -3,8 +3,6 @@
 
 package dev.octri.showcase.resend
 
-typealias UpdateTemplateOptions = dev.octri.showcase.resend.models.UpdateTemplateOptions
-
 typealias UpdateTemplateResponseSuccess = dev.octri.showcase.resend.models.UpdateTemplateResponseSuccess
 
 typealias UpdateTopicOptions = dev.octri.showcase.resend.models.UpdateTopicOptions
@@ -18,14 +16,6 @@ typealias UpdateWebhookRequest = dev.octri.showcase.resend.models.UpdateWebhookR
 typealias UpdateWebhookRequestStatusEnum = dev.octri.showcase.resend.models.UpdateWebhookRequestStatusEnum
 
 typealias UpdateWebhookResponse = dev.octri.showcase.resend.models.UpdateWebhookResponse
-
-typealias ValueUpdateInboxAgentOptions = dev.octri.showcase.resend.models.ValueUpdateInboxAgentOptions
-
-typealias ValueUpdateInboxDraftOptions = dev.octri.showcase.resend.models.ValueUpdateInboxDraftOptions
-
-typealias ValueUpdateInboxOptions = dev.octri.showcase.resend.models.ValueUpdateInboxOptions
-
-typealias ValueUpdateInboxThreadOptions = dev.octri.showcase.resend.models.ValueUpdateInboxThreadOptions
 
 typealias VerifyDomainResponse = dev.octri.showcase.resend.models.VerifyDomainResponse
 

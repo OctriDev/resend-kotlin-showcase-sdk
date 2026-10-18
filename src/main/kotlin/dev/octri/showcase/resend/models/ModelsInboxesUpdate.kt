@@ -6,25 +6,20 @@ package dev.octri.showcase.resend.models
 /**
  * At least one of `instructions`, `tone`, or `enabled_actions` must be provided. Omitted fields keep their current value.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = UpdateInboxAgentOptions.Deserializer::class)
-sealed interface UpdateInboxAgentOptions {
-    /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<UpdateInboxAgentOptions>() {
-        override fun deserialize(
-            parser: com.fasterxml.jackson.core.JsonParser,
-            context: com.fasterxml.jackson.databind.DeserializationContext,
-        ): UpdateInboxAgentOptions {
-            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
-            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            return when {
-                else -> ValueUpdateInboxAgentOptions(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
-            }
-        }
-    }
-}
-
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueUpdateInboxAgentOptions(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : UpdateInboxAgentOptions
+data class UpdateInboxAgentOptions(
+    /**
+     * Instructions the agent follows when it handles the threads of the inbox. Max 4000 characters. Leading and trailing whitespace is trimmed, and the trimmed value must not be empty. Send null to clear the instructions.
+     */
+    val instructions: String? = null,
+    /**
+     * The tone the agent writes in. Send null to clear the tone.
+     */
+    val tone: UpdateInboxAgentOptionsToneEnum? = null,
+    /**
+     * The actions the agent can take. Replaces the whole set. Duplicates are removed. Send an empty array to disable all actions.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("enabled_actions") val enabledActions: List<UpdateInboxAgentOptionsEnabledActionsItemEnum>? = null
+)
 
 /**
  * Typed representation of the `UpdateInboxAgentResponseSuccess` API schema.
@@ -43,25 +38,36 @@ data class UpdateInboxAgentResponseSuccess(
 /**
  * Send at least one of `to`, `cc`, `bcc`, `subject`, `text`, `html` or `attachments`. Omitted fields are left unchanged. Setting `text` or `html` replaces the whole body, so the body part you omit becomes `null`. The merged draft must contain at least one non-empty field, and its combined recipients cannot exceed 50.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = UpdateInboxDraftOptions.Deserializer::class)
-sealed interface UpdateInboxDraftOptions {
-    /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<UpdateInboxDraftOptions>() {
-        override fun deserialize(
-            parser: com.fasterxml.jackson.core.JsonParser,
-            context: com.fasterxml.jackson.databind.DeserializationContext,
-        ): UpdateInboxDraftOptions {
-            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
-            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            return when {
-                else -> ValueUpdateInboxDraftOptions(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
-            }
-        }
-    }
-}
-
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueUpdateInboxDraftOptions(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : UpdateInboxDraftOptions
+data class UpdateInboxDraftOptions(
+    /**
+     * The recipients. For multiple addresses, send an array of strings. Each value can include a friendly name. Pass `null` to clear. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
+     */
+    val to: Any? = null,
+    /**
+     * The CC recipients. Pass `null` or `[]` to clear. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
+     */
+    val cc: Any? = null,
+    /**
+     * The BCC recipients. Pass `null` or `[]` to clear. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
+     */
+    val bcc: Any? = null,
+    /**
+     * The subject. Max 2000 characters. Cannot be only whitespace or contain a line break. Pass `null` to clear.
+     */
+    val subject: String? = null,
+    /**
+     * The HTML body. Pass `null` to clear.
+     */
+    val html: String? = null,
+    /**
+     * The plain text body. Pass `null` to clear.
+     */
+    val text: String? = null,
+    /**
+     * Files to store on the draft. Each one needs `content`, `filename` and `content_type`. A `path` without `content` returns a 422, and when both are sent, `path` is ignored. A `content_id` returns a 422. The files on a draft can total at most 25 MB. An empty file or a blocked file type returns a 422. Sending the field replaces every attachment on the draft. Send `[]` to remove them all. `null` also removes them all.
+     */
+    val attachments: List<InboxDraftAttachmentInput>? = null
+)
 
 /**
  * Typed representation of the `UpdateInboxLabelOptions` API schema.
@@ -94,25 +100,16 @@ data class UpdateInboxLabelResponseSuccess(
 /**
  * Provide at least one of `name` or `from_name`.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = UpdateInboxOptions.Deserializer::class)
-sealed interface UpdateInboxOptions {
-    /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<UpdateInboxOptions>() {
-        override fun deserialize(
-            parser: com.fasterxml.jackson.core.JsonParser,
-            context: com.fasterxml.jackson.databind.DeserializationContext,
-        ): UpdateInboxOptions {
-            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
-            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            return when {
-                else -> ValueUpdateInboxOptions(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
-            }
-        }
-    }
-}
-
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueUpdateInboxOptions(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : UpdateInboxOptions
+data class UpdateInboxOptions(
+    /**
+     * New internal name for the inbox. Recipients do not see it. Between 1 and 64 characters after trimming.
+     */
+    val name: String? = null,
+    /**
+     * The name recipients see when mail is sent from this inbox. A plain name, not a `Name <email>` address. Max 78 characters. It cannot contain a colon, `<`, `>`, line breaks, or other control characters. An email address inside the name must be on a domain the team has verified for sending. An empty string removes it.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("from_name") val fromName: String? = null
+)
 
 /**
  * Typed representation of the `UpdateInboxResponseSuccess` API schema.
@@ -131,22 +128,21 @@ data class UpdateInboxResponseSuccess(
 /**
  * At least one of `read`, `folder`, `add_label_ids`, or `remove_label_ids` is required. A label ID cannot be both added and removed in the same request.
  */
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = UpdateInboxThreadOptions.Deserializer::class)
-sealed interface UpdateInboxThreadOptions {
-    /** Chooses the branch this payload is shaped like. */
-    class Deserializer : com.fasterxml.jackson.databind.JsonDeserializer<UpdateInboxThreadOptions>() {
-        override fun deserialize(
-            parser: com.fasterxml.jackson.core.JsonParser,
-            context: com.fasterxml.jackson.databind.DeserializationContext,
-        ): UpdateInboxThreadOptions {
-            val mapper = parser.codec as com.fasterxml.jackson.databind.ObjectMapper
-            val node: com.fasterxml.jackson.databind.JsonNode = parser.readValueAsTree()
-            return when {
-                else -> ValueUpdateInboxThreadOptions(mapper.convertValue(node, object : com.fasterxml.jackson.core.type.TypeReference<Any>() {}))
-            }
-        }
-    }
-}
-
-@com.fasterxml.jackson.databind.annotation.JsonDeserialize(using = com.fasterxml.jackson.databind.JsonDeserializer.None::class) @com.fasterxml.jackson.annotation.JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NONE)
-data class ValueUpdateInboxThreadOptions(@get:com.fasterxml.jackson.annotation.JsonValue val value: Any) : UpdateInboxThreadOptions
+data class UpdateInboxThreadOptions(
+    /**
+     * Marks every email in the thread read or unread.
+     */
+    val read: Boolean? = null,
+    /**
+     * Moves the thread to this folder. `sent` is assigned automatically and cannot be set.
+     */
+    val folder: UpdateInboxThreadOptionsFolderEnum? = null,
+    /**
+     * Label IDs to apply to the thread. Between 1 and 10 IDs. A label ID that does not exist in the inbox returns a 404.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("add_label_ids") val addLabelIds: List<String>? = null,
+    /**
+     * Label IDs to remove from the thread. Between 1 and 10 IDs. The labels themselves are kept. A label ID that does not exist in the inbox returns a 404.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("remove_label_ids") val removeLabelIds: List<String>? = null
+)

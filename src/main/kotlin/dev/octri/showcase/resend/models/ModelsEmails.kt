@@ -186,20 +186,6 @@ data class ListEmailsResponse(
 )
 
 /**
- * Optional API value serialized in the `template` wire field.
- */
-data class SendEmailRequestTemplate(
-    /**
-     * The id of the published email template.
-     */
-    val id: String,
-    /**
-     * Template variables object with key/value pairs.
-     */
-    val variables: Map<String, Any>? = null
-)
-
-/**
  * Typed representation of the `SendEmailRequest` API schema.
  */
 data class SendEmailRequest(
@@ -236,9 +222,9 @@ data class SendEmailRequest(
      */
     val text: String? = null,
     /**
-     * Optional API value serialized in the `template` wire field.
+     * Use a published template to send the email. If provided, do not include html or text.
      */
-    val template: SendEmailRequestTemplate? = null,
+    val template: EmailTemplateInput? = null,
     /**
      * Custom headers to add to the email.
      */
