@@ -5,142 +5,96 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `InboxDraftCreatedEvent` API schema.
- */
+/** Typed representation of the `InboxDraftCreatedEvent` API schema. */
 data class InboxDraftCreatedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: InboxDraftCreatedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
     /**
      * The data of an `inbox.draft.created`, `inbox.draft.updated` or `inbox.draft.deleted` event.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxDraftEventData
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxDraftEventData,
 )
 
-/**
- * Typed representation of the `InboxDraftDeletedEvent` API schema.
- */
+/** Typed representation of the `InboxDraftDeletedEvent` API schema. */
 data class InboxDraftDeletedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: InboxDraftDeletedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
     /**
      * The data of an `inbox.draft.created`, `inbox.draft.updated` or `inbox.draft.deleted` event.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxDraftEventData
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxDraftEventData,
 )
 
-/**
- * The data of an `inbox.draft.created`, `inbox.draft.updated` or `inbox.draft.deleted` event.
- */
+/** The data of an `inbox.draft.created`, `inbox.draft.updated` or `inbox.draft.deleted` event. */
 data class InboxDraftEventData(
-    /**
-     * What made the change.
-     */
+    /** What made the change. */
     val source: InboxEventSource,
-    /**
-     * The ID of the inbox.
-     */
+    /** The ID of the inbox. */
     @com.fasterxml.jackson.annotation.JsonProperty("inbox_id") val inboxId: String,
-    /**
-     * The ID of the draft.
-     */
+    /** The ID of the draft. */
     @com.fasterxml.jackson.annotation.JsonProperty("draft_id") val draftId: String,
-    /**
-     * The ID of the thread. Only on reply drafts.
-     */
+    /** The ID of the thread. Only on reply drafts. */
     @com.fasterxml.jackson.annotation.JsonProperty("thread_id") val threadId: String? = null,
     /**
-     * The thread as it is when the webhook is sent. Absent when the thread no longer exists. Only on reply drafts.
+     * The thread as it is when the webhook is sent. Absent when the thread no longer exists. Only
+     * on reply drafts.
      */
     val thread: InboxThreadSummary? = null,
     /**
-     * The draft as it is when the webhook is sent, without `html` or `text`. Fetch the body with Retrieve Draft. Absent when the draft no longer exists.
+     * The draft as it is when the webhook is sent, without `html` or `text`. Fetch the body with
+     * Retrieve Draft. Absent when the draft no longer exists.
      */
-    val draft: InboxEventDraft? = null
+    val draft: InboxEventDraft? = null,
 )
 
-/**
- * Typed representation of the `InboxDraftSentEvent` API schema.
- */
+/** Typed representation of the `InboxDraftSentEvent` API schema. */
 data class InboxDraftSentEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: InboxDraftSentEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * The data of an `inbox.draft.sent` event.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxDraftSentEventData
+    /** The data of an `inbox.draft.sent` event. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxDraftSentEventData,
 )
 
-/**
- * The data of an `inbox.draft.sent` event.
- */
+/** The data of an `inbox.draft.sent` event. */
 data class InboxDraftSentEventData(
-    /**
-     * What made the change.
-     */
+    /** What made the change. */
     val source: InboxEventSource,
-    /**
-     * The ID of the inbox.
-     */
+    /** The ID of the inbox. */
     @com.fasterxml.jackson.annotation.JsonProperty("inbox_id") val inboxId: String,
-    /**
-     * The ID of the thread.
-     */
+    /** The ID of the thread. */
     @com.fasterxml.jackson.annotation.JsonProperty("thread_id") val threadId: String,
-    /**
-     * The ID of the email.
-     */
+    /** The ID of the email. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_id") val emailId: String,
-    /**
-     * The ID of the draft.
-     */
+    /** The ID of the draft. */
     @com.fasterxml.jackson.annotation.JsonProperty("draft_id") val draftId: String,
-    /**
-     * The thread as it is when the webhook is sent. Absent when the thread no longer exists.
-     */
+    /** The thread as it is when the webhook is sent. Absent when the thread no longer exists. */
     val thread: InboxThreadSummary? = null,
     /**
-     * The email as it is when the webhook is sent, without `html` or `text`. Fetch the body with Retrieve Thread Email. Only when the email is already on the thread when the webhook is sent.
+     * The email as it is when the webhook is sent, without `html` or `text`. Fetch the body with
+     * Retrieve Thread Email. Only when the email is already on the thread when the webhook is sent.
      */
     val email: InboxEventEmail? = null,
     /**
-     * The draft as it is when the webhook is sent, without `html` or `text`. Fetch the body with Retrieve Draft. Absent when the draft no longer exists.
+     * The draft as it is when the webhook is sent, without `html` or `text`. Fetch the body with
+     * Retrieve Draft. Absent when the draft no longer exists.
      */
-    val draft: InboxEventDraft? = null
+    val draft: InboxEventDraft? = null,
 )
 
-/**
- * Typed representation of the `InboxDraftUpdatedEvent` API schema.
- */
+/** Typed representation of the `InboxDraftUpdatedEvent` API schema. */
 data class InboxDraftUpdatedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: InboxDraftUpdatedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
     /**
      * The data of an `inbox.draft.created`, `inbox.draft.updated` or `inbox.draft.deleted` event.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxDraftEventData
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxDraftEventData,
 )

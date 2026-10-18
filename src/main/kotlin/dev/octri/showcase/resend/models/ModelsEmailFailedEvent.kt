@@ -5,66 +5,36 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `EmailFailedEvent` API schema.
- */
+/** Typed representation of the `EmailFailedEvent` API schema. */
 data class EmailFailedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: EmailFailedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Required API value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: EmailFailedEventData
+    /** Required API value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: EmailFailedEventData,
 )
 
-/**
- * Typed representation of the `EmailFailedEventData` API schema.
- */
+/** Typed representation of the `EmailFailedEventData` API schema. */
 data class EmailFailedEventData(
-    /**
-     * Unique identifier for the email.
-     */
+    /** Unique identifier for the email. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_id") val emailId: String,
-    /**
-     * Timestamp when the email was created.
-     */
+    /** Timestamp when the email was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Sender email address and name in the format `Name <email@domain.com>`.
-     */
+    /** Sender email address and name in the format `Name <email@domain.com>`. */
     val from: String,
-    /**
-     * Array of impacted recipient email addresses.
-     */
+    /** Array of impacted recipient email addresses. */
     val to: List<String>,
-    /**
-     * Email subject line.
-     */
+    /** Email subject line. */
     val subject: String,
-    /**
-     * Required object value serialized in the `failed` wire field.
-     */
+    /** Required object value serialized in the `failed` wire field. */
     val failed: WebhookEventFailed,
-    /**
-     * Unique identifier for the broadcast campaign, if applicable.
-     */
+    /** Unique identifier for the broadcast campaign, if applicable. */
     @com.fasterxml.jackson.annotation.JsonProperty("broadcast_id") val broadcastId: String? = null,
-    /**
-     * Unique identifier for the template used, if applicable.
-     */
+    /** Unique identifier for the template used, if applicable. */
     @com.fasterxml.jackson.annotation.JsonProperty("template_id") val templateId: String? = null,
-    /**
-     * Tag key-value pairs associated with the email.
-     */
+    /** Tag key-value pairs associated with the email. */
     val tags: Map<String, String>? = null,
-    /**
-     * Custom headers included with the email (omitted when no custom headers are set).
-     */
-    val headers: List<OutboundEmailEventDataHeadersItem>? = null
+    /** Custom headers included with the email (omitted when no custom headers are set). */
+    val headers: List<OutboundEmailEventDataHeadersItem>? = null,
 )

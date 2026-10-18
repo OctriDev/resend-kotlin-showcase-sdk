@@ -3,15 +3,15 @@
 
 package dev.octri.showcase.resend
 
-
 class UsageNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Retrieves current account usage and plan limits. Use the response to review consumption and limits across email, contacts, segments, broadcasts, AI credits, automation runs, domains, and rate limits.
+     * Retrieves current account usage and plan limits. Use the response to review consumption and
+     * limits across email, contacts, segments, broadcasts, AI credits, automation runs, domains,
+     * and rate limits.
      *
      * Retrieve your account's current usage and plan limits.
      */
     fun get(options: RequestOptions? = null): GetUsageResponseSuccess {
         return dev.octri.showcase.resend.methods.Usage.usageGet(clientConfig, options)
     }
-
 }
