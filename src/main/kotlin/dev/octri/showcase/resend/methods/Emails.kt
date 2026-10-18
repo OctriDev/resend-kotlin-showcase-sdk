@@ -62,7 +62,8 @@ object Emails {
      * @param replyTo Reply-to email address. For multiple addresses, send as an array of strings.
      * @param html The HTML version of the message.
      * @param text The plain text version of the message.
-     * @param template Optional API value serialized in the `template` wire field.
+     * @param template Use a published template to send the email. If provided, do not include html
+     *   or text.
      * @param headers Custom headers to add to the email.
      * @param scheduledAt Schedule email to be sent later. The date should be in ISO 8601 format.
      * @param attachments Optional array value serialized in the `attachments` wire field.

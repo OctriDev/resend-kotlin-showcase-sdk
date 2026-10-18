@@ -113,14 +113,6 @@ data class ListEmailsResponse(
     @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Email>? = null,
 )
 
-/** Optional API value serialized in the `template` wire field. */
-data class SendEmailRequestTemplate(
-    /** The id of the published email template. */
-    val id: String,
-    /** Template variables object with key/value pairs. */
-    val variables: Map<String, Any>? = null,
-)
-
 /** Typed representation of the `SendEmailRequest` API schema. */
 data class SendEmailRequest(
     /**
@@ -142,8 +134,8 @@ data class SendEmailRequest(
     val html: String? = null,
     /** The plain text version of the message. */
     val text: String? = null,
-    /** Optional API value serialized in the `template` wire field. */
-    val template: SendEmailRequestTemplate? = null,
+    /** Use a published template to send the email. If provided, do not include html or text. */
+    val template: EmailTemplateInput? = null,
     /** Custom headers to add to the email. */
     val headers: Map<String, Any>? = null,
     /** Schedule email to be sent later. The date should be in ISO 8601 format. */

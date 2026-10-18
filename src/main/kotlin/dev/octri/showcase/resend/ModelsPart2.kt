@@ -383,8 +383,6 @@ typealias SendBroadcastResponseSuccess =
 
 typealias SendEmailRequest = dev.octri.showcase.resend.models.SendEmailRequest
 
-typealias SendEmailRequestTemplate = dev.octri.showcase.resend.models.SendEmailRequestTemplate
-
 typealias SendEmailResponse = dev.octri.showcase.resend.models.SendEmailResponse
 
 typealias SendEventRequest = dev.octri.showcase.resend.models.SendEventRequest
@@ -542,3 +540,5 @@ typealias UpdateSegmentOptions = dev.octri.showcase.resend.models.UpdateSegmentO
 
 typealias UpdateSegmentResponseSuccess =
     dev.octri.showcase.resend.models.UpdateSegmentResponseSuccess
+
+typealias UpdateTemplateOptions = dev.octri.showcase.resend.models.UpdateTemplateOptions
