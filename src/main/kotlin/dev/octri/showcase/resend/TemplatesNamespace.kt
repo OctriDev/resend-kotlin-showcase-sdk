@@ -3,97 +3,55 @@
 
 package dev.octri.showcase.resend
 
+
 class TemplatesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a new email template from its name and HTML content. Supply `name` and `html`; you
-     * can also set sender details, reply-to addresses, plain-text content, and template variables.
+     * Creates a new email template from its name and HTML content. Supply `name` and `html`; you can also set sender details, reply-to addresses, plain-text content, and template variables.
      */
-    fun create(
-        request: dev.octri.showcase.resend.methods.Templates.TemplatesCreateRequest,
-        options: RequestOptions? = null,
-    ): CreateTemplateResponseSuccess {
-        return dev.octri.showcase.resend.methods.Templates.templatesCreate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun create(request: dev.octri.showcase.resend.methods.Templates.TemplatesCreateRequest, options: RequestOptions? = null): CreateTemplateResponseSuccess {
+        return dev.octri.showcase.resend.methods.Templates.templatesCreate(clientConfig, request, options)
     }
 
     /**
-     * Lists templates available to the authenticated user. Use `after` or `before` to navigate the
-     * results with a cursor, and `limit` to control the number of templates returned.
+     * Lists templates available to the authenticated user. Use `after` or `before` to navigate the results with a cursor, and `limit` to control the number of templates returned.
      */
-    fun list(
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListTemplatesResponseSuccess {
-        return dev.octri.showcase.resend.methods.Templates.templatesList(
-            clientConfig,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun list(limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListTemplatesResponseSuccess {
+        return dev.octri.showcase.resend.methods.Templates.templatesList(clientConfig, limit, after, before, options)
     }
 
     /**
-     * Retrieves a template by its ID or alias. Use the returned details to inspect the template
-     * content, variables, and publication status.
+     * Retrieves a template by its ID or alias. Use the returned details to inspect the template content, variables, and publication status.
      */
     fun get(id: String, options: RequestOptions? = null): Template {
         return dev.octri.showcase.resend.methods.Templates.templatesGet(clientConfig, id, options)
     }
 
     /**
-     * Updates an existing template with the fields you provide. Use the `id` path parameter to
-     * select the template and send only the template properties you want to change.
+     * Updates an existing template with the fields you provide. Use the `id` path parameter to select the template and send only the template properties you want to change.
      */
-    fun update(
-        request: dev.octri.showcase.resend.methods.Templates.TemplatesUpdateRequest,
-        options: RequestOptions? = null,
-    ): UpdateTemplateResponseSuccess {
-        return dev.octri.showcase.resend.methods.Templates.templatesUpdate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun update(request: dev.octri.showcase.resend.methods.Templates.TemplatesUpdateRequest, options: RequestOptions? = null): UpdateTemplateResponseSuccess {
+        return dev.octri.showcase.resend.methods.Templates.templatesUpdate(clientConfig, request, options)
     }
 
     /**
-     * Deletes a template selected by its ID or alias. Use this operation when you want to remove
-     * the template; the response indicates whether it was deleted.
+     * Deletes a template selected by its ID or alias. Use this operation when you want to remove the template; the response indicates whether it was deleted.
      */
     fun remove(id: String, options: RequestOptions? = null): RemoveTemplateResponseSuccess {
-        return dev.octri.showcase.resend.methods.Templates.templatesRemove(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Templates.templatesRemove(clientConfig, id, options)
     }
 
     /**
-     * Publishes a template selected by its ID or alias. Use this operation to make the template's
-     * current version published.
+     * Publishes a template selected by its ID or alias. Use this operation to make the template's current version published.
      */
     fun publish(id: String, options: RequestOptions? = null): PublishTemplateResponseSuccess {
-        return dev.octri.showcase.resend.methods.Templates.templatesPublish(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Templates.templatesPublish(clientConfig, id, options)
     }
 
     /**
-     * Creates a duplicate of a template selected by its ID or alias. Use this operation when you
-     * want a separate template based on an existing one.
+     * Creates a duplicate of a template selected by its ID or alias. Use this operation when you want a separate template based on an existing one.
      */
     fun duplicate(id: String, options: RequestOptions? = null): DuplicateTemplateResponseSuccess {
-        return dev.octri.showcase.resend.methods.Templates.templatesDuplicate(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Templates.templatesDuplicate(clientConfig, id, options)
     }
+
 }

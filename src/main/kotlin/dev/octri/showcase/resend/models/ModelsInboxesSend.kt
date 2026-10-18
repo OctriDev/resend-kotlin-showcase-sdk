@@ -3,19 +3,22 @@
 
 package dev.octri.showcase.resend.models
 
-/** Typed representation of the `SendInboxDraftOptions` API schema. */
+/**
+ * Typed representation of the `SendInboxDraftOptions` API schema.
+ */
 data class SendInboxDraftOptions(
     /**
-     * Custom headers to add to the email. The `In-Reply-To`, `References` and `Reply-To` headers
-     * are set by Resend and cannot be set here. Sending one of them, in any letter case, returns
-     * a 422. Header names cannot be empty, and names and values cannot contain line breaks or null
-     * characters, or the request returns a 422. `null` means no custom headers.
+     * Custom headers to add to the email. The `In-Reply-To`, `References` and `Reply-To` headers are set by Resend and cannot be set here. Sending one of them, in any letter case, returns a 422. Header names cannot be empty, and names and values cannot contain line breaks or null characters, or the request returns a 422. `null` means no custom headers.
      */
     val headers: Map<String, String>? = null
 )
 
-/** Typed representation of the `SendInboxDraftResponseSuccess` API schema. */
+/**
+ * Typed representation of the `SendInboxDraftResponseSuccess` API schema.
+ */
 data class SendInboxDraftResponseSuccess(
-    /** The ID of the sent email. Use it with the emails endpoints. */
+    /**
+     * The ID of the sent email. Use it with the emails endpoints.
+     */
     val id: String
 )

@@ -3,42 +3,74 @@
 
 package dev.octri.showcase.resend.models
 
-/** Typed representation of the `RemoveInboxDraftResponseSuccess` API schema. */
+/**
+ * Typed representation of the `RemoveInboxDraftResponseSuccess` API schema.
+ */
 data class RemoveInboxDraftResponseSuccess(
-    /** The object type. */
+    /**
+     * The object type.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /** The ID of the draft. */
+    /**
+     * The ID of the draft.
+     */
     val id: String,
-    /** Indicates whether the draft was successfully deleted. */
-    val deleted: Boolean,
+    /**
+     * Indicates whether the draft was successfully deleted.
+     */
+    val deleted: Boolean
 )
 
-/** Typed representation of the `RemoveInboxLabelResponseSuccess` API schema. */
+/**
+ * Typed representation of the `RemoveInboxLabelResponseSuccess` API schema.
+ */
 data class RemoveInboxLabelResponseSuccess(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /** The ID of the removed label. */
+    /**
+     * The ID of the removed label.
+     */
     val id: String,
-    /** Indicates whether the label was deleted. */
-    val deleted: Boolean,
+    /**
+     * Indicates whether the label was deleted.
+     */
+    val deleted: Boolean
 )
 
-/** Typed representation of the `RemoveInboxResponseSuccess` API schema. */
+/**
+ * Typed representation of the `RemoveInboxResponseSuccess` API schema.
+ */
 data class RemoveInboxResponseSuccess(
-    /** The object type. */
+    /**
+     * The object type.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /** The ID of the inbox. */
+    /**
+     * The ID of the inbox.
+     */
     val id: String,
-    /** Indicates whether the inbox was successfully deleted. */
-    val deleted: Boolean,
+    /**
+     * Indicates whether the inbox was successfully deleted.
+     */
+    val deleted: Boolean
 )
 
-/** Typed representation of the `RemoveInboxThreadResponseSuccess` API schema. */
+/**
+ * Typed representation of the `RemoveInboxThreadResponseSuccess` API schema.
+ */
 data class RemoveInboxThreadResponseSuccess(
-    /** The object type. */
+    /**
+     * The object type.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /** The ID of the thread. */
+    /**
+     * The ID of the thread.
+     */
     val id: String,
-    /** True when this call moved the thread to `trash`. False when the thread was already there. */
-    val deleted: Boolean,
+    /**
+     * True when this call moved the thread to `trash`. False when the thread was already there.
+     */
+    val deleted: Boolean
 )

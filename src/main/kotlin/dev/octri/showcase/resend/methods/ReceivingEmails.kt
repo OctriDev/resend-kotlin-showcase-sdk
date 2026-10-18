@@ -14,153 +14,99 @@ import dev.octri.showcase.resend.Validation
 
 object ReceivingEmails {
 
+
     /**
-     * Lists received emails with cursor-based pagination. Use `limit` to control the number of
-     * results and `after` or `before` to select a pagination cursor; the cursor parameters cannot
-     * be used together.
+     * Lists received emails with cursor-based pagination. Use `limit` to control the number of results and `after` or `before` to select a pagination cursor; the cursor parameters cannot be used together.
      *
      * @param limit Maximum number of received emails to return.
-     * @param after Pagination cursor to fetch results after this email ID. Cannot be used with
-     *   'before'.
-     * @param before Pagination cursor to fetch results before this email ID. Cannot be used with
-     *   'after'.
+     * @param after Pagination cursor to fetch results after this email ID. Cannot be
+     *   used with 'before'.
+     * @param before Pagination cursor to fetch results before this email ID. Cannot
+     *   be used with 'after'.
      */
-    fun list(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListReceivedEmailsResponse {
+    fun list(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListReceivedEmailsResponse {
         if (after != null) {
             Validation.validateUuid("after", after)
-        }
+}
 
         if (before != null) {
             Validation.validateUuid("before", before)
-        }
+}
 
-        return SdkClient.request<ListReceivedEmailsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/emails/receiving",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "before" to SdkClient.queryValue(before, "form", true),
-                        ),
-                    operationId = "list",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<ListReceivedEmailsResponse>(SdkClient.RequestSpec("GET", "/emails/receiving", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "list", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a received email by its identifier. Use `email_id` to select the email; the
-     * response includes its message content, headers, recipients, receipt time, and attachments.
+     * Retrieves a received email by its identifier. Use `email_id` to select the email; the response includes its message content, headers, recipients, receipt time, and attachments.
      *
      * @param emailId The ID of the received email.
      */
-    fun get(
-        clientConfig: ClientConfig,
-        emailId: String,
-        options: RequestOptions? = null,
-    ): GetReceivedEmailResponse {
+    fun get(clientConfig: ClientConfig, emailId: String, options: RequestOptions? = null): GetReceivedEmailResponse {
         Validation.validateUuid("email_id", emailId)
 
-        return SdkClient.request<GetReceivedEmailResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/emails/receiving/${SdkClient.encodePathSegment(emailId)}",
-                    config = clientConfig,
-                    operationId = "get",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<GetReceivedEmailResponse>(SdkClient.RequestSpec("GET", "/emails/receiving/${SdkClient.encodePathSegment(emailId)}", config = clientConfig, operationId = "get", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists attachments for a received email. Use `email_id` to select the email and `after` or
-     * `before` to navigate through attachment results.
+     * Lists attachments for a received email. Use `email_id` to select the email and `after` or `before` to navigate through attachment results.
      *
      * @param emailId The ID of the received email.
      * @param limit Maximum number of attachments to return.
-     * @param after Pagination cursor to fetch results after this attachment ID. Cannot be used with
-     *   'before'.
-     * @param before Pagination cursor to fetch results before this attachment ID. Cannot be used
-     *   with 'after'.
+     * @param after Pagination cursor to fetch results after this attachment ID.
+     *   Cannot be used with 'before'.
+     * @param before Pagination cursor to fetch results before this attachment ID.
+     *   Cannot be used with 'after'.
      */
-    fun listAttachments(
-        clientConfig: ClientConfig,
-        emailId: String,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListAttachmentsResponse {
+    fun listAttachments(clientConfig: ClientConfig, emailId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListAttachmentsResponse {
         Validation.validateUuid("email_id", emailId)
 
         if (after != null) {
             Validation.validateUuid("after", after)
-        }
+}
 
         if (before != null) {
             Validation.validateUuid("before", before)
-        }
+}
 
-        return SdkClient.request<ListAttachmentsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/emails/receiving/${SdkClient.encodePathSegment(emailId)}/attachments",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "before" to SdkClient.queryValue(before, "form", true),
-                        ),
-                    operationId = "listAttachments",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<ListAttachmentsResponse>(SdkClient.RequestSpec("GET", "/emails/receiving/${SdkClient.encodePathSegment(emailId)}/attachments", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "listAttachments", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves an attachment belonging to a received email. Use `email_id` to identify the email
-     * and `attachment_id` to select its attachment; the response includes a signed download URL and
-     * its expiration time.
+     * Retrieves an attachment belonging to a received email. Use `email_id` to identify the email and `attachment_id` to select its attachment; the response includes a signed download URL and its expiration time.
      *
      * @param emailId The ID of the received email.
      * @param attachmentId The ID of the attachment.
      */
-    fun getAttachment(
-        clientConfig: ClientConfig,
-        emailId: String,
-        attachmentId: String,
-        options: RequestOptions? = null,
-    ): RetrievedAttachment {
+    fun getAttachment(clientConfig: ClientConfig, emailId: String, attachmentId: String, options: RequestOptions? = null): RetrievedAttachment {
         Validation.validateUuid("email_id", emailId)
 
         Validation.validateUuid("attachment_id", attachmentId)
 
-        return SdkClient.request<RetrievedAttachment>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/emails/receiving/${SdkClient.encodePathSegment(emailId)}/attachments/${SdkClient.encodePathSegment(attachmentId)}",
-                    config = clientConfig,
-                    operationId = "getAttachment",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<RetrievedAttachment>(SdkClient.RequestSpec("GET", "/emails/receiving/${SdkClient.encodePathSegment(emailId)}/attachments/${SdkClient.encodePathSegment(attachmentId)}", config = clientConfig, operationId = "getAttachment", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
+
+
+
+
+
+
+
 }

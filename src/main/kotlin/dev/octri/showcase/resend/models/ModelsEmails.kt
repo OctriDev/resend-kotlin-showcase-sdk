@@ -3,196 +3,308 @@
 
 package dev.octri.showcase.resend.models
 
-/** Required object value serialized in the `data[]` wire field. */
+/**
+ * Required object value serialized in the `data[]` wire field.
+ */
 data class CreateBatchEmailsResponseDataItem(
-    /** The ID of the sent email. */
+    /**
+     * The ID of the sent email.
+     */
     val id: String? = null
 )
 
-/** Typed representation of the `CreateBatchEmailsResponse` API schema. */
+/**
+ * Typed representation of the `CreateBatchEmailsResponse` API schema.
+ */
 data class CreateBatchEmailsResponse(
-    /** Optional array value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<CreateBatchEmailsResponseDataItem>? = null
-)
-
-/** Typed representation of the `Email` API schema. */
-data class Email(
-    /** The type of object. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the email. */
-    val id: String? = null,
-    /** The Message-ID header value of the email. */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_id") val messageId: String? = null,
-    /** Optional array value serialized in the `to` wire field. */
-    val to: List<String>? = null,
-    /** The email address of the sender. */
-    val from: String? = null,
-    /** The date and time the email was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /** The subject line of the email. */
-    val subject: String? = null,
-    /** The HTML body of the email. */
-    val html: String? = null,
-    /** The plain text body of the email. */
-    val text: String? = null,
-    /** The email addresses of the blind carbon copy recipients. */
-    val bcc: List<String>? = null,
-    /** The email addresses of the carbon copy recipients. */
-    val cc: List<String>? = null,
-    /** The email addresses to which replies should be sent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_to") val replyTo: List<String>? = null,
-    /** The status of the email. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_event")
-    val lastEvent: EmailLastEventEnum? = null,
+    /**
+     * Optional array value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<CreateBatchEmailsResponseDataItem>? = null
 )
 
 /**
- * A single breakdown row. Which dimension fields are present depends on the requested `dimensions`;
- * which metric fields are present depends on the requested `metrics`.
+ * Typed representation of the `Email` API schema.
+ */
+data class Email(
+    /**
+     * The type of object.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * The ID of the email.
+     */
+    val id: String? = null,
+    /**
+     * The Message-ID header value of the email.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_id") val messageId: String? = null,
+    /**
+     * Optional array value serialized in the `to` wire field.
+     */
+    val to: List<String>? = null,
+    /**
+     * The email address of the sender.
+     */
+    val from: String? = null,
+    /**
+     * The date and time the email was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
+    /**
+     * The subject line of the email.
+     */
+    val subject: String? = null,
+    /**
+     * The HTML body of the email.
+     */
+    val html: String? = null,
+    /**
+     * The plain text body of the email.
+     */
+    val text: String? = null,
+    /**
+     * The email addresses of the blind carbon copy recipients.
+     */
+    val bcc: List<String>? = null,
+    /**
+     * The email addresses of the carbon copy recipients.
+     */
+    val cc: List<String>? = null,
+    /**
+     * The email addresses to which replies should be sent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_to") val replyTo: List<String>? = null,
+    /**
+     * The status of the email.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_event") val lastEvent: EmailLastEventEnum? = null
+)
+
+/**
+ * A single breakdown row. Which dimension fields are present depends on the requested `dimensions`; which metric fields are present depends on the requested `metrics`.
  */
 data class EmailMetricsDataRow(
-    /** Present when `period` is in `dimensions`. */
+    /**
+     * Present when `period` is in `dimensions`.
+     */
     val period: String? = null,
-    /** Present when `domain` is in `dimensions`. */
+    /**
+     * Present when `domain` is in `dimensions`.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("domain_id") val domainId: String? = null,
-    /** Present when `domain` is in `dimensions`. */
+    /**
+     * Present when `domain` is in `dimensions`.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("domain_name") val domainName: String? = null,
-    /** Present when `email` is in `dimensions`. */
+    /**
+     * Present when `email` is in `dimensions`.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("email_id") val emailId: String? = null,
-    /** Present when `broadcast` is in `dimensions`. */
+    /**
+     * Present when `broadcast` is in `dimensions`.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("broadcast_id") val broadcastId: String? = null,
-    /** Present when `broadcast` is in `dimensions`. */
-    @com.fasterxml.jackson.annotation.JsonProperty("broadcast_name")
-    val broadcastName: String? = null,
+    /**
+     * Present when `broadcast` is in `dimensions`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("broadcast_name") val broadcastName: String? = null
 ) {
     @field:com.fasterxml.jackson.annotation.JsonAnySetter
     @get:com.fasterxml.jackson.annotation.JsonAnyGetter
     val additionalProperties: MutableMap<String, Any?> = linkedMapOf()
 }
 
-/** Typed representation of the `EmailTemplateInput` API schema. */
+/**
+ * Typed representation of the `EmailTemplateInput` API schema.
+ */
 data class EmailTemplateInput(
-    /** The id of the published email template. */
+    /**
+     * The id of the published email template.
+     */
     val id: String,
-    /** Template variables object with key/value pairs. */
-    val variables: Map<String, Any>? = null,
+    /**
+     * Template variables object with key/value pairs.
+     */
+    val variables: Map<String, Any>? = null
 )
 
-/** Typed representation of the `GetEmailsMetricsResponse` API schema. */
+/**
+ * Typed representation of the `GetEmailsMetricsResponse` API schema.
+ */
 data class GetEmailsMetricsResponse(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The start of the requested date range, as an ISO 8601 datetime. */
+    /**
+     * The start of the requested date range, as an ISO 8601 datetime.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("start_date") val startDate: String? = null,
-    /** The end of the requested date range, as an ISO 8601 datetime. */
+    /**
+     * The end of the requested date range, as an ISO 8601 datetime.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("end_date") val endDate: String? = null,
-    /** The metrics included in the response. */
+    /**
+     * The metrics included in the response.
+     */
     val metrics: List<String>? = null,
-    /** The dimensions the response is broken down by. */
+    /**
+     * The dimensions the response is broken down by.
+     */
     val dimensions: List<GetEmailsMetricsResponseDimensionsItemEnum>? = null,
-    /** The bucket size used when `period` is in `dimensions`. */
+    /**
+     * The bucket size used when `period` is in `dimensions`.
+     */
     val granularity: GetEmailsMetricsResponseGranularityEnum? = null,
-    /** The requested metrics, totaled over the whole date range. */
+    /**
+     * The requested metrics, totaled over the whole date range.
+     */
     val totals: Map<String, Double>? = null,
     /**
-     * One row per unique combination of the requested `dimensions`. Omitted when `dimensions` is
-     * empty.
+     * One row per unique combination of the requested `dimensions`. Omitted when `dimensions` is empty.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<EmailMetricsDataRow>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<EmailMetricsDataRow>? = null
 )
 
-/** Typed representation of the `ListEmailsResponse` API schema. */
+/**
+ * Typed representation of the `ListEmailsResponse` API schema.
+ */
 data class ListEmailsResponse(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates if there are more results available. */
+    /**
+     * Indicates if there are more results available.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /** Array containing email information. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Email>? = null,
+    /**
+     * Array containing email information.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<Email>? = null
 )
 
-/** Typed representation of the `SendEmailRequest` API schema. */
+/**
+ * Typed representation of the `SendEmailRequest` API schema.
+ */
 data class SendEmailRequest(
     /**
-     * Sender email address. To include a friendly name, use the format "Your Name
-     * <sender@domain.com>".
+     * Sender email address. To include a friendly name, use the format "Your Name <sender@domain.com>".
      */
     val from: String,
-    /** Recipient email address. For multiple addresses, send as an array of strings. Max 50. */
+    /**
+     * Recipient email address. For multiple addresses, send as an array of strings. Max 50.
+     */
     val to: Any,
-    /** Email subject. */
+    /**
+     * Email subject.
+     */
     val subject: String,
-    /** Bcc recipient email address. For multiple addresses, send as an array of strings. */
+    /**
+     * Bcc recipient email address. For multiple addresses, send as an array of strings.
+     */
     val bcc: Any? = null,
-    /** Cc recipient email address. For multiple addresses, send as an array of strings. */
+    /**
+     * Cc recipient email address. For multiple addresses, send as an array of strings.
+     */
     val cc: Any? = null,
-    /** Reply-to email address. For multiple addresses, send as an array of strings. */
+    /**
+     * Reply-to email address. For multiple addresses, send as an array of strings.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("reply_to") val replyTo: Any? = null,
-    /** The HTML version of the message. */
+    /**
+     * The HTML version of the message.
+     */
     val html: String? = null,
-    /** The plain text version of the message. */
+    /**
+     * The plain text version of the message.
+     */
     val text: String? = null,
-    /** Use a published template to send the email. If provided, do not include html or text. */
+    /**
+     * Use a published template to send the email. If provided, do not include html or text.
+     */
     val template: EmailTemplateInput? = null,
-    /** Custom headers to add to the email. */
+    /**
+     * Custom headers to add to the email.
+     */
     val headers: Map<String, Any>? = null,
-    /** Schedule email to be sent later. The date should be in ISO 8601 format. */
+    /**
+     * Schedule email to be sent later. The date should be in ISO 8601 format.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("scheduled_at") val scheduledAt: String? = null,
-    /** Optional array value serialized in the `attachments` wire field. */
+    /**
+     * Optional array value serialized in the `attachments` wire field.
+     */
     val attachments: List<Attachment>? = null,
-    /** Optional array value serialized in the `tags` wire field. */
+    /**
+     * Optional array value serialized in the `tags` wire field.
+     */
     val tags: List<Tag>? = null,
     /**
-     * The topic ID to scope the email to. If the recipient is a contact and opted-in to the topic,
-     * the email is sent. If opted-out, the email is not sent. If the recipient is not a contact,
-     * the email is sent if the topic's default subscription is opt_in.
+     * The topic ID to scope the email to. If the recipient is a contact and opted-in to the topic, the email is sent. If opted-out, the email is not sent. If the recipient is not a contact, the email is sent if the topic's default subscription is opt_in.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("topic_id") val topicId: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("topic_id") val topicId: String? = null
 )
 
-/** Typed representation of the `SendEmailResponse` API schema. */
+/**
+ * Typed representation of the `SendEmailResponse` API schema.
+ */
 data class SendEmailResponse(
-    /** The ID of the sent email. */
+    /**
+     * The ID of the sent email.
+     */
     val id: String? = null
 )
 
-/** Typed representation of the `ShareEmailOptions` API schema. */
+/**
+ * Typed representation of the `ShareEmailOptions` API schema.
+ */
 data class ShareEmailOptions(
     /**
-     * How long the link stays valid for, as a duration like `10m`, `2 hours`, or `1 day`. Defaults
-     * to `48h` and cannot exceed 48 hours.
+     * How long the link stays valid for, as a duration like `10m`, `2 hours`, or `1 day`. Defaults to `48h` and cannot exceed 48 hours.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("expires_in") val expiresIn: String? = null
 )
 
-/** Typed representation of the `ShareEmailResponse` API schema. */
+/**
+ * Typed representation of the `ShareEmailResponse` API schema.
+ */
 data class ShareEmailResponse(
-    /** The type of object. */
+    /**
+     * The type of object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the email. */
+    /**
+     * The ID of the email.
+     */
     val id: String? = null,
-    /** The shareable link, valid until it expires. */
-    val url: String? = null,
+    /**
+     * The shareable link, valid until it expires.
+     */
+    val url: String? = null
 )
 
-/** Typed representation of the `Tag` API schema. */
+/**
+ * Typed representation of the `Tag` API schema.
+ */
 data class Tag(
     /**
-     * The name of the email tag. It can only contain ASCII letters (a–z, A–Z), numbers (0–9),
-     * underscores (_), or dashes (-). It can contain no more than 256 characters.
+     * The name of the email tag. It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-). It can contain no more than 256 characters.
      */
     val name: String? = null,
     /**
-     * The value of the email tag.It can only contain ASCII letters (a–z, A–Z), numbers (0–9),
-     * underscores (_), or dashes (-). It can contain no more than 256 characters.
+     * The value of the email tag.It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_), or dashes (-). It can contain no more than 256 characters.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String? = null
 )
 
-/** Typed representation of the `UpdateEmailOptions` API schema. */
+/**
+ * Typed representation of the `UpdateEmailOptions` API schema.
+ */
 data class UpdateEmailOptions(
-    /** Schedule email to be sent later. The date should be in ISO 8601 format. */
+    /**
+     * Schedule email to be sent later. The date should be in ISO 8601 format.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("scheduled_at") val scheduledAt: String? = null
 )

@@ -18,6 +18,7 @@ import dev.octri.showcase.resend.Validation
 
 object Templates {
 
+
     /** Parameters for [templatesCreate]. */
     data class TemplatesCreateRequest(
         val name: String,
@@ -27,113 +28,68 @@ object Templates {
         val subject: String? = null,
         val replyTo: List<String>? = null,
         val text: String? = null,
-        val variables: List<TemplateVariableInput>? = null,
+        val variables: List<TemplateVariableInput>? = null
     )
 
     /**
-     * Creates a new email template from its name and HTML content. Supply `name` and `html`; you
-     * can also set sender details, reply-to addresses, plain-text content, and template variables.
+     * Creates a new email template from its name and HTML content. Supply `name` and `html`; you can also set sender details, reply-to addresses, plain-text content, and template variables.
      *
      * @param name The name of the template.
      * @param html The HTML version of the template.
      * @param alias The alias of the template.
-     * @param from Sender email address. To include a friendly name, use the format "Your Name
-     *   <sender@domain.com>".
+     * @param from Sender email address. To include a friendly name, use the format
+     *   "Your Name <sender@domain.com>".
      * @param subject Email subject.
      * @param replyTo Reply-to email addresses.
      * @param text The plain text version of the template.
-     * @param variables Optional array value serialized in the `variables` wire field.
+     * @param variables Optional array value serialized in the `variables` wire
+     *   field.
      */
-    fun templatesCreate(
-        clientConfig: ClientConfig,
-        request: TemplatesCreateRequest,
-        options: RequestOptions? = null,
-    ): CreateTemplateResponseSuccess {
-        return SdkClient.request<CreateTemplateResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/templates",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (request.name),
-                            "html" to (request.html),
-                            "alias" to (SdkClient.omitIfNull(request.alias)),
-                            "from" to (SdkClient.omitIfNull(request.from)),
-                            "subject" to (SdkClient.omitIfNull(request.subject)),
-                            "reply_to" to (SdkClient.omitIfNull(request.replyTo)),
-                            "text" to (SdkClient.omitIfNull(request.text)),
-                            "variables" to (SdkClient.omitIfNull(request.variables)),
-                        ),
-                    operationId = "templatesCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+    fun templatesCreate(clientConfig: ClientConfig, request: TemplatesCreateRequest, options: RequestOptions? = null): CreateTemplateResponseSuccess {
+        return SdkClient.request<CreateTemplateResponseSuccess>(SdkClient.RequestSpec("POST", "/templates", config = clientConfig, body = SdkClient.bodyMap("name" to (request.name), "html" to (request.html), "alias" to (SdkClient.omitIfNull(request.alias)), "from" to (SdkClient.omitIfNull(request.from)), "subject" to (SdkClient.omitIfNull(request.subject)), "reply_to" to (SdkClient.omitIfNull(request.replyTo)), "text" to (SdkClient.omitIfNull(request.text)), "variables" to (SdkClient.omitIfNull(request.variables))), operationId = "templatesCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists templates available to the authenticated user. Use `after` or `before` to navigate the
-     * results with a cursor, and `limit` to control the number of templates returned.
+     * Lists templates available to the authenticated user. Use `after` or `before` to navigate the results with a cursor, and `limit` to control the number of templates returned.
      *
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun templatesList(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListTemplatesResponseSuccess {
+    fun templatesList(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListTemplatesResponseSuccess {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
-        return SdkClient.request<ListTemplatesResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/templates",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "before" to SdkClient.queryValue(before, "form", true),
-                        ),
-                    operationId = "templatesList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<ListTemplatesResponseSuccess>(SdkClient.RequestSpec("GET", "/templates", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "templatesList", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a template by its ID or alias. Use the returned details to inspect the template
-     * content, variables, and publication status.
+     * Retrieves a template by its ID or alias. Use the returned details to inspect the template content, variables, and publication status.
      *
      * @param id The Template ID or alias.
      */
-    fun templatesGet(
-        clientConfig: ClientConfig,
-        id: String,
-        options: RequestOptions? = null,
-    ): Template {
-        return SdkClient.request<Template>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/templates/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "templatesGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+    fun templatesGet(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): Template {
+        return SdkClient.request<Template>(SdkClient.RequestSpec("GET", "/templates/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "templatesGet", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
+
+
+
+
+
+
 
     /** Parameters for [templatesUpdate]. */
     data class TemplatesUpdateRequest(
@@ -145,122 +101,77 @@ object Templates {
         val replyTo: List<String>? = null,
         val html: String? = null,
         val text: String? = null,
-        val variables: List<TemplateVariableInput>? = null,
+        val variables: List<TemplateVariableInput>? = null
     )
 
     /**
-     * Updates an existing template with the fields you provide. Use the `id` path parameter to
-     * select the template and send only the template properties you want to change.
+     * Updates an existing template with the fields you provide. Use the `id` path parameter to select the template and send only the template properties you want to change.
      *
      * @param id The Template ID or alias.
      * @param name The name of the template.
      * @param alias The alias of the template.
-     * @param from Sender email address. To include a friendly name, use the format "Your Name
-     *   <sender@domain.com>".
+     * @param from Sender email address. To include a friendly name, use the format
+     *   "Your Name <sender@domain.com>".
      * @param subject Email subject.
      * @param replyTo Reply-to email addresses.
      * @param html The HTML version of the template.
      * @param text The plain text version of the template.
-     * @param variables Optional array value serialized in the `variables` wire field.
+     * @param variables Optional array value serialized in the `variables` wire
+     *   field.
      */
-    fun templatesUpdate(
-        clientConfig: ClientConfig,
-        request: TemplatesUpdateRequest,
-        options: RequestOptions? = null,
-    ): UpdateTemplateResponseSuccess {
-        return SdkClient.request<UpdateTemplateResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/templates/${SdkClient.encodePathSegment(request.id)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (SdkClient.omitIfNull(request.name)),
-                            "alias" to (SdkClient.omitIfNull(request.alias)),
-                            "from" to (SdkClient.omitIfNull(request.from)),
-                            "subject" to (SdkClient.omitIfNull(request.subject)),
-                            "reply_to" to (SdkClient.omitIfNull(request.replyTo)),
-                            "html" to (SdkClient.omitIfNull(request.html)),
-                            "text" to (SdkClient.omitIfNull(request.text)),
-                            "variables" to (SdkClient.omitIfNull(request.variables)),
-                        ),
-                    operationId = "templatesUpdate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+    fun templatesUpdate(clientConfig: ClientConfig, request: TemplatesUpdateRequest, options: RequestOptions? = null): UpdateTemplateResponseSuccess {
+        return SdkClient.request<UpdateTemplateResponseSuccess>(SdkClient.RequestSpec("PATCH", "/templates/${SdkClient.encodePathSegment(request.id)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(request.name)), "alias" to (SdkClient.omitIfNull(request.alias)), "from" to (SdkClient.omitIfNull(request.from)), "subject" to (SdkClient.omitIfNull(request.subject)), "reply_to" to (SdkClient.omitIfNull(request.replyTo)), "html" to (SdkClient.omitIfNull(request.html)), "text" to (SdkClient.omitIfNull(request.text)), "variables" to (SdkClient.omitIfNull(request.variables))), operationId = "templatesUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes a template selected by its ID or alias. Use this operation when you want to remove
-     * the template; the response indicates whether it was deleted.
+     * Deletes a template selected by its ID or alias. Use this operation when you want to remove the template; the response indicates whether it was deleted.
      *
      * @param id The Template ID or alias.
      */
-    fun templatesRemove(
-        clientConfig: ClientConfig,
-        id: String,
-        options: RequestOptions? = null,
-    ): RemoveTemplateResponseSuccess {
-        return SdkClient.request<RemoveTemplateResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/templates/${SdkClient.encodePathSegment(id)}",
-                    config = clientConfig,
-                    operationId = "templatesRemove",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+    fun templatesRemove(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): RemoveTemplateResponseSuccess {
+        return SdkClient.request<RemoveTemplateResponseSuccess>(SdkClient.RequestSpec("DELETE", "/templates/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "templatesRemove", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Publishes a template selected by its ID or alias. Use this operation to make the template's
-     * current version published.
+     * Publishes a template selected by its ID or alias. Use this operation to make the template's current version published.
      *
      * @param id The Template ID or alias.
      */
-    fun templatesPublish(
-        clientConfig: ClientConfig,
-        id: String,
-        options: RequestOptions? = null,
-    ): PublishTemplateResponseSuccess {
-        return SdkClient.request<PublishTemplateResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/templates/${SdkClient.encodePathSegment(id)}/publish",
-                    config = clientConfig,
-                    operationId = "templatesPublish",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+    fun templatesPublish(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): PublishTemplateResponseSuccess {
+        return SdkClient.request<PublishTemplateResponseSuccess>(SdkClient.RequestSpec("POST", "/templates/${SdkClient.encodePathSegment(id)}/publish", config = clientConfig, operationId = "templatesPublish", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates a duplicate of a template selected by its ID or alias. Use this operation when you
-     * want a separate template based on an existing one.
+     * Creates a duplicate of a template selected by its ID or alias. Use this operation when you want a separate template based on an existing one.
      *
      * @param id The Template ID or alias.
      */
-    fun templatesDuplicate(
-        clientConfig: ClientConfig,
-        id: String,
-        options: RequestOptions? = null,
-    ): DuplicateTemplateResponseSuccess {
-        return SdkClient.request<DuplicateTemplateResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/templates/${SdkClient.encodePathSegment(id)}/duplicate",
-                    config = clientConfig,
-                    operationId = "templatesDuplicate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+    fun templatesDuplicate(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): DuplicateTemplateResponseSuccess {
+        return SdkClient.request<DuplicateTemplateResponseSuccess>(SdkClient.RequestSpec("POST", "/templates/${SdkClient.encodePathSegment(id)}/duplicate", config = clientConfig, operationId = "templatesDuplicate", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
+
+
+
+
+
+
+
 }

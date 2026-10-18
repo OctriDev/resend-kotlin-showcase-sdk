@@ -5,183 +5,308 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `CreateWebhookRequest` API schema. */
+/**
+ * Typed representation of the `CreateWebhookRequest` API schema.
+ */
 data class CreateWebhookRequest(
-    /** The URL where webhook events will be sent. */
+    /**
+     * The URL where webhook events will be sent.
+     */
     val endpoint: String,
-    /** Array of event types to subscribe to. */
-    val events: List<String>,
+    /**
+     * Array of event types to subscribe to.
+     */
+    val events: List<String>
 )
 
-/** Typed representation of the `CreateWebhookResponse` API schema. */
+/**
+ * Typed representation of the `CreateWebhookResponse` API schema.
+ */
 data class CreateWebhookResponse(
-    /** The type of object. */
+    /**
+     * The type of object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the webhook. */
+    /**
+     * The ID of the webhook.
+     */
     val id: String? = null,
-    /** The secret key used to verify webhook payloads. */
-    @com.fasterxml.jackson.annotation.JsonProperty("signing_secret")
-    val signingSecret: String? = null,
+    /**
+     * The secret key used to verify webhook payloads.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("signing_secret") val signingSecret: String? = null
 )
 
-/** Typed representation of the `DeleteWebhookResponse` API schema. */
+/**
+ * Typed representation of the `DeleteWebhookResponse` API schema.
+ */
 data class DeleteWebhookResponse(
-    /** The type of object. */
+    /**
+     * The type of object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the deleted webhook. */
+    /**
+     * The ID of the deleted webhook.
+     */
     val id: String? = null,
-    /** Indicates whether the webhook was successfully deleted. */
-    val deleted: Boolean? = null,
+    /**
+     * Indicates whether the webhook was successfully deleted.
+     */
+    val deleted: Boolean? = null
 )
 
-/** Typed representation of the `GetWebhookEventResponse` API schema. */
+/**
+ * Typed representation of the `GetWebhookEventResponse` API schema.
+ */
 data class GetWebhookEventResponse(
-    /** The type of object. */
+    /**
+     * The type of object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the webhook event. */
+    /**
+     * The ID of the webhook event.
+     */
     val id: String? = null,
-    /** The type of the event. */
+    /**
+     * The type of the event.
+     */
     val type: String? = null,
-    /** Timestamp indicating when the event was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** The delivery status of the event for this webhook. */
+    /**
+     * Timestamp indicating when the event was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * The delivery status of the event for this webhook.
+     */
     val status: GetWebhookEventResponseStatusEnum? = null,
     /**
-     * Timestamp of the next scheduled delivery attempt, or null when none is scheduled. Always null
-     * once the event has succeeded or permanently failed.
+     * Timestamp of the next scheduled delivery attempt, or null when none is scheduled. Always null once the event has succeeded or permanently failed.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_attempt_at")
-    val nextAttemptAt: OffsetDateTime? = null,
-    /** The event payload sent to the webhook endpoint. */
-    val payload: Map<String, Any>? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("next_attempt_at") val nextAttemptAt: OffsetDateTime? = null,
+    /**
+     * The event payload sent to the webhook endpoint.
+     */
+    val payload: Map<String, Any>? = null
 )
 
-/** Typed representation of the `GetWebhookResponse` API schema. */
+/**
+ * Typed representation of the `GetWebhookResponse` API schema.
+ */
 data class GetWebhookResponse(
-    /** The type of object. */
+    /**
+     * The type of object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the webhook. */
+    /**
+     * The ID of the webhook.
+     */
     val id: String? = null,
-    /** The URL where webhook events are sent. */
+    /**
+     * The URL where webhook events are sent.
+     */
     val endpoint: String? = null,
-    /** Array of event types subscribed to. */
+    /**
+     * Array of event types subscribed to.
+     */
     val events: List<String>? = null,
-    /** The status of the webhook. */
+    /**
+     * The status of the webhook.
+     */
     val status: String? = null,
-    /** Timestamp indicating when the webhook was created. */
+    /**
+     * Timestamp indicating when the webhook was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /** The secret key used to verify webhook payloads. */
-    @com.fasterxml.jackson.annotation.JsonProperty("signing_secret")
-    val signingSecret: String? = null,
+    /**
+     * The secret key used to verify webhook payloads.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("signing_secret") val signingSecret: String? = null
 )
 
-/** Required object value serialized in the `data[]` wire field. */
+/**
+ * Required object value serialized in the `data[]` wire field.
+ */
 data class ListWebhookEventAttemptsResponseDataItem(
-    /** The ID of the webhook event attempt. */
+    /**
+     * The ID of the webhook event attempt.
+     */
     val id: String? = null,
-    /** The HTTP status code returned by the webhook endpoint. */
-    @com.fasterxml.jackson.annotation.JsonProperty("http_status_code")
-    val httpStatusCode: Long? = null,
-    /** The response body returned by the webhook endpoint. */
+    /**
+     * The HTTP status code returned by the webhook endpoint.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("http_status_code") val httpStatusCode: Long? = null,
+    /**
+     * The response body returned by the webhook endpoint.
+     */
     val response: String? = null,
-    /** Timestamp indicating when the attempt was sent. */
-    @com.fasterxml.jackson.annotation.JsonProperty("sent_at") val sentAt: OffsetDateTime? = null,
+    /**
+     * Timestamp indicating when the attempt was sent.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("sent_at") val sentAt: OffsetDateTime? = null
 )
 
-/** Typed representation of the `ListWebhookEventAttemptsResponse` API schema. */
+/**
+ * Typed representation of the `ListWebhookEventAttemptsResponse` API schema.
+ */
 data class ListWebhookEventAttemptsResponse(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates if there are more results available. */
+    /**
+     * Indicates if there are more results available.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /** Array containing webhook event attempt information. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<ListWebhookEventAttemptsResponseDataItem>? = null,
+    /**
+     * Array containing webhook event attempt information.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ListWebhookEventAttemptsResponseDataItem>? = null
 )
 
-/** Required object value serialized in the `data[]` wire field. */
+/**
+ * Required object value serialized in the `data[]` wire field.
+ */
 data class ListWebhookEventsResponseDataItem(
-    /** The ID of the webhook event. */
+    /**
+     * The ID of the webhook event.
+     */
     val id: String? = null,
-    /** The type of the event. */
+    /**
+     * The type of the event.
+     */
     val type: String? = null,
-    /** Timestamp indicating when the event was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** The delivery status of the event for this webhook. */
-    val status: ListWebhookEventsResponseDataItemStatusEnum? = null,
+    /**
+     * Timestamp indicating when the event was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * The delivery status of the event for this webhook.
+     */
+    val status: ListWebhookEventsResponseDataItemStatusEnum? = null
 )
 
-/** Typed representation of the `ListWebhookEventsResponse` API schema. */
+/**
+ * Typed representation of the `ListWebhookEventsResponse` API schema.
+ */
 data class ListWebhookEventsResponse(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates if there are more results available. */
+    /**
+     * Indicates if there are more results available.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /** Array containing webhook event information. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<ListWebhookEventsResponseDataItem>? = null,
+    /**
+     * Array containing webhook event information.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ListWebhookEventsResponseDataItem>? = null
 )
 
-/** Required object value serialized in the `data[]` wire field. */
+/**
+ * Required object value serialized in the `data[]` wire field.
+ */
 data class ListWebhooksResponseDataItem(
-    /** The ID of the webhook. */
+    /**
+     * The ID of the webhook.
+     */
     val id: String? = null,
-    /** The URL where webhook events are sent. */
+    /**
+     * The URL where webhook events are sent.
+     */
     val endpoint: String? = null,
-    /** Array of event types subscribed to. */
+    /**
+     * Array of event types subscribed to.
+     */
     val events: List<String>? = null,
-    /** The status of the webhook. */
+    /**
+     * The status of the webhook.
+     */
     val status: String? = null,
-    /** Timestamp indicating when the webhook was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
+    /**
+     * Timestamp indicating when the webhook was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
 )
 
-/** Typed representation of the `ListWebhooksResponse` API schema. */
+/**
+ * Typed representation of the `ListWebhooksResponse` API schema.
+ */
 data class ListWebhooksResponse(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates if there are more results available. */
+    /**
+     * Indicates if there are more results available.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /** Array containing webhook information. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<ListWebhooksResponseDataItem>? = null,
+    /**
+     * Array containing webhook information.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ListWebhooksResponseDataItem>? = null
 )
 
-/** Typed representation of the `ReplayWebhookEventResponse` API schema. */
+/**
+ * Typed representation of the `ReplayWebhookEventResponse` API schema.
+ */
 data class ReplayWebhookEventResponse(
-    /** The type of object. */
+    /**
+     * The type of object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the replayed webhook event. */
-    val id: String? = null,
+    /**
+     * The ID of the replayed webhook event.
+     */
+    val id: String? = null
 )
 
-/** Typed representation of the `RotateWebhookSigningSecretResponse` API schema. */
+/**
+ * Typed representation of the `RotateWebhookSigningSecretResponse` API schema.
+ */
 data class RotateWebhookSigningSecretResponse(
-    /** The type of object. */
+    /**
+     * The type of object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the webhook. */
+    /**
+     * The ID of the webhook.
+     */
     val id: String? = null,
-    /** The new secret key used to verify webhook payloads. */
-    @com.fasterxml.jackson.annotation.JsonProperty("signing_secret")
-    val signingSecret: String? = null,
+    /**
+     * The new secret key used to verify webhook payloads.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("signing_secret") val signingSecret: String? = null
 )
 
-/** Typed representation of the `UpdateWebhookRequest` API schema. */
+/**
+ * Typed representation of the `UpdateWebhookRequest` API schema.
+ */
 data class UpdateWebhookRequest(
-    /** The URL where webhook events will be sent. */
+    /**
+     * The URL where webhook events will be sent.
+     */
     val endpoint: String? = null,
-    /** Array of event types to subscribe to. */
+    /**
+     * Array of event types to subscribe to.
+     */
     val events: List<String>? = null,
-    /** The status of the webhook. */
-    val status: UpdateWebhookRequestStatusEnum? = null,
+    /**
+     * The status of the webhook.
+     */
+    val status: UpdateWebhookRequestStatusEnum? = null
 )
 
-/** Typed representation of the `UpdateWebhookResponse` API schema. */
+/**
+ * Typed representation of the `UpdateWebhookResponse` API schema.
+ */
 data class UpdateWebhookResponse(
-    /** The type of object. */
+    /**
+     * The type of object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the updated webhook. */
-    val id: String? = null,
+    /**
+     * The ID of the updated webhook.
+     */
+    val id: String? = null
 )

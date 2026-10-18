@@ -3,101 +3,170 @@
 
 package dev.octri.showcase.resend.models
 
-/** Typed representation of the `CreateTopicOptions` API schema. */
+/**
+ * Typed representation of the `CreateTopicOptions` API schema.
+ */
 data class CreateTopicOptions(
-    /** The name of the topic. Max 50 characters. */
+    /**
+     * The name of the topic. Max 50 characters.
+     */
     val name: String,
-    /** The default subscription status for the topic. Cannot be changed after creation. */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_subscription")
-    val defaultSubscription: CreateTopicOptionsDefaultSubscriptionEnum,
-    /** A description of the topic. Max 200 characters. */
+    /**
+     * The default subscription status for the topic. Cannot be changed after creation.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_subscription") val defaultSubscription: CreateTopicOptionsDefaultSubscriptionEnum,
+    /**
+     * A description of the topic. Max 200 characters.
+     */
     val description: String? = null,
     /**
-     * The visibility of the topic. Public topics are visible to all contacts on the unsubscribe
-     * page. Private topics are only visible to opted-in contacts.
+     * The visibility of the topic. Public topics are visible to all contacts on the unsubscribe page. Private topics are only visible to opted-in contacts.
      */
-    val visibility: CreateTopicOptionsVisibilityEnum? = null,
+    val visibility: CreateTopicOptionsVisibilityEnum? = null
 )
 
-/** Typed representation of the `CreateTopicResponseSuccess` API schema. */
+/**
+ * Typed representation of the `CreateTopicResponseSuccess` API schema.
+ */
 data class CreateTopicResponseSuccess(
-    /** The ID of the topic. */
+    /**
+     * The ID of the topic.
+     */
     val id: String? = null,
-    /** The object type of the response. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * The object type of the response.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null
 )
 
-/** Typed representation of the `GetTopicResponseSuccess` API schema. */
+/**
+ * Typed representation of the `GetTopicResponseSuccess` API schema.
+ */
 data class GetTopicResponseSuccess(
-    /** The ID of the topic. */
+    /**
+     * The ID of the topic.
+     */
     val id: String? = null,
-    /** The object type. */
+    /**
+     * The object type.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The name of the topic. */
+    /**
+     * The name of the topic.
+     */
     val name: String? = null,
-    /** A description of the topic. */
+    /**
+     * A description of the topic.
+     */
     val description: String? = null,
-    /** The default subscription status for the topic. */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_subscription")
-    val defaultSubscription: GetTopicResponseSuccessDefaultSubscriptionEnum? = null,
-    /** The visibility of the topic. */
+    /**
+     * The default subscription status for the topic.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_subscription") val defaultSubscription: GetTopicResponseSuccessDefaultSubscriptionEnum? = null,
+    /**
+     * The visibility of the topic.
+     */
     val visibility: GetTopicResponseSuccessVisibilityEnum? = null,
-    /** Timestamp indicating when the topic was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
+    /**
+     * Timestamp indicating when the topic was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
 )
 
-/** Required object value serialized in the `data[]` wire field. */
+/**
+ * Required object value serialized in the `data[]` wire field.
+ */
 data class ListTopicsResponseSuccessDataItem(
-    /** Unique identifier for the topic. */
+    /**
+     * Unique identifier for the topic.
+     */
     val id: String? = null,
-    /** Name of the topic. */
+    /**
+     * Name of the topic.
+     */
     val name: String? = null,
-    /** A description of the topic. */
+    /**
+     * A description of the topic.
+     */
     val description: String? = null,
-    /** The default subscription status for the topic. */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_subscription")
-    val defaultSubscription: ListTopicsResponseSuccessDataItemDefaultSubscriptionEnum? = null,
-    /** The visibility of the topic. */
+    /**
+     * The default subscription status for the topic.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_subscription") val defaultSubscription: ListTopicsResponseSuccessDataItemDefaultSubscriptionEnum? = null,
+    /**
+     * The visibility of the topic.
+     */
     val visibility: ListTopicsResponseSuccessDataItemVisibilityEnum? = null,
-    /** Timestamp indicating when the topic was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
+    /**
+     * Timestamp indicating when the topic was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
 )
 
-/** Typed representation of the `ListTopicsResponseSuccess` API schema. */
+/**
+ * Typed representation of the `ListTopicsResponseSuccess` API schema.
+ */
 data class ListTopicsResponseSuccess(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates if there are more results available. */
+    /**
+     * Indicates if there are more results available.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /** Array containing topic information. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<ListTopicsResponseSuccessDataItem>? = null,
+    /**
+     * Array containing topic information.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ListTopicsResponseSuccessDataItem>? = null
 )
 
-/** Typed representation of the `RemoveTopicResponseSuccess` API schema. */
+/**
+ * Typed representation of the `RemoveTopicResponseSuccess` API schema.
+ */
 data class RemoveTopicResponseSuccess(
-    /** The ID of the topic. */
+    /**
+     * The ID of the topic.
+     */
     val id: String? = null,
-    /** The object type. */
+    /**
+     * The object type.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates whether the topic was successfully deleted. */
-    val deleted: Boolean? = null,
+    /**
+     * Indicates whether the topic was successfully deleted.
+     */
+    val deleted: Boolean? = null
 )
 
-/** Typed representation of the `UpdateTopicOptions` API schema. */
+/**
+ * Typed representation of the `UpdateTopicOptions` API schema.
+ */
 data class UpdateTopicOptions(
-    /** The name of the topic. Max 50 characters. */
+    /**
+     * The name of the topic. Max 50 characters.
+     */
     val name: String? = null,
-    /** A description of the topic. Max 200 characters. */
+    /**
+     * A description of the topic. Max 200 characters.
+     */
     val description: String? = null,
-    /** The visibility of the topic. */
-    val visibility: UpdateTopicOptionsVisibilityEnum? = null,
+    /**
+     * The visibility of the topic.
+     */
+    val visibility: UpdateTopicOptionsVisibilityEnum? = null
 )
 
-/** Typed representation of the `UpdateTopicResponseSuccess` API schema. */
+/**
+ * Typed representation of the `UpdateTopicResponseSuccess` API schema.
+ */
 data class UpdateTopicResponseSuccess(
-    /** The ID of the topic. */
+    /**
+     * The ID of the topic.
+     */
     val id: String? = null,
-    /** The object type. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * The object type.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null
 )

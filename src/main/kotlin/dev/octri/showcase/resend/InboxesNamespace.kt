@@ -3,574 +3,234 @@
 
 package dev.octri.showcase.resend
 
+
 class InboxesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates an inbox that sends and receives email at an address on one of the team's domains.
-     * Supply `email_address` and choose whether to enable `forwarding`; the domain's verification
-     * requirements depend on that setting.
+     * Creates an inbox that sends and receives email at an address on one of the team's domains. Supply `email_address` and choose whether to enable `forwarding`; the domain's verification requirements depend on that setting.
      *
-     * Creates an inbox that sends and receives email at an address on one of your domains. The
-     * domain must belong to the team. Without `forwarding`, the domain must have receiving enabled,
-     * with DKIM and SPF verified and the inbound MX record verified or pending. With `forwarding`
-     * set to `true`, the domain only needs DKIM and SPF verified for sending, and Resend generates
-     * a `receiving_address` on the team inbound domain, and a team without an inbound domain gets
-     * a 422. A domain…
+     * Creates an inbox that sends and receives email at an address on one of your domains. The domain must belong to the team. Without `forwarding`, the domain must have receiving enabled, with DKIM and SPF verified and the inbound MX record verified or pending. With `forwarding` set to `true`, the domain only needs DKIM and SPF verified for sending, and Resend generates a `receiving_address` on the team inbound domain, and a team without an inbound domain gets a 422. A domain…
      */
-    fun create(
-        emailAddress: String,
-        name: String? = null,
-        fromName: String? = null,
-        forwarding: Boolean? = null,
-        options: RequestOptions? = null,
-    ): CreateInboxResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesCreate(
-            clientConfig,
-            emailAddress,
-            name,
-            fromName,
-            forwarding,
-            options,
-        )
+    fun create(emailAddress: String, name: String? = null, fromName: String? = null, forwarding: Boolean? = null, options: RequestOptions? = null): CreateInboxResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesCreate(clientConfig, emailAddress, name, fromName, forwarding, options)
     }
 
     /**
-     * Lists the team's inboxes, ordered from newest to oldest. Use `after` or `before` with an
-     * inbox ID to navigate the results; list items include fewer fields than an individual inbox
-     * record.
+     * Lists the team's inboxes, ordered from newest to oldest. Use `after` or `before` with an inbox ID to navigate the results; list items include fewer fields than an individual inbox record.
      *
-     * Returns the inboxes of the team, newest first. The list items carry fewer fields than a
-     * single inbox. Retrieve an inbox to get all its fields. The `after` and `before` cursors take
-     * an inbox ID, and only one of them can be passed, or the request returns a 422. A value that
-     * is not a UUID returns a 422, and an unknown ID returns a 404.
+     * Returns the inboxes of the team, newest first. The list items carry fewer fields than a single inbox. Retrieve an inbox to get all its fields. The `after` and `before` cursors take an inbox ID, and only one of them can be passed, or the request returns a 422. A value that is not a UUID returns a 422, and an unknown ID returns a 404.
      */
-    fun list(
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListInboxesResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesList(
-            clientConfig,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun list(limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListInboxesResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesList(clientConfig, limit, after, before, options)
     }
 
     /**
-     * Retrieves a single inbox by its ID or email address. Use an email address for a
-     * case-insensitive address lookup, or a UUID to look up the inbox by ID.
+     * Retrieves a single inbox by its ID or email address. Use an email address for a case-insensitive address lookup, or a UUID to look up the inbox by ID.
      */
     fun get(inboxId: String, options: RequestOptions? = null): Inbox {
         return dev.octri.showcase.resend.methods.Inboxes.inboxesGet(clientConfig, inboxId, options)
     }
 
     /**
-     * Updates an inbox's internal name or the sender name recipients see. Provide at least one of
-     * `name` or `from_name`; omitted values remain unchanged.
+     * Updates an inbox's internal name or the sender name recipients see. Provide at least one of `name` or `from_name`; omitted values remain unchanged.
      *
-     * Updates the internal name of the inbox or the name recipients see when mail is sent from it.
-     * At least one of `name` or `from_name` is required.
+     * Updates the internal name of the inbox or the name recipients see when mail is sent from it. At least one of `name` or `from_name` is required.
      */
-    fun update(
-        inboxId: String,
-        name: String? = null,
-        fromName: String? = null,
-        options: RequestOptions? = null,
-    ): UpdateInboxResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesUpdate(
-            clientConfig,
-            inboxId,
-            name,
-            fromName,
-            options,
-        )
+    fun update(inboxId: String, name: String? = null, fromName: String? = null, options: RequestOptions? = null): UpdateInboxResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesUpdate(clientConfig, inboxId, name, fromName, options)
     }
 
     /**
-     * Deletes an existing inbox. Use its UUID as `inbox_id`; an email address is not accepted for
-     * this operation.
+     * Deletes an existing inbox. Use its UUID as `inbox_id`; an email address is not accepted for this operation.
      *
-     * Removes the inbox. An inbox that does not exist or was already removed returns a 404
-     * not_found.
+     * Removes the inbox. An inbox that does not exist or was already removed returns a 404 not_found.
      */
     fun remove(inboxId: String, options: RequestOptions? = null): RemoveInboxResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesRemove(
-            clientConfig,
-            inboxId,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesRemove(clientConfig, inboxId, options)
     }
 
     /**
-     * Retrieves the agent settings for an inbox. An inbox without a configured agent has null
-     * `instructions` and `tone` values and an empty `enabled_actions` array.
+     * Retrieves the agent settings for an inbox. An inbox without a configured agent has null `instructions` and `tone` values and an empty `enabled_actions` array.
      *
-     * Returns the agent settings of the inbox. An inbox without a configured agent returns empty
-     * settings: `instructions` and `tone` are null and `enabled_actions` is an empty array.
+     * Returns the agent settings of the inbox. An inbox without a configured agent returns empty settings: `instructions` and `tone` are null and `enabled_actions` is an empty array.
      */
     fun getAgent(inboxId: String, options: RequestOptions? = null): InboxAgent {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesGetAgent(
-            clientConfig,
-            inboxId,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesGetAgent(clientConfig, inboxId, options)
     }
 
     /**
-     * Updates the agent settings for an inbox, creating an agent if one is not configured. Provide
-     * at least one of `instructions`, `tone`, or `enabled_actions`; omitted fields keep their
-     * current values.
+     * Updates the agent settings for an inbox, creating an agent if one is not configured. Provide at least one of `instructions`, `tone`, or `enabled_actions`; omitted fields keep their current values.
      *
-     * Updates the agent settings of the inbox. The agent is created when the inbox has none.
-     * Omitted fields keep their current value.
+     * Updates the agent settings of the inbox. The agent is created when the inbox has none. Omitted fields keep their current value.
      */
-    fun updateAgent(
-        inboxId: String,
-        instructions: SdkClient.SdkOptional<String?>? = null,
-        tone: SdkClient.SdkOptional<String?>? = null,
-        enabledActions: List<UpdateInboxAgentOptionsEnabledActionsItemEnum>? = null,
-        options: RequestOptions? = null,
-    ): UpdateInboxAgentResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesUpdateAgent(
-            clientConfig,
-            inboxId,
-            instructions,
-            tone,
-            enabledActions,
-            options,
-        )
+    fun updateAgent(inboxId: String, instructions: SdkClient.SdkOptional<String?>? = null, tone: SdkClient.SdkOptional<String?>? = null, enabledActions: List<UpdateInboxAgentOptionsEnabledActionsItemEnum>? = null, options: RequestOptions? = null): UpdateInboxAgentResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesUpdateAgent(clientConfig, inboxId, instructions, tone, enabledActions, options)
     }
 
     /**
-     * Lists the labels attached to an inbox, ordered from oldest to newest. Use this endpoint to
-     * retrieve the inbox’s labels; the complete list is returned without pagination.
+     * Lists the labels attached to an inbox, ordered from oldest to newest. Use this endpoint to retrieve the inbox’s labels; the complete list is returned without pagination.
      *
      * Returns every label on the inbox, oldest first. The list is not paginated.
      */
-    fun listLabels(
-        inboxId: String,
-        options: RequestOptions? = null,
-    ): ListInboxLabelsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesListLabels(
-            clientConfig,
-            inboxId,
-            options,
-        )
+    fun listLabels(inboxId: String, options: RequestOptions? = null): ListInboxLabelsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesListLabels(clientConfig, inboxId, options)
     }
 
     /**
-     * Creates a named, colored label on an inbox. Supply a `name` between 1 and 64 characters;
-     * names are unique per inbox, without regard to case, and `color` defaults to a random
-     * dashboard palette color when omitted.
+     * Creates a named, colored label on an inbox. Supply a `name` between 1 and 64 characters; names are unique per inbox, without regard to case, and `color` defaults to a random dashboard palette color when omitted.
      *
-     * A label is a named, colored tag that belongs to one inbox. An inbox can have at most 100
-     * labels. Label names are unique per inbox, compared without case. A duplicate name or a full
-     * inbox returns a 422 validation_error.
+     * A label is a named, colored tag that belongs to one inbox. An inbox can have at most 100 labels. Label names are unique per inbox, compared without case. A duplicate name or a full inbox returns a 422 validation_error.
      */
-    fun createLabel(
-        inboxId: String,
-        name: String,
-        color: String? = null,
-        options: RequestOptions? = null,
-    ): CreateInboxLabelResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesCreateLabel(
-            clientConfig,
-            inboxId,
-            name,
-            color,
-            options,
-        )
+    fun createLabel(inboxId: String, name: String, color: String? = null, options: RequestOptions? = null): CreateInboxLabelResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesCreateLabel(clientConfig, inboxId, name, color, options)
     }
 
     /**
-     * Updates the name or color of an inbox label. Supply only the fields you want to change;
-     * omitted fields keep their current values, and a new name must remain unique on the inbox
-     * without regard to case.
+     * Updates the name or color of an inbox label. Supply only the fields you want to change; omitted fields keep their current values, and a new name must remain unique on the inbox without regard to case.
      *
-     * Renames or recolors a label. Omitted fields keep their current value. A new name must not
-     * match another label on the inbox, compared without case, or the request returns a 422
-     * validation_error.
+     * Renames or recolors a label. Omitted fields keep their current value. A new name must not match another label on the inbox, compared without case, or the request returns a 422 validation_error.
      */
-    fun updateLabel(
-        inboxId: String,
-        labelId: String,
-        name: String? = null,
-        color: String? = null,
-        options: RequestOptions? = null,
-    ): UpdateInboxLabelResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesUpdateLabel(
-            clientConfig,
-            inboxId,
-            labelId,
-            name,
-            color,
-            options,
-        )
+    fun updateLabel(inboxId: String, labelId: String, name: String? = null, color: String? = null, options: RequestOptions? = null): UpdateInboxLabelResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesUpdateLabel(clientConfig, inboxId, labelId, name, color, options)
     }
 
     /**
-     * Deletes a label from an inbox and removes it from every thread that carries it. Use this
-     * endpoint when you want to remove the label itself as well as its associations with threads.
+     * Deletes a label from an inbox and removes it from every thread that carries it. Use this endpoint when you want to remove the label itself as well as its associations with threads.
      *
      * Deletes the label and removes it from every thread that carries it.
      */
-    fun removeLabel(
-        inboxId: String,
-        labelId: String,
-        options: RequestOptions? = null,
-    ): RemoveInboxLabelResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesRemoveLabel(
-            clientConfig,
-            inboxId,
-            labelId,
-            options,
-        )
+    fun removeLabel(inboxId: String, labelId: String, options: RequestOptions? = null): RemoveInboxLabelResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesRemoveLabel(clientConfig, inboxId, labelId, options)
     }
 
     /**
-     * Lists threads in an inbox, ordered by most recent activity first. Use `folders`, `labels`, or
-     * `read` to filter the results, and use `after` or `before` to navigate by thread ID; you can
-     * pass only one cursor at a time.
+     * Lists threads in an inbox, ordered by most recent activity first. Use `folders`, `labels`, or `read` to filter the results, and use `after` or `before` to navigate by thread ID; you can pass only one cursor at a time.
      *
-     * Returns the threads in an inbox, most recently active first. A thread is a conversation made
-     * up of one or more emails. The `after` and `before` cursors take a thread ID, and only one of
-     * them can be passed. A cursor that is not a UUID, such as a date, returns a 422
-     * validation_error. A cursor thread that is not in the selected folders returns a 404. To find
-     * threads by text, sender, recipient, attachment, or date, use the search threads endpoint.
+     * Returns the threads in an inbox, most recently active first. A thread is a conversation made up of one or more emails. The `after` and `before` cursors take a thread ID, and only one of them can be passed. A cursor that is not a UUID, such as a date, returns a 422 validation_error. A cursor thread that is not in the selected folders returns a 404. To find threads by text, sender, recipient, attachment, or date, use the search threads endpoint.
      */
-    fun listThreads(
-        request: dev.octri.showcase.resend.methods.Inboxes.InboxesListThreadsRequest,
-        options: RequestOptions? = null,
-    ): ListInboxThreadsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesListThreads(
-            clientConfig,
-            request,
-            options,
-        )
+    fun listThreads(request: dev.octri.showcase.resend.methods.Inboxes.InboxesListThreadsRequest, options: RequestOptions? = null): ListInboxThreadsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesListThreads(clientConfig, request, options)
     }
 
     /**
-     * Searches an inbox’s threads by email text, sender or recipient, attachment presence, and
-     * date. Combine filters to find threads matching all specified criteria; email-level filters
-     * must match the same email, and results may lag new emails by up to about a minute. Search
-     * covers the 10,000 threads with the newest matching email when more than 10,000 threads match.
+     * Searches an inbox’s threads by email text, sender or recipient, attachment presence, and date. Combine filters to find threads matching all specified criteria; email-level filters must match the same email, and results may lag new emails by up to about a minute. Search covers the 10,000 threads with the newest matching email when more than 10,000 threads match.
      *
-     * Finds threads by the text of their emails, who sent or received them, whether they have
-     * attachments, and their dates. Results are ordered by latest activity, newest first, and
-     * paginate like the list threads endpoint, so a cursor that is not a thread ID returns a 422.
-     * Search can be up to about a minute behind new emails. Different parameters combine, so a
-     * thread must match all of them. `folders`, `labels`, and `read` apply to the thread. `query`,
-     * `from`, `to`, `cc`, `bcc`,…
+     * Finds threads by the text of their emails, who sent or received them, whether they have attachments, and their dates. Results are ordered by latest activity, newest first, and paginate like the list threads endpoint, so a cursor that is not a thread ID returns a 422. Search can be up to about a minute behind new emails. Different parameters combine, so a thread must match all of them. `folders`, `labels`, and `read` apply to the thread. `query`, `from`, `to`, `cc`, `bcc`,…
      */
-    fun searchThreads(
-        request: dev.octri.showcase.resend.methods.Inboxes.InboxesSearchThreadsRequest,
-        options: RequestOptions? = null,
-    ): SearchInboxThreadsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesSearchThreads(
-            clientConfig,
-            request,
-            options,
-        )
+    fun searchThreads(request: dev.octri.showcase.resend.methods.Inboxes.InboxesSearchThreadsRequest, options: RequestOptions? = null): SearchInboxThreadsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesSearchThreads(clientConfig, request, options)
     }
 
     /**
-     * Retrieves the summary of a single inbox thread. Use the list thread emails endpoint to
-     * retrieve the messages that make up the thread.
+     * Retrieves the summary of a single inbox thread. Use the list thread emails endpoint to retrieve the messages that make up the thread.
      *
-     * Returns the thread summary. The emails in the thread are listed with the list thread emails
-     * endpoint.
+     * Returns the thread summary. The emails in the thread are listed with the list thread emails endpoint.
      */
-    fun getThread(
-        inboxId: String,
-        threadId: String,
-        options: RequestOptions? = null,
-    ): InboxThreadSummary {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesGetThread(
-            clientConfig,
-            inboxId,
-            threadId,
-            options,
-        )
+    fun getThread(inboxId: String, threadId: String, options: RequestOptions? = null): InboxThreadSummary {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesGetThread(clientConfig, inboxId, threadId, options)
     }
 
     /**
-     * Updates a thread’s read state, folder, or labels. Supply at least one of `read`, `folder`,
-     * `add_label_ids`, or `remove_label_ids`; changes apply in that order and are not atomic, so
-     * earlier changes may remain applied if a later label operation fails.
+     * Updates a thread’s read state, folder, or labels. Supply at least one of `read`, `folder`, `add_label_ids`, or `remove_label_ids`; changes apply in that order and are not atomic, so earlier changes may remain applied if a later label operation fails.
      *
-     * Marks a thread read or unread, moves it to a folder, or adds and removes labels. At least one
-     * of `read`, `folder`, `add_label_ids`, or `remove_label_ids` is required. A label ID cannot be
-     * both added and removed in the same request. Removing a label from a thread keeps the label
-     * itself. Moving a thread out of `trash` restores it and clears its deletion deadline. The
-     * changes apply in this order: `read`, `folder`, added labels, removed labels. They are not
-     * atomic, so a 404 for…
+     * Marks a thread read or unread, moves it to a folder, or adds and removes labels. At least one of `read`, `folder`, `add_label_ids`, or `remove_label_ids` is required. A label ID cannot be both added and removed in the same request. Removing a label from a thread keeps the label itself. Moving a thread out of `trash` restores it and clears its deletion deadline. The changes apply in this order: `read`, `folder`, added labels, removed labels. They are not atomic, so a 404 for…
      */
-    fun updateThread(
-        request: dev.octri.showcase.resend.methods.Inboxes.InboxesUpdateThreadRequest,
-        options: RequestOptions? = null,
-    ): InboxThreadSummary {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesUpdateThread(
-            clientConfig,
-            request,
-            options,
-        )
+    fun updateThread(request: dev.octri.showcase.resend.methods.Inboxes.InboxesUpdateThreadRequest, options: RequestOptions? = null): InboxThreadSummary {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesUpdateThread(clientConfig, request, options)
     }
 
     /**
-     * Moves a thread to the `trash` folder and schedules it for deletion in 30 days. The move is
-     * reversible; update the thread’s `folder` to `inbox`, `archive`, or `spam` to restore it and
-     * clear the deletion deadline.
+     * Moves a thread to the `trash` folder and schedules it for deletion in 30 days. The move is reversible; update the thread’s `folder` to `inbox`, `archive`, or `spam` to restore it and clear the deletion deadline.
      *
-     * Moves the thread to `trash` and schedules it for deletion in 30 days. This is reversible. To
-     * restore the thread, update its `folder` to `inbox`, `archive`, or `spam`, which also clears
-     * the deletion deadline.
+     * Moves the thread to `trash` and schedules it for deletion in 30 days. This is reversible. To restore the thread, update its `folder` to `inbox`, `archive`, or `spam`, which also clears the deletion deadline.
      */
-    fun removeThread(
-        inboxId: String,
-        threadId: String,
-        options: RequestOptions? = null,
-    ): RemoveInboxThreadResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesRemoveThread(
-            clientConfig,
-            inboxId,
-            threadId,
-            options,
-        )
+    fun removeThread(inboxId: String, threadId: String, options: RequestOptions? = null): RemoveInboxThreadResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesRemoveThread(clientConfig, inboxId, threadId, options)
     }
 
     /**
-     * Lists the messages in a thread, ordered from oldest to newest. Use `after` with the last
-     * message ID to retrieve a newer page, or `before` with the first message ID to retrieve an
-     * older page; pass only one cursor at a time.
+     * Lists the messages in a thread, ordered from oldest to newest. Use `after` with the last message ID to retrieve a newer page, or `before` with the first message ID to retrieve an older page; pass only one cursor at a time.
      *
-     * Returns the messages of a thread, oldest first. Pass the `id` of the last message as `after`
-     * to get the next, newer page. Pass the `id` of the first message as `before` to get the
-     * previous, older page. Passing both `after` and `before`, or a cursor that is not a UUID,
-     * returns a 422. A cursor that is not a message of the thread returns a 404.
+     * Returns the messages of a thread, oldest first. Pass the `id` of the last message as `after` to get the next, newer page. Pass the `id` of the first message as `before` to get the previous, older page. Passing both `after` and `before`, or a cursor that is not a UUID, returns a 422. A cursor that is not a message of the thread returns a 404.
      */
-    fun listThreadEmails(
-        inboxId: String,
-        threadId: String,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListInboxThreadEmailsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesListThreadEmails(
-            clientConfig,
-            inboxId,
-            threadId,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun listThreadEmails(inboxId: String, threadId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListInboxThreadEmailsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesListThreadEmails(clientConfig, inboxId, threadId, limit, after, before, options)
     }
 
     /**
-     * Retrieves a specific email from an inbox thread. Use the inbox, thread, and email identifiers
-     * to select the message whose details you need.
+     * Retrieves a specific email from an inbox thread. Use the inbox, thread, and email identifiers to select the message whose details you need.
      */
-    fun getThreadEmail(
-        inboxId: String,
-        threadId: String,
-        emailId: String,
-        options: RequestOptions? = null,
-    ): InboxThreadEmail {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesGetThreadEmail(
-            clientConfig,
-            inboxId,
-            threadId,
-            emailId,
-            options,
-        )
+    fun getThreadEmail(inboxId: String, threadId: String, emailId: String, options: RequestOptions? = null): InboxThreadEmail {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesGetThreadEmail(clientConfig, inboxId, threadId, emailId, options)
     }
 
     /**
-     * Submits a reply to a message in an inbox thread directly from the inbox address, without
-     * storing a draft. Use `html` or `text` for the reply body; recipients are derived from the
-     * message, with `reply_all` controlling whether other recipients are copied. The reply is
-     * threaded under the original message.
+     * Submits a reply to a message in an inbox thread directly from the inbox address, without storing a draft. Use `html` or `text` for the reply body; recipients are derived from the message, with `reply_all` controlling whether other recipients are copied. The reply is threaded under the original message.
      *
-     * Sends a reply from the inbox address right away, with no stored draft. The `to` recipients
-     * come from the message you reply to. For a message the inbox received, the reply goes to its
-     * `Reply-To` addresses, or to its sender when it has no `Reply-To`. For a message the inbox
-     * sent, the reply goes to that message's `to` recipients. Set `reply_all` to also copy the
-     * other recipients of the message. The reply threads under the message through the
-     * `In-Reply-To` and `References`…
+     * Sends a reply from the inbox address right away, with no stored draft. The `to` recipients come from the message you reply to. For a message the inbox received, the reply goes to its `Reply-To` addresses, or to its sender when it has no `Reply-To`. For a message the inbox sent, the reply goes to that message's `to` recipients. Set `reply_all` to also copy the other recipients of the message. The reply threads under the message through the `In-Reply-To` and `References`…
      */
-    fun replyThreadEmail(
-        request: dev.octri.showcase.resend.methods.Inboxes.InboxesReplyThreadEmailRequest,
-        options: RequestOptions? = null,
-    ): ReplyInboxThreadEmailResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesReplyThreadEmail(
-            clientConfig,
-            request,
-            options,
-        )
+    fun replyThreadEmail(request: dev.octri.showcase.resend.methods.Inboxes.InboxesReplyThreadEmailRequest, options: RequestOptions? = null): ReplyInboxThreadEmailResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesReplyThreadEmail(clientConfig, request, options)
     }
 
     /**
-     * Submits a forward of a message from the inbox address directly, without storing a draft.
-     * Supply `to` recipients and optionally add a note with `html` or `text`; the original message
-     * is quoted and its attachments are included. Added attachments share the original message's
-     * limit of 10 files and 25 MB of content.
+     * Submits a forward of a message from the inbox address directly, without storing a draft. Supply `to` recipients and optionally add a note with `html` or `text`; the original message is quoted and its attachments are included. Added attachments share the original message's limit of 10 files and 25 MB of content.
      *
-     * Forwards a message from the inbox address right away, with no stored draft. The original
-     * message is quoted under a forwarded-message banner, below the optional `html` or `text` note.
-     * The attachments of the original message are sent with the forward, together with any
-     * `attachments` you add. The request fails when they exceed 10 files or 25 MB of `content` in
-     * total. An original attachment that was sent from a URL (`path`) cannot be forwarded, and the
-     * request returns a 422. The…
+     * Forwards a message from the inbox address right away, with no stored draft. The original message is quoted under a forwarded-message banner, below the optional `html` or `text` note. The attachments of the original message are sent with the forward, together with any `attachments` you add. The request fails when they exceed 10 files or 25 MB of `content` in total. An original attachment that was sent from a URL (`path`) cannot be forwarded, and the request returns a 422. The…
      */
-    fun forwardThreadEmail(
-        request: dev.octri.showcase.resend.methods.Inboxes.InboxesForwardThreadEmailRequest,
-        options: RequestOptions? = null,
-    ): ForwardInboxThreadEmailResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesForwardThreadEmail(
-            clientConfig,
-            request,
-            options,
-        )
+    fun forwardThreadEmail(request: dev.octri.showcase.resend.methods.Inboxes.InboxesForwardThreadEmailRequest, options: RequestOptions? = null): ForwardInboxThreadEmailResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesForwardThreadEmail(clientConfig, request, options)
     }
 
     /**
-     * Lists unsent drafts in an inbox, ordered by most recently updated. Use `after` or `before`
-     * with a Draft ID from the current page to navigate results; do not supply both cursors
-     * together.
+     * Lists unsent drafts in an inbox, ordered by most recently updated. Use `after` or `before` with a Draft ID from the current page to navigate results; do not supply both cursors together.
      *
-     * Returns the unsent drafts on the inbox, most recently updated first. The `after` and `before`
-     * cursors take a Draft ID from the current page, and only one of them can be passed. A cursor
-     * that is not a UUID, or both cursors together, return a 422. A cursor that is not an unsent
-     * draft on this inbox returns a 404.
+     * Returns the unsent drafts on the inbox, most recently updated first. The `after` and `before` cursors take a Draft ID from the current page, and only one of them can be passed. A cursor that is not a UUID, or both cursors together, return a 422. A cursor that is not an unsent draft on this inbox returns a 404.
      */
-    fun listDrafts(
-        inboxId: String,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListInboxDraftsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesListDrafts(
-            clientConfig,
-            inboxId,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun listDrafts(inboxId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListInboxDraftsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesListDrafts(clientConfig, inboxId, limit, after, before, options)
     }
 
     /**
-     * Creates an unsent draft in an inbox, either as a new thread or as a reply in an existing
-     * thread. Supply at least one non-empty recipient, subject, body, or attachment field; reply
-     * drafts require both `thread_id` and `reply_to_email_id`. If a reply draft already exists for
-     * the target email, the response returns its ID and only a supplied `attachments` value is
-     * applied.
+     * Creates an unsent draft in an inbox, either as a new thread or as a reply in an existing thread. Supply at least one non-empty recipient, subject, body, or attachment field; reply drafts require both `thread_id` and `reply_to_email_id`. If a reply draft already exists for the target email, the response returns its ID and only a supplied `attachments` value is applied.
      *
-     * Creates an unsent draft on the inbox. Omit `thread_id` and `reply_to_email_id` for a draft
-     * that starts a new thread. Pass both together for a reply draft in an existing thread. A reply
-     * draft without `to` is addressed to the sender of the email it replies to, or to its Reply-To
-     * when set. For an email the inbox sent, it defaults to that email's `to` recipients. Send `to:
-     * []` to leave it empty. At least one of `to`, `cc`, `bcc`, `subject`, `text`, `html` or
-     * `attachments` must…
+     * Creates an unsent draft on the inbox. Omit `thread_id` and `reply_to_email_id` for a draft that starts a new thread. Pass both together for a reply draft in an existing thread. A reply draft without `to` is addressed to the sender of the email it replies to, or to its Reply-To when set. For an email the inbox sent, it defaults to that email's `to` recipients. Send `to: []` to leave it empty. At least one of `to`, `cc`, `bcc`, `subject`, `text`, `html` or `attachments` must…
      */
-    fun createDraft(
-        request: dev.octri.showcase.resend.methods.Inboxes.InboxesCreateDraftRequest,
-        options: RequestOptions? = null,
-    ): CreateInboxDraftResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesCreateDraft(
-            clientConfig,
-            request,
-            options,
-        )
+    fun createDraft(request: dev.octri.showcase.resend.methods.Inboxes.InboxesCreateDraftRequest, options: RequestOptions? = null): CreateInboxDraftResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesCreateDraft(clientConfig, request, options)
     }
 
     /**
-     * Retrieves a specific draft from an inbox. Use the inbox and draft identifiers to inspect its
-     * recipients, content, thread association, timestamps, and stored attachments.
+     * Retrieves a specific draft from an inbox. Use the inbox and draft identifiers to inspect its recipients, content, thread association, timestamps, and stored attachments.
      */
     fun getDraft(inboxId: String, draftId: String, options: RequestOptions? = null): InboxDraft {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesGetDraft(
-            clientConfig,
-            inboxId,
-            draftId,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesGetDraft(clientConfig, inboxId, draftId, options)
     }
 
     /**
-     * Updates the content of an unsent draft in an inbox. Send only the fields you want to change;
-     * sending `attachments` replaces all attachments, while sending `text` or `html` replaces the
-     * entire body. The merged draft must retain at least one non-empty field and no more than 50
-     * combined recipients.
+     * Updates the content of an unsent draft in an inbox. Send only the fields you want to change; sending `attachments` replaces all attachments, while sending `text` or `html` replaces the entire body. The merged draft must retain at least one non-empty field and no more than 50 combined recipients.
      *
-     * Updates the content of an unsent draft. Omitted fields are left unchanged. Send at least one
-     * of `to`, `cc`, `bcc`, `subject`, `text`, `html` or `attachments`. Sending `attachments`
-     * replaces every attachment on the draft. A request that sets `text` or `html` replaces the
-     * whole body. The body part you omit from that request becomes `null`. The merged draft must
-     * still contain at least one non-empty field, and its combined recipients cannot exceed 50. A
-     * draft that was already…
+     * Updates the content of an unsent draft. Omitted fields are left unchanged. Send at least one of `to`, `cc`, `bcc`, `subject`, `text`, `html` or `attachments`. Sending `attachments` replaces every attachment on the draft. A request that sets `text` or `html` replaces the whole body. The body part you omit from that request becomes `null`. The merged draft must still contain at least one non-empty field, and its combined recipients cannot exceed 50. A draft that was already…
      */
-    fun updateDraft(
-        request: dev.octri.showcase.resend.methods.Inboxes.InboxesUpdateDraftRequest,
-        options: RequestOptions? = null,
-    ): InboxDraft {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesUpdateDraft(
-            clientConfig,
-            request,
-            options,
-        )
+    fun updateDraft(request: dev.octri.showcase.resend.methods.Inboxes.InboxesUpdateDraftRequest, options: RequestOptions? = null): InboxDraft {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesUpdateDraft(clientConfig, request, options)
     }
 
     /**
-     * Deletes an unsent draft from an inbox. Use the inbox and draft identifiers to select the
-     * draft to discard; drafts that have already been sent are not eligible for removal.
+     * Deletes an unsent draft from an inbox. Use the inbox and draft identifiers to select the draft to discard; drafts that have already been sent are not eligible for removal.
      *
-     * Discards an unsent draft. A draft that was already sent, or that changed during the request,
-     * returns a 409.
+     * Discards an unsent draft. A draft that was already sent, or that changed during the request, returns a 409.
      */
-    fun removeDraft(
-        inboxId: String,
-        draftId: String,
-        options: RequestOptions? = null,
-    ): RemoveInboxDraftResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesRemoveDraft(
-            clientConfig,
-            inboxId,
-            draftId,
-            options,
-        )
+    fun removeDraft(inboxId: String, draftId: String, options: RequestOptions? = null): RemoveInboxDraftResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesRemoveDraft(clientConfig, inboxId, draftId, options)
     }
 
     /**
-     * Submits an unsent draft from the inbox address. A reply draft is sent in its existing thread,
-     * while a standalone draft starts a new thread; you can add custom headers in the optional
-     * request body. Before sending, the draft must have at least one recipient, a non-empty
-     * subject, and an HTML or plain-text body.
+     * Submits an unsent draft from the inbox address. A reply draft is sent in its existing thread, while a standalone draft starts a new thread; you can add custom headers in the optional request body. Before sending, the draft must have at least one recipient, a non-empty subject, and an HTML or plain-text body.
      *
-     * Sends the draft from the inbox address. A reply draft is sent in its thread. A draft without
-     * a thread starts a new thread. The draft must have at least one `to` recipient, a non-empty
-     * `subject`, and `html` or `text`, or the request returns a 422. A draft that was already sent
-     * returns a 409. The request body is optional and takes only `headers`. The whole email,
-     * encoded, can be at most 40 MB, or the request returns a 422.
+     * Sends the draft from the inbox address. A reply draft is sent in its thread. A draft without a thread starts a new thread. The draft must have at least one `to` recipient, a non-empty `subject`, and `html` or `text`, or the request returns a 422. A draft that was already sent returns a 409. The request body is optional and takes only `headers`. The whole email, encoded, can be at most 40 MB, or the request returns a 422.
      */
-    fun sendDraft(
-        inboxId: String,
-        draftId: String,
-        idempotencyKey: String? = null,
-        headers: SdkClient.SdkOptional<Map<String, String>?>? = null,
-        options: RequestOptions? = null,
-    ): SendInboxDraftResponseSuccess {
-        return dev.octri.showcase.resend.methods.Inboxes.inboxesSendDraft(
-            clientConfig,
-            inboxId,
-            draftId,
-            idempotencyKey,
-            headers,
-            options,
-        )
+    fun sendDraft(inboxId: String, draftId: String, idempotencyKey: String? = null, headers: SdkClient.SdkOptional<Map<String, String>?>? = null, options: RequestOptions? = null): SendInboxDraftResponseSuccess {
+        return dev.octri.showcase.resend.methods.Inboxes.inboxesSendDraft(clientConfig, inboxId, draftId, idempotencyKey, headers, options)
     }
+
 }

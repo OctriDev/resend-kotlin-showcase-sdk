@@ -14,211 +14,127 @@ import dev.octri.showcase.resend.Validation
 
 internal object InboxesCreateDraftOperation {
     /**
-     * Creates an unsent draft in an inbox, either as a new thread or as a reply in an existing
-     * thread. Supply at least one non-empty recipient, subject, body, or attachment field; reply
-     * drafts require both `thread_id` and `reply_to_email_id`. If a reply draft already exists for
-     * the target email, the response returns its ID and only a supplied `attachments` value is
-     * applied.
+     * Creates an unsent draft in an inbox, either as a new thread or as a reply in an existing thread. Supply at least one non-empty recipient, subject, body, or attachment field; reply drafts require both `thread_id` and `reply_to_email_id`. If a reply draft already exists for the target email, the response returns its ID and only a supplied `attachments` value is applied.
      *
-     * Creates an unsent draft on the inbox. Omit `thread_id` and `reply_to_email_id` for a draft
-     * that starts a new thread. Pass both together for a reply draft in an existing thread. A reply
-     * draft without `to` is addressed to the sender of the email it replies to, or to its Reply-To
-     * when set. For an email the inbox sent, it defaults to that email's `to` recipients. Send `to:
-     * []` to leave it empty. At least one of `to`, `cc`, `bcc`, `subject`, `text`, `html` or
-     * `attachments` must…
+     * Creates an unsent draft on the inbox. Omit `thread_id` and `reply_to_email_id` for a draft that starts a new thread. Pass both together for a reply draft in an existing thread. A reply draft without `to` is addressed to the sender of the email it replies to, or to its Reply-To when set. For an email the inbox sent, it defaults to that email's `to` recipients. Send `to: []` to leave it empty. At least one of `to`, `cc`, `bcc`, `subject`, `text`, `html` or `attachments` must…
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
-     * @param idempotencyKey A unique key for the request, so the draft is created only once. A
-     *   retry with the same key within 24 hours returns the first successful (2xx) response, with
-     *   the `idempotent-replayed: true` header. A failed request is not stored, so it can be
-     *   retried with the same key. Reusing the key with a different body, or while the first
-     *   request is still running, returns a 409. An empty key, or one longer than 256 characters,
-     *   returns a 400 `invalid_idempotency_key`. Learn more
-     * @param to The recipients. For multiple addresses, send an array of strings. Each value can
-     *   include a friendly name, for example `Ada Lovelace <ada@example.org>`. Each address is
-     *   `email@example.com` or `Name <email@example.com>`. An address that is not valid returns
-     *   a 422.
-     * @param cc The CC recipients. For multiple addresses, send an array of strings. Each address
-     *   is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns
-     *   a 422.
-     * @param bcc The BCC recipients. For multiple addresses, send an array of strings. Each address
-     *   is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns
-     *   a 422.
-     * @param subject The subject. Max 2000 characters. A string that is only whitespace, or that
-     *   contains a line break, is rejected.
+     * @param idempotencyKey A unique key for the request, so the draft is created
+     *   only once. A retry with the same key within 24 hours returns the first
+     *   successful (2xx) response, with the `idempotent-replayed: true` header. A
+     *   failed request is not stored, so it can be retried with the same key. Reusing
+     *   the key with a different body, or while the first request is still running,
+     *   returns a 409. An empty key, or one longer than 256 characters, returns a 400
+     *   `invalid_idempotency_key`. Learn more
+     * @param to The recipients. For multiple addresses, send an array of strings.
+     *   Each value can include a friendly name, for example `Ada Lovelace
+     *   <ada@example.org>`. Each address is `email@example.com` or `Name
+     *   <email@example.com>`. An address that is not valid returns a 422.
+     * @param cc The CC recipients. For multiple addresses, send an array of strings.
+     *   Each address is `email@example.com` or `Name <email@example.com>`. An address
+     *   that is not valid returns a 422.
+     * @param bcc The BCC recipients. For multiple addresses, send an array of
+     *   strings. Each address is `email@example.com` or `Name <email@example.com>`. An
+     *   address that is not valid returns a 422.
+     * @param subject The subject. Max 2000 characters. A string that is only
+     *   whitespace, or that contains a line break, is rejected.
      * @param html The HTML body.
      * @param text The plain text body.
-     * @param attachments Files to store on the draft. Each one needs `content`, `filename` and
-     *   `content_type`. A `path` without `content` returns a 422, and when both are sent, `path` is
-     *   ignored. A `content_id` returns a 422. The files on a draft can total at most 25 MB. An
-     *   empty file or a blocked file type returns a 422.
-     * @param threadId The Thread ID to reply in. Must be sent with `reply_to_email_id`.
-     * @param replyToEmailId The Email ID to reply to, as returned in `data[].id` by the list thread
-     *   emails endpoint. Must be sent with `thread_id`.
+     * @param attachments Files to store on the draft. Each one needs `content`,
+     *   `filename` and `content_type`. A `path` without `content` returns a 422, and
+     *   when both are sent, `path` is ignored. A `content_id` returns a 422. The files
+     *   on a draft can total at most 25 MB. An empty file or a blocked file type
+     *   returns a 422.
+     * @param threadId The Thread ID to reply in. Must be sent with
+     *   `reply_to_email_id`.
+     * @param replyToEmailId The Email ID to reply to, as returned in `data[].id` by
+     *   the list thread emails endpoint. Must be sent with `thread_id`.
      */
-    fun inboxesCreateDraft(
-        clientConfig: ClientConfig,
-        request: Inboxes.InboxesCreateDraftRequest,
-        options: RequestOptions? = null,
-    ): CreateInboxDraftResponseSuccess {
+    fun inboxesCreateDraft(clientConfig: ClientConfig, request: Inboxes.InboxesCreateDraftRequest, options: RequestOptions? = null): CreateInboxDraftResponseSuccess {
         validateInboxesCreateDraftRequest(request)
 
-        return SdkClient.request<CreateInboxDraftResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/drafts",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "to" to (request.to ?: SdkClient.SdkOptional.Omitted),
-                            "cc" to (request.cc ?: SdkClient.SdkOptional.Omitted),
-                            "bcc" to (request.bcc ?: SdkClient.SdkOptional.Omitted),
-                            "subject" to (request.subject ?: SdkClient.SdkOptional.Omitted),
-                            "html" to (request.html ?: SdkClient.SdkOptional.Omitted),
-                            "text" to (request.text ?: SdkClient.SdkOptional.Omitted),
-                            "attachments" to (request.attachments ?: SdkClient.SdkOptional.Omitted),
-                            "thread_id" to (SdkClient.omitIfNull(request.threadId)),
-                            "reply_to_email_id" to (SdkClient.omitIfNull(request.replyToEmailId)),
-                        ),
-                    operationId = "inboxesCreateDraft",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Idempotency-Key" to
-                                SdkClient.headerValue(request.idempotencyKey, false)
-                        ),
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<CreateInboxDraftResponseSuccess>(SdkClient.RequestSpec("POST", "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/drafts", config = clientConfig, body = SdkClient.bodyMap("to" to (request.to ?: SdkClient.SdkOptional.Omitted), "cc" to (request.cc ?: SdkClient.SdkOptional.Omitted), "bcc" to (request.bcc ?: SdkClient.SdkOptional.Omitted), "subject" to
+    (request.subject ?: SdkClient.SdkOptional.Omitted), "html" to (request.html ?: SdkClient.SdkOptional.Omitted), "text" to (request.text ?: SdkClient.SdkOptional.Omitted), "attachments" to
+    (request.attachments ?: SdkClient.SdkOptional.Omitted), "thread_id" to (SdkClient.omitIfNull(request.threadId)), "reply_to_email_id" to
+    (SdkClient.omitIfNull(request.replyToEmailId))), operationId = "inboxesCreateDraft", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Idempotency-Key" to SdkClient.headerValue(request.idempotencyKey, false)), options = options)).data
     }
+
 
     private fun validateInboxesCreateDraftRequest(request: Inboxes.InboxesCreateDraftRequest) {
         Validation.validateUuid("inbox_id", request.inboxId)
 
         if (request.idempotencyKey != null) {
-            Validation.validateLength(
-                "Idempotency-Key",
-                request.idempotencyKey,
-                Validation.LengthOpts(min = 1, max = 256),
-            )
-        }
+            Validation.validateLength("Idempotency-Key", request.idempotencyKey, Validation.LengthOpts(min = 1, max = 256))
+}
 
         val subjectValue = request.subject?.getOrNull()
-        if (subjectValue != null) {
-            Validation.validateLength(
-                "subject",
-                subjectValue,
-                Validation.LengthOpts(min = 1, max = 2000),
-            )
-        }
+if (subjectValue != null) {
+            Validation.validateLength("subject", subjectValue, Validation.LengthOpts(min = 1, max = 2000))
+}
 
         if (request.threadId != null) {
             Validation.validateUuid("thread_id", request.threadId)
-        }
+}
 
         if (request.replyToEmailId != null) {
             Validation.validateUuid("reply_to_email_id", request.replyToEmailId)
-        }
+}
     }
 }
 
 internal object InboxesGetDraftOperation {
     /**
-     * Retrieves a specific draft from an inbox. Use the inbox and draft identifiers to inspect its
-     * recipients, content, thread association, timestamps, and stored attachments.
+     * Retrieves a specific draft from an inbox. Use the inbox and draft identifiers to inspect its recipients, content, thread association, timestamps, and stored attachments.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      * @param draftId The Draft ID.
      */
-    fun inboxesGetDraft(
-        clientConfig: ClientConfig,
-        inboxId: String,
-        draftId: String,
-        options: RequestOptions? = null,
-    ): InboxDraft {
+    fun inboxesGetDraft(clientConfig: ClientConfig, inboxId: String, draftId: String, options: RequestOptions? = null): InboxDraft {
         Validation.validateUuid("inbox_id", inboxId)
 
         Validation.validateUuid("draft_id", draftId)
 
-        return SdkClient.request<InboxDraft>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/inboxes/${SdkClient.encodePathSegment(inboxId)}/drafts/${SdkClient.encodePathSegment(draftId)}",
-                    config = clientConfig,
-                    operationId = "inboxesGetDraft",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<InboxDraft>(SdkClient.RequestSpec("GET", "/inboxes/${SdkClient.encodePathSegment(inboxId)}/drafts/${SdkClient.encodePathSegment(draftId)}", config = clientConfig, operationId = "inboxesGetDraft", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 }
 
 internal object InboxesUpdateDraftOperation {
     /**
-     * Updates the content of an unsent draft in an inbox. Send only the fields you want to change;
-     * sending `attachments` replaces all attachments, while sending `text` or `html` replaces the
-     * entire body. The merged draft must retain at least one non-empty field and no more than 50
-     * combined recipients.
+     * Updates the content of an unsent draft in an inbox. Send only the fields you want to change; sending `attachments` replaces all attachments, while sending `text` or `html` replaces the entire body. The merged draft must retain at least one non-empty field and no more than 50 combined recipients.
      *
-     * Updates the content of an unsent draft. Omitted fields are left unchanged. Send at least one
-     * of `to`, `cc`, `bcc`, `subject`, `text`, `html` or `attachments`. Sending `attachments`
-     * replaces every attachment on the draft. A request that sets `text` or `html` replaces the
-     * whole body. The body part you omit from that request becomes `null`. The merged draft must
-     * still contain at least one non-empty field, and its combined recipients cannot exceed 50. A
-     * draft that was already…
+     * Updates the content of an unsent draft. Omitted fields are left unchanged. Send at least one of `to`, `cc`, `bcc`, `subject`, `text`, `html` or `attachments`. Sending `attachments` replaces every attachment on the draft. A request that sets `text` or `html` replaces the whole body. The body part you omit from that request becomes `null`. The merged draft must still contain at least one non-empty field, and its combined recipients cannot exceed 50. A draft that was already…
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      * @param draftId The Draft ID.
-     * @param to The recipients. For multiple addresses, send an array of strings. Each value can
-     *   include a friendly name. Pass `null` to clear. Each address is `email@example.com` or `Name
-     *   <email@example.com>`. An address that is not valid returns a 422.
+     * @param to The recipients. For multiple addresses, send an array of strings.
+     *   Each value can include a friendly name. Pass `null` to clear. Each address is
+     *   `email@example.com` or `Name <email@example.com>`. An address that is not
+     *   valid returns a 422.
      * @param cc The CC recipients. Pass `null` or `[]` to clear. Each address is
-     *   `email@example.com` or `Name <email@example.com>`. An address that is not valid returns
-     *   a 422.
+     *   `email@example.com` or `Name <email@example.com>`. An address that is not
+     *   valid returns a 422.
      * @param bcc The BCC recipients. Pass `null` or `[]` to clear. Each address is
-     *   `email@example.com` or `Name <email@example.com>`. An address that is not valid returns
-     *   a 422.
-     * @param subject The subject. Max 2000 characters. Cannot be only whitespace or contain a line
-     *   break. Pass `null` to clear.
+     *   `email@example.com` or `Name <email@example.com>`. An address that is not
+     *   valid returns a 422.
+     * @param subject The subject. Max 2000 characters. Cannot be only whitespace or
+     *   contain a line break. Pass `null` to clear.
      * @param html The HTML body. Pass `null` to clear.
      * @param text The plain text body. Pass `null` to clear.
-     * @param attachments Files to store on the draft. Each one needs `content`, `filename` and
-     *   `content_type`. A `path` without `content` returns a 422, and when both are sent, `path` is
-     *   ignored. A `content_id` returns a 422. The files on a draft can total at most 25 MB. An
-     *   empty file or a blocked file type returns a 422. Sending the field replaces every
-     *   attachment on the draft. Send `[]` to remove them all. `null` also removes them all.
+     * @param attachments Files to store on the draft. Each one needs `content`,
+     *   `filename` and `content_type`. A `path` without `content` returns a 422, and
+     *   when both are sent, `path` is ignored. A `content_id` returns a 422. The files
+     *   on a draft can total at most 25 MB. An empty file or a blocked file type
+     *   returns a 422. Sending the field replaces every attachment on the draft. Send
+     *   `[]` to remove them all. `null` also removes them all.
      */
-    fun inboxesUpdateDraft(
-        clientConfig: ClientConfig,
-        request: Inboxes.InboxesUpdateDraftRequest,
-        options: RequestOptions? = null,
-    ): InboxDraft {
+    fun inboxesUpdateDraft(clientConfig: ClientConfig, request: Inboxes.InboxesUpdateDraftRequest, options: RequestOptions? = null): InboxDraft {
         validateInboxesUpdateDraftRequest(request)
 
-        return SdkClient.request<InboxDraft>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/drafts/${SdkClient.encodePathSegment(request.draftId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "to" to (request.to ?: SdkClient.SdkOptional.Omitted),
-                            "cc" to (request.cc ?: SdkClient.SdkOptional.Omitted),
-                            "bcc" to (request.bcc ?: SdkClient.SdkOptional.Omitted),
-                            "subject" to (request.subject ?: SdkClient.SdkOptional.Omitted),
-                            "html" to (request.html ?: SdkClient.SdkOptional.Omitted),
-                            "text" to (request.text ?: SdkClient.SdkOptional.Omitted),
-                            "attachments" to (request.attachments ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "inboxesUpdateDraft",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<InboxDraft>(SdkClient.RequestSpec("PATCH", "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/drafts/${SdkClient.encodePathSegment(request.draftId)}", config = clientConfig, body = SdkClient.bodyMap("to" to (request.to ?: SdkClient.SdkOptional.Omitted), "cc" to (request.cc ?: SdkClient.SdkOptional.Omitted), "bcc" to (request.bcc ?: SdkClient.SdkOptional.Omitted), "subject" to
+    (request.subject ?: SdkClient.SdkOptional.Omitted), "html" to (request.html ?: SdkClient.SdkOptional.Omitted), "text" to (request.text ?: SdkClient.SdkOptional.Omitted), "attachments" to
+    (request.attachments ?: SdkClient.SdkOptional.Omitted)), operationId = "inboxesUpdateDraft", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
+
 
     private fun validateInboxesUpdateDraftRequest(request: Inboxes.InboxesUpdateDraftRequest) {
         Validation.validateUuid("inbox_id", request.inboxId)
@@ -226,114 +142,60 @@ internal object InboxesUpdateDraftOperation {
         Validation.validateUuid("draft_id", request.draftId)
 
         val subjectValue = request.subject?.getOrNull()
-        if (subjectValue != null) {
-            Validation.validateLength(
-                "subject",
-                subjectValue,
-                Validation.LengthOpts(min = 1, max = 2000),
-            )
-        }
+if (subjectValue != null) {
+            Validation.validateLength("subject", subjectValue, Validation.LengthOpts(min = 1, max = 2000))
+}
     }
 }
 
 internal object InboxesRemoveDraftOperation {
     /**
-     * Deletes an unsent draft from an inbox. Use the inbox and draft identifiers to select the
-     * draft to discard; drafts that have already been sent are not eligible for removal.
+     * Deletes an unsent draft from an inbox. Use the inbox and draft identifiers to select the draft to discard; drafts that have already been sent are not eligible for removal.
      *
-     * Discards an unsent draft. A draft that was already sent, or that changed during the request,
-     * returns a 409.
+     * Discards an unsent draft. A draft that was already sent, or that changed during the request, returns a 409.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      * @param draftId The Draft ID.
      */
-    fun inboxesRemoveDraft(
-        clientConfig: ClientConfig,
-        inboxId: String,
-        draftId: String,
-        options: RequestOptions? = null,
-    ): RemoveInboxDraftResponseSuccess {
+    fun inboxesRemoveDraft(clientConfig: ClientConfig, inboxId: String, draftId: String, options: RequestOptions? = null): RemoveInboxDraftResponseSuccess {
         Validation.validateUuid("inbox_id", inboxId)
 
         Validation.validateUuid("draft_id", draftId)
 
-        return SdkClient.request<RemoveInboxDraftResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/inboxes/${SdkClient.encodePathSegment(inboxId)}/drafts/${SdkClient.encodePathSegment(draftId)}",
-                    config = clientConfig,
-                    operationId = "inboxesRemoveDraft",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<RemoveInboxDraftResponseSuccess>(SdkClient.RequestSpec("DELETE", "/inboxes/${SdkClient.encodePathSegment(inboxId)}/drafts/${SdkClient.encodePathSegment(draftId)}", config = clientConfig, operationId = "inboxesRemoveDraft", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 }
 
 internal object InboxesSendDraftOperation {
     /**
-     * Submits an unsent draft from the inbox address. A reply draft is sent in its existing thread,
-     * while a standalone draft starts a new thread; you can add custom headers in the optional
-     * request body. Before sending, the draft must have at least one recipient, a non-empty
-     * subject, and an HTML or plain-text body.
+     * Submits an unsent draft from the inbox address. A reply draft is sent in its existing thread, while a standalone draft starts a new thread; you can add custom headers in the optional request body. Before sending, the draft must have at least one recipient, a non-empty subject, and an HTML or plain-text body.
      *
-     * Sends the draft from the inbox address. A reply draft is sent in its thread. A draft without
-     * a thread starts a new thread. The draft must have at least one `to` recipient, a non-empty
-     * `subject`, and `html` or `text`, or the request returns a 422. A draft that was already sent
-     * returns a 409. The request body is optional and takes only `headers`. The whole email,
-     * encoded, can be at most 40 MB, or the request returns a 422.
+     * Sends the draft from the inbox address. A reply draft is sent in its thread. A draft without a thread starts a new thread. The draft must have at least one `to` recipient, a non-empty `subject`, and `html` or `text`, or the request returns a 422. A draft that was already sent returns a 409. The request body is optional and takes only `headers`. The whole email, encoded, can be at most 40 MB, or the request returns a 422.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      * @param draftId The Draft ID.
-     * @param idempotencyKey A unique key for the request, so the draft is sent only once. A retry
-     *   with the same key within 24 hours returns the first successful (2xx) response, with the
-     *   `idempotent-replayed: true` header. A failed request is not stored, so it can be retried
-     *   with the same key. Reusing the key with a different body, or while the first request is
-     *   still running, returns a 409. An empty key, or one longer than 256 characters, returns a
-     *   400 `invalid_idempotency_key`. Learn more
-     * @param headers Custom headers to add to the email. The `In-Reply-To`, `References` and
-     *   `Reply-To` headers are set by Resend and cannot be set here. Sending one of them, in any
-     *   letter case, returns a 422. Header names cannot be empty, and names and values cannot
-     *   contain line breaks or null characters, or the request returns a 422. `null` means no
-     *   custom headers.
+     * @param idempotencyKey A unique key for the request, so the draft is sent only
+     *   once. A retry with the same key within 24 hours returns the first successful
+     *   (2xx) response, with the `idempotent-replayed: true` header. A failed request
+     *   is not stored, so it can be retried with the same key. Reusing the key with a
+     *   different body, or while the first request is still running, returns a 409. An
+     *   empty key, or one longer than 256 characters, returns a 400
+     *   `invalid_idempotency_key`. Learn more
+     * @param headers Custom headers to add to the email. The `In-Reply-To`,
+     *   `References` and `Reply-To` headers are set by Resend and cannot be set here.
+     *   Sending one of them, in any letter case, returns a 422. Header names cannot be
+     *   empty, and names and values cannot contain line breaks or null characters, or
+     *   the request returns a 422. `null` means no custom headers.
      */
-    fun inboxesSendDraft(
-        clientConfig: ClientConfig,
-        inboxId: String,
-        draftId: String,
-        idempotencyKey: String? = null,
-        headers: SdkClient.SdkOptional<Map<String, String>?>? = null,
-        options: RequestOptions? = null,
-    ): SendInboxDraftResponseSuccess {
+    fun inboxesSendDraft(clientConfig: ClientConfig, inboxId: String, draftId: String, idempotencyKey: String? = null, headers: SdkClient.SdkOptional<Map<String, String>?>? = null, options: RequestOptions? = null): SendInboxDraftResponseSuccess {
         Validation.validateUuid("inbox_id", inboxId)
 
         Validation.validateUuid("draft_id", draftId)
 
         if (idempotencyKey != null) {
-            Validation.validateLength(
-                "Idempotency-Key",
-                idempotencyKey,
-                Validation.LengthOpts(min = 1, max = 256),
-            )
-        }
+            Validation.validateLength("Idempotency-Key", idempotencyKey, Validation.LengthOpts(min = 1, max = 256))
+}
 
-        return SdkClient.request<SendInboxDraftResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/inboxes/${SdkClient.encodePathSegment(inboxId)}/drafts/${SdkClient.encodePathSegment(draftId)}/send",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap("headers" to (headers ?: SdkClient.SdkOptional.Omitted)),
-                    operationId = "inboxesSendDraft",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Idempotency-Key" to SdkClient.headerValue(idempotencyKey, false)
-                        ),
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<SendInboxDraftResponseSuccess>(SdkClient.RequestSpec("POST", "/inboxes/${SdkClient.encodePathSegment(inboxId)}/drafts/${SdkClient.encodePathSegment(draftId)}/send", config = clientConfig, body = SdkClient.bodyMap("headers" to (headers ?: SdkClient.SdkOptional.Omitted)), operationId = "inboxesSendDraft", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Idempotency-Key" to SdkClient.headerValue(idempotencyKey, false)), options = options)).data
     }
 }

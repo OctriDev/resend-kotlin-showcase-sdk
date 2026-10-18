@@ -3,119 +3,194 @@
 
 package dev.octri.showcase.resend.models
 
-/** Typed representation of the `BatchAddSuppressionsOptions` API schema. */
+/**
+ * Typed representation of the `BatchAddSuppressionsOptions` API schema.
+ */
 data class BatchAddSuppressionsOptions(
-    /** Email addresses to suppress. */
+    /**
+     * Email addresses to suppress.
+     */
     val emails: List<String>
 )
 
-/** Required object value serialized in the `data[]` wire field. */
+/**
+ * Required object value serialized in the `data[]` wire field.
+ */
 data class BatchAddSuppressionsResponseSuccessDataItem(
-    /** Type of the object. */
+    /**
+     * Type of the object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Unique identifier for the suppression. */
-    val id: String? = null,
+    /**
+     * Unique identifier for the suppression.
+     */
+    val id: String? = null
 )
 
-/** Typed representation of the `BatchAddSuppressionsResponseSuccess` API schema. */
+/**
+ * Typed representation of the `BatchAddSuppressionsResponseSuccess` API schema.
+ */
 data class BatchAddSuppressionsResponseSuccess(
-    /** Array containing the created suppressions. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<BatchAddSuppressionsResponseSuccessDataItem>? = null
+    /**
+     * Array containing the created suppressions.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<BatchAddSuppressionsResponseSuccessDataItem>? = null
 )
 
-/** Provide either `emails` or `ids`, but not both. */
+/**
+ * Provide either `emails` or `ids`, but not both.
+ */
 data class BatchRemoveSuppressionsOptions(
-    /** Email addresses to remove from the suppression list. */
+    /**
+     * Email addresses to remove from the suppression list.
+     */
     val emails: List<String>? = null,
-    /** Suppression IDs to remove from the suppression list. */
-    val ids: List<String>? = null,
+    /**
+     * Suppression IDs to remove from the suppression list.
+     */
+    val ids: List<String>? = null
 )
 
-/** Required object value serialized in the `data[]` wire field. */
+/**
+ * Required object value serialized in the `data[]` wire field.
+ */
 data class BatchRemoveSuppressionsResponseSuccessDataItem(
-    /** Type of the object. */
+    /**
+     * Type of the object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Unique identifier for the suppression. */
+    /**
+     * Unique identifier for the suppression.
+     */
     val id: String? = null,
-    /** Indicates whether the suppression was successfully deleted. */
-    val deleted: Boolean? = null,
+    /**
+     * Indicates whether the suppression was successfully deleted.
+     */
+    val deleted: Boolean? = null
 )
 
-/** Typed representation of the `BatchRemoveSuppressionsResponseSuccess` API schema. */
+/**
+ * Typed representation of the `BatchRemoveSuppressionsResponseSuccess` API schema.
+ */
 data class BatchRemoveSuppressionsResponseSuccess(
-    /** Array containing the removed suppressions. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<BatchRemoveSuppressionsResponseSuccessDataItem>? = null
+    /**
+     * Array containing the removed suppressions.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<BatchRemoveSuppressionsResponseSuccessDataItem>? = null
 )
 
-/** Typed representation of the `CreateSuppressionOptions` API schema. */
+/**
+ * Typed representation of the `CreateSuppressionOptions` API schema.
+ */
 data class CreateSuppressionOptions(
-    /** Email address to suppress. */
+    /**
+     * Email address to suppress.
+     */
     val email: String
 )
 
-/** Typed representation of the `CreateSuppressionResponseSuccess` API schema. */
+/**
+ * Typed representation of the `CreateSuppressionResponseSuccess` API schema.
+ */
 data class CreateSuppressionResponseSuccess(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Unique identifier for the created suppression. */
-    val id: String? = null,
+    /**
+     * Unique identifier for the created suppression.
+     */
+    val id: String? = null
 )
 
-/** Typed representation of the `GetSuppressionResponseSuccess` API schema. */
+/**
+ * Typed representation of the `GetSuppressionResponseSuccess` API schema.
+ */
 data class GetSuppressionResponseSuccess(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Unique identifier for the suppression. */
+    /**
+     * Unique identifier for the suppression.
+     */
     val id: String? = null,
-    /** Email address that is suppressed. */
+    /**
+     * Email address that is suppressed.
+     */
     val email: String? = null,
-    /** Origin of the suppression. */
+    /**
+     * Origin of the suppression.
+     */
     val origin: GetSuppressionResponseSuccessOriginEnum? = null,
     /**
-     * Identifier of the event that caused the suppression, such as the email that bounced or
-     * complained.
+     * Identifier of the event that caused the suppression, such as the email that bounced or complained.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("source_id") val sourceId: String? = null,
-    /** Timestamp indicating when the suppression was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
+    /**
+     * Timestamp indicating when the suppression was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
 )
 
-/** Required object value serialized in the `data[]` wire field. */
+/**
+ * Required object value serialized in the `data[]` wire field.
+ */
 data class ListSuppressionsResponseSuccessDataItem(
-    /** Unique identifier for the suppression. */
+    /**
+     * Unique identifier for the suppression.
+     */
     val id: String? = null,
-    /** Email address that is suppressed. */
+    /**
+     * Email address that is suppressed.
+     */
     val email: String? = null,
-    /** Origin of the suppression. */
+    /**
+     * Origin of the suppression.
+     */
     val origin: ListSuppressionsResponseSuccessDataItemOriginEnum? = null,
     /**
-     * Identifier of the event that caused the suppression, such as the email that bounced or
-     * complained.
+     * Identifier of the event that caused the suppression, such as the email that bounced or complained.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("source_id") val sourceId: String? = null,
-    /** Timestamp indicating when the suppression was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
+    /**
+     * Timestamp indicating when the suppression was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
 )
 
-/** Typed representation of the `ListSuppressionsResponseSuccess` API schema. */
+/**
+ * Typed representation of the `ListSuppressionsResponseSuccess` API schema.
+ */
 data class ListSuppressionsResponseSuccess(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates if there are more results available. */
+    /**
+     * Indicates if there are more results available.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /** Array containing suppression information. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<ListSuppressionsResponseSuccessDataItem>? = null,
+    /**
+     * Array containing suppression information.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ListSuppressionsResponseSuccessDataItem>? = null
 )
 
-/** Typed representation of the `RemoveSuppressionResponseSuccess` API schema. */
+/**
+ * Typed representation of the `RemoveSuppressionResponseSuccess` API schema.
+ */
 data class RemoveSuppressionResponseSuccess(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Unique identifier for the removed suppression. */
+    /**
+     * Unique identifier for the removed suppression.
+     */
     val id: String? = null,
-    /** Indicates whether the suppression was successfully deleted. */
-    val deleted: Boolean? = null,
+    /**
+     * Indicates whether the suppression was successfully deleted.
+     */
+    val deleted: Boolean? = null
 )

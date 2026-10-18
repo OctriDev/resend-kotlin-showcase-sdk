@@ -5,150 +5,242 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `InboxThreadAssignedEvent` API schema. */
+/**
+ * Typed representation of the `InboxThreadAssignedEvent` API schema.
+ */
 data class InboxThreadAssignedEvent(
-    /** The event type. */
+    /**
+     * The event type.
+     */
     val type: InboxThreadAssignedEventTypeEnum,
-    /** Timestamp when the event was emitted. */
+    /**
+     * Timestamp when the event was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** The data of an `inbox.thread.assigned` event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxThreadAssignedEventData,
+    /**
+     * The data of an `inbox.thread.assigned` event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxThreadAssignedEventData
 )
 
-/** The data of an `inbox.thread.assigned` event. */
+/**
+ * The data of an `inbox.thread.assigned` event.
+ */
 data class InboxThreadAssignedEventData(
-    /** The email of the member the thread is now assigned to. */
-    @com.fasterxml.jackson.annotation.JsonProperty("assignee_email", required = true)
-    val assigneeEmail: String?,
-    /** The email of the member who made the assignment. Null when no member made it. */
-    @com.fasterxml.jackson.annotation.JsonProperty("assigned_by_email", required = true)
-    val assignedByEmail: String?,
-    /** The email of the member the thread was assigned to before. Null when it was unassigned. */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_assignee_email", required = true)
-    val previousAssigneeEmail: String?,
-    /** What made the change. */
+    /**
+     * The email of the member the thread is now assigned to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("assignee_email", required = true) val assigneeEmail: String?,
+    /**
+     * The email of the member who made the assignment. Null when no member made it.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("assigned_by_email", required = true) val assignedByEmail: String?,
+    /**
+     * The email of the member the thread was assigned to before. Null when it was unassigned.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_assignee_email", required = true) val previousAssigneeEmail: String?,
+    /**
+     * What made the change.
+     */
     val source: InboxEventSource,
-    /** The ID of the inbox. */
+    /**
+     * The ID of the inbox.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("inbox_id") val inboxId: String,
-    /** The ID of the thread. */
+    /**
+     * The ID of the thread.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("thread_id") val threadId: String,
-    /** The thread as it is when the webhook is sent. Absent when the thread no longer exists. */
-    val thread: InboxThreadSummary? = null,
+    /**
+     * The thread as it is when the webhook is sent. Absent when the thread no longer exists.
+     */
+    val thread: InboxThreadSummary? = null
 )
 
-/** Typed representation of the `InboxThreadCreatedEvent` API schema. */
+/**
+ * Typed representation of the `InboxThreadCreatedEvent` API schema.
+ */
 data class InboxThreadCreatedEvent(
-    /** The event type. */
+    /**
+     * The event type.
+     */
     val type: InboxThreadCreatedEventTypeEnum,
-    /** Timestamp when the event was emitted. */
+    /**
+     * Timestamp when the event was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
     /**
      * The data of an `inbox.thread.created`, `inbox.email.received` or `inbox.email.sent` event.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxThreadEmailEventData,
-)
-
-/** The data of an `inbox.thread.created`, `inbox.email.received` or `inbox.email.sent` event. */
-data class InboxThreadEmailEventData(
-    /** What made the change. */
-    val source: InboxEventSource,
-    /** The ID of the inbox. */
-    @com.fasterxml.jackson.annotation.JsonProperty("inbox_id") val inboxId: String,
-    /** The ID of the thread. */
-    @com.fasterxml.jackson.annotation.JsonProperty("thread_id") val threadId: String,
-    /** The ID of the email. */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_id") val emailId: String,
-    /** The thread as it is when the webhook is sent. Absent when the thread no longer exists. */
-    val thread: InboxThreadSummary? = null,
-    /**
-     * The email as it is when the webhook is sent, without `html` or `text`. Fetch the body with
-     * Retrieve Thread Email. Absent when the email no longer exists.
-     */
-    val email: InboxEventEmail? = null,
-)
-
-/** Typed representation of the `InboxThreadFolderUpdatedEvent` API schema. */
-data class InboxThreadFolderUpdatedEvent(
-    /** The event type. */
-    val type: InboxThreadFolderUpdatedEventTypeEnum,
-    /** Timestamp when the event was emitted. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** The data of an `inbox.thread.folder.updated` event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: InboxThreadFolderUpdatedEventData,
-)
-
-/** The data of an `inbox.thread.folder.updated` event. */
-data class InboxThreadFolderUpdatedEventData(
-    /** The folder the thread was in. */
-    val from: InboxThreadFolderUpdatedEventDataFromEnum,
-    /** The folder the thread moved to. */
-    val to: InboxThreadFolderUpdatedEventDataToEnum,
-    /** What made the change. */
-    val source: InboxEventSource,
-    /** The ID of the inbox. */
-    @com.fasterxml.jackson.annotation.JsonProperty("inbox_id") val inboxId: String,
-    /** The ID of the thread. */
-    @com.fasterxml.jackson.annotation.JsonProperty("thread_id") val threadId: String,
-    /** The thread as it is when the webhook is sent. Absent when the thread no longer exists. */
-    val thread: InboxThreadSummary? = null,
-)
-
-/** Typed representation of the `InboxThreadLabelsUpdatedEvent` API schema. */
-data class InboxThreadLabelsUpdatedEvent(
-    /** The event type. */
-    val type: InboxThreadLabelsUpdatedEventTypeEnum,
-    /** Timestamp when the event was emitted. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * The data of an `inbox.thread.labels.updated` event. One event carries one label, in either
-     * `added` or `removed`.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: InboxThreadLabelsUpdatedEventData,
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxThreadEmailEventData
 )
 
 /**
- * The data of an `inbox.thread.labels.updated` event. One event carries one label, in either
- * `added` or `removed`.
+ * The data of an `inbox.thread.created`, `inbox.email.received` or `inbox.email.sent` event.
+ */
+data class InboxThreadEmailEventData(
+    /**
+     * What made the change.
+     */
+    val source: InboxEventSource,
+    /**
+     * The ID of the inbox.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("inbox_id") val inboxId: String,
+    /**
+     * The ID of the thread.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("thread_id") val threadId: String,
+    /**
+     * The ID of the email.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_id") val emailId: String,
+    /**
+     * The thread as it is when the webhook is sent. Absent when the thread no longer exists.
+     */
+    val thread: InboxThreadSummary? = null,
+    /**
+     * The email as it is when the webhook is sent, without `html` or `text`. Fetch the body with Retrieve Thread Email. Absent when the email no longer exists.
+     */
+    val email: InboxEventEmail? = null
+)
+
+/**
+ * Typed representation of the `InboxThreadFolderUpdatedEvent` API schema.
+ */
+data class InboxThreadFolderUpdatedEvent(
+    /**
+     * The event type.
+     */
+    val type: InboxThreadFolderUpdatedEventTypeEnum,
+    /**
+     * Timestamp when the event was emitted.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
+    /**
+     * The data of an `inbox.thread.folder.updated` event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxThreadFolderUpdatedEventData
+)
+
+/**
+ * The data of an `inbox.thread.folder.updated` event.
+ */
+data class InboxThreadFolderUpdatedEventData(
+    /**
+     * The folder the thread was in.
+     */
+    val from: InboxThreadFolderUpdatedEventDataFromEnum,
+    /**
+     * The folder the thread moved to.
+     */
+    val to: InboxThreadFolderUpdatedEventDataToEnum,
+    /**
+     * What made the change.
+     */
+    val source: InboxEventSource,
+    /**
+     * The ID of the inbox.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("inbox_id") val inboxId: String,
+    /**
+     * The ID of the thread.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("thread_id") val threadId: String,
+    /**
+     * The thread as it is when the webhook is sent. Absent when the thread no longer exists.
+     */
+    val thread: InboxThreadSummary? = null
+)
+
+/**
+ * Typed representation of the `InboxThreadLabelsUpdatedEvent` API schema.
+ */
+data class InboxThreadLabelsUpdatedEvent(
+    /**
+     * The event type.
+     */
+    val type: InboxThreadLabelsUpdatedEventTypeEnum,
+    /**
+     * Timestamp when the event was emitted.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
+    /**
+     * The data of an `inbox.thread.labels.updated` event. One event carries one label, in either `added` or `removed`.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxThreadLabelsUpdatedEventData
+)
+
+/**
+ * The data of an `inbox.thread.labels.updated` event. One event carries one label, in either `added` or `removed`.
  */
 data class InboxThreadLabelsUpdatedEventData(
-    /** The labels applied to the thread. */
+    /**
+     * The labels applied to the thread.
+     */
     val added: List<InboxThreadLabel>,
-    /** The labels removed from the thread. */
+    /**
+     * The labels removed from the thread.
+     */
     val removed: List<InboxThreadLabel>,
-    /** What made the change. */
+    /**
+     * What made the change.
+     */
     val source: InboxEventSource,
-    /** The ID of the inbox. */
+    /**
+     * The ID of the inbox.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("inbox_id") val inboxId: String,
-    /** The ID of the thread. */
+    /**
+     * The ID of the thread.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("thread_id") val threadId: String,
-    /** The thread as it is when the webhook is sent. Absent when the thread no longer exists. */
-    val thread: InboxThreadSummary? = null,
+    /**
+     * The thread as it is when the webhook is sent. Absent when the thread no longer exists.
+     */
+    val thread: InboxThreadSummary? = null
 )
 
-/** Typed representation of the `InboxThreadUnassignedEvent` API schema. */
+/**
+ * Typed representation of the `InboxThreadUnassignedEvent` API schema.
+ */
 data class InboxThreadUnassignedEvent(
-    /** The event type. */
+    /**
+     * The event type.
+     */
     val type: InboxThreadUnassignedEventTypeEnum,
-    /** Timestamp when the event was emitted. */
+    /**
+     * Timestamp when the event was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** The data of an `inbox.thread.unassigned` event. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: InboxThreadUnassignedEventData,
+    /**
+     * The data of an `inbox.thread.unassigned` event.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxThreadUnassignedEventData
 )
 
-/** The data of an `inbox.thread.unassigned` event. */
+/**
+ * The data of an `inbox.thread.unassigned` event.
+ */
 data class InboxThreadUnassignedEventData(
-    /** The email of the member the thread was assigned to. */
-    @com.fasterxml.jackson.annotation.JsonProperty("previous_assignee_email", required = true)
-    val previousAssigneeEmail: String?,
-    /** What made the change. */
+    /**
+     * The email of the member the thread was assigned to.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("previous_assignee_email", required = true) val previousAssigneeEmail: String?,
+    /**
+     * What made the change.
+     */
     val source: InboxEventSource,
-    /** The ID of the inbox. */
+    /**
+     * The ID of the inbox.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("inbox_id") val inboxId: String,
-    /** The ID of the thread. */
+    /**
+     * The ID of the thread.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("thread_id") val threadId: String,
-    /** The thread as it is when the webhook is sent. Absent when the thread no longer exists. */
-    val thread: InboxThreadSummary? = null,
+    /**
+     * The thread as it is when the webhook is sent. Absent when the thread no longer exists.
+     */
+    val thread: InboxThreadSummary? = null
 )

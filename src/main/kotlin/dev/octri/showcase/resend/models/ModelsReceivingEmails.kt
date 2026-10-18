@@ -5,113 +5,192 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/** Required object value serialized in the `attachments[]` wire field. */
+/**
+ * Required object value serialized in the `attachments[]` wire field.
+ */
 data class GetReceivedEmailResponseAttachmentsItem(
-    /** The ID of the attachment. */
+    /**
+     * The ID of the attachment.
+     */
     val id: String? = null,
-    /** The filename of the attachment. */
+    /**
+     * The filename of the attachment.
+     */
     val filename: String? = null,
-    /** The MIME type of the attachment. */
+    /**
+     * The MIME type of the attachment.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_type") val contentType: String? = null,
-    /** The content ID for inline attachments. */
+    /**
+     * The content ID for inline attachments.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_id") val contentId: String? = null,
-    /** How the attachment should be displayed. */
-    @com.fasterxml.jackson.annotation.JsonProperty("content_disposition")
-    val contentDisposition: GetReceivedEmailResponseAttachmentsItemContentDispositionEnum? = null,
-    /** Size of the attachment in bytes. */
-    val size: Long? = null,
+    /**
+     * How the attachment should be displayed.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("content_disposition") val contentDisposition: GetReceivedEmailResponseAttachmentsItemContentDispositionEnum? = null,
+    /**
+     * Size of the attachment in bytes.
+     */
+    val size: Long? = null
 )
 
-/** Typed representation of the `GetReceivedEmailResponse` API schema. */
+/**
+ * Typed representation of the `GetReceivedEmailResponse` API schema.
+ */
 data class GetReceivedEmailResponse(
-    /** The type of object. */
+    /**
+     * The type of object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the received email. */
+    /**
+     * The ID of the received email.
+     */
     val id: String? = null,
-    /** The recipient email addresses. */
+    /**
+     * The recipient email addresses.
+     */
     val to: List<String>? = null,
-    /** The sender email address. */
+    /**
+     * The sender email address.
+     */
     val from: String? = null,
-    /** The email subject. */
+    /**
+     * The email subject.
+     */
     val subject: String? = null,
-    /** The unique message ID from the email headers. */
+    /**
+     * The unique message ID from the email headers.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("message_id") val messageId: String? = null,
-    /** The BCC recipients. */
+    /**
+     * The BCC recipients.
+     */
     val bcc: List<String>? = null,
-    /** The CC recipients. */
+    /**
+     * The CC recipients.
+     */
     val cc: List<String>? = null,
-    /** The reply-to addresses. */
+    /**
+     * The reply-to addresses.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("reply_to") val replyTo: List<String>? = null,
     /**
-     * The recipient addresses the email was forwarded for, taken from the `for` clause of the
-     * message's `Received` headers.
+     * The recipient addresses the email was forwarded for, taken from the `for` clause of the message's `Received` headers.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("received_for")
-    val receivedFor: List<String>? = null,
-    /** The HTML content of the email. */
+    @com.fasterxml.jackson.annotation.JsonProperty("received_for") val receivedFor: List<String>? = null,
+    /**
+     * The HTML content of the email.
+     */
     val html: String? = null,
-    /** The plain text content of the email. */
+    /**
+     * The plain text content of the email.
+     */
     val text: String? = null,
-    /** The email headers. */
+    /**
+     * The email headers.
+     */
     val headers: Map<String, Any>? = null,
-    /** Timestamp when the email was received. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Array of attachments. */
-    val attachments: List<GetReceivedEmailResponseAttachmentsItem>? = null,
+    /**
+     * Timestamp when the email was received.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Array of attachments.
+     */
+    val attachments: List<GetReceivedEmailResponseAttachmentsItem>? = null
 )
 
-/** Required object value serialized in the `attachments[]` wire field. */
+/**
+ * Required object value serialized in the `attachments[]` wire field.
+ */
 data class ListReceivedEmailsResponseDataItemAttachmentsItem(
-    /** The ID of the attachment. */
+    /**
+     * The ID of the attachment.
+     */
     val id: String? = null,
-    /** The filename of the attachment. */
+    /**
+     * The filename of the attachment.
+     */
     val filename: String? = null,
-    /** The MIME type of the attachment. */
+    /**
+     * The MIME type of the attachment.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_type") val contentType: String? = null,
-    /** The content ID for inline attachments. */
+    /**
+     * The content ID for inline attachments.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_id") val contentId: String? = null,
-    /** How the attachment should be displayed. */
-    @com.fasterxml.jackson.annotation.JsonProperty("content_disposition")
-    val contentDisposition:
-        ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum? =
-        null,
-    /** Size of the attachment in bytes. */
-    val size: Long? = null,
+    /**
+     * How the attachment should be displayed.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("content_disposition") val contentDisposition: ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum? = null,
+    /**
+     * Size of the attachment in bytes.
+     */
+    val size: Long? = null
 )
 
-/** Required object value serialized in the `data[]` wire field. */
+/**
+ * Required object value serialized in the `data[]` wire field.
+ */
 data class ListReceivedEmailsResponseDataItem(
-    /** The ID of the received email. */
+    /**
+     * The ID of the received email.
+     */
     val id: String? = null,
-    /** The recipient email addresses. */
+    /**
+     * The recipient email addresses.
+     */
     val to: List<String>? = null,
-    /** The sender email address. */
+    /**
+     * The sender email address.
+     */
     val from: String? = null,
-    /** The email subject. */
+    /**
+     * The email subject.
+     */
     val subject: String? = null,
-    /** The unique message ID from the email headers. */
+    /**
+     * The unique message ID from the email headers.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("message_id") val messageId: String? = null,
-    /** The BCC recipients. */
+    /**
+     * The BCC recipients.
+     */
     val bcc: List<String>? = null,
-    /** The CC recipients. */
+    /**
+     * The CC recipients.
+     */
     val cc: List<String>? = null,
-    /** The reply-to addresses. */
+    /**
+     * The reply-to addresses.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("reply_to") val replyTo: List<String>? = null,
-    /** Timestamp when the email was received. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at")
-    val createdAt: OffsetDateTime? = null,
-    /** Array of attachments for this email. */
-    val attachments: List<ListReceivedEmailsResponseDataItemAttachmentsItem>? = null,
+    /**
+     * Timestamp when the email was received.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime? = null,
+    /**
+     * Array of attachments for this email.
+     */
+    val attachments: List<ListReceivedEmailsResponseDataItemAttachmentsItem>? = null
 )
 
-/** Typed representation of the `ListReceivedEmailsResponse` API schema. */
+/**
+ * Typed representation of the `ListReceivedEmailsResponse` API schema.
+ */
 data class ListReceivedEmailsResponse(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates if there are more results available. */
+    /**
+     * Indicates if there are more results available.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /** Array containing received email information. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<ListReceivedEmailsResponseDataItem>? = null,
+    /**
+     * Array containing received email information.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ListReceivedEmailsResponseDataItem>? = null
 )
