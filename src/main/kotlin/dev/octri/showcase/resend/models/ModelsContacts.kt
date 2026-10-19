@@ -3,287 +3,490 @@
 
 package dev.octri.showcase.resend.models
 
-/** Typed representation of the `AddContactToSegmentResponseSuccess` API schema. */
+/**
+ * Typed representation of the `AddContactToSegmentResponseSuccess` API schema.
+ */
 data class AddContactToSegmentResponseSuccess(
-    /** The object type. */
+    /**
+     * The object type.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the contact. */
+    /**
+     * The ID of the contact.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("contact_id") val contactId: String? = null,
-    /** The ID of the segment. */
-    @com.fasterxml.jackson.annotation.JsonProperty("segment_id") val segmentId: String? = null,
+    /**
+     * The ID of the segment.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("segment_id") val segmentId: String? = null
 )
 
-/** Typed representation of the `ContactImport` API schema. */
+/**
+ * Typed representation of the `ContactImport` API schema.
+ */
 data class ContactImport(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Unique identifier for the contact import. */
+    /**
+     * Unique identifier for the contact import.
+     */
     val id: String? = null,
-    /** Current status of the contact import. */
+    /**
+     * Current status of the contact import.
+     */
     val status: ContactImportStatusEnum? = null,
-    /** Timestamp indicating when the contact import was created. */
+    /**
+     * Timestamp indicating when the contact import was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /** Timestamp indicating when the contact import completed. */
+    /**
+     * Timestamp indicating when the contact import completed.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: String? = null,
-    /** Optional object value serialized in the `counts` wire field. */
-    val counts: ContactImportCounts? = null,
+    /**
+     * Optional object value serialized in the `counts` wire field.
+     */
+    val counts: ContactImportCounts? = null
 )
 
-/** Typed representation of the `ContactImportCounts` API schema. */
+/**
+ * Typed representation of the `ContactImportCounts` API schema.
+ */
 data class ContactImportCounts(
-    /** Total number of rows processed by the import. */
+    /**
+     * Total number of rows processed by the import.
+     */
     val total: Long? = null,
-    /** Number of contacts created by the import. */
+    /**
+     * Number of contacts created by the import.
+     */
     val created: Long? = null,
-    /** Number of contacts updated by the import. */
+    /**
+     * Number of contacts updated by the import.
+     */
     val updated: Long? = null,
-    /** Number of rows skipped by the import. */
+    /**
+     * Number of rows skipped by the import.
+     */
     val skipped: Long? = null,
-    /** Number of rows that failed during the import. */
-    val failed: Long? = null,
+    /**
+     * Number of rows that failed during the import.
+     */
+    val failed: Long? = null
 )
 
-/** Typed representation of the `CreateContactImportOptions` API schema. */
+/**
+ * Typed representation of the `CreateContactImportOptions` API schema.
+ */
 data class CreateContactImportOptions(
-    /** CSV file to import. Maximum size is 50MB. */
+    /**
+     * CSV file to import. Maximum size is 50MB.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("file") val `file`: ByteArray,
     /**
-     * JSON-encoded object mapping contact fields and custom property keys to CSV column names.
-     * Supports `email`, `first_name`, `last_name`, `unsubscribed`, and `properties`. Custom
-     * property mappings can include `type` as `string`, `number`, or `boolean`; defaults to
-     * `string`.
+     * JSON-encoded object mapping contact fields and custom property keys to CSV column names. Supports `email`, `first_name`, `last_name`, `unsubscribed`, and `properties`. Custom property mappings can include `type` as `string`, `number`, or `boolean`; defaults to `string`.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("column_map") val columnMap: String? = null,
-    /** Strategy to use when an imported contact already exists. */
-    @com.fasterxml.jackson.annotation.JsonProperty("on_conflict")
-    val onConflict: CreateContactImportOptionsOnConflictEnum? = null,
-    /** JSON-encoded array of segments to add imported contacts to. */
+    /**
+     * Strategy to use when an imported contact already exists.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("on_conflict") val onConflict: CreateContactImportOptionsOnConflictEnum? = null,
+    /**
+     * JSON-encoded array of segments to add imported contacts to.
+     */
     val segments: String? = null,
     /**
-     * JSON-encoded array of topic subscriptions to apply to imported contacts. Each `subscription`
-     * must be `opt_in` or `opt_out`.
+     * JSON-encoded array of topic subscriptions to apply to imported contacts. Each `subscription` must be `opt_in` or `opt_out`.
      */
-    val topics: String? = null,
+    val topics: String? = null
 )
 
-/** Typed representation of the `CreateContactImportResponseSuccess` API schema. */
+/**
+ * Typed representation of the `CreateContactImportResponseSuccess` API schema.
+ */
 data class CreateContactImportResponseSuccess(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Unique identifier for the created contact import. */
-    val id: String? = null,
-)
-
-/** Required object value serialized in the `segments[]` wire field. */
-data class CreateContactOptionsSegmentsItem(
-    /** The segment ID */
+    /**
+     * Unique identifier for the created contact import.
+     */
     val id: String? = null
 )
 
-/** Required object value serialized in the `topics[]` wire field. */
+/**
+ * Required object value serialized in the `segments[]` wire field.
+ */
+data class CreateContactOptionsSegmentsItem(
+    /**
+     * The segment ID
+     */
+    val id: String? = null
+)
+
+/**
+ * Required object value serialized in the `topics[]` wire field.
+ */
 data class CreateContactOptionsTopicsItem(
-    /** The topic ID. */
+    /**
+     * The topic ID.
+     */
     val id: String? = null,
-    /** The subscription status for this topic. */
-    val subscription: CreateContactOptionsTopicsItemSubscriptionEnum? = null,
+    /**
+     * The subscription status for this topic.
+     */
+    val subscription: CreateContactOptionsTopicsItemSubscriptionEnum? = null
 )
 
-/** Typed representation of the `CreateContactOptions` API schema. */
+/**
+ * Typed representation of the `CreateContactOptions` API schema.
+ */
 data class CreateContactOptions(
-    /** Email address of the contact. */
+    /**
+     * Email address of the contact.
+     */
     val email: String,
-    /** First name of the contact. */
+    /**
+     * First name of the contact.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("first_name") val firstName: String? = null,
-    /** Last name of the contact. */
+    /**
+     * Last name of the contact.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String? = null,
     /**
-     * The Contact's global subscription status. If set to true, the contact will be unsubscribed
-     * from all Broadcasts.
+     * The Contact's global subscription status. If set to true, the contact will be unsubscribed from all Broadcasts.
      */
     val unsubscribed: Boolean? = null,
-    /** A map of custom property keys and values to create. */
+    /**
+     * A map of custom property keys and values to create.
+     */
     val properties: Map<String, Any>? = null,
-    /** Array of segment IDs to add the contact to. */
+    /**
+     * Array of segment IDs to add the contact to.
+     */
     val segments: List<CreateContactOptionsSegmentsItem>? = null,
-    /** Array of topic subscriptions for the contact. */
+    /**
+     * Array of topic subscriptions for the contact.
+     */
     val topics: List<CreateContactOptionsTopicsItem>? = null,
-    /** Unique identifier of the audience to which the contact belongs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("audience_id") val audienceId: String? = null,
+    /**
+     * Unique identifier of the audience to which the contact belongs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("audience_id") val audienceId: String? = null
 )
 
-/** Typed representation of the `CreateContactResponseSuccess` API schema. */
+/**
+ * Typed representation of the `CreateContactResponseSuccess` API schema.
+ */
 data class CreateContactResponseSuccess(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Unique identifier for the created contact. */
-    val id: String? = null,
+    /**
+     * Unique identifier for the created contact.
+     */
+    val id: String? = null
 )
 
-/** Typed representation of the `GetContactImportResponseSuccess` API schema. */
+/**
+ * Typed representation of the `GetContactImportResponseSuccess` API schema.
+ */
 data class GetContactImportResponseSuccess(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Unique identifier for the contact import. */
+    /**
+     * Unique identifier for the contact import.
+     */
     val id: String? = null,
-    /** Current status of the contact import. */
+    /**
+     * Current status of the contact import.
+     */
     val status: ContactImportStatusEnum? = null,
-    /** Timestamp indicating when the contact import was created. */
+    /**
+     * Timestamp indicating when the contact import was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /** Timestamp indicating when the contact import completed. */
+    /**
+     * Timestamp indicating when the contact import completed.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: String? = null,
-    /** Optional object value serialized in the `counts` wire field. */
-    val counts: ContactImportCounts? = null,
+    /**
+     * Optional object value serialized in the `counts` wire field.
+     */
+    val counts: ContactImportCounts? = null
 )
 
-/** Typed representation of the `GetContactResponseSuccess` API schema. */
+/**
+ * Typed representation of the `GetContactResponseSuccess` API schema.
+ */
 data class GetContactResponseSuccess(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Unique identifier for the contact. */
+    /**
+     * Unique identifier for the contact.
+     */
     val id: String? = null,
-    /** Email address of the contact. */
+    /**
+     * Email address of the contact.
+     */
     val email: String? = null,
-    /** First name of the contact. */
+    /**
+     * First name of the contact.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("first_name") val firstName: String? = null,
-    /** Last name of the contact. */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String? = null,
-    /** Timestamp indicating when the contact was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /** Indicates if the contact is unsubscribed. */
-    val unsubscribed: Boolean? = null,
-    /** A map of custom property keys and values. */
-    val properties: Map<String, Any>? = null,
-)
-
-/** Required object value serialized in the `data[]` wire field. */
-data class GetContactTopicsResponseSuccessDataItem(
-    /** Unique identifier for the topic. */
-    val id: String? = null,
-    /** Name of the topic. */
-    val name: String? = null,
-    /** Description of the topic. */
-    val description: String? = null,
-    /** The subscription status for this topic. */
-    val subscription: GetContactTopicsResponseSuccessDataItemSubscriptionEnum? = null,
-)
-
-/** Typed representation of the `GetContactTopicsResponseSuccess` API schema. */
-data class GetContactTopicsResponseSuccess(
-    /** Type of the response object. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates if there are more results available. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /** Array containing topic subscriptions for this contact. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<GetContactTopicsResponseSuccessDataItem>? = null,
-)
-
-/** Typed representation of the `ListContactImportsResponseSuccess` API schema. */
-data class ListContactImportsResponseSuccess(
-    /** Type of the response object. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates if there are more results available. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /** Array containing contact imports. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ContactImport>? = null,
-)
-
-/** Required object value serialized in the `data[]` wire field. */
-data class ListContactSegmentsResponseSuccessDataItem(
-    /** Unique identifier for the segment. */
-    val id: String? = null,
-    /** Name of the segment. */
-    val name: String? = null,
-    /** Timestamp indicating when the contact was added to the segment. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-)
-
-/** Typed representation of the `ListContactSegmentsResponseSuccess` API schema. */
-data class ListContactSegmentsResponseSuccess(
-    /** Type of the response object. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates if there are more results available. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /** Array containing segment information for this contact. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<ListContactSegmentsResponseSuccessDataItem>? = null,
-)
-
-/** Typed representation of the `RemoveContactFromSegmentResponseSuccess` API schema. */
-data class RemoveContactFromSegmentResponseSuccess(
-    /** The object type. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the contact. */
-    @com.fasterxml.jackson.annotation.JsonProperty("contact_id") val contactId: String? = null,
-    /** The ID of the segment. */
-    @com.fasterxml.jackson.annotation.JsonProperty("segment_id") val segmentId: String? = null,
-    /** Indicates whether the contact was successfully removed from the segment. */
-    val deleted: Boolean? = null,
-)
-
-/** Typed representation of the `RemoveContactResponseSuccess` API schema. */
-data class RemoveContactResponseSuccess(
-    /** Type of the response object. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Unique identifier for the removed contact. */
-    val id: String? = null,
-    /** Indicates whether the contact was successfully deleted. */
-    val deleted: Boolean? = null,
-)
-
-/** Typed representation of the `UpdateContactOptions` API schema. */
-data class UpdateContactOptions(
-    /** Email address of the contact. */
-    val email: String? = null,
-    /** First name of the contact. */
-    @com.fasterxml.jackson.annotation.JsonProperty("first_name") val firstName: String? = null,
-    /** Last name of the contact. */
+    /**
+     * Last name of the contact.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String? = null,
     /**
-     * The Contact's global subscription status. If set to true, the contact will be unsubscribed
-     * from all Broadcasts.
+     * Timestamp indicating when the contact was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
+    /**
+     * Indicates if the contact is unsubscribed.
      */
     val unsubscribed: Boolean? = null,
-    /** A map of custom property keys and values to update. */
-    val properties: Map<String, Any>? = null,
+    /**
+     * A map of custom property keys and values.
+     */
+    val properties: Map<String, Any>? = null
 )
 
-/** Typed representation of the `UpdateContactResponseSuccess` API schema. */
-data class UpdateContactResponseSuccess(
-    /** Type of the response object. */
+/**
+ * Required object value serialized in the `data[]` wire field.
+ */
+data class GetContactTopicsResponseSuccessDataItem(
+    /**
+     * Unique identifier for the topic.
+     */
+    val id: String? = null,
+    /**
+     * Name of the topic.
+     */
+    val name: String? = null,
+    /**
+     * Description of the topic.
+     */
+    val description: String? = null,
+    /**
+     * The subscription status for this topic.
+     */
+    val subscription: GetContactTopicsResponseSuccessDataItemSubscriptionEnum? = null
+)
+
+/**
+ * Typed representation of the `GetContactTopicsResponseSuccess` API schema.
+ */
+data class GetContactTopicsResponseSuccess(
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Unique identifier for the updated contact. */
-    val id: String? = null,
+    /**
+     * Indicates if there are more results available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
+    /**
+     * Array containing topic subscriptions for this contact.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<GetContactTopicsResponseSuccessDataItem>? = null
 )
 
-/** Required object value serialized in the `topics[]` wire field. */
+/**
+ * Typed representation of the `ListContactImportsResponseSuccess` API schema.
+ */
+data class ListContactImportsResponseSuccess(
+    /**
+     * Type of the response object.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * Indicates if there are more results available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
+    /**
+     * Array containing contact imports.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ContactImport>? = null
+)
+
+/**
+ * Required object value serialized in the `data[]` wire field.
+ */
+data class ListContactSegmentsResponseSuccessDataItem(
+    /**
+     * Unique identifier for the segment.
+     */
+    val id: String? = null,
+    /**
+     * Name of the segment.
+     */
+    val name: String? = null,
+    /**
+     * Timestamp indicating when the contact was added to the segment.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
+)
+
+/**
+ * Typed representation of the `ListContactSegmentsResponseSuccess` API schema.
+ */
+data class ListContactSegmentsResponseSuccess(
+    /**
+     * Type of the response object.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * Indicates if there are more results available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
+    /**
+     * Array containing segment information for this contact.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ListContactSegmentsResponseSuccessDataItem>? = null
+)
+
+/**
+ * Typed representation of the `RemoveContactFromSegmentResponseSuccess` API schema.
+ */
+data class RemoveContactFromSegmentResponseSuccess(
+    /**
+     * The object type.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * The ID of the contact.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("contact_id") val contactId: String? = null,
+    /**
+     * The ID of the segment.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("segment_id") val segmentId: String? = null,
+    /**
+     * Indicates whether the contact was successfully removed from the segment.
+     */
+    val deleted: Boolean? = null
+)
+
+/**
+ * Typed representation of the `RemoveContactResponseSuccess` API schema.
+ */
+data class RemoveContactResponseSuccess(
+    /**
+     * Type of the response object.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * Unique identifier for the removed contact.
+     */
+    val id: String? = null,
+    /**
+     * Indicates whether the contact was successfully deleted.
+     */
+    val deleted: Boolean? = null
+)
+
+/**
+ * Typed representation of the `UpdateContactOptions` API schema.
+ */
+data class UpdateContactOptions(
+    /**
+     * Email address of the contact.
+     */
+    val email: String? = null,
+    /**
+     * First name of the contact.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("first_name") val firstName: String? = null,
+    /**
+     * Last name of the contact.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String? = null,
+    /**
+     * The Contact's global subscription status. If set to true, the contact will be unsubscribed from all Broadcasts.
+     */
+    val unsubscribed: Boolean? = null,
+    /**
+     * A map of custom property keys and values to update.
+     */
+    val properties: Map<String, Any>? = null
+)
+
+/**
+ * Typed representation of the `UpdateContactResponseSuccess` API schema.
+ */
+data class UpdateContactResponseSuccess(
+    /**
+     * Type of the response object.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * Unique identifier for the updated contact.
+     */
+    val id: String? = null
+)
+
+/**
+ * Required object value serialized in the `topics[]` wire field.
+ */
 data class UpdateContactTopicsOptionsTopicsItem(
-    /** The ID of the topic. */
+    /**
+     * The ID of the topic.
+     */
     val id: String? = null,
-    /** The subscription status (opt_in or opt_out). */
-    val subscription: UpdateContactTopicsOptionsTopicsItemSubscriptionEnum? = null,
+    /**
+     * The subscription status (opt_in or opt_out).
+     */
+    val subscription: UpdateContactTopicsOptionsTopicsItemSubscriptionEnum? = null
 )
 
-/** Typed representation of the `UpdateContactTopicsOptions` API schema. */
+/**
+ * Typed representation of the `UpdateContactTopicsOptions` API schema.
+ */
 data class UpdateContactTopicsOptions(
-    /** Required array value serialized in the `topics` wire field. */
+    /**
+     * Required array value serialized in the `topics` wire field.
+     */
     val topics: List<UpdateContactTopicsOptionsTopicsItem>
 )
 
-/** Required object value serialized in the `topics[]` wire field. */
+/**
+ * Required object value serialized in the `topics[]` wire field.
+ */
 data class UpdateContactTopicsResponseSuccessTopicsItem(
-    /** The ID of the topic. */
+    /**
+     * The ID of the topic.
+     */
     val id: String? = null,
-    /** The subscription status. */
-    val subscription: UpdateContactTopicsResponseSuccessTopicsItemSubscriptionEnum? = null,
+    /**
+     * The subscription status.
+     */
+    val subscription: UpdateContactTopicsResponseSuccessTopicsItemSubscriptionEnum? = null
 )
 
-/** Typed representation of the `UpdateContactTopicsResponseSuccess` API schema. */
+/**
+ * Typed representation of the `UpdateContactTopicsResponseSuccess` API schema.
+ */
 data class UpdateContactTopicsResponseSuccess(
-    /** The object type. */
+    /**
+     * The object type.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the contact. */
+    /**
+     * The ID of the contact.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("contact_id") val contactId: String? = null,
-    /** Array of updated topic subscriptions. */
-    val topics: List<UpdateContactTopicsResponseSuccessTopicsItem>? = null,
+    /**
+     * Array of updated topic subscriptions.
+     */
+    val topics: List<UpdateContactTopicsResponseSuccessTopicsItem>? = null
 )

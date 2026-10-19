@@ -3,39 +3,35 @@
 
 package dev.octri.showcase.resend.models
 
-/** Why the claim is currently blocked, if applicable. */
-class DomainClaimBlockedReasonEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is DomainClaimBlockedReasonEnum && value == other.value
-
+/**
+ * Why the claim is currently blocked, if applicable.
+ */
+class DomainClaimBlockedReasonEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is DomainClaimBlockedReasonEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val GRACE_PERIOD = DomainClaimBlockedReasonEnum("grace_period")
         @JvmField val RECENT_OWNER_ACTIVITY = DomainClaimBlockedReasonEnum("recent_owner_activity")
-        @JvmField
-        val PENDING_SCHEDULED_EMAILS = DomainClaimBlockedReasonEnum("pending_scheduled_emails")
+        @JvmField val PENDING_SCHEDULED_EMAILS = DomainClaimBlockedReasonEnum("pending_scheduled_emails")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = DomainClaimBlockedReasonEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = DomainClaimBlockedReasonEnum(value)
     }
 }
 
-/** The region where the claimed domain will send from. */
-class DomainClaimRegionEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is DomainClaimRegionEnum && value == other.value
-
+/**
+ * The region where the claimed domain will send from.
+ */
+class DomainClaimRegionEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is DomainClaimRegionEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -45,22 +41,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val SA_EAST_1 = DomainClaimRegionEnum("sa-east-1")
         @JvmField val AP_NORTHEAST_1 = DomainClaimRegionEnum("ap-northeast-1")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = DomainClaimRegionEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = DomainClaimRegionEnum(value)
     }
 }
 
-/** The status of the claim. */
-class DomainClaimStatusEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is DomainClaimStatusEnum && value == other.value
-
+/**
+ * The status of the claim.
+ */
+class DomainClaimStatusEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is DomainClaimStatusEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -74,40 +67,34 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val CANCELED = DomainClaimStatusEnum("canceled")
         @JvmField val FAILED = DomainClaimStatusEnum("failed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = DomainClaimStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = DomainClaimStatusEnum(value)
     }
 }
 
-/** The DNS record type. Always TXT for domain claims. */
-class DomainClaimRecordTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is DomainClaimRecordTypeEnum && value == other.value
-
+/**
+ * The DNS record type. Always TXT for domain claims.
+ */
+class DomainClaimRecordTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is DomainClaimRecordTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val TXT = DomainClaimRecordTypeEnum("TXT")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = DomainClaimRecordTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = DomainClaimRecordTypeEnum(value)
     }
 }
 
-/** The event type. */
-enum class DomainCreatedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event type.
+ */
+enum class DomainCreatedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     DOMAIN_CREATED("domain.created");
 
     override fun toString() = value
@@ -115,16 +102,15 @@ enum class DomainCreatedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event type. */
-enum class DomainDeletedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event type.
+ */
+enum class DomainDeletedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     DOMAIN_DELETED("domain.deleted");
 
     override fun toString() = value
@@ -132,20 +118,19 @@ enum class DomainDeletedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** AWS region where the domain is configured. */
-class DomainEventDataRegionEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is DomainEventDataRegionEnum && value == other.value
-
+/**
+ * AWS region where the domain is configured.
+ */
+class DomainEventDataRegionEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is DomainEventDataRegionEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -155,22 +140,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val SA_EAST_1 = DomainEventDataRegionEnum("sa-east-1")
         @JvmField val AP_NORTHEAST_1 = DomainEventDataRegionEnum("ap-northeast-1")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = DomainEventDataRegionEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = DomainEventDataRegionEnum(value)
     }
 }
 
-/** Aggregated verification status of the domain. */
-class DomainEventDataStatusEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is DomainEventDataStatusEnum && value == other.value
-
+/**
+ * Aggregated verification status of the domain.
+ */
+class DomainEventDataStatusEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is DomainEventDataStatusEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -182,25 +164,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val PENDING = DomainEventDataStatusEnum("pending")
         @JvmField val NOT_STARTED = DomainEventDataStatusEnum("not_started")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = DomainEventDataStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = DomainEventDataStatusEnum(value)
     }
 }
 
 /**
- * The type of record (SPF for sending, DKIM for sending, Receiving for inbound emails, Tracking &
- * TrackingCAA for click and open tracking).
+ * The type of record (SPF for sending, DKIM for sending, Receiving for inbound emails, Tracking & TrackingCAA for click and open tracking).
  */
-class DomainRecordRecordEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is DomainRecordRecordEnum && value == other.value
-
+class DomainRecordRecordEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is DomainRecordRecordEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -211,22 +187,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val TRACKING = DomainRecordRecordEnum("Tracking")
         @JvmField val TRACKINGCAA = DomainRecordRecordEnum("TrackingCAA")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = DomainRecordRecordEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = DomainRecordRecordEnum(value)
     }
 }
 
-/** The status of the record. */
-class DomainRecordStatusEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is DomainRecordStatusEnum && value == other.value
-
+/**
+ * The status of the record.
+ */
+class DomainRecordStatusEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is DomainRecordStatusEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -237,22 +210,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val TEMPORARY_FAILURE = DomainRecordStatusEnum("temporary_failure")
         @JvmField val NOT_STARTED = DomainRecordStatusEnum("not_started")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = DomainRecordStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = DomainRecordStatusEnum(value)
     }
 }
 
-/** The DNS record type. */
-class DomainRecordTypeEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is DomainRecordTypeEnum && value == other.value
-
+/**
+ * The DNS record type.
+ */
+class DomainRecordTypeEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is DomainRecordTypeEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -262,18 +232,15 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val CNAME = DomainRecordTypeEnum("CNAME")
         @JvmField val CAA = DomainRecordTypeEnum("CAA")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = DomainRecordTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = DomainRecordTypeEnum(value)
     }
 }
 
-/** The event type. */
-enum class DomainUpdatedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event type.
+ */
+enum class DomainUpdatedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     DOMAIN_UPDATED("domain.updated");
 
     override fun toString() = value
@@ -281,19 +248,19 @@ enum class DomainUpdatedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The status of the email. */
-class EmailLastEventEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/**
+ * The status of the email.
+ */
+class EmailLastEventEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
     override fun equals(other: Any?): Boolean = other is EmailLastEventEnum && value == other.value
-
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -311,18 +278,15 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val SENT = EmailLastEventEnum("sent")
         @JvmField val SUPPRESSED = EmailLastEventEnum("suppressed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = EmailLastEventEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = EmailLastEventEnum(value)
     }
 }
 
-/** The event type. */
-enum class EmailBouncedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event type.
+ */
+enum class EmailBouncedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     EMAIL_BOUNCED("email.bounced");
 
     override fun toString() = value
@@ -330,16 +294,15 @@ enum class EmailBouncedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event type. */
-enum class EmailClickedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event type.
+ */
+enum class EmailClickedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     EMAIL_CLICKED("email.clicked");
 
     override fun toString() = value
@@ -347,16 +310,15 @@ enum class EmailClickedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event type. */
-enum class EmailComplainedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event type.
+ */
+enum class EmailComplainedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     EMAIL_COMPLAINED("email.complained");
 
     override fun toString() = value
@@ -364,16 +326,15 @@ enum class EmailComplainedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event type. */
-enum class EmailDeliveredEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event type.
+ */
+enum class EmailDeliveredEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     EMAIL_DELIVERED("email.delivered");
 
     override fun toString() = value
@@ -381,16 +342,15 @@ enum class EmailDeliveredEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event type. */
-enum class EmailDeliveryDelayedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event type.
+ */
+enum class EmailDeliveryDelayedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     EMAIL_DELIVERY_DELAYED("email.delivery_delayed");
 
     override fun toString() = value
@@ -398,13 +358,14 @@ enum class EmailDeliveryDelayedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event type. */
+/**
+ * The event type.
+ */
 enum class EmailFailedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     EMAIL_FAILED("email.failed");
 
@@ -413,13 +374,14 @@ enum class EmailFailedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue 
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event type. */
+/**
+ * The event type.
+ */
 enum class EmailOpenedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     EMAIL_OPENED("email.opened");
 
@@ -428,16 +390,15 @@ enum class EmailOpenedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue 
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event type. */
-enum class EmailReceivedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event type.
+ */
+enum class EmailReceivedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     EMAIL_RECEIVED("email.received");
 
     override fun toString() = value
@@ -445,16 +406,15 @@ enum class EmailReceivedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event type. */
-enum class EmailScheduledEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event type.
+ */
+enum class EmailScheduledEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     EMAIL_SCHEDULED("email.scheduled");
 
     override fun toString() = value
@@ -462,13 +422,14 @@ enum class EmailScheduledEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event type. */
+/**
+ * The event type.
+ */
 enum class EmailSentEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     EMAIL_SENT("email.sent");
 
@@ -477,16 +438,15 @@ enum class EmailSentEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue va
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The event type. */
-enum class EmailSuppressedEventTypeEnum(
-    @com.fasterxml.jackson.annotation.JsonValue val value: String
-) {
+/**
+ * The event type.
+ */
+enum class EmailSuppressedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
     EMAIL_SUPPRESSED("email.suppressed");
 
     override fun toString() = value
@@ -494,20 +454,19 @@ enum class EmailSuppressedEventTypeEnum(
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) =
-            values().find { it.value == v }
-                ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) = values().find { it.value == v }
+            ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/** The subscription status for this topic. */
-class GetContactTopicsResponseSuccessDataItemSubscriptionEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GetContactTopicsResponseSuccessDataItemSubscriptionEnum && value == other.value
-
+/**
+ * The subscription status for this topic.
+ */
+class GetContactTopicsResponseSuccessDataItemSubscriptionEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GetContactTopicsResponseSuccessDataItemSubscriptionEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -515,23 +474,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val OPT_IN = GetContactTopicsResponseSuccessDataItemSubscriptionEnum("opt_in")
         @JvmField val OPT_OUT = GetContactTopicsResponseSuccessDataItemSubscriptionEnum("opt_out")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) =
-            GetContactTopicsResponseSuccessDataItemSubscriptionEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GetContactTopicsResponseSuccessDataItemSubscriptionEnum(value)
     }
 }
 
-/** Required enumerated value serialized in the `dimensions[]` wire field. */
-class GetEmailsMetricsResponseDimensionsItemEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GetEmailsMetricsResponseDimensionsItemEnum && value == other.value
-
+/**
+ * Required enumerated value serialized in the `dimensions[]` wire field.
+ */
+class GetEmailsMetricsResponseDimensionsItemEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GetEmailsMetricsResponseDimensionsItemEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -541,22 +496,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val EMAIL = GetEmailsMetricsResponseDimensionsItemEnum("email")
         @JvmField val BROADCAST = GetEmailsMetricsResponseDimensionsItemEnum("broadcast")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GetEmailsMetricsResponseDimensionsItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GetEmailsMetricsResponseDimensionsItemEnum(value)
     }
 }
 
-/** The bucket size used when `period` is in `dimensions`. */
-class GetEmailsMetricsResponseGranularityEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GetEmailsMetricsResponseGranularityEnum && value == other.value
-
+/**
+ * The bucket size used when `period` is in `dimensions`.
+ */
+class GetEmailsMetricsResponseGranularityEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GetEmailsMetricsResponseGranularityEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -566,49 +518,39 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val WEEKLY = GetEmailsMetricsResponseGranularityEnum("weekly")
         @JvmField val MONTHLY = GetEmailsMetricsResponseGranularityEnum("monthly")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GetEmailsMetricsResponseGranularityEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GetEmailsMetricsResponseGranularityEnum(value)
     }
 }
 
-/** How the attachment should be displayed. */
-class GetReceivedEmailResponseAttachmentsItemContentDispositionEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GetReceivedEmailResponseAttachmentsItemContentDispositionEnum &&
-            value == other.value
-
+/**
+ * How the attachment should be displayed.
+ */
+class GetReceivedEmailResponseAttachmentsItemContentDispositionEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GetReceivedEmailResponseAttachmentsItemContentDispositionEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField
-        val INLINE = GetReceivedEmailResponseAttachmentsItemContentDispositionEnum("inline")
-        @JvmField
-        val ATTACHMENT = GetReceivedEmailResponseAttachmentsItemContentDispositionEnum("attachment")
+        @JvmField val INLINE = GetReceivedEmailResponseAttachmentsItemContentDispositionEnum("inline")
+        @JvmField val ATTACHMENT = GetReceivedEmailResponseAttachmentsItemContentDispositionEnum("attachment")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) =
-            GetReceivedEmailResponseAttachmentsItemContentDispositionEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GetReceivedEmailResponseAttachmentsItemContentDispositionEnum(value)
     }
 }
 
-/** Origin of the suppression. */
-class GetSuppressionResponseSuccessOriginEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GetSuppressionResponseSuccessOriginEnum && value == other.value
-
+/**
+ * Origin of the suppression.
+ */
+class GetSuppressionResponseSuccessOriginEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GetSuppressionResponseSuccessOriginEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -617,22 +559,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val COMPLAINT = GetSuppressionResponseSuccessOriginEnum("complaint")
         @JvmField val MANUAL = GetSuppressionResponseSuccessOriginEnum("manual")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GetSuppressionResponseSuccessOriginEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GetSuppressionResponseSuccessOriginEnum(value)
     }
 }
 
-/** The default subscription status for the topic. */
-class GetTopicResponseSuccessDefaultSubscriptionEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GetTopicResponseSuccessDefaultSubscriptionEnum && value == other.value
-
+/**
+ * The default subscription status for the topic.
+ */
+class GetTopicResponseSuccessDefaultSubscriptionEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GetTopicResponseSuccessDefaultSubscriptionEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -640,22 +579,19 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val OPT_IN = GetTopicResponseSuccessDefaultSubscriptionEnum("opt_in")
         @JvmField val OPT_OUT = GetTopicResponseSuccessDefaultSubscriptionEnum("opt_out")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GetTopicResponseSuccessDefaultSubscriptionEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GetTopicResponseSuccessDefaultSubscriptionEnum(value)
     }
 }
 
-/** The visibility of the topic. */
-class GetTopicResponseSuccessVisibilityEnum
-private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
-    override fun equals(other: Any?): Boolean =
-        other is GetTopicResponseSuccessVisibilityEnum && value == other.value
-
+/**
+ * The visibility of the topic.
+ */
+class GetTopicResponseSuccessVisibilityEnum private constructor(
+    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
+) {
+    override fun equals(other: Any?): Boolean = other is GetTopicResponseSuccessVisibilityEnum && value == other.value
     override fun hashCode(): Int = value.hashCode()
-
     override fun toString(): String = value
 
     companion object {
@@ -663,10 +599,7 @@ private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: S
         @JvmField val PUBLIC = GetTopicResponseSuccessVisibilityEnum("public")
         @JvmField val PRIVATE = GetTopicResponseSuccessVisibilityEnum("private")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(
-            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
-        )
-        @JvmStatic
-        fun fromValue(value: String) = GetTopicResponseSuccessVisibilityEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
+        @JvmStatic fun fromValue(value: String) = GetTopicResponseSuccessVisibilityEnum(value)
     }
 }

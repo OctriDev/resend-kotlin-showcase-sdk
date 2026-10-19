@@ -3,17 +3,28 @@
 
 package dev.octri.showcase.resend.models
 
-/** Typed representation of the `WebhookEventAttachment` API schema. */
+/**
+ * Typed representation of the `WebhookEventAttachment` API schema.
+ */
 data class WebhookEventAttachment(
-    /** Unique identifier for the attachment. */
+    /**
+     * Unique identifier for the attachment.
+     */
     val id: String,
-    /** The filename of the attachment. */
+    /**
+     * The filename of the attachment.
+     */
     val filename: String? = null,
-    /** The MIME type of the attachment. */
+    /**
+     * The MIME type of the attachment.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("content_type") val contentType: String? = null,
-    /** The content disposition (e.g., `inline` or `attachment`). */
-    @com.fasterxml.jackson.annotation.JsonProperty("content_disposition")
-    val contentDisposition: String? = null,
-    /** Content-ID header used for referencing inline images. */
-    @com.fasterxml.jackson.annotation.JsonProperty("content_id") val contentId: String? = null,
+    /**
+     * The content disposition (e.g., `inline` or `attachment`).
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("content_disposition") val contentDisposition: String? = null,
+    /**
+     * Content-ID header used for referencing inline images.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("content_id") val contentId: String? = null
 )

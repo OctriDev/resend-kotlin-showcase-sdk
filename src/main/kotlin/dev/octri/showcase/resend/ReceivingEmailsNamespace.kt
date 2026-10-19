@@ -3,71 +3,34 @@
 
 package dev.octri.showcase.resend
 
+
 class ReceivingEmailsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists received emails with cursor-based pagination. Use `limit` to control the number of
-     * results and `after` or `before` to select a pagination cursor; the cursor parameters cannot
-     * be used together.
+     * Lists received emails with cursor-based pagination. Use `limit` to control the number of results and `after` or `before` to select a pagination cursor; the cursor parameters cannot be used together.
      */
-    fun list(
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListReceivedEmailsResponse {
-        return dev.octri.showcase.resend.methods.ReceivingEmails.list(
-            clientConfig,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun list(limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListReceivedEmailsResponse {
+        return dev.octri.showcase.resend.methods.ReceivingEmails.list(clientConfig, limit, after, before, options)
     }
 
     /**
-     * Retrieves a received email by its identifier. Use `email_id` to select the email; the
-     * response includes its message content, headers, recipients, receipt time, and attachments.
+     * Retrieves a received email by its identifier. Use `email_id` to select the email; the response includes its message content, headers, recipients, receipt time, and attachments.
      */
     fun get(emailId: String, options: RequestOptions? = null): GetReceivedEmailResponse {
         return dev.octri.showcase.resend.methods.ReceivingEmails.get(clientConfig, emailId, options)
     }
 
     /**
-     * Lists attachments for a received email. Use `email_id` to select the email and `after` or
-     * `before` to navigate through attachment results.
+     * Lists attachments for a received email. Use `email_id` to select the email and `after` or `before` to navigate through attachment results.
      */
-    fun listAttachments(
-        emailId: String,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListAttachmentsResponse {
-        return dev.octri.showcase.resend.methods.ReceivingEmails.listAttachments(
-            clientConfig,
-            emailId,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun listAttachments(emailId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListAttachmentsResponse {
+        return dev.octri.showcase.resend.methods.ReceivingEmails.listAttachments(clientConfig, emailId, limit, after, before, options)
     }
 
     /**
-     * Retrieves an attachment belonging to a received email. Use `email_id` to identify the email
-     * and `attachment_id` to select its attachment; the response includes a signed download URL and
-     * its expiration time.
+     * Retrieves an attachment belonging to a received email. Use `email_id` to identify the email and `attachment_id` to select its attachment; the response includes a signed download URL and its expiration time.
      */
-    fun getAttachment(
-        emailId: String,
-        attachmentId: String,
-        options: RequestOptions? = null,
-    ): RetrievedAttachment {
-        return dev.octri.showcase.resend.methods.ReceivingEmails.getAttachment(
-            clientConfig,
-            emailId,
-            attachmentId,
-            options,
-        )
+    fun getAttachment(emailId: String, attachmentId: String, options: RequestOptions? = null): RetrievedAttachment {
+        return dev.octri.showcase.resend.methods.ReceivingEmails.getAttachment(clientConfig, emailId, attachmentId, options)
     }
+
 }

@@ -6,8 +6,8 @@ package dev.octri.showcase.resend.methods
 import dev.octri.showcase.resend.Automation
 import dev.octri.showcase.resend.AutomationConnection
 import dev.octri.showcase.resend.AutomationRun
-import dev.octri.showcase.resend.AutomationStep
 import dev.octri.showcase.resend.AutomationsListParameterEnum
+import dev.octri.showcase.resend.AutomationStep
 import dev.octri.showcase.resend.ClientConfig
 import dev.octri.showcase.resend.CreateAutomationRequestStatusEnum
 import dev.octri.showcase.resend.CreateAutomationResponse
@@ -24,322 +24,195 @@ import dev.octri.showcase.resend.Validation
 
 object Automations {
 
+
     /**
-     * Creates an automation workflow from its name, steps, and connections. Supply at least one
-     * step, including a `trigger` step, and configure each step with its key, type, and
-     * configuration. A 201 response returns the new automation's identifier.
+     * Creates an automation workflow from its name, steps, and connections. Supply at least one step, including a `trigger` step, and configure each step with its key, type, and configuration. A 201 response returns the new automation's identifier.
      *
      * @param name The name of the automation.
-     * @param steps The steps that compose the automation workflow. Must include at least one
-     *   `trigger` step.
+     * @param steps The steps that compose the automation workflow. Must include at
+     *   least one `trigger` step.
      * @param connections The connections between steps in the automation graph.
      * @param status The initial status of the automation. Defaults to `disabled`.
      */
-    fun automationsCreate(
-        clientConfig: ClientConfig,
-        name: String,
-        steps: List<AutomationStep>,
-        connections: List<AutomationConnection>,
-        status: CreateAutomationRequestStatusEnum? = null,
-        options: RequestOptions? = null,
-    ): CreateAutomationResponse {
+    fun automationsCreate(clientConfig: ClientConfig, name: String, steps: List<AutomationStep>, connections: List<AutomationConnection>, status: CreateAutomationRequestStatusEnum? = null, options: RequestOptions? = null): CreateAutomationResponse {
         Validation.validateLength("name", name, Validation.LengthOpts(min = 1))
 
         Validation.validateItems("steps", steps, Validation.LengthOpts(min = 1, max = 150))
 
-        return SdkClient.request<CreateAutomationResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/automations",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (name),
-                            "steps" to (steps),
-                            "connections" to (connections),
-                            "status" to (SdkClient.omitIfNull(status)),
-                        ),
-                    operationId = "automationsCreate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<CreateAutomationResponse>(SdkClient.RequestSpec("POST", "/automations", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "steps" to (steps), "connections" to (connections), "status" to (SdkClient.omitIfNull(status))), operationId = "automationsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists automations, with optional filtering by status and cursor-based pagination. Use
-     * `status` to select enabled or disabled automations, and use `after` or `before` to navigate
-     * results.
+     * Lists automations, with optional filtering by status and cursor-based pagination. Use `status` to select enabled or disabled automations, and use `after` or `before` to navigate results.
      *
      * @param status Filter automations by status.
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun automationsList(
-        clientConfig: ClientConfig,
-        status: AutomationsListParameterEnum? = null,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListAutomationsResponse {
+    fun automationsList(clientConfig: ClientConfig, status: AutomationsListParameterEnum? = null, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListAutomationsResponse {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
-        return SdkClient.request<ListAutomationsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/automations",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "status" to SdkClient.queryValue(status, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "before" to SdkClient.queryValue(before, "form", true),
-                        ),
-                    operationId = "automationsList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<ListAutomationsResponse>(SdkClient.RequestSpec("GET", "/automations", config = clientConfig, query = mapOf("status" to SdkClient.queryValue(status, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "automationsList", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a single automation and its active workflow version. Use the automation details to
-     * inspect its status, timestamps, steps, and connections.
+     * Retrieves a single automation and its active workflow version. Use the automation details to inspect its status, timestamps, steps, and connections.
      *
      * @param automationId The ID of the automation.
      */
-    fun automationsGet(
-        clientConfig: ClientConfig,
-        automationId: String,
-        options: RequestOptions? = null,
-    ): Automation {
+    fun automationsGet(clientConfig: ClientConfig, automationId: String, options: RequestOptions? = null): Automation {
         Validation.validateUuid("automation_id", automationId)
 
-        return SdkClient.request<Automation>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/automations/${SdkClient.encodePathSegment(automationId)}",
-                    config = clientConfig,
-                    operationId = "automationsGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<Automation>(SdkClient.RequestSpec("GET", "/automations/${SdkClient.encodePathSegment(automationId)}", config = clientConfig, operationId = "automationsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Updates an automation's name, status, or workflow graph. Supply at least one of `name`,
-     * `status`, or both `steps` and `connections`; workflow graph updates require both arrays
-     * together. Provide between 1 and 150 steps when updating the graph.
+     * Updates an automation's name, status, or workflow graph. Supply at least one of `name`, `status`, or both `steps` and `connections`; workflow graph updates require both arrays together. Provide between 1 and 150 steps when updating the graph.
      *
      * @param automationId The ID of the automation.
      * @param name The name of the automation.
      * @param status The status of the automation.
-     * @param steps The steps that compose the automation workflow. Must be provided together with
-     *   `connections`.
-     * @param connections The connections between steps in the automation graph. Must be provided
-     *   together with `steps`.
+     * @param steps The steps that compose the automation workflow. Must be provided
+     *   together with `connections`.
+     * @param connections The connections between steps in the automation graph. Must
+     *   be provided together with `steps`.
      */
-    fun automationsUpdate(
-        clientConfig: ClientConfig,
-        automationId: String,
-        name: String? = null,
-        status: PatchAutomationRequestStatusEnum? = null,
-        steps: List<AutomationStep>? = null,
-        connections: List<AutomationConnection>? = null,
-        options: RequestOptions? = null,
-    ): PatchAutomationResponse {
+    fun automationsUpdate(clientConfig: ClientConfig, automationId: String, name: String? = null, status: PatchAutomationRequestStatusEnum? = null, steps: List<AutomationStep>? = null, connections: List<AutomationConnection>? = null, options: RequestOptions? = null): PatchAutomationResponse {
         Validation.validateUuid("automation_id", automationId)
 
         if (name != null) {
             Validation.validateLength("name", name, Validation.LengthOpts(min = 1))
-        }
+}
 
         if (steps != null) {
             Validation.validateItems("steps", steps, Validation.LengthOpts(min = 1, max = 150))
-        }
+}
 
-        return SdkClient.request<PatchAutomationResponse>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/automations/${SdkClient.encodePathSegment(automationId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "name" to (SdkClient.omitIfNull(name)),
-                            "status" to (SdkClient.omitIfNull(status)),
-                            "steps" to (SdkClient.omitIfNull(steps)),
-                            "connections" to (SdkClient.omitIfNull(connections)),
-                        ),
-                    operationId = "automationsUpdate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<PatchAutomationResponse>(SdkClient.RequestSpec("PATCH", "/automations/${SdkClient.encodePathSegment(automationId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "status" to (SdkClient.omitIfNull(status)), "steps" to (SdkClient.omitIfNull(steps)), "connections" to (SdkClient.omitIfNull(connections))), operationId = "automationsUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Deletes an automation by its identifier. Use this operation to remove an automation you no
-     * longer need; the response indicates whether deletion succeeded.
+     * Deletes an automation by its identifier. Use this operation to remove an automation you no longer need; the response indicates whether deletion succeeded.
      *
      * @param automationId The ID of the automation.
      */
-    fun automationsRemove(
-        clientConfig: ClientConfig,
-        automationId: String,
-        options: RequestOptions? = null,
-    ): DeleteAutomationResponse {
+    fun automationsRemove(clientConfig: ClientConfig, automationId: String, options: RequestOptions? = null): DeleteAutomationResponse {
         Validation.validateUuid("automation_id", automationId)
 
-        return SdkClient.request<DeleteAutomationResponse>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/automations/${SdkClient.encodePathSegment(automationId)}",
-                    config = clientConfig,
-                    operationId = "automationsRemove",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<DeleteAutomationResponse>(SdkClient.RequestSpec("DELETE", "/automations/${SdkClient.encodePathSegment(automationId)}", config = clientConfig, operationId = "automationsRemove", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Duplicates an existing automation to create a separate automation. Supply the source
-     * automation's identifier to create the duplicate, then use the returned identifier to access
-     * it.
+     * Duplicates an existing automation to create a separate automation. Supply the source automation's identifier to create the duplicate, then use the returned identifier to access it.
      *
      * @param automationId The ID of the automation.
      */
-    fun automationsDuplicate(
-        clientConfig: ClientConfig,
-        automationId: String,
-        options: RequestOptions? = null,
-    ): DuplicateAutomationResponse {
+    fun automationsDuplicate(clientConfig: ClientConfig, automationId: String, options: RequestOptions? = null): DuplicateAutomationResponse {
         Validation.validateUuid("automation_id", automationId)
 
-        return SdkClient.request<DuplicateAutomationResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/automations/${SdkClient.encodePathSegment(automationId)}/duplicate",
-                    config = clientConfig,
-                    operationId = "automationsDuplicate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<DuplicateAutomationResponse>(SdkClient.RequestSpec("POST", "/automations/${SdkClient.encodePathSegment(automationId)}/duplicate", config = clientConfig, operationId = "automationsDuplicate", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Stops an automation by its identifier. Use this operation when you want the automation to
-     * stop running; the response includes its status after stopping.
+     * Stops an automation by its identifier. Use this operation when you want the automation to stop running; the response includes its status after stopping.
      *
      * @param automationId The ID of the automation.
      */
-    fun automationsStop(
-        clientConfig: ClientConfig,
-        automationId: String,
-        options: RequestOptions? = null,
-    ): StopAutomationResponse {
+    fun automationsStop(clientConfig: ClientConfig, automationId: String, options: RequestOptions? = null): StopAutomationResponse {
         Validation.validateUuid("automation_id", automationId)
 
-        return SdkClient.request<StopAutomationResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/automations/${SdkClient.encodePathSegment(automationId)}/stop",
-                    config = clientConfig,
-                    operationId = "automationsStop",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<StopAutomationResponse>(SdkClient.RequestSpec("POST", "/automations/${SdkClient.encodePathSegment(automationId)}/stop", config = clientConfig, operationId = "automationsStop", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists runs for a specific automation, with optional filtering by run status and cursor-based
-     * pagination. Use `status` to filter by run state, and use `after` or `before` to navigate the
-     * results.
+     * Lists runs for a specific automation, with optional filtering by run status and cursor-based pagination. Use `status` to filter by run state, and use `after` or `before` to navigate the results.
      *
      * @param automationId The ID of the automation.
-     * @param status Filter runs by status. Comma-separated list of: running, completed, failed,
-     *   cancelled.
+     * @param status Filter runs by status. Comma-separated list of: running,
+     *   completed, failed, cancelled.
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun automationsListRuns(
-        clientConfig: ClientConfig,
-        automationId: String,
-        status: String? = null,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListAutomationRunsResponse {
+    fun automationsListRuns(clientConfig: ClientConfig, automationId: String, status: String? = null, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListAutomationRunsResponse {
         Validation.validateUuid("automation_id", automationId)
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
-        return SdkClient.request<ListAutomationRunsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/automations/${SdkClient.encodePathSegment(automationId)}/runs",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "status" to SdkClient.queryValue(status, "form", true),
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "before" to SdkClient.queryValue(before, "form", true),
-                        ),
-                    operationId = "automationsListRuns",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<ListAutomationRunsResponse>(SdkClient.RequestSpec("GET", "/automations/${SdkClient.encodePathSegment(automationId)}/runs", config = clientConfig, query = mapOf("status" to SdkClient.queryValue(status, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "automationsListRuns", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a single run for a specific automation. Use the run details to inspect its status,
-     * timestamps, and step executions, which are returned in workflow graph order.
+     * Retrieves a single run for a specific automation. Use the run details to inspect its status, timestamps, and step executions, which are returned in workflow graph order.
      *
      * @param automationId The ID of the automation.
      * @param runId The ID of the automation run.
      */
-    fun automationsGetRun(
-        clientConfig: ClientConfig,
-        automationId: String,
-        runId: String,
-        options: RequestOptions? = null,
-    ): AutomationRun {
+    fun automationsGetRun(clientConfig: ClientConfig, automationId: String, runId: String, options: RequestOptions? = null): AutomationRun {
         Validation.validateUuid("automation_id", automationId)
 
         Validation.validateUuid("run_id", runId)
 
-        return SdkClient.request<AutomationRun>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/automations/${SdkClient.encodePathSegment(automationId)}/runs/${SdkClient.encodePathSegment(runId)}",
-                    config = clientConfig,
-                    operationId = "automationsGetRun",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<AutomationRun>(SdkClient.RequestSpec("GET", "/automations/${SdkClient.encodePathSegment(automationId)}/runs/${SdkClient.encodePathSegment(runId)}", config = clientConfig, operationId = "automationsGetRun", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
+
+
+
+
+
+
+
 }

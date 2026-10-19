@@ -3,220 +3,97 @@
 
 package dev.octri.showcase.resend
 
+
 class ContactsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a contact with an email address and optional profile, subscription, and grouping
-     * details. Include `email`; you can also set custom `properties`, add `segments`, or configure
-     * `topics`.
+     * Creates a contact with an email address and optional profile, subscription, and grouping details. Include `email`; you can also set custom `properties`, add `segments`, or configure `topics`.
      */
-    fun create(
-        request: dev.octri.showcase.resend.methods.Contacts.ContactsCreateRequest,
-        options: RequestOptions? = null,
-    ): CreateContactResponseSuccess {
-        return dev.octri.showcase.resend.methods.Contacts.contactsCreate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun create(request: dev.octri.showcase.resend.methods.Contacts.ContactsCreateRequest, options: RequestOptions? = null): CreateContactResponseSuccess {
+        return dev.octri.showcase.resend.methods.Contacts.contactsCreate(clientConfig, request, options)
     }
 
     /**
-     * Lists contacts, with each result including contact information. Use `after` or `before` to
-     * navigate results by cursor, and `limit` to control the number of items returned.
+     * Lists contacts, with each result including contact information. Use `after` or `before` to navigate results by cursor, and `limit` to control the number of items returned.
      */
-    fun list(
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListContactsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Contacts.contactsList(
-            clientConfig,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun list(limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListContactsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Contacts.contactsList(clientConfig, limit, after, before, options)
     }
 
     /**
-     * Creates a contact import from a CSV file. Include the file and optionally provide a column
-     * mapping, conflict strategy, segments, or topic subscriptions for imported contacts.
+     * Creates a contact import from a CSV file. Include the file and optionally provide a column mapping, conflict strategy, segments, or topic subscriptions for imported contacts.
      */
-    fun createImport(
-        file: SdkClient.UploadFile,
-        columnMap: String? = null,
-        onConflict: CreateContactImportOptionsOnConflictEnum? = null,
-        segments: String? = null,
-        topics: String? = null,
-        options: RequestOptions? = null,
-    ): CreateContactImportResponseSuccess {
-        return dev.octri.showcase.resend.methods.Contacts.contactsCreateImport(
-            clientConfig,
-            file,
-            columnMap,
-            onConflict,
-            segments,
-            topics,
-            options,
-        )
+    fun createImport(file: SdkClient.UploadFile, columnMap: String? = null, onConflict: CreateContactImportOptionsOnConflictEnum? = null, segments: String? = null, topics: String? = null, options: RequestOptions? = null): CreateContactImportResponseSuccess {
+        return dev.octri.showcase.resend.methods.Contacts.contactsCreateImport(clientConfig, file, columnMap, onConflict, segments, topics, options)
     }
 
     /**
-     * Lists contact imports and their processing information. Use `status` to filter by import
-     * state, and `after` or `before` to navigate results by cursor.
+     * Lists contact imports and their processing information. Use `status` to filter by import state, and `after` or `before` to navigate results by cursor.
      */
-    fun listImports(
-        status: ContactsListImportsParameterEnum? = null,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListContactImportsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Contacts.contactsListImports(
-            clientConfig,
-            status,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun listImports(status: ContactsListImportsParameterEnum? = null, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListContactImportsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Contacts.contactsListImports(clientConfig, status, limit, after, before, options)
     }
 
     /**
-     * Retrieves a contact import by its identifier. Use the import record to review its status,
-     * timestamps, and processing counts.
+     * Retrieves a contact import by its identifier. Use the import record to review its status, timestamps, and processing counts.
      */
     fun getImport(id: String, options: RequestOptions? = null): GetContactImportResponseSuccess {
-        return dev.octri.showcase.resend.methods.Contacts.contactsGetImport(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Contacts.contactsGetImport(clientConfig, id, options)
     }
 
     /**
-     * Retrieves a contact by its ID or email address. Use this operation to inspect the contact's
-     * profile, subscription status, and custom properties.
+     * Retrieves a contact by its ID or email address. Use this operation to inspect the contact's profile, subscription status, and custom properties.
      */
     fun get(id: String, options: RequestOptions? = null): GetContactResponseSuccess {
         return dev.octri.showcase.resend.methods.Contacts.contactsGet(clientConfig, id, options)
     }
 
     /**
-     * Updates a contact identified by its ID or email address. Include only the profile,
-     * subscription, or custom property fields you want to change.
+     * Updates a contact identified by its ID or email address. Include only the profile, subscription, or custom property fields you want to change.
      */
-    fun update(
-        request: dev.octri.showcase.resend.methods.Contacts.ContactsUpdateRequest,
-        options: RequestOptions? = null,
-    ): UpdateContactResponseSuccess {
-        return dev.octri.showcase.resend.methods.Contacts.contactsUpdate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun update(request: dev.octri.showcase.resend.methods.Contacts.ContactsUpdateRequest, options: RequestOptions? = null): UpdateContactResponseSuccess {
+        return dev.octri.showcase.resend.methods.Contacts.contactsUpdate(clientConfig, request, options)
     }
 
     /**
-     * Deletes a contact identified by its ID or email address. Use this operation to remove the
-     * contact from the contacts resource.
+     * Deletes a contact identified by its ID or email address. Use this operation to remove the contact from the contacts resource.
      */
     fun remove(id: String, options: RequestOptions? = null): RemoveContactResponseSuccess {
         return dev.octri.showcase.resend.methods.Contacts.contactsRemove(clientConfig, id, options)
     }
 
     /**
-     * Lists the segments associated with a contact. Use `contact_id` to select the contact and
-     * `after` or `before` to position results relative to a cursor.
+     * Lists the segments associated with a contact. Use `contact_id` to select the contact and `after` or `before` to position results relative to a cursor.
      */
-    fun listSegments(
-        contactId: String,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListContactSegmentsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Contacts.contactsListSegments(
-            clientConfig,
-            contactId,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun listSegments(contactId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListContactSegmentsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Contacts.contactsListSegments(clientConfig, contactId, limit, after, before, options)
     }
 
     /**
-     * Adds a contact to a segment. Supply the contact’s ID or email address and the segment ID to
-     * select the membership to create.
+     * Adds a contact to a segment. Supply the contact’s ID or email address and the segment ID to select the membership to create.
      */
-    fun addSegment(
-        contactId: String,
-        segmentId: String,
-        options: RequestOptions? = null,
-    ): AddContactToSegmentResponseSuccess {
-        return dev.octri.showcase.resend.methods.Contacts.contactsAddSegment(
-            clientConfig,
-            contactId,
-            segmentId,
-            options,
-        )
+    fun addSegment(contactId: String, segmentId: String, options: RequestOptions? = null): AddContactToSegmentResponseSuccess {
+        return dev.octri.showcase.resend.methods.Contacts.contactsAddSegment(clientConfig, contactId, segmentId, options)
     }
 
     /**
-     * Removes a contact from a segment. Supply the contact’s ID or email address and the segment ID
-     * to select the membership to remove.
+     * Removes a contact from a segment. Supply the contact’s ID or email address and the segment ID to select the membership to remove.
      */
-    fun removeSegment(
-        contactId: String,
-        segmentId: String,
-        options: RequestOptions? = null,
-    ): RemoveContactFromSegmentResponseSuccess {
-        return dev.octri.showcase.resend.methods.Contacts.contactsRemoveSegment(
-            clientConfig,
-            contactId,
-            segmentId,
-            options,
-        )
+    fun removeSegment(contactId: String, segmentId: String, options: RequestOptions? = null): RemoveContactFromSegmentResponseSuccess {
+        return dev.octri.showcase.resend.methods.Contacts.contactsRemoveSegment(clientConfig, contactId, segmentId, options)
     }
 
     /**
-     * Lists the topics and subscription statuses associated with a contact. Use `contact_id` to
-     * select the contact and `after` or `before` to position results relative to a cursor.
+     * Lists the topics and subscription statuses associated with a contact. Use `contact_id` to select the contact and `after` or `before` to position results relative to a cursor.
      */
-    fun listTopics(
-        contactId: String,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): GetContactTopicsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Contacts.contactsListTopics(
-            clientConfig,
-            contactId,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun listTopics(contactId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): GetContactTopicsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Contacts.contactsListTopics(clientConfig, contactId, limit, after, before, options)
     }
 
     /**
-     * Updates a contact’s subscriptions to topics. Supply the required `topics` array with each
-     * topic ID and its subscription status.
+     * Updates a contact’s subscriptions to topics. Supply the required `topics` array with each topic ID and its subscription status.
      */
-    fun updateTopics(
-        contactId: String,
-        topics:
-            List<dev.octri.showcase.resend.methods.Contacts.UpdateContactTopicsOptionsTopicsItem>,
-        options: RequestOptions? = null,
-    ): UpdateContactTopicsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Contacts.contactsUpdateTopics(
-            clientConfig,
-            contactId,
-            topics,
-            options,
-        )
+    fun updateTopics(contactId: String, topics: List<dev.octri.showcase.resend.methods.Contacts.UpdateContactTopicsOptionsTopicsItem>, options: RequestOptions? = null): UpdateContactTopicsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Contacts.contactsUpdateTopics(clientConfig, contactId, topics, options)
     }
+
 }

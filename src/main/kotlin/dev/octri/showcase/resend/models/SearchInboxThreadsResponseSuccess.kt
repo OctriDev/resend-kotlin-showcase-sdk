@@ -3,13 +3,20 @@
 
 package dev.octri.showcase.resend.models
 
-/** Typed representation of the `SearchInboxThreadsResponseSuccess` API schema. */
+/**
+ * Typed representation of the `SearchInboxThreadsResponseSuccess` API schema.
+ */
 data class SearchInboxThreadsResponseSuccess(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /** Indicates if there are more results available. */
+    /**
+     * Indicates if there are more results available.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean,
-    /** The matching threads, most recently active first. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<InboxThreadSearchResult>,
+    /**
+     * The matching threads, most recently active first.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<InboxThreadSearchResult>
 )

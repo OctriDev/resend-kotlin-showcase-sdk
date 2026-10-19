@@ -3,97 +3,48 @@
 
 package dev.octri.showcase.resend
 
+
 class SuppressionsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a suppression for an email address. Supply the required `email` value to add that
-     * address to the suppression list.
+     * Creates a suppression for an email address. Supply the required `email` value to add that address to the suppression list.
      */
     fun add(email: String, options: RequestOptions? = null): CreateSuppressionResponseSuccess {
-        return dev.octri.showcase.resend.methods.Suppressions.suppressionsAdd(
-            clientConfig,
-            email,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Suppressions.suppressionsAdd(clientConfig, email, options)
     }
 
     /**
-     * Lists suppressions, with an optional filter for their origin. Use `after` or `before` to
-     * navigate results and `limit` to control the number of suppressions returned per request.
+     * Lists suppressions, with an optional filter for their origin. Use `after` or `before` to navigate results and `limit` to control the number of suppressions returned per request.
      */
-    fun list(
-        origin: SuppressionsListParameterEnum? = null,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListSuppressionsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Suppressions.suppressionsList(
-            clientConfig,
-            origin,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun list(origin: SuppressionsListParameterEnum? = null, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListSuppressionsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Suppressions.suppressionsList(clientConfig, origin, limit, after, before, options)
     }
 
     /**
-     * Adds multiple email addresses to the suppression list in one request. Supply an `emails`
-     * array containing between 1 and 100 addresses.
+     * Adds multiple email addresses to the suppression list in one request. Supply an `emails` array containing between 1 and 100 addresses.
      */
-    fun batchAdd(
-        emails: List<String>,
-        options: RequestOptions? = null,
-    ): BatchAddSuppressionsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Suppressions.suppressionsBatchAdd(
-            clientConfig,
-            emails,
-            options,
-        )
+    fun batchAdd(emails: List<String>, options: RequestOptions? = null): BatchAddSuppressionsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Suppressions.suppressionsBatchAdd(clientConfig, emails, options)
     }
 
     /**
-     * Removes multiple suppressions from the suppression list in one request. Provide either an
-     * `emails` array or an `ids` array, but not both, with between 1 and 100 values in the selected
-     * array.
+     * Removes multiple suppressions from the suppression list in one request. Provide either an `emails` array or an `ids` array, but not both, with between 1 and 100 values in the selected array.
      */
-    fun batchRemove(
-        emails: List<String>? = null,
-        ids: List<String>? = null,
-        options: RequestOptions? = null,
-    ): BatchRemoveSuppressionsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Suppressions.suppressionsBatchRemove(
-            clientConfig,
-            emails,
-            ids,
-            options,
-        )
+    fun batchRemove(emails: List<String>? = null, ids: List<String>? = null, options: RequestOptions? = null): BatchRemoveSuppressionsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Suppressions.suppressionsBatchRemove(clientConfig, emails, ids, options)
     }
 
     /**
-     * Retrieves a single suppression by its identifier or email address. Use `suppression` to look
-     * up the matching suppression record.
+     * Retrieves a single suppression by its identifier or email address. Use `suppression` to look up the matching suppression record.
      */
     fun get(suppression: String, options: RequestOptions? = null): GetSuppressionResponseSuccess {
-        return dev.octri.showcase.resend.methods.Suppressions.suppressionsGet(
-            clientConfig,
-            suppression,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Suppressions.suppressionsGet(clientConfig, suppression, options)
     }
 
     /**
-     * Deletes a single suppression by its identifier or email address. Use `suppression` to select
-     * the suppression to remove.
+     * Deletes a single suppression by its identifier or email address. Use `suppression` to select the suppression to remove.
      */
-    fun remove(
-        suppression: String,
-        options: RequestOptions? = null,
-    ): RemoveSuppressionResponseSuccess {
-        return dev.octri.showcase.resend.methods.Suppressions.suppressionsRemove(
-            clientConfig,
-            suppression,
-            options,
-        )
+    fun remove(suppression: String, options: RequestOptions? = null): RemoveSuppressionResponseSuccess {
+        return dev.octri.showcase.resend.methods.Suppressions.suppressionsRemove(clientConfig, suppression, options)
     }
+
 }

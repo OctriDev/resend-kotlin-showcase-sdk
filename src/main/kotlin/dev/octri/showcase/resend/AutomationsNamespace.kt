@@ -3,165 +3,69 @@
 
 package dev.octri.showcase.resend
 
+
 class AutomationsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates an automation workflow from its name, steps, and connections. Supply at least one
-     * step, including a `trigger` step, and configure each step with its key, type, and
-     * configuration. A 201 response returns the new automation's identifier.
+     * Creates an automation workflow from its name, steps, and connections. Supply at least one step, including a `trigger` step, and configure each step with its key, type, and configuration. A 201 response returns the new automation's identifier.
      */
-    fun create(
-        name: String,
-        steps: List<AutomationStep>,
-        connections: List<AutomationConnection>,
-        status: CreateAutomationRequestStatusEnum? = null,
-        options: RequestOptions? = null,
-    ): CreateAutomationResponse {
-        return dev.octri.showcase.resend.methods.Automations.automationsCreate(
-            clientConfig,
-            name,
-            steps,
-            connections,
-            status,
-            options,
-        )
+    fun create(name: String, steps: List<AutomationStep>, connections: List<AutomationConnection>, status: CreateAutomationRequestStatusEnum? = null, options: RequestOptions? = null): CreateAutomationResponse {
+        return dev.octri.showcase.resend.methods.Automations.automationsCreate(clientConfig, name, steps, connections, status, options)
     }
 
     /**
-     * Lists automations, with optional filtering by status and cursor-based pagination. Use
-     * `status` to select enabled or disabled automations, and use `after` or `before` to navigate
-     * results.
+     * Lists automations, with optional filtering by status and cursor-based pagination. Use `status` to select enabled or disabled automations, and use `after` or `before` to navigate results.
      */
-    fun list(
-        status: AutomationsListParameterEnum? = null,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListAutomationsResponse {
-        return dev.octri.showcase.resend.methods.Automations.automationsList(
-            clientConfig,
-            status,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun list(status: AutomationsListParameterEnum? = null, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListAutomationsResponse {
+        return dev.octri.showcase.resend.methods.Automations.automationsList(clientConfig, status, limit, after, before, options)
     }
 
     /**
-     * Retrieves a single automation and its active workflow version. Use the automation details to
-     * inspect its status, timestamps, steps, and connections.
+     * Retrieves a single automation and its active workflow version. Use the automation details to inspect its status, timestamps, steps, and connections.
      */
     fun get(automationId: String, options: RequestOptions? = null): Automation {
-        return dev.octri.showcase.resend.methods.Automations.automationsGet(
-            clientConfig,
-            automationId,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Automations.automationsGet(clientConfig, automationId, options)
     }
 
     /**
-     * Updates an automation's name, status, or workflow graph. Supply at least one of `name`,
-     * `status`, or both `steps` and `connections`; workflow graph updates require both arrays
-     * together. Provide between 1 and 150 steps when updating the graph.
+     * Updates an automation's name, status, or workflow graph. Supply at least one of `name`, `status`, or both `steps` and `connections`; workflow graph updates require both arrays together. Provide between 1 and 150 steps when updating the graph.
      */
-    fun update(
-        automationId: String,
-        name: String? = null,
-        status: PatchAutomationRequestStatusEnum? = null,
-        steps: List<AutomationStep>? = null,
-        connections: List<AutomationConnection>? = null,
-        options: RequestOptions? = null,
-    ): PatchAutomationResponse {
-        return dev.octri.showcase.resend.methods.Automations.automationsUpdate(
-            clientConfig,
-            automationId,
-            name,
-            status,
-            steps,
-            connections,
-            options,
-        )
+    fun update(automationId: String, name: String? = null, status: PatchAutomationRequestStatusEnum? = null, steps: List<AutomationStep>? = null, connections: List<AutomationConnection>? = null, options: RequestOptions? = null): PatchAutomationResponse {
+        return dev.octri.showcase.resend.methods.Automations.automationsUpdate(clientConfig, automationId, name, status, steps, connections, options)
     }
 
     /**
-     * Deletes an automation by its identifier. Use this operation to remove an automation you no
-     * longer need; the response indicates whether deletion succeeded.
+     * Deletes an automation by its identifier. Use this operation to remove an automation you no longer need; the response indicates whether deletion succeeded.
      */
     fun remove(automationId: String, options: RequestOptions? = null): DeleteAutomationResponse {
-        return dev.octri.showcase.resend.methods.Automations.automationsRemove(
-            clientConfig,
-            automationId,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Automations.automationsRemove(clientConfig, automationId, options)
     }
 
     /**
-     * Duplicates an existing automation to create a separate automation. Supply the source
-     * automation's identifier to create the duplicate, then use the returned identifier to access
-     * it.
+     * Duplicates an existing automation to create a separate automation. Supply the source automation's identifier to create the duplicate, then use the returned identifier to access it.
      */
-    fun duplicate(
-        automationId: String,
-        options: RequestOptions? = null,
-    ): DuplicateAutomationResponse {
-        return dev.octri.showcase.resend.methods.Automations.automationsDuplicate(
-            clientConfig,
-            automationId,
-            options,
-        )
+    fun duplicate(automationId: String, options: RequestOptions? = null): DuplicateAutomationResponse {
+        return dev.octri.showcase.resend.methods.Automations.automationsDuplicate(clientConfig, automationId, options)
     }
 
     /**
-     * Stops an automation by its identifier. Use this operation when you want the automation to
-     * stop running; the response includes its status after stopping.
+     * Stops an automation by its identifier. Use this operation when you want the automation to stop running; the response includes its status after stopping.
      */
     fun stop(automationId: String, options: RequestOptions? = null): StopAutomationResponse {
-        return dev.octri.showcase.resend.methods.Automations.automationsStop(
-            clientConfig,
-            automationId,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Automations.automationsStop(clientConfig, automationId, options)
     }
 
     /**
-     * Lists runs for a specific automation, with optional filtering by run status and cursor-based
-     * pagination. Use `status` to filter by run state, and use `after` or `before` to navigate the
-     * results.
+     * Lists runs for a specific automation, with optional filtering by run status and cursor-based pagination. Use `status` to filter by run state, and use `after` or `before` to navigate the results.
      */
-    fun listRuns(
-        automationId: String,
-        status: String? = null,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListAutomationRunsResponse {
-        return dev.octri.showcase.resend.methods.Automations.automationsListRuns(
-            clientConfig,
-            automationId,
-            status,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun listRuns(automationId: String, status: String? = null, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListAutomationRunsResponse {
+        return dev.octri.showcase.resend.methods.Automations.automationsListRuns(clientConfig, automationId, status, limit, after, before, options)
     }
 
     /**
-     * Retrieves a single run for a specific automation. Use the run details to inspect its status,
-     * timestamps, and step executions, which are returned in workflow graph order.
+     * Retrieves a single run for a specific automation. Use the run details to inspect its status, timestamps, and step executions, which are returned in workflow graph order.
      */
-    fun getRun(
-        automationId: String,
-        runId: String,
-        options: RequestOptions? = null,
-    ): AutomationRun {
-        return dev.octri.showcase.resend.methods.Automations.automationsGetRun(
-            clientConfig,
-            automationId,
-            runId,
-            options,
-        )
+    fun getRun(automationId: String, runId: String, options: RequestOptions? = null): AutomationRun {
+        return dev.octri.showcase.resend.methods.Automations.automationsGetRun(clientConfig, automationId, runId, options)
     }
+
 }

@@ -3,161 +3,80 @@
 
 package dev.octri.showcase.resend
 
+
 class BroadcastsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a broadcast with sender, subject, and segment details. Include `from`, `subject`, and
-     * `segment_id`; optionally provide message content, reply addresses, a topic, or sending and
-     * scheduling settings.
+     * Creates a broadcast with sender, subject, and segment details. Include `from`, `subject`, and `segment_id`; optionally provide message content, reply addresses, a topic, or sending and scheduling settings.
      */
-    fun create(
-        request: dev.octri.showcase.resend.methods.Broadcasts.BroadcastsCreateRequest,
-        options: RequestOptions? = null,
-    ): CreateBroadcastResponseSuccess {
-        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsCreate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun create(request: dev.octri.showcase.resend.methods.Broadcasts.BroadcastsCreateRequest, options: RequestOptions? = null): CreateBroadcastResponseSuccess {
+        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsCreate(clientConfig, request, options)
     }
 
     /**
-     * Lists broadcasts and their delivery or scheduling information. Use `after` or `before` to
-     * navigate results by cursor, and `limit` to control the number of items returned.
+     * Lists broadcasts and their delivery or scheduling information. Use `after` or `before` to navigate results by cursor, and `limit` to control the number of items returned.
      */
-    fun list(
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListBroadcastsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsList(
-            clientConfig,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun list(limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListBroadcastsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsList(clientConfig, limit, after, before, options)
     }
 
     /**
-     * Deletes an existing broadcast that is in draft status. Use this operation to remove a draft
-     * broadcast that you no longer need.
+     * Deletes an existing broadcast that is in draft status. Use this operation to remove a draft broadcast that you no longer need.
      */
     fun remove(id: String, options: RequestOptions? = null): RemoveBroadcastResponseSuccess {
-        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsRemove(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsRemove(clientConfig, id, options)
     }
 
     /**
-     * Retrieves a single broadcast by its identifier. Use this endpoint to inspect the broadcast's
-     * audience, sender, content, and delivery status.
+     * Retrieves a single broadcast by its identifier. Use this endpoint to inspect the broadcast's audience, sender, content, and delivery status.
      */
     fun get(id: String, options: RequestOptions? = null): GetBroadcastResponseSuccess {
         return dev.octri.showcase.resend.methods.Broadcasts.broadcastsGet(clientConfig, id, options)
     }
 
     /**
-     * Updates the name, audience, sender, content, or topic of an existing broadcast. Supply only
-     * the fields you want to change; use `segment_id` instead of the deprecated `audience_id`
-     * field.
+     * Updates the name, audience, sender, content, or topic of an existing broadcast. Supply only the fields you want to change; use `segment_id` instead of the deprecated `audience_id` field.
      */
-    fun update(
-        request: dev.octri.showcase.resend.methods.Broadcasts.BroadcastsUpdateRequest,
-        options: RequestOptions? = null,
-    ): UpdateBroadcastResponseSuccess {
-        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsUpdate(
-            clientConfig,
-            request,
-            options,
-        )
+    fun update(request: dev.octri.showcase.resend.methods.Broadcasts.BroadcastsUpdateRequest, options: RequestOptions? = null): UpdateBroadcastResponseSuccess {
+        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsUpdate(clientConfig, request, options)
     }
 
     /**
-     * Submits a broadcast for sending or schedules it for later delivery. Provide `scheduled_at` in
-     * ISO 8601 format when you want the broadcast sent at a specific time; omit it to send without
-     * scheduling.
+     * Submits a broadcast for sending or schedules it for later delivery. Provide `scheduled_at` in ISO 8601 format when you want the broadcast sent at a specific time; omit it to send without scheduling.
      */
-    fun send(
-        id: String,
-        scheduledAt: String? = null,
-        options: RequestOptions? = null,
-    ): SendBroadcastResponseSuccess {
-        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsSend(
-            clientConfig,
-            id,
-            scheduledAt,
-            options,
-        )
+    fun send(id: String, scheduledAt: String? = null, options: RequestOptions? = null): SendBroadcastResponseSuccess {
+        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsSend(clientConfig, id, scheduledAt, options)
     }
 
     /**
-     * Cancels a queued or scheduled broadcast. Cancelling a queued broadcast stops further
-     * delivery, but does not affect emails that have already been sent.
+     * Cancels a queued or scheduled broadcast. Cancelling a queued broadcast stops further delivery, but does not affect emails that have already been sent.
      *
-     * Cancels a broadcast that is queued or scheduled. Canceling a queued broadcast stops it
-     * mid-send; emails already sent are not affected, but no further emails will go out.
+     * Cancels a broadcast that is queued or scheduled. Canceling a queued broadcast stops it mid-send; emails already sent are not affected, but no further emails will go out.
      */
     fun cancel(id: String, options: RequestOptions? = null): CancelBroadcastResponseSuccess {
-        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsCancel(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsCancel(clientConfig, id, options)
     }
 
     /**
-     * Creates a new draft broadcast with the same segment, topic, sender, subject, reply-to,
-     * preview text, and content as the source. The copy is named after the source with " (copy)"
-     * appended, truncated to 70 characters.
+     * Creates a new draft broadcast with the same segment, topic, sender, subject, reply-to, preview text, and content as the source. The copy is named after the source with " (copy)" appended, truncated to 70 characters.
      */
     fun duplicate(id: String, options: RequestOptions? = null): DuplicateBroadcastResponseSuccess {
-        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsDuplicate(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsDuplicate(clientConfig, id, options)
     }
 
     /**
-     * Lists recipients of a broadcast filtered by recipient event type, such as opened, clicked, or
-     * bounced. Use `type` to select the event and optionally use `email`, `bounce_type`, or cursor
-     * parameters to narrow the results.
+     * Lists recipients of a broadcast filtered by recipient event type, such as opened, clicked, or bounced. Use `type` to select the event and optionally use `email`, `bounce_type`, or cursor parameters to narrow the results.
      *
-     * Retrieve the recipients of a broadcast for a given event type, such as who opened, clicked,
-     * or bounced.
+     * Retrieve the recipients of a broadcast for a given event type, such as who opened, clicked, or bounced.
      */
-    fun listRecipients(
-        request: dev.octri.showcase.resend.methods.Broadcasts.ListRecipientsRequest,
-        options: RequestOptions? = null,
-    ): ListBroadcastRecipientsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Broadcasts.listRecipients(
-            clientConfig,
-            request,
-            options,
-        )
+    fun listRecipients(request: dev.octri.showcase.resend.methods.Broadcasts.ListRecipientsRequest, options: RequestOptions? = null): ListBroadcastRecipientsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Broadcasts.listRecipients(clientConfig, request, options)
     }
 
     /**
-     * Lists the links clicked in a broadcast and their click counts. Use the cursor parameters to
-     * retrieve results before or after a position in the list.
+     * Lists the links clicked in a broadcast and their click counts. Use the cursor parameters to retrieve results before or after a position in the list.
      */
-    fun listClickedLinks(
-        id: String,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListBroadcastClickedLinksResponseSuccess {
-        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsListClickedLinks(
-            clientConfig,
-            id,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun listClickedLinks(id: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListBroadcastClickedLinksResponseSuccess {
+        return dev.octri.showcase.resend.methods.Broadcasts.broadcastsListClickedLinks(clientConfig, id, limit, after, before, options)
     }
+
 }
