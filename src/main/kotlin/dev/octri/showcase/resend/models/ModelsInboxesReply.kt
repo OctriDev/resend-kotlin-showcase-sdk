@@ -13,13 +13,13 @@ data class ReplyInboxThreadEmailOptions(
      * recipients. Each address is `email@example.com` or `Name <email@example.com>`. An address
      * that is not valid returns a 422.
      */
-    val cc: Any? = null,
+    val cc: List<String>? = null,
     /**
      * BCC recipient email address. For multiple addresses, send as an array of strings. BCC
      * recipients of the original message are never copied. Each address is `email@example.com` or
      * `Name <email@example.com>`. An address that is not valid returns a 422.
      */
-    val bcc: Any? = null,
+    val bcc: List<String>? = null,
     /** The HTML body of the reply. */
     val html: String? = null,
     /** The plain-text body of the reply. */

@@ -30,10 +30,11 @@ dependencies {
 
 ## Quickstart
 
-The example calls `client.domains.get` (GET `/domains/{domain_id}`) with example values for its required arguments.
+The example calls `client.emails.send` (POST `/emails`) with example values for its required arguments.
 
 ```kotlin
 import dev.octri.showcase.resend.*
+import dev.octri.showcase.resend.methods.Emails
 
 fun main() {
     val config = ClientConfig(
@@ -42,7 +43,7 @@ fun main() {
         auth = ClientAuthConfig(bearerAuth = System.getenv("API_TOKEN")),
     )
     val client = Resend(config)
-    val result = client.domains.get(domainId = "domain-1")
+    val result = client.emails.send(Emails.EmailsSendRequest(from = "user@example.com", to = listOf("user@example.com"), subject = "subject"))
     println(result)
 }
 ```

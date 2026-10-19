@@ -11,19 +11,19 @@ data class ForwardInboxThreadEmailOptions(
      * `email@example.com` or `Name <email@example.com>`. An address that is not valid returns
      * a 422.
      */
-    val to: Any,
+    val to: List<String>,
     /**
      * CC recipient email address. For multiple addresses, send as an array of strings. Counts
      * toward the 50-recipient limit. Each address is `email@example.com` or `Name
      * <email@example.com>`. An address that is not valid returns a 422.
      */
-    val cc: Any? = null,
+    val cc: List<String>? = null,
     /**
      * BCC recipient email address. For multiple addresses, send as an array of strings. Counts
      * toward the 50-recipient limit. Each address is `email@example.com` or `Name
      * <email@example.com>`. An address that is not valid returns a 422.
      */
-    val bcc: Any? = null,
+    val bcc: List<String>? = null,
     /** An HTML note sent above the quoted original. */
     val html: String? = null,
     /** A plain-text note sent above the quoted original. */

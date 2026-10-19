@@ -7291,8 +7291,8 @@
             {
               "name": "to",
               "required": true,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
@@ -7305,22 +7305,22 @@
             {
               "name": "bcc",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
               "name": "cc",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
               "name": "reply_to",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
@@ -7420,8 +7420,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -7432,8 +7432,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -7491,8 +7491,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -7563,8 +7563,8 @@
           "in": "body",
           "required": true,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -7601,8 +7601,8 @@
           "in": "body",
           "required": true,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -7636,8 +7636,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -7648,8 +7648,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -7660,8 +7660,8 @@
           "in": "body",
           "required": false,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -9373,22 +9373,22 @@
             {
               "name": "to",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
               "name": "cc",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
               "name": "bcc",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
@@ -9494,8 +9494,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -9506,8 +9506,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -9609,8 +9609,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -9645,8 +9645,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -9657,8 +9657,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -9669,8 +9669,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -9947,22 +9947,22 @@
             {
               "name": "to",
               "required": true,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
               "name": "cc",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
               "name": "bcc",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
@@ -10044,8 +10044,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -10056,8 +10056,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -10163,8 +10163,8 @@
           "in": "body",
           "required": true,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -10210,8 +10210,8 @@
           "in": "body",
           "required": true,
           "nullable": false,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -10233,8 +10233,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -10245,8 +10245,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -11780,15 +11780,15 @@
             {
               "name": "cc",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
               "name": "bcc",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
@@ -11877,8 +11877,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -11889,8 +11889,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -12054,8 +12054,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -12066,8 +12066,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -13069,22 +13069,22 @@
             {
               "name": "to",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
               "name": "cc",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
               "name": "bcc",
               "required": false,
-              "repeated": false,
-              "partKind": "json",
+              "repeated": true,
+              "partKind": "scalar",
               "contentType": null
             },
             {
@@ -13159,8 +13159,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -13171,8 +13171,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -13250,8 +13250,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -13286,8 +13286,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -13298,8 +13298,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -13310,8 +13310,8 @@
           "in": "body",
           "required": false,
           "nullable": true,
-          "type": "oneOf",
-          "wireType": null,
+          "type": "array",
+          "wireType": "array",
           "declaredValue": null,
           "mediaTypes": [
             "application/json"
@@ -21350,78 +21350,40 @@
         {
           "name": "bcc",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": true,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "cc",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": true,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "html",
@@ -21481,40 +21443,21 @@
         {
           "name": "to",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": true,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         }
       ],
       "values": []
@@ -25093,78 +25036,40 @@
         {
           "name": "bcc",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": true,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "cc",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": true,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "headers",
@@ -25221,40 +25126,21 @@
         {
           "name": "to",
           "required": true,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": false,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         }
       ],
       "values": []
@@ -34070,78 +33956,40 @@
         {
           "name": "bcc",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": true,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "cc",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": true,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "headers",
@@ -34606,78 +34454,40 @@
         {
           "name": "bcc",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": false,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "cc",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": false,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "from",
@@ -34715,40 +34525,21 @@
         {
           "name": "reply_to",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": false,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "scheduled_at",
@@ -34816,40 +34607,21 @@
         {
           "name": "to",
           "required": true,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": false,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "topic_id",
@@ -37025,78 +36797,40 @@
         {
           "name": "bcc",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": true,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "cc",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": true,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         },
         {
           "name": "html",
@@ -37134,40 +36868,21 @@
         {
           "name": "to",
           "required": false,
-          "type": "oneOf",
+          "type": "array",
           "format": null,
           "ref": null,
           "nullable": true,
-          "items": null,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
-          "variants": [
-            {
-              "type": "string",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": null,
-              "mapValue": null,
-              "variants": null
-            },
-            {
-              "type": "array",
-              "format": null,
-              "ref": null,
-              "nullable": false,
-              "items": {
-                "type": "string",
-                "format": null,
-                "ref": null,
-                "nullable": false,
-                "items": null,
-                "mapValue": null,
-                "variants": null
-              },
-              "mapValue": null,
-              "variants": null
-            }
-          ]
+          "variants": null
         }
       ],
       "values": []

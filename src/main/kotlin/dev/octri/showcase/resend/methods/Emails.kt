@@ -29,12 +29,12 @@ object Emails {
     /** Parameters for [emailsSend]. */
     data class EmailsSendRequest(
         val from: String,
-        val to: Any,
+        val to: List<String>,
         val subject: String,
         val idempotencyKey: String? = null,
-        val bcc: Any? = null,
-        val cc: Any? = null,
-        val replyTo: Any? = null,
+        val bcc: List<String>? = null,
+        val cc: List<String>? = null,
+        val replyTo: List<String>? = null,
         val html: String? = null,
         val text: String? = null,
         val template: EmailTemplateInput? = null,
@@ -99,6 +99,8 @@ object Emails {
     }
 
     private fun validateEmailsSendRequest(request: EmailsSendRequest) {
+        Validation.validateItems("to", request.to, Validation.LengthOpts(min = 1, max = 50))
+
         if (request.idempotencyKey != null) {
             Validation.validateLength(
                 "Idempotency-Key",

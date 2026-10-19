@@ -26,12 +26,20 @@
       "mediaType": "application/json",
       "kind": "json",
       "value": {
-        "from": "from",
-        "to": "to",
+        "from": "user@example.com",
+        "to": [
+          "to"
+        ],
         "subject": "subject",
-        "bcc": "bcc",
-        "cc": "cc",
-        "reply_to": "reply_to",
+        "bcc": [
+          "bcc"
+        ],
+        "cc": [
+          "cc"
+        ],
+        "reply_to": [
+          "reply_to"
+        ],
         "html": "html",
         "text": "text",
         "template": {
@@ -2424,8 +2432,12 @@
         "to": [
           "ada@example.org"
         ],
-        "cc": "cc",
-        "bcc": "bcc",
+        "cc": [
+          "cc"
+        ],
+        "bcc": [
+          "bcc"
+        ],
         "subject": "Refund for order 1041",
         "html": "<p>Refund issued for order 1041.</p>",
         "text": "Refund issued for order 1041.",
