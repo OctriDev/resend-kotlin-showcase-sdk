@@ -28,12 +28,20 @@
           "idempotency-key": "Idempotency-Key"
         },
         "body": {
-          "from": "from",
-          "to": "to",
+          "from": "user@example.com",
+          "to": [
+            "to"
+          ],
           "subject": "subject",
-          "bcc": "bcc",
-          "cc": "cc",
-          "reply_to": "reply_to",
+          "bcc": [
+            "bcc"
+          ],
+          "cc": [
+            "cc"
+          ],
+          "reply_to": [
+            "reply_to"
+          ],
           "html": "html",
           "text": "text",
           "template": {
@@ -79,7 +87,7 @@
           "idempotency-key": "Idempotency-Key",
           "content-type": "application/json"
         },
-        "bodyText": "{\"from\":\"from\",\"to\":\"to\",\"subject\":\"subject\",\"bcc\":\"bcc\",\"cc\":\"cc\",\"reply_to\":\"reply_to\",\"html\":\"html\",\"text\":\"text\",\"template\":{\"id\":\"id-1\",\"variables\":{\"variableName\":\"Sign up now\",\"variableName2\":123}},\"headers\":{},\"scheduled_at\":\"2024-01-01T00:00:00Z\",\"attachments\":[{\"content\":\"ZXhhbXBsZQ==\",\"filename\":\"Example Name\",\"path\":\"path\",\"content_type\":\"content_type\",\"content_id\":\"content-1\"}],\"tags\":[{\"name\":\"Example Name\",\"value\":\"value\"}],\"topic_id\":\"topic-1\"}",
+        "bodyText": "{\"from\":\"user@example.com\",\"to\":[\"to\"],\"subject\":\"subject\",\"bcc\":[\"bcc\"],\"cc\":[\"cc\"],\"reply_to\":[\"reply_to\"],\"html\":\"html\",\"text\":\"text\",\"template\":{\"id\":\"id-1\",\"variables\":{\"variableName\":\"Sign up now\",\"variableName2\":123}},\"headers\":{},\"scheduled_at\":\"2024-01-01T00:00:00Z\",\"attachments\":[{\"content\":\"ZXhhbXBsZQ==\",\"filename\":\"Example Name\",\"path\":\"path\",\"content_type\":\"content_type\",\"content_id\":\"content-1\"}],\"tags\":[{\"name\":\"Example Name\",\"value\":\"value\"}],\"topic_id\":\"topic-1\"}",
         "multipartFields": null
       },
       "response": {
@@ -2144,8 +2152,12 @@
           "to": [
             "ada@example.org"
           ],
-          "cc": "cc",
-          "bcc": "bcc",
+          "cc": [
+            "cc"
+          ],
+          "bcc": [
+            "bcc"
+          ],
           "subject": "Refund for order 1041",
           "html": "<p>Refund issued for order 1041.</p>",
           "text": "Refund issued for order 1041.",
@@ -2176,7 +2188,7 @@
           "idempotency-key": "x",
           "content-type": "application/json"
         },
-        "bodyText": "{\"to\":[\"ada@example.org\"],\"cc\":\"cc\",\"bcc\":\"bcc\",\"subject\":\"Refund for order 1041\",\"html\":\"<p>Refund issued for order 1041.</p>\",\"text\":\"Refund issued for order 1041.\",\"attachments\":[{\"content\":\"aGVsbG8gZTJl\",\"filename\":\"receipt.pdf\",\"content_type\":\"application/pdf\"}],\"thread_id\":\"4d8e2a1c-9b3f-4c6d-8a21-3e5f7c9c0d12\",\"reply_to_email_id\":\"5b1a9f47-2c8d-4e6f-9a03-1d2e3f4a5b60\"}",
+        "bodyText": "{\"to\":[\"ada@example.org\"],\"cc\":[\"cc\"],\"bcc\":[\"bcc\"],\"subject\":\"Refund for order 1041\",\"html\":\"<p>Refund issued for order 1041.</p>\",\"text\":\"Refund issued for order 1041.\",\"attachments\":[{\"content\":\"aGVsbG8gZTJl\",\"filename\":\"receipt.pdf\",\"content_type\":\"application/pdf\"}],\"thread_id\":\"4d8e2a1c-9b3f-4c6d-8a21-3e5f7c9c0d12\",\"reply_to_email_id\":\"5b1a9f47-2c8d-4e6f-9a03-1d2e3f4a5b60\"}",
         "multipartFields": null
       },
       "response": {
@@ -2259,12 +2271,20 @@
           "idempotency-key": "Idempotency-Key"
         },
         "body": {
-          "from": "from",
-          "to": "to",
+          "from": "user@example.com",
+          "to": [
+            "to"
+          ],
           "subject": "subject",
-          "bcc": "bcc",
-          "cc": "cc",
-          "reply_to": "reply_to",
+          "bcc": [
+            "bcc"
+          ],
+          "cc": [
+            "cc"
+          ],
+          "reply_to": [
+            "reply_to"
+          ],
           "html": "html",
           "text": "text",
           "template": {
@@ -2310,7 +2330,7 @@
           "idempotency-key": "Idempotency-Key",
           "content-type": "application/json"
         },
-        "bodyText": "{\"from\":\"from\",\"to\":\"to\",\"subject\":\"subject\",\"bcc\":\"bcc\",\"cc\":\"cc\",\"reply_to\":\"reply_to\",\"html\":\"html\",\"text\":\"text\",\"template\":{\"id\":\"id-1\",\"variables\":{\"variableName\":\"Sign up now\",\"variableName2\":123}},\"headers\":{},\"scheduled_at\":\"2024-01-01T00:00:00Z\",\"attachments\":[{\"content\":\"ZXhhbXBsZQ==\",\"filename\":\"Example Name\",\"path\":\"path\",\"content_type\":\"content_type\",\"content_id\":\"content-1\"}],\"tags\":[{\"name\":\"Example Name\",\"value\":\"value\"}],\"topic_id\":\"topic-1\"}",
+        "bodyText": "{\"from\":\"user@example.com\",\"to\":[\"to\"],\"subject\":\"subject\",\"bcc\":[\"bcc\"],\"cc\":[\"cc\"],\"reply_to\":[\"reply_to\"],\"html\":\"html\",\"text\":\"text\",\"template\":{\"id\":\"id-1\",\"variables\":{\"variableName\":\"Sign up now\",\"variableName2\":123}},\"headers\":{},\"scheduled_at\":\"2024-01-01T00:00:00Z\",\"attachments\":[{\"content\":\"ZXhhbXBsZQ==\",\"filename\":\"Example Name\",\"path\":\"path\",\"content_type\":\"content_type\",\"content_id\":\"content-1\"}],\"tags\":[{\"name\":\"Example Name\",\"value\":\"value\"}],\"topic_id\":\"topic-1\"}",
         "multipartFields": null
       },
       "response": {
@@ -2397,12 +2417,20 @@
           "idempotency-key": "Idempotency-Key"
         },
         "body": {
-          "from": "from",
-          "to": "to",
+          "from": "user@example.com",
+          "to": [
+            "to"
+          ],
           "subject": "subject",
-          "bcc": "bcc",
-          "cc": "cc",
-          "reply_to": "reply_to",
+          "bcc": [
+            "bcc"
+          ],
+          "cc": [
+            "cc"
+          ],
+          "reply_to": [
+            "reply_to"
+          ],
           "html": "html",
           "text": "text",
           "template": {
@@ -2448,7 +2476,7 @@
           "idempotency-key": "Idempotency-Key",
           "content-type": "application/json"
         },
-        "bodyText": "{\"from\":\"from\",\"to\":\"to\",\"subject\":\"subject\",\"bcc\":\"bcc\",\"cc\":\"cc\",\"reply_to\":\"reply_to\",\"html\":\"html\",\"text\":\"text\",\"template\":{\"id\":\"id-1\",\"variables\":{\"variableName\":\"Sign up now\",\"variableName2\":123}},\"headers\":{},\"scheduled_at\":\"2024-01-01T00:00:00Z\",\"attachments\":[{\"content\":\"ZXhhbXBsZQ==\",\"filename\":\"Example Name\",\"path\":\"path\",\"content_type\":\"content_type\",\"content_id\":\"content-1\"}],\"tags\":[{\"name\":\"Example Name\",\"value\":\"value\"}],\"topic_id\":\"topic-1\"}",
+        "bodyText": "{\"from\":\"user@example.com\",\"to\":[\"to\"],\"subject\":\"subject\",\"bcc\":[\"bcc\"],\"cc\":[\"cc\"],\"reply_to\":[\"reply_to\"],\"html\":\"html\",\"text\":\"text\",\"template\":{\"id\":\"id-1\",\"variables\":{\"variableName\":\"Sign up now\",\"variableName2\":123}},\"headers\":{},\"scheduled_at\":\"2024-01-01T00:00:00Z\",\"attachments\":[{\"content\":\"ZXhhbXBsZQ==\",\"filename\":\"Example Name\",\"path\":\"path\",\"content_type\":\"content_type\",\"content_id\":\"content-1\"}],\"tags\":[{\"name\":\"Example Name\",\"value\":\"value\"}],\"topic_id\":\"topic-1\"}",
         "multipartFields": null
       },
       "response": {

@@ -1059,6 +1059,13 @@ internal object InboxesReplyThreadEmailOperation {
     private fun validateInboxesReplyThreadEmailRequest(
         request: Inboxes.InboxesReplyThreadEmailRequest
     ) {
+        validateInboxesReplyThreadEmailRequestPart1(request)
+        validateInboxesReplyThreadEmailRequestPart2(request)
+    }
+
+    private fun validateInboxesReplyThreadEmailRequestPart1(
+        request: Inboxes.InboxesReplyThreadEmailRequest
+    ) {
         Validation.validateUuid("inbox_id", request.inboxId)
 
         Validation.validateUuid("thread_id", request.threadId)
@@ -1071,6 +1078,20 @@ internal object InboxesReplyThreadEmailOperation {
                 request.idempotencyKey,
                 Validation.LengthOpts(min = 1, max = 256),
             )
+        }
+
+        val ccValue = request.cc?.getOrNull()
+        if (ccValue != null) {
+            Validation.validateItems("cc", ccValue, Validation.LengthOpts(max = 49))
+        }
+    }
+
+    private fun validateInboxesReplyThreadEmailRequestPart2(
+        request: Inboxes.InboxesReplyThreadEmailRequest
+    ) {
+        val bccValue = request.bcc?.getOrNull()
+        if (bccValue != null) {
+            Validation.validateItems("bcc", bccValue, Validation.LengthOpts(max = 49))
         }
 
         if (request.subject != null) {
@@ -1173,11 +1194,20 @@ internal object InboxesForwardThreadEmailOperation {
     private fun validateInboxesForwardThreadEmailRequest(
         request: Inboxes.InboxesForwardThreadEmailRequest
     ) {
+        validateInboxesForwardThreadEmailRequestPart1(request)
+        validateInboxesForwardThreadEmailRequestPart2(request)
+    }
+
+    private fun validateInboxesForwardThreadEmailRequestPart1(
+        request: Inboxes.InboxesForwardThreadEmailRequest
+    ) {
         Validation.validateUuid("inbox_id", request.inboxId)
 
         Validation.validateUuid("thread_id", request.threadId)
 
         Validation.validateUuid("email_id", request.emailId)
+
+        Validation.validateItems("to", request.to, Validation.LengthOpts(min = 1, max = 50))
 
         if (request.idempotencyKey != null) {
             Validation.validateLength(
@@ -1185,6 +1215,20 @@ internal object InboxesForwardThreadEmailOperation {
                 request.idempotencyKey,
                 Validation.LengthOpts(min = 1, max = 256),
             )
+        }
+    }
+
+    private fun validateInboxesForwardThreadEmailRequestPart2(
+        request: Inboxes.InboxesForwardThreadEmailRequest
+    ) {
+        val ccValue = request.cc?.getOrNull()
+        if (ccValue != null) {
+            Validation.validateItems("cc", ccValue, Validation.LengthOpts(max = 50))
+        }
+
+        val bccValue = request.bcc?.getOrNull()
+        if (bccValue != null) {
+            Validation.validateItems("bcc", bccValue, Validation.LengthOpts(max = 50))
         }
 
         if (request.subject != null) {
