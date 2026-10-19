@@ -196,7 +196,7 @@ data class SendEmailRequest(
     /**
      * Recipient email address. For multiple addresses, send as an array of strings. Max 50.
      */
-    val to: Any,
+    val to: List<String>,
     /**
      * Email subject.
      */
@@ -204,15 +204,15 @@ data class SendEmailRequest(
     /**
      * Bcc recipient email address. For multiple addresses, send as an array of strings.
      */
-    val bcc: Any? = null,
+    val bcc: List<String>? = null,
     /**
      * Cc recipient email address. For multiple addresses, send as an array of strings.
      */
-    val cc: Any? = null,
+    val cc: List<String>? = null,
     /**
      * Reply-to email address. For multiple addresses, send as an array of strings.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_to") val replyTo: Any? = null,
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_to") val replyTo: List<String>? = null,
     /**
      * The HTML version of the message.
      */

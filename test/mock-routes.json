@@ -90,20 +90,20 @@
         "fields": [
           {
             "wireName": "to",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
             "wireName": "cc",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
             "wireName": "bcc",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
@@ -275,14 +275,14 @@
         "fields": [
           {
             "wireName": "cc",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
             "wireName": "bcc",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
@@ -2334,12 +2334,20 @@
         "fields": [],
         "example": [
           {
-            "from": "from",
-            "to": "to",
+            "from": "user@example.com",
+            "to": [
+              "to"
+            ],
             "subject": "subject",
-            "bcc": "bcc",
-            "cc": "cc",
-            "reply_to": "reply_to",
+            "bcc": [
+              "bcc"
+            ],
+            "cc": [
+              "cc"
+            ],
+            "reply_to": [
+              "reply_to"
+            ],
             "html": "html",
             "text": "text",
             "template": {
@@ -4545,20 +4553,20 @@
         "fields": [
           {
             "wireName": "to",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
             "wireName": "cc",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
             "wireName": "bcc",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
@@ -4602,8 +4610,12 @@
           "to": [
             "ada@example.org"
           ],
-          "cc": "cc",
-          "bcc": "bcc",
+          "cc": [
+            "cc"
+          ],
+          "bcc": [
+            "bcc"
+          ],
           "subject": "Refund for order 1041",
           "html": "<p>Refund issued for order 1041.</p>",
           "text": "Refund issued for order 1041.",
@@ -6188,20 +6200,20 @@
         "fields": [
           {
             "wireName": "to",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
             "wireName": "cc",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
             "wireName": "bcc",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
@@ -6233,8 +6245,12 @@
           "to": [
             "ada@example.org"
           ],
-          "cc": "cc",
-          "bcc": "bcc",
+          "cc": [
+            "cc"
+          ],
+          "bcc": [
+            "bcc"
+          ],
           "subject": "Refund issued for order 1041",
           "html": "html",
           "text": "text",
@@ -7210,7 +7226,7 @@
           "name": "Example Name",
           "segment_id": "segment-1",
           "audience_id": "audience-1",
-          "from": "from",
+          "from": "user@example.com",
           "subject": "subject",
           "reply_to": [
             "reply_to"
@@ -7538,7 +7554,7 @@
         "example": {
           "name": "Example Name",
           "alias": "alias",
-          "from": "from",
+          "from": "user@example.com",
           "subject": "subject",
           "reply_to": [
             "reply_to"
@@ -8871,8 +8887,8 @@
           },
           {
             "wireName": "to",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
@@ -8883,20 +8899,20 @@
           },
           {
             "wireName": "bcc",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
             "wireName": "cc",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
             "wireName": "reply_to",
-            "repeated": false,
-            "partKind": "json",
+            "repeated": true,
+            "partKind": "scalar",
             "contentType": null
           },
           {
@@ -8949,12 +8965,20 @@
           }
         ],
         "example": {
-          "from": "from",
-          "to": "to",
+          "from": "user@example.com",
+          "to": [
+            "to"
+          ],
           "subject": "subject",
-          "bcc": "bcc",
-          "cc": "cc",
-          "reply_to": "reply_to",
+          "bcc": [
+            "bcc"
+          ],
+          "cc": [
+            "cc"
+          ],
+          "reply_to": [
+            "reply_to"
+          ],
           "html": "html",
           "text": "text",
           "template": {
@@ -10345,7 +10369,7 @@
           "name": "Example Name",
           "audience_id": "audience-1",
           "segment_id": "segment-1",
-          "from": "from",
+          "from": "user@example.com",
           "subject": "subject",
           "reply_to": [
             "reply_to"
@@ -10609,7 +10633,7 @@
           "current_version_id": "current_version-1",
           "name": "Example Name",
           "alias": "alias",
-          "from": "from",
+          "from": "user@example.com",
           "subject": "subject",
           "reply_to": [
             "reply_to"
@@ -10742,7 +10766,7 @@
         "example": {
           "name": "Example Name",
           "alias": "alias",
-          "from": "from",
+          "from": "user@example.com",
           "subject": "subject",
           "reply_to": [
             "reply_to"

@@ -42,15 +42,15 @@ data class UpdateInboxDraftOptions(
     /**
      * The recipients. For multiple addresses, send an array of strings. Each value can include a friendly name. Pass `null` to clear. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
      */
-    val to: Any? = null,
+    val to: List<String>? = null,
     /**
      * The CC recipients. Pass `null` or `[]` to clear. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
      */
-    val cc: Any? = null,
+    val cc: List<String>? = null,
     /**
      * The BCC recipients. Pass `null` or `[]` to clear. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
      */
-    val bcc: Any? = null,
+    val bcc: List<String>? = null,
     /**
      * The subject. Max 2000 characters. Cannot be only whitespace or contain a line break. Pass `null` to clear.
      */

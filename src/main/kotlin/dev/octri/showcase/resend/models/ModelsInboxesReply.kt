@@ -10,11 +10,11 @@ data class ReplyInboxThreadEmailOptions(
     /**
      * CC recipient email address. For multiple addresses, send as an array of strings. Without `reply_all`, the reply copies only these addresses. With `reply_all`, these addresses are merged with the copied recipients, without duplicates. `cc` and `bcc` combined must be fewer than 50 addresses. After the `to` recipients are added, the reply cannot exceed 50 recipients. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
      */
-    val cc: Any? = null,
+    val cc: List<String>? = null,
     /**
      * BCC recipient email address. For multiple addresses, send as an array of strings. BCC recipients of the original message are never copied. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
      */
-    val bcc: Any? = null,
+    val bcc: List<String>? = null,
     /**
      * The HTML body of the reply.
      */

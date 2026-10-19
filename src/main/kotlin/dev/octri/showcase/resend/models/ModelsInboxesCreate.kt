@@ -10,15 +10,15 @@ data class CreateInboxDraftOptions(
     /**
      * The recipients. For multiple addresses, send an array of strings. Each value can include a friendly name, for example `Ada Lovelace <ada@example.org>`. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
      */
-    val to: Any? = null,
+    val to: List<String>? = null,
     /**
      * The CC recipients. For multiple addresses, send an array of strings. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
      */
-    val cc: Any? = null,
+    val cc: List<String>? = null,
     /**
      * The BCC recipients. For multiple addresses, send an array of strings. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
      */
-    val bcc: Any? = null,
+    val bcc: List<String>? = null,
     /**
      * The subject. Max 2000 characters. A string that is only whitespace, or that contains a line break, is rejected.
      */

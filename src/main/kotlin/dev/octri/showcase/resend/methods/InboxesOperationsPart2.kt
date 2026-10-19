@@ -61,12 +61,34 @@ internal object InboxesCreateDraftOperation {
 
 
     private fun validateInboxesCreateDraftRequest(request: Inboxes.InboxesCreateDraftRequest) {
+        validateInboxesCreateDraftRequestPart1(request)
+        validateInboxesCreateDraftRequestPart2(request)
+    }
+
+    private fun validateInboxesCreateDraftRequestPart1(request: Inboxes.InboxesCreateDraftRequest) {
         Validation.validateUuid("inbox_id", request.inboxId)
 
         if (request.idempotencyKey != null) {
             Validation.validateLength("Idempotency-Key", request.idempotencyKey, Validation.LengthOpts(min = 1, max = 256))
 }
 
+        val toValue = request.to?.getOrNull()
+if (toValue != null) {
+            Validation.validateItems("to", toValue, Validation.LengthOpts(max = 50))
+}
+
+        val ccValue = request.cc?.getOrNull()
+if (ccValue != null) {
+            Validation.validateItems("cc", ccValue, Validation.LengthOpts(max = 50))
+}
+
+        val bccValue = request.bcc?.getOrNull()
+if (bccValue != null) {
+            Validation.validateItems("bcc", bccValue, Validation.LengthOpts(max = 50))
+}
+    }
+
+    private fun validateInboxesCreateDraftRequestPart2(request: Inboxes.InboxesCreateDraftRequest) {
         val subjectValue = request.subject?.getOrNull()
 if (subjectValue != null) {
             Validation.validateLength("subject", subjectValue, Validation.LengthOpts(min = 1, max = 2000))
@@ -137,10 +159,32 @@ internal object InboxesUpdateDraftOperation {
 
 
     private fun validateInboxesUpdateDraftRequest(request: Inboxes.InboxesUpdateDraftRequest) {
+        validateInboxesUpdateDraftRequestPart1(request)
+        validateInboxesUpdateDraftRequestPart2(request)
+    }
+
+    private fun validateInboxesUpdateDraftRequestPart1(request: Inboxes.InboxesUpdateDraftRequest) {
         Validation.validateUuid("inbox_id", request.inboxId)
 
         Validation.validateUuid("draft_id", request.draftId)
 
+        val toValue = request.to?.getOrNull()
+if (toValue != null) {
+            Validation.validateItems("to", toValue, Validation.LengthOpts(max = 50))
+}
+
+        val ccValue = request.cc?.getOrNull()
+if (ccValue != null) {
+            Validation.validateItems("cc", ccValue, Validation.LengthOpts(max = 50))
+}
+
+        val bccValue = request.bcc?.getOrNull()
+if (bccValue != null) {
+            Validation.validateItems("bcc", bccValue, Validation.LengthOpts(max = 50))
+}
+    }
+
+    private fun validateInboxesUpdateDraftRequestPart2(request: Inboxes.InboxesUpdateDraftRequest) {
         val subjectValue = request.subject?.getOrNull()
 if (subjectValue != null) {
             Validation.validateLength("subject", subjectValue, Validation.LengthOpts(min = 1, max = 2000))
