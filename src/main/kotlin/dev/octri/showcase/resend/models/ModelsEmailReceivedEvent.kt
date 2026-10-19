@@ -5,66 +5,40 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `EmailReceivedEvent` API schema.
- */
+/** Typed representation of the `EmailReceivedEvent` API schema. */
 data class EmailReceivedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: EmailReceivedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Required object value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: EmailReceivedEventData
+    /** Required object value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: EmailReceivedEventData,
 )
 
-/**
- * Typed representation of the `EmailReceivedEventData` API schema.
- */
+/** Typed representation of the `EmailReceivedEventData` API schema. */
 data class EmailReceivedEventData(
-    /**
-     * Unique identifier for the email.
-     */
+    /** Unique identifier for the email. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_id") val emailId: String,
-    /**
-     * Timestamp when the email was received.
-     */
+    /** Timestamp when the email was received. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Sender email address.
-     */
+    /** Sender email address. */
     val from: String,
-    /**
-     * Array of recipient email addresses.
-     */
+    /** Array of recipient email addresses. */
     val to: List<String>,
-    /**
-     * Email subject line.
-     */
+    /** Email subject line. */
     val subject: String,
-    /**
-     * The unique message ID from the email headers.
-     */
+    /** The unique message ID from the email headers. */
     @com.fasterxml.jackson.annotation.JsonProperty("message_id") val messageId: String,
-    /**
-     * BCC recipients.
-     */
+    /** BCC recipients. */
     val bcc: List<String>,
-    /**
-     * CC recipients.
-     */
+    /** CC recipients. */
     val cc: List<String>,
-    /**
-     * Array of attachment metadata.
-     */
+    /** Array of attachment metadata. */
     val attachments: List<WebhookEventAttachment>,
     /**
-     * The recipient addresses the email was forwarded for, taken from the `for` clause of the message's `Received` headers.
+     * The recipient addresses the email was forwarded for, taken from the `for` clause of the
+     * message's `Received` headers.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("received_for") val receivedFor: List<String>? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("received_for")
+    val receivedFor: List<String>? = null,
 )

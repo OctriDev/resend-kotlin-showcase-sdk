@@ -3,50 +3,60 @@
 
 package dev.octri.showcase.resend.models
 
-/**
- * At least one of `html` or `text` must contain more than whitespace.
- */
+/** At least one of `html` or `text` must contain more than whitespace. */
 data class ReplyInboxThreadEmailOptions(
     /**
-     * CC recipient email address. For multiple addresses, send as an array of strings. Without `reply_all`, the reply copies only these addresses. With `reply_all`, these addresses are merged with the copied recipients, without duplicates. `cc` and `bcc` combined must be fewer than 50 addresses. After the `to` recipients are added, the reply cannot exceed 50 recipients. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
+     * CC recipient email address. For multiple addresses, send as an array of strings. Without
+     * `reply_all`, the reply copies only these addresses. With `reply_all`, these addresses are
+     * merged with the copied recipients, without duplicates. `cc` and `bcc` combined must be fewer
+     * than 50 addresses. After the `to` recipients are added, the reply cannot exceed 50
+     * recipients. Each address is `email@example.com` or `Name <email@example.com>`. An address
+     * that is not valid returns a 422.
      */
     val cc: List<String>? = null,
     /**
-     * BCC recipient email address. For multiple addresses, send as an array of strings. BCC recipients of the original message are never copied. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
+     * BCC recipient email address. For multiple addresses, send as an array of strings. BCC
+     * recipients of the original message are never copied. Each address is `email@example.com` or
+     * `Name <email@example.com>`. An address that is not valid returns a 422.
      */
     val bcc: List<String>? = null,
-    /**
-     * The HTML body of the reply.
-     */
+    /** The HTML body of the reply. */
     val html: String? = null,
-    /**
-     * The plain-text body of the reply.
-     */
+    /** The plain-text body of the reply. */
     val text: String? = null,
     /**
-     * The subject of the reply. Cannot be only whitespace or contain a line break. When omitted, the thread subject is used, prefixed with `Re:` if it does not already start with it.
+     * The subject of the reply. Cannot be only whitespace or contain a line break. When omitted,
+     * the thread subject is used, prefixed with `Re:` if it does not already start with it.
      */
     val subject: String? = null,
     /**
-     * Reply to everyone on the original message. For a message the inbox received, the reply goes to its `Reply-To` addresses, or to its sender when it has none, and copies the other addresses of its `To` header and its `cc` recipients in `cc`. For a message the inbox sent, the reply goes to that message's `Reply-To` addresses when they are not the inbox address, otherwise to its `to` recipients, and copies its `cc` recipients. The inbox address is always excluded, and duplicates…
+     * Reply to everyone on the original message. For a message the inbox received, the reply goes
+     * to its `Reply-To` addresses, or to its sender when it has none, and copies the other
+     * addresses of its `To` header and its `cc` recipients in `cc`. For a message the inbox sent,
+     * the reply goes to that message's `Reply-To` addresses when they are not the inbox address,
+     * otherwise to its `to` recipients, and copies its `cc` recipients. The inbox address is always
+     * excluded, and duplicates…
      */
     @com.fasterxml.jackson.annotation.JsonProperty("reply_all") val replyAll: Boolean? = null,
     /**
-     * Files to attach, as on `POST /emails`. Each one needs `content` or `path`. Up to 10 files. The `content` of all files can total at most 25 MB. A `path` file counts toward the 10 files only, because it is fetched when the email is sent. An empty file, a blocked file type, a `path` that is not an `http` or `https` URL or that points to `localhost`, `127.0.0.1` or `0.0.0.0`, or a `content_type` that is not a valid MIME type returns a 422.
+     * Files to attach, as on `POST /emails`. Each one needs `content` or `path`. Up to 10 files.
+     * The `content` of all files can total at most 25 MB. A `path` file counts toward the 10 files
+     * only, because it is fetched when the email is sent. An empty file, a blocked file type, a
+     * `path` that is not an `http` or `https` URL or that points to `localhost`, `127.0.0.1` or
+     * `0.0.0.0`, or a `content_type` that is not a valid MIME type returns a 422.
      */
     val attachments: List<Attachment>? = null,
     /**
-     * Custom headers to add to the email. The `In-Reply-To`, `References` and `Reply-To` headers are set by Resend and cannot be set here. Sending one of them, in any letter case, returns a 422. Header names cannot be empty, and names and values cannot contain line breaks or null characters, or the request returns a 422. `null` means no custom headers.
+     * Custom headers to add to the email. The `In-Reply-To`, `References` and `Reply-To` headers
+     * are set by Resend and cannot be set here. Sending one of them, in any letter case, returns
+     * a 422. Header names cannot be empty, and names and values cannot contain line breaks or null
+     * characters, or the request returns a 422. `null` means no custom headers.
      */
-    val headers: Map<String, String>? = null
+    val headers: Map<String, String>? = null,
 )
 
-/**
- * Typed representation of the `ReplyInboxThreadEmailResponseSuccess` API schema.
- */
+/** Typed representation of the `ReplyInboxThreadEmailResponseSuccess` API schema. */
 data class ReplyInboxThreadEmailResponseSuccess(
-    /**
-     * The ID of the sent email. Use it with the emails endpoints.
-     */
+    /** The ID of the sent email. Use it with the emails endpoints. */
     val id: String
 )

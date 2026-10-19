@@ -3,24 +3,17 @@
 
 package dev.octri.showcase.resend.models
 
-/**
- * Typed representation of the `WebhookEventBounce` API schema.
- */
+/** Typed representation of the `WebhookEventBounce` API schema. */
 data class WebhookEventBounce(
     /**
-     * Array of SMTP diagnostic responses from the receiving server, one entry per recipient (e.g., `smtp; 550 5.1.1 user unknown`).
+     * Array of SMTP diagnostic responses from the receiving server, one entry per recipient (e.g.,
+     * `smtp; 550 5.1.1 user unknown`).
      */
     val diagnosticCode: List<String>,
-    /**
-     * Detailed bounce message describing why the email bounced.
-     */
+    /** Detailed bounce message describing why the email bounced. */
     val message: String,
-    /**
-     * Bounce sub-type.
-     */
+    /** Bounce sub-type. */
     val subType: WebhookEventBounceSubTypeEnum,
-    /**
-     * Bounce type.
-     */
-    val type: WebhookEventBounceTypeEnum
+    /** Bounce type. */
+    val type: WebhookEventBounceTypeEnum,
 )

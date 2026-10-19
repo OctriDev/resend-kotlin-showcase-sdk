@@ -3,80 +3,186 @@
 
 package dev.octri.showcase.resend
 
-
 class WebhooksNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a webhook subscription that delivers selected event types to a specified endpoint. Provide an `endpoint` URL and at least one event type in `events` to configure the subscription.
+     * Creates a webhook subscription that delivers selected event types to a specified endpoint.
+     * Provide an `endpoint` URL and at least one event type in `events` to configure the
+     * subscription.
      */
-    fun create(endpoint: String, events: List<String>, options: RequestOptions? = null): CreateWebhookResponse {
-        return dev.octri.showcase.resend.methods.Webhooks.webhooksCreate(clientConfig, endpoint, events, options)
+    fun create(
+        endpoint: String,
+        events: List<String>,
+        options: RequestOptions? = null,
+    ): CreateWebhookResponse {
+        return dev.octri.showcase.resend.methods.Webhooks.webhooksCreate(
+            clientConfig,
+            endpoint,
+            events,
+            options,
+        )
     }
 
     /**
-     * Lists webhooks configured for your account. Use the pagination cursors to retrieve results before or after a webhook in the list; provide no more than one cursor at a time.
+     * Lists webhooks configured for your account. Use the pagination cursors to retrieve results
+     * before or after a webhook in the list; provide no more than one cursor at a time.
      */
-    fun list(limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListWebhooksResponse {
-        return dev.octri.showcase.resend.methods.Webhooks.webhooksList(clientConfig, limit, after, before, options)
+    fun list(
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListWebhooksResponse {
+        return dev.octri.showcase.resend.methods.Webhooks.webhooksList(
+            clientConfig,
+            limit,
+            after,
+            before,
+            options,
+        )
     }
 
     /**
-     * Retrieves a webhook by its identifier. Use this endpoint to inspect the webhook's endpoint URL, subscribed event types, status, creation timestamp, and signing secret.
+     * Retrieves a webhook by its identifier. Use this endpoint to inspect the webhook's endpoint
+     * URL, subscribed event types, status, creation timestamp, and signing secret.
      */
     fun get(webhookId: String, options: RequestOptions? = null): GetWebhookResponse {
-        return dev.octri.showcase.resend.methods.Webhooks.webhooksGet(clientConfig, webhookId, options)
+        return dev.octri.showcase.resend.methods.Webhooks.webhooksGet(
+            clientConfig,
+            webhookId,
+            options,
+        )
     }
 
     /**
-     * Updates the endpoint URL, subscribed event types, or status of a webhook. Supply only the fields you want to change; `status` must be enabled or disabled, and `events` must contain at least one event type.
+     * Updates the endpoint URL, subscribed event types, or status of a webhook. Supply only the
+     * fields you want to change; `status` must be enabled or disabled, and `events` must contain at
+     * least one event type.
      */
-    fun update(webhookId: String, endpoint: String? = null, events: List<String>? = null, status: UpdateWebhookRequestStatusEnum? = null, options: RequestOptions? = null): UpdateWebhookResponse {
-        return dev.octri.showcase.resend.methods.Webhooks.webhooksUpdate(clientConfig, webhookId, endpoint, events, status, options)
+    fun update(
+        webhookId: String,
+        endpoint: String? = null,
+        events: List<String>? = null,
+        status: UpdateWebhookRequestStatusEnum? = null,
+        options: RequestOptions? = null,
+    ): UpdateWebhookResponse {
+        return dev.octri.showcase.resend.methods.Webhooks.webhooksUpdate(
+            clientConfig,
+            webhookId,
+            endpoint,
+            events,
+            status,
+            options,
+        )
     }
 
     /**
-     * Deletes a webhook. Use this endpoint when you no longer want the webhook to receive event deliveries; the response indicates whether deletion succeeded.
+     * Deletes a webhook. Use this endpoint when you no longer want the webhook to receive event
+     * deliveries; the response indicates whether deletion succeeded.
      */
     fun remove(webhookId: String, options: RequestOptions? = null): DeleteWebhookResponse {
-        return dev.octri.showcase.resend.methods.Webhooks.webhooksRemove(clientConfig, webhookId, options)
+        return dev.octri.showcase.resend.methods.Webhooks.webhooksRemove(
+            clientConfig,
+            webhookId,
+            options,
+        )
     }
 
     /**
-     * Rotates the signing secret for a webhook and returns the new secret. Payloads delivered after rotation use the new secret, while the previous secret remains valid for verifying payloads for 24 hours.
+     * Rotates the signing secret for a webhook and returns the new secret. Payloads delivered after
+     * rotation use the new secret, while the previous secret remains valid for verifying payloads
+     * for 24 hours.
      *
-     * Generates a new signing secret for the webhook and returns it. Payloads delivered after the rotation are signed with the new secret. The previous secret keeps verifying payloads for 24 hours, so both secrets are accepted during that window. A webhook that does not exist or was removed returns a 404 not_found.
+     * Generates a new signing secret for the webhook and returns it. Payloads delivered after the
+     * rotation are signed with the new secret. The previous secret keeps verifying payloads for 24
+     * hours, so both secrets are accepted during that window. A webhook that does not exist or was
+     * removed returns a 404 not_found.
      */
-    fun rotateSigningSecret(webhookId: String, options: RequestOptions? = null): RotateWebhookSigningSecretResponse {
-        return dev.octri.showcase.resend.methods.Webhooks.webhooksRotateSigningSecret(clientConfig, webhookId, options)
+    fun rotateSigningSecret(
+        webhookId: String,
+        options: RequestOptions? = null,
+    ): RotateWebhookSigningSecretResponse {
+        return dev.octri.showcase.resend.methods.Webhooks.webhooksRotateSigningSecret(
+            clientConfig,
+            webhookId,
+            options,
+        )
     }
 
     /**
-     * Lists events associated with a webhook. Use `after` to continue from a cursor and `limit` to control the number of results; the response indicates whether more results are available.
+     * Lists events associated with a webhook. Use `after` to continue from a cursor and `limit` to
+     * control the number of results; the response indicates whether more results are available.
      */
-    fun listEvents(webhookId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): ListWebhookEventsResponse {
-        return dev.octri.showcase.resend.methods.Webhooks.webhooksListEvents(clientConfig, webhookId, limit, after, options)
+    fun listEvents(
+        webhookId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): ListWebhookEventsResponse {
+        return dev.octri.showcase.resend.methods.Webhooks.webhooksListEvents(
+            clientConfig,
+            webhookId,
+            limit,
+            after,
+            options,
+        )
     }
 
     /**
-     * Retrieves a specific event associated with a webhook. Use the event details to inspect its delivery status, payload, and any scheduled next delivery attempt.
+     * Retrieves a specific event associated with a webhook. Use the event details to inspect its
+     * delivery status, payload, and any scheduled next delivery attempt.
      */
-    fun getEvent(webhookId: String, eventId: String, options: RequestOptions? = null): GetWebhookEventResponse {
-        return dev.octri.showcase.resend.methods.Webhooks.webhooksGetEvent(clientConfig, webhookId, eventId, options)
+    fun getEvent(
+        webhookId: String,
+        eventId: String,
+        options: RequestOptions? = null,
+    ): GetWebhookEventResponse {
+        return dev.octri.showcase.resend.methods.Webhooks.webhooksGetEvent(
+            clientConfig,
+            webhookId,
+            eventId,
+            options,
+        )
     }
 
     /**
-     * Triggers one additional delivery of a webhook event. The webhook must be enabled, and a manual replay does not schedule automatic retries.
+     * Triggers one additional delivery of a webhook event. The webhook must be enabled, and a
+     * manual replay does not schedule automatic retries.
      *
-     * Queues one more delivery of the event to the webhook. The event must be retrievable through the get event endpoint and the webhook must be enabled; a disabled webhook returns a 422 validation_error. A manual replay does not schedule automatic retries.
+     * Queues one more delivery of the event to the webhook. The event must be retrievable through
+     * the get event endpoint and the webhook must be enabled; a disabled webhook returns a 422
+     * validation_error. A manual replay does not schedule automatic retries.
      */
-    fun replayEvent(webhookId: String, eventId: String, options: RequestOptions? = null): ReplayWebhookEventResponse {
-        return dev.octri.showcase.resend.methods.Webhooks.webhooksReplayEvent(clientConfig, webhookId, eventId, options)
+    fun replayEvent(
+        webhookId: String,
+        eventId: String,
+        options: RequestOptions? = null,
+    ): ReplayWebhookEventResponse {
+        return dev.octri.showcase.resend.methods.Webhooks.webhooksReplayEvent(
+            clientConfig,
+            webhookId,
+            eventId,
+            options,
+        )
     }
 
     /**
-     * Lists delivery attempts for a specific event associated with a webhook. Use `after` to continue from a cursor and `limit` to control the number of attempts returned.
+     * Lists delivery attempts for a specific event associated with a webhook. Use `after` to
+     * continue from a cursor and `limit` to control the number of attempts returned.
      */
-    fun listEventAttempts(webhookId: String, eventId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): ListWebhookEventAttemptsResponse {
-        return dev.octri.showcase.resend.methods.Webhooks.webhooksListEventAttempts(clientConfig, webhookId, eventId, limit, after, options)
+    fun listEventAttempts(
+        webhookId: String,
+        eventId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): ListWebhookEventAttemptsResponse {
+        return dev.octri.showcase.resend.methods.Webhooks.webhooksListEventAttempts(
+            clientConfig,
+            webhookId,
+            eventId,
+            limit,
+            after,
+            options,
+        )
     }
-
 }

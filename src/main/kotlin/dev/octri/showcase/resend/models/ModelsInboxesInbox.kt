@@ -5,538 +5,358 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `Inbox` API schema.
- */
+/** Typed representation of the `Inbox` API schema. */
 data class Inbox(
-    /**
-     * The object type. Always `inbox`.
-     */
+    /** The object type. Always `inbox`. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * The ID of the inbox.
-     */
+    /** The ID of the inbox. */
     val id: String,
     /**
      * Internal name for the inbox. Recipients do not see it. Falls back to the inbox email address.
      */
     val name: String,
-    /**
-     * The address of the inbox.
-     */
+    /** The address of the inbox. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_address") val emailAddress: String,
-    /**
-     * The ID of the domain that owns the address.
-     */
+    /** The ID of the domain that owns the address. */
     @com.fasterxml.jackson.annotation.JsonProperty("domain_id") val domainId: String,
-    /**
-     * The address to forward mail to when forwarding is enabled. `null` otherwise.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("receiving_address", required = true) val receivingAddress: String?,
-    /**
-     * The name recipients see when mail is sent from this inbox. `null` when not set.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("from_name", required = true) val fromName: String?,
-    /**
-     * The number of unread threads in the Inbox folder.
-     */
+    /** The address to forward mail to when forwarding is enabled. `null` otherwise. */
+    @com.fasterxml.jackson.annotation.JsonProperty("receiving_address", required = true)
+    val receivingAddress: String?,
+    /** The name recipients see when mail is sent from this inbox. `null` when not set. */
+    @com.fasterxml.jackson.annotation.JsonProperty("from_name", required = true)
+    val fromName: String?,
+    /** The number of unread threads in the Inbox folder. */
     val unread: Long,
-    /**
-     * The number of unsent drafts.
-     */
+    /** The number of unsent drafts. */
     val drafts: Long,
     /**
-     * ISO 8601 timestamp of the newest received email in the Inbox folder. `null` when the folder has no received email.
+     * ISO 8601 timestamp of the newest received email in the Inbox folder. `null` when the folder
+     * has no received email.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_received", required = true) val lastReceived: OffsetDateTime?,
-    /**
-     * ISO 8601 timestamp when the inbox was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime
+    @com.fasterxml.jackson.annotation.JsonProperty("last_received", required = true)
+    val lastReceived: OffsetDateTime?,
+    /** ISO 8601 timestamp when the inbox was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
 )
 
-/**
- * Typed representation of the `InboxAgent` API schema.
- */
+/** Typed representation of the `InboxAgent` API schema. */
 data class InboxAgent(
-    /**
-     * The object type. Always `inbox_agent`.
-     */
+    /** The object type. Always `inbox_agent`. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
     /**
-     * Instructions the agent follows when it handles the threads of the inbox. Null when no instructions are set.
+     * Instructions the agent follows when it handles the threads of the inbox. Null when no
+     * instructions are set.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("instructions", required = true) val instructions: String?,
-    /**
-     * The tone the agent writes in. Null when no tone is set.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("tone", required = true) val tone: InboxAgentToneEnum?,
-    /**
-     * The actions the agent can take. Empty when no actions are enabled.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("enabled_actions") val enabledActions: List<InboxAgentEnabledActionsItemEnum>
+    @com.fasterxml.jackson.annotation.JsonProperty("instructions", required = true)
+    val instructions: String?,
+    /** The tone the agent writes in. Null when no tone is set. */
+    @com.fasterxml.jackson.annotation.JsonProperty("tone", required = true)
+    val tone: InboxAgentToneEnum?,
+    /** The actions the agent can take. Empty when no actions are enabled. */
+    @com.fasterxml.jackson.annotation.JsonProperty("enabled_actions")
+    val enabledActions: List<InboxAgentEnabledActionsItemEnum>,
 )
 
-/**
- * Typed representation of the `InboxDraft` API schema.
- */
+/** Typed representation of the `InboxDraft` API schema. */
 data class InboxDraft(
-    /**
-     * The object type.
-     */
+    /** The object type. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * The ID of the draft.
-     */
+    /** The ID of the draft. */
     val id: String,
     /**
-     * `reply` when the draft replies to an email in an existing thread. `standalone` when the draft starts a new thread.
+     * `reply` when the draft replies to an email in an existing thread. `standalone` when the draft
+     * starts a new thread.
      */
     val type: InboxDraftTypeEnum,
-    /**
-     * The recipients. `null` or empty when no recipients are set.
-     */
+    /** The recipients. `null` or empty when no recipients are set. */
     @com.fasterxml.jackson.annotation.JsonProperty("to", required = true) val to: List<String>?,
-    /**
-     * The CC recipients.
-     */
+    /** The CC recipients. */
     val cc: List<String>,
-    /**
-     * The BCC recipients.
-     */
+    /** The BCC recipients. */
     val bcc: List<String>,
-    /**
-     * The subject.
-     */
+    /** The subject. */
     @com.fasterxml.jackson.annotation.JsonProperty("subject", required = true) val subject: String?,
-    /**
-     * The HTML body.
-     */
+    /** The HTML body. */
     @com.fasterxml.jackson.annotation.JsonProperty("html", required = true) val html: String?,
-    /**
-     * The plain text body. A reply draft created without a body has an empty string.
-     */
+    /** The plain text body. A reply draft created without a body has an empty string. */
     @com.fasterxml.jackson.annotation.JsonProperty("text", required = true) val text: String?,
-    /**
-     * The Thread ID when the draft is a reply. `null` otherwise.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("thread_id", required = true) val threadId: String?,
-    /**
-     * The Email ID the draft replies to. `null` otherwise.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_to_email_id", required = true) val replyToEmailId: String?,
+    /** The Thread ID when the draft is a reply. `null` otherwise. */
+    @com.fasterxml.jackson.annotation.JsonProperty("thread_id", required = true)
+    val threadId: String?,
+    /** The Email ID the draft replies to. `null` otherwise. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_to_email_id", required = true)
+    val replyToEmailId: String?,
     /**
      * The ID of the outbound email queued when the draft was sent. `null` until the draft is sent.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_id", required = true) val emailId: String?,
-    /**
-     * Timestamp when the draft was created.
-     */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_id", required = true)
+    val emailId: String?,
+    /** Timestamp when the draft was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Timestamp when the draft was last saved.
-     */
+    /** Timestamp when the draft was last saved. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
-    /**
-     * The files stored on the draft.
-     */
-    val attachments: List<InboxDraftAttachment>
+    /** The files stored on the draft. */
+    val attachments: List<InboxDraftAttachment>,
 )
 
-/**
- * A file stored on a draft.
- */
+/** A file stored on a draft. */
 data class InboxDraftAttachment(
-    /**
-     * The ID of the attachment.
-     */
+    /** The ID of the attachment. */
     val id: String,
-    /**
-     * The filename of the attachment.
-     */
+    /** The filename of the attachment. */
     val filename: String,
-    /**
-     * The MIME type of the attachment.
-     */
+    /** The MIME type of the attachment. */
     @com.fasterxml.jackson.annotation.JsonProperty("content_type") val contentType: String,
-    /**
-     * The size of the attachment in bytes.
-     */
-    val size: Long
+    /** The size of the attachment in bytes. */
+    val size: Long,
 )
 
 /**
- * A file to store on a draft. Unlike `POST /emails` attachments, a draft attachment cannot use `path` or `content_id`. A `path` without `content` returns a 422, and when both are sent, `path` is ignored.
+ * A file to store on a draft. Unlike `POST /emails` attachments, a draft attachment cannot use
+ * `path` or `content_id`. A `path` without `content` returns a 422, and when both are sent, `path`
+ * is ignored.
  */
 data class InboxDraftAttachmentInput(
-    /**
-     * The content of the file, encoded in base64. It cannot be empty.
-     */
+    /** The content of the file, encoded in base64. It cannot be empty. */
     val content: String,
-    /**
-     * The filename of the attachment. A blocked file type returns a 422.
-     */
+    /** The filename of the attachment. A blocked file type returns a 422. */
     val filename: String,
     /**
-     * The MIME type of the attachment. It must be a valid MIME type, such as `application/pdf`, or the request returns a 422.
+     * The MIME type of the attachment. It must be a valid MIME type, such as `application/pdf`, or
+     * the request returns a 422.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("content_type") val contentType: String
+    @com.fasterxml.jackson.annotation.JsonProperty("content_type") val contentType: String,
 )
 
-/**
- * Typed representation of the `InboxDraftListItem` API schema.
- */
+/** Typed representation of the `InboxDraftListItem` API schema. */
 data class InboxDraftListItem(
-    /**
-     * The ID of the draft.
-     */
+    /** The ID of the draft. */
     val id: String,
     /**
-     * `reply` when the draft replies to an email in an existing thread. `standalone` when the draft starts a new thread.
+     * `reply` when the draft replies to an email in an existing thread. `standalone` when the draft
+     * starts a new thread.
      */
     val type: InboxDraftListItemTypeEnum,
-    /**
-     * The recipients. `null` or empty when no recipients are set.
-     */
+    /** The recipients. `null` or empty when no recipients are set. */
     @com.fasterxml.jackson.annotation.JsonProperty("to", required = true) val to: List<String>?,
-    /**
-     * The CC recipients.
-     */
+    /** The CC recipients. */
     val cc: List<String>,
-    /**
-     * The BCC recipients.
-     */
+    /** The BCC recipients. */
     val bcc: List<String>,
-    /**
-     * The subject.
-     */
+    /** The subject. */
     @com.fasterxml.jackson.annotation.JsonProperty("subject", required = true) val subject: String?,
-    /**
-     * A short preview of the body.
-     */
+    /** A short preview of the body. */
     @com.fasterxml.jackson.annotation.JsonProperty("snippet", required = true) val snippet: String?,
-    /**
-     * The Thread ID when the draft is a reply. `null` otherwise.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("thread_id", required = true) val threadId: String?,
-    /**
-     * The Email ID the draft replies to. `null` otherwise.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_to_email_id", required = true) val replyToEmailId: String?,
-    /**
-     * Timestamp when the draft was last saved.
-     */
+    /** The Thread ID when the draft is a reply. `null` otherwise. */
+    @com.fasterxml.jackson.annotation.JsonProperty("thread_id", required = true)
+    val threadId: String?,
+    /** The Email ID the draft replies to. `null` otherwise. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_to_email_id", required = true)
+    val replyToEmailId: String?,
+    /** Timestamp when the draft was last saved. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
-    /**
-     * The files stored on the draft.
-     */
-    val attachments: List<InboxDraftAttachment>
+    /** The files stored on the draft. */
+    val attachments: List<InboxDraftAttachment>,
 )
 
-/**
- * Typed representation of the `InboxLabel` API schema.
- */
+/** Typed representation of the `InboxLabel` API schema. */
 data class InboxLabel(
-    /**
-     * The ID of the label.
-     */
+    /** The ID of the label. */
     val id: String,
-    /**
-     * The name of the label.
-     */
+    /** The name of the label. */
     val name: String,
-    /**
-     * The color of the label, as a `#RRGGBB` hex color in uppercase.
-     */
+    /** The color of the label, as a `#RRGGBB` hex color in uppercase. */
     val color: String,
-    /**
-     * Timestamp when the label was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime
+    /** Timestamp when the label was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
 )
 
-/**
- * A thread as it appears in the list of an inbox's threads.
- */
+/** A thread as it appears in the list of an inbox's threads. */
 data class InboxThread(
-    /**
-     * The ID of the thread.
-     */
+    /** The ID of the thread. */
     val id: String,
-    /**
-     * The subject of the thread.
-     */
+    /** The subject of the thread. */
     @com.fasterxml.jackson.annotation.JsonProperty("subject", required = true) val subject: String?,
-    /**
-     * The sender email address. Can include the display name.
-     */
+    /** The sender email address. Can include the display name. */
     @com.fasterxml.jackson.annotation.JsonProperty("from", required = true) val from: String?,
     /**
-     * The recipients of the most recent email. For a received email, these are the addresses it was delivered to, not the full `To` header.
+     * The recipients of the most recent email. For a received email, these are the addresses it was
+     * delivered to, not the full `To` header.
      */
     val to: List<String>,
-    /**
-     * The CC recipients of the most recent email.
-     */
+    /** The CC recipients of the most recent email. */
     val cc: List<String>,
-    /**
-     * The BCC recipients of the most recent email. Always empty for a received email.
-     */
+    /** The BCC recipients of the most recent email. Always empty for a received email. */
     val bcc: List<String>,
-    /**
-     * The labels attached to the thread.
-     */
+    /** The labels attached to the thread. */
     val labels: List<InboxThreadLabel>,
-    /**
-     * The number of emails in the thread.
-     */
+    /** The number of emails in the thread. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_count") val emailCount: Long,
-    /**
-     * Whether the most recent email in the thread has an attachment.
-     */
+    /** Whether the most recent email in the thread has an attachment. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_attachment") val hasAttachment: Boolean,
-    /**
-     * Whether the thread has an unsent draft.
-     */
+    /** Whether the thread has an unsent draft. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_draft") val hasDraft: Boolean,
-    /**
-     * True only when every email in the thread is read.
-     */
+    /** True only when every email in the thread is read. */
     val read: Boolean,
-    /**
-     * Timestamp when the thread was last active.
-     */
+    /** Timestamp when the thread was last active. */
     @com.fasterxml.jackson.annotation.JsonProperty("received_at") val receivedAt: OffsetDateTime,
     /**
-     * The folder the thread is in. Every thread is in exactly one folder. `inbox` holds threads with at least one received email. `archive` and `spam` hold threads moved there. `trash` holds threads scheduled for deletion in 30 days. `sent` holds threads whose emails are all outbound, and is assigned automatically.
+     * The folder the thread is in. Every thread is in exactly one folder. `inbox` holds threads
+     * with at least one received email. `archive` and `spam` hold threads moved there. `trash`
+     * holds threads scheduled for deletion in 30 days. `sent` holds threads whose emails are all
+     * outbound, and is assigned automatically.
      */
-    val folder: InboxThreadFolderEnum
+    val folder: InboxThreadFolderEnum,
 )
 
-/**
- * Typed representation of the `InboxThreadEmail` API schema.
- */
+/** Typed representation of the `InboxThreadEmail` API schema. */
 data class InboxThreadEmail(
-    /**
-     * The ID of the message.
-     */
+    /** The ID of the message. */
     val id: String,
     /**
-     * Whether the inbox received the message (`inbound`) or sent it (`outbound`). A message the inbox sent to itself is `inbound`, so a reply to it goes to its sender.
+     * Whether the inbox received the message (`inbound`) or sent it (`outbound`). A message the
+     * inbox sent to itself is `inbound`, so a reply to it goes to its sender.
      */
     val direction: InboxThreadEmailDirectionEnum,
     /**
-     * Sender email address. Includes the display name when the sender has one, in the format "Name <sender@domain.com>".
+     * Sender email address. Includes the display name when the sender has one, in the format "Name
+     * <sender@domain.com>".
      */
     val from: String,
     /**
-     * The recipients of the message. For a received message, these are the addresses it was delivered to, not the full `To` header.
+     * The recipients of the message. For a received message, these are the addresses it was
+     * delivered to, not the full `To` header.
      */
     val to: List<String>,
-    /**
-     * The CC recipients of the message.
-     */
+    /** The CC recipients of the message. */
     val cc: List<String>,
-    /**
-     * The BCC recipients of the message. Always empty for a received message.
-     */
+    /** The BCC recipients of the message. Always empty for a received message. */
     val bcc: List<String>,
-    /**
-     * The Reply-To addresses of the message.
-     */
+    /** The Reply-To addresses of the message. */
     @com.fasterxml.jackson.annotation.JsonProperty("reply_to") val replyTo: List<String>,
-    /**
-     * The subject of the message.
-     */
+    /** The subject of the message. */
     @com.fasterxml.jackson.annotation.JsonProperty("subject", required = true) val subject: String?,
-    /**
-     * The Message-ID header of the message.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_id", required = true) val messageId: String?,
-    /**
-     * The HTML body.
-     */
+    /** The Message-ID header of the message. */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_id", required = true)
+    val messageId: String?,
+    /** The HTML body. */
     @com.fasterxml.jackson.annotation.JsonProperty("html", required = true) val html: String?,
-    /**
-     * The plain-text body.
-     */
+    /** The plain-text body. */
     @com.fasterxml.jackson.annotation.JsonProperty("text", required = true) val text: String?,
-    /**
-     * The attachments of the message.
-     */
+    /** The attachments of the message. */
     val attachments: List<InboxThreadEmailAttachment>,
-    /**
-     * Whether the message has been read.
-     */
+    /** Whether the message has been read. */
     val read: Boolean,
-    /**
-     * Timestamp when the inbox received the message, or when the inbox sent it.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("received_at") val receivedAt: OffsetDateTime
+    /** Timestamp when the inbox received the message, or when the inbox sent it. */
+    @com.fasterxml.jackson.annotation.JsonProperty("received_at") val receivedAt: OffsetDateTime,
 )
 
-/**
- * Typed representation of the `InboxThreadEmailAttachment` API schema.
- */
+/** Typed representation of the `InboxThreadEmailAttachment` API schema. */
 data class InboxThreadEmailAttachment(
-    /**
-     * The ID of the attachment.
-     */
+    /** The ID of the attachment. */
     val id: String,
-    /**
-     * The filename of the attachment.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("filename", required = true) val filename: String?,
-    /**
-     * The size of the attachment in bytes.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("size", required = true) val size: Long?
+    /** The filename of the attachment. */
+    @com.fasterxml.jackson.annotation.JsonProperty("filename", required = true)
+    val filename: String?,
+    /** The size of the attachment in bytes. */
+    @com.fasterxml.jackson.annotation.JsonProperty("size", required = true) val size: Long?,
 )
 
-/**
- * Typed representation of the `InboxThreadLabel` API schema.
- */
+/** Typed representation of the `InboxThreadLabel` API schema. */
 data class InboxThreadLabel(
-    /**
-     * The ID of the label.
-     */
+    /** The ID of the label. */
     val id: String,
-    /**
-     * The name of the label.
-     */
+    /** The name of the label. */
     val name: String,
-    /**
-     * The color of the label, as a `#RRGGBB` hex color in uppercase.
-     */
-    val color: String
+    /** The color of the label, as a `#RRGGBB` hex color in uppercase. */
+    val color: String,
 )
 
 /**
- * Where `query` matched the email in `matched_email_id`, as text fragments with each match wrapped in `**`. Only keys with a match are present. An empty object when there is no `query`.
+ * Where `query` matched the email in `matched_email_id`, as text fragments with each match wrapped
+ * in `**`. Only keys with a match are present. An empty object when there is no `query`.
  */
 data class InboxThreadSearchResultVariant1Highlights(
-    /**
-     * Optional array value serialized in the `subject` wire field.
-     */
+    /** Optional array value serialized in the `subject` wire field. */
     val subject: List<String>? = null,
-    /**
-     * Optional array value serialized in the `body` wire field.
-     */
+    /** Optional array value serialized in the `body` wire field. */
     val body: List<String>? = null,
-    /**
-     * Optional array value serialized in the `from` wire field.
-     */
+    /** Optional array value serialized in the `from` wire field. */
     val from: List<String>? = null,
-    /**
-     * Optional array value serialized in the `to` wire field.
-     */
+    /** Optional array value serialized in the `to` wire field. */
     val to: List<String>? = null,
-    /**
-     * Optional array value serialized in the `cc` wire field.
-     */
+    /** Optional array value serialized in the `cc` wire field. */
     val cc: List<String>? = null,
-    /**
-     * Optional array value serialized in the `bcc` wire field.
-     */
+    /** Optional array value serialized in the `bcc` wire field. */
     val bcc: List<String>? = null,
-    /**
-     * Optional array value serialized in the `attachments` wire field.
-     */
-    val attachments: List<String>? = null
+    /** Optional array value serialized in the `attachments` wire field. */
+    val attachments: List<String>? = null,
 )
 
-/**
- * Typed representation of the `InboxThreadSearchResult` API schema.
- */
+/** Typed representation of the `InboxThreadSearchResult` API schema. */
 data class InboxThreadSearchResult(
-    /**
-     * The ID of the thread.
-     */
+    /** The ID of the thread. */
     val id: String,
-    /**
-     * The subject of the thread.
-     */
+    /** The subject of the thread. */
     @com.fasterxml.jackson.annotation.JsonProperty("subject", required = true) val subject: String?,
-    /**
-     * The sender email address. Can include the display name.
-     */
+    /** The sender email address. Can include the display name. */
     @com.fasterxml.jackson.annotation.JsonProperty("from", required = true) val from: String?,
     /**
-     * The recipients of the most recent email. For a received email, these are the addresses it was delivered to, not the full `To` header.
+     * The recipients of the most recent email. For a received email, these are the addresses it was
+     * delivered to, not the full `To` header.
      */
     val to: List<String>,
-    /**
-     * The CC recipients of the most recent email.
-     */
+    /** The CC recipients of the most recent email. */
     val cc: List<String>,
-    /**
-     * The BCC recipients of the most recent email. Always empty for a received email.
-     */
+    /** The BCC recipients of the most recent email. Always empty for a received email. */
     val bcc: List<String>,
-    /**
-     * The labels attached to the thread.
-     */
+    /** The labels attached to the thread. */
     val labels: List<InboxThreadLabel>,
-    /**
-     * The number of emails in the thread.
-     */
+    /** The number of emails in the thread. */
     @com.fasterxml.jackson.annotation.JsonProperty("email_count") val emailCount: Long,
-    /**
-     * Whether the most recent email in the thread has an attachment.
-     */
+    /** Whether the most recent email in the thread has an attachment. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_attachment") val hasAttachment: Boolean,
-    /**
-     * Whether the thread has an unsent draft.
-     */
+    /** Whether the thread has an unsent draft. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_draft") val hasDraft: Boolean,
-    /**
-     * True only when every email in the thread is read.
-     */
+    /** True only when every email in the thread is read. */
     val read: Boolean,
-    /**
-     * Timestamp when the thread was last active.
-     */
+    /** Timestamp when the thread was last active. */
     @com.fasterxml.jackson.annotation.JsonProperty("received_at") val receivedAt: OffsetDateTime,
     /**
-     * The folder the thread is in. Every thread is in exactly one folder. `inbox` holds threads with at least one received email. `archive` and `spam` hold threads moved there. `trash` holds threads scheduled for deletion in 30 days. `sent` holds threads whose emails are all outbound, and is assigned automatically.
+     * The folder the thread is in. Every thread is in exactly one folder. `inbox` holds threads
+     * with at least one received email. `archive` and `spam` hold threads moved there. `trash`
+     * holds threads scheduled for deletion in 30 days. `sent` holds threads whose emails are all
+     * outbound, and is assigned automatically.
      */
     val folder: InboxThreadFolderEnum,
     /**
-     * Identifies the email in the thread that matched the search. When `query` has words or phrases, it is the most relevant match. Otherwise, it is the newest. The get, reply and forward thread email endpoints accept it as `email_id`, but it is not equal to the `id` those endpoints return. Null when the search index returns no matched email for the thread.
+     * Identifies the email in the thread that matched the search. When `query` has words or
+     * phrases, it is the most relevant match. Otherwise, it is the newest. The get, reply and
+     * forward thread email endpoints accept it as `email_id`, but it is not equal to the `id` those
+     * endpoints return. Null when the search index returns no matched email for the thread.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("matched_email_id", required = true) val matchedEmailId: String?,
+    @com.fasterxml.jackson.annotation.JsonProperty("matched_email_id", required = true)
+    val matchedEmailId: String?,
     /**
-     * Where `query` matched the email in `matched_email_id`, as text fragments with each match wrapped in `**`. Only keys with a match are present. An empty object when there is no `query`.
+     * Where `query` matched the email in `matched_email_id`, as text fragments with each match
+     * wrapped in `**`. Only keys with a match are present. An empty object when there is no
+     * `query`.
      */
-    val highlights: InboxThreadSearchResultVariant1Highlights
+    val highlights: InboxThreadSearchResultVariant1Highlights,
 )
 
-/**
- * The summary of a single thread.
- */
+/** The summary of a single thread. */
 data class InboxThreadSummary(
-    /**
-     * The object type.
-     */
+    /** The object type. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * The ID of the thread.
-     */
+    /** The ID of the thread. */
     val id: String,
-    /**
-     * The subject of the thread.
-     */
+    /** The subject of the thread. */
     @com.fasterxml.jackson.annotation.JsonProperty("subject", required = true) val subject: String?,
-    /**
-     * The folder the thread is in.
-     */
+    /** The folder the thread is in. */
     val folder: InboxThreadSummaryFolderEnum,
-    /**
-     * The labels attached to the thread.
-     */
+    /** The labels attached to the thread. */
     val labels: List<InboxThreadLabel>,
-    /**
-     * True only when every email in the thread is read.
-     */
-    val read: Boolean
+    /** True only when every email in the thread is read. */
+    val read: Boolean,
 )

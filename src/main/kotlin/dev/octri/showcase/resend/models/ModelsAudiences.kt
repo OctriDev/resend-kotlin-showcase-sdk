@@ -3,102 +3,59 @@
 
 package dev.octri.showcase.resend.models
 
-/**
- * Typed representation of the `CreateAudienceOptions` API schema.
- */
+/** Typed representation of the `CreateAudienceOptions` API schema. */
 data class CreateAudienceOptions(
-    /**
-     * The name of the audience you want to create.
-     */
+    /** The name of the audience you want to create. */
     val name: String
 )
 
-/**
- * Typed representation of the `CreateAudienceResponseSuccess` API schema.
- */
+/** Typed representation of the `CreateAudienceResponseSuccess` API schema. */
 data class CreateAudienceResponseSuccess(
-    /**
-     * The ID of the audience.
-     */
+    /** The ID of the audience. */
     val id: String? = null,
-    /**
-     * The object of the audience.
-     */
+    /** The object of the audience. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * The name of the audience.
-     */
-    val name: String? = null
+    /** The name of the audience. */
+    val name: String? = null,
 )
 
-/**
- * Typed representation of the `GetAudienceResponseSuccess` API schema.
- */
+/** Typed representation of the `GetAudienceResponseSuccess` API schema. */
 data class GetAudienceResponseSuccess(
-    /**
-     * The ID of the audience.
-     */
+    /** The ID of the audience. */
     val id: String? = null,
-    /**
-     * The object of the audience.
-     */
+    /** The object of the audience. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * The name of the audience.
-     */
+    /** The name of the audience. */
     val name: String? = null,
-    /**
-     * The date that the object was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
+    /** The date that the object was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
 )
 
-/**
- * Required object value serialized in the `data[]` wire field.
- */
+/** Required object value serialized in the `data[]` wire field. */
 data class ListAudiencesResponseSuccessDataItem(
-    /**
-     * Unique identifier for the audience.
-     */
+    /** Unique identifier for the audience. */
     val id: String? = null,
-    /**
-     * Name of the audience.
-     */
+    /** Name of the audience. */
     val name: String? = null,
-    /**
-     * Timestamp indicating when the audience was created.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
+    /** Timestamp indicating when the audience was created. */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
 )
 
-/**
- * Typed representation of the `ListAudiencesResponseSuccess` API schema.
- */
+/** Typed representation of the `ListAudiencesResponseSuccess` API schema. */
 data class ListAudiencesResponseSuccess(
-    /**
-     * Type of the response object.
-     */
+    /** Type of the response object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * Array containing audience information.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ListAudiencesResponseSuccessDataItem>? = null
+    /** Array containing audience information. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data")
+    val `data`: List<ListAudiencesResponseSuccessDataItem>? = null,
 )
 
-/**
- * Typed representation of the `RemoveAudienceResponseSuccess` API schema.
- */
+/** Typed representation of the `RemoveAudienceResponseSuccess` API schema. */
 data class RemoveAudienceResponseSuccess(
-    /**
-     * The ID of the audience.
-     */
+    /** The ID of the audience. */
     val id: String? = null,
-    /**
-     * The object of the audience.
-     */
+    /** The object of the audience. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * The deleted attribute indicates that the corresponding audience has been deleted.
-     */
-    val deleted: Boolean? = null
+    /** The deleted attribute indicates that the corresponding audience has been deleted. */
+    val deleted: Boolean? = null,
 )
