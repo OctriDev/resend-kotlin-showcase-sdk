@@ -5,150 +5,85 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/**
- * The data of an `inbox.created` or `inbox.updated` event.
- */
+/** The data of an `inbox.created` or `inbox.updated` event. */
 data class InboxEventData(
-    /**
-     * What made the change.
-     */
+    /** What made the change. */
     val source: InboxEventSource,
-    /**
-     * The ID of the inbox.
-     */
+    /** The ID of the inbox. */
     @com.fasterxml.jackson.annotation.JsonProperty("inbox_id") val inboxId: String,
-    /**
-     * The inbox as it is when the webhook is sent. Absent when the inbox no longer exists.
-     */
-    val inbox: Inbox? = null
+    /** The inbox as it is when the webhook is sent. Absent when the inbox no longer exists. */
+    val inbox: Inbox? = null,
 )
 
-/**
- * The draft carried by an inbox webhook event. It has no `html` or `text`.
- */
+/** The draft carried by an inbox webhook event. It has no `html` or `text`. */
 data class InboxEventDraft(
-    /**
-     * The object type. Always `inbox_draft`.
-     */
+    /** The object type. Always `inbox_draft`. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String,
-    /**
-     * The ID of the draft.
-     */
+    /** The ID of the draft. */
     val id: String,
-    /**
-     * `standalone` for a new conversation, or `reply`.
-     */
+    /** `standalone` for a new conversation, or `reply`. */
     val type: InboxEventDraftTypeEnum,
-    /**
-     * The recipients.
-     */
+    /** The recipients. */
     @com.fasterxml.jackson.annotation.JsonProperty("to", required = true) val to: List<String>?,
-    /**
-     * The CC recipients.
-     */
+    /** The CC recipients. */
     val cc: List<String>,
-    /**
-     * The BCC recipients.
-     */
+    /** The BCC recipients. */
     val bcc: List<String>,
-    /**
-     * The subject.
-     */
+    /** The subject. */
     @com.fasterxml.jackson.annotation.JsonProperty("subject", required = true) val subject: String?,
-    /**
-     * The ID of the thread when this draft is a reply. Null otherwise.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("thread_id", required = true) val threadId: String?,
-    /**
-     * The ID of the email this draft replies to. Null otherwise.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("reply_to_email_id", required = true) val replyToEmailId: String?,
-    /**
-     * The ID of the queued outbound email after send. Null until then.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("email_id", required = true) val emailId: String?,
-    /**
-     * Timestamp when the draft was created.
-     */
+    /** The ID of the thread when this draft is a reply. Null otherwise. */
+    @com.fasterxml.jackson.annotation.JsonProperty("thread_id", required = true)
+    val threadId: String?,
+    /** The ID of the email this draft replies to. Null otherwise. */
+    @com.fasterxml.jackson.annotation.JsonProperty("reply_to_email_id", required = true)
+    val replyToEmailId: String?,
+    /** The ID of the queued outbound email after send. Null until then. */
+    @com.fasterxml.jackson.annotation.JsonProperty("email_id", required = true)
+    val emailId: String?,
+    /** Timestamp when the draft was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Timestamp when the draft was last saved.
-     */
+    /** Timestamp when the draft was last saved. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
-    /**
-     * The files stored on the draft.
-     */
-    val attachments: List<InboxDraftAttachment>
+    /** The files stored on the draft. */
+    val attachments: List<InboxDraftAttachment>,
 )
 
-/**
- * The email carried by an inbox webhook event. It has no `html` or `text`.
- */
+/** The email carried by an inbox webhook event. It has no `html` or `text`. */
 data class InboxEventEmail(
-    /**
-     * The ID of the email.
-     */
+    /** The ID of the email. */
     val id: String,
-    /**
-     * Whether the email was received by the inbox or sent from it.
-     */
+    /** Whether the email was received by the inbox or sent from it. */
     val direction: InboxEventEmailDirectionEnum,
-    /**
-     * The sender, as an address or as `Name <address>`.
-     */
+    /** The sender, as an address or as `Name <address>`. */
     val from: String,
-    /**
-     * The recipients of the email.
-     */
+    /** The recipients of the email. */
     val to: List<String>,
-    /**
-     * The CC recipients of the email.
-     */
+    /** The CC recipients of the email. */
     val cc: List<String>,
-    /**
-     * The BCC recipients of the email.
-     */
+    /** The BCC recipients of the email. */
     val bcc: List<String>,
-    /**
-     * The Reply-To addresses.
-     */
+    /** The Reply-To addresses. */
     @com.fasterxml.jackson.annotation.JsonProperty("reply_to") val replyTo: List<String>,
-    /**
-     * The subject of the email.
-     */
+    /** The subject of the email. */
     @com.fasterxml.jackson.annotation.JsonProperty("subject", required = true) val subject: String?,
-    /**
-     * The Message-ID header of the email.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("message_id", required = true) val messageId: String?,
-    /**
-     * The attachments on the email.
-     */
+    /** The Message-ID header of the email. */
+    @com.fasterxml.jackson.annotation.JsonProperty("message_id", required = true)
+    val messageId: String?,
+    /** The attachments on the email. */
     val attachments: List<InboxEventEmailAttachment>,
-    /**
-     * Whether the email has been read.
-     */
+    /** Whether the email has been read. */
     val read: Boolean,
-    /**
-     * Timestamp when the email arrived or was sent.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("received_at") val receivedAt: OffsetDateTime
+    /** Timestamp when the email arrived or was sent. */
+    @com.fasterxml.jackson.annotation.JsonProperty("received_at") val receivedAt: OffsetDateTime,
 )
 
-/**
- * An attachment on an email in an inbox webhook event.
- */
+/** An attachment on an email in an inbox webhook event. */
 data class InboxEventEmailAttachment(
-    /**
-     * The ID of the attachment.
-     */
+    /** The ID of the attachment. */
     val id: String,
-    /**
-     * The filename of the attachment.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("filename", required = true) val filename: String?,
-    /**
-     * The size of the attachment in bytes.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("size", required = true) val size: Long?
+    /** The filename of the attachment. */
+    @com.fasterxml.jackson.annotation.JsonProperty("filename", required = true)
+    val filename: String?,
+    /** The size of the attachment in bytes. */
+    @com.fasterxml.jackson.annotation.JsonProperty("size", required = true) val size: Long?,
 )
