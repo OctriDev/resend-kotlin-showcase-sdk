@@ -5,26 +5,38 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `InboxEmailReceivedEvent` API schema. */
+/**
+ * Typed representation of the `InboxEmailReceivedEvent` API schema.
+ */
 data class InboxEmailReceivedEvent(
-    /** The event type. */
+    /**
+     * The event type.
+     */
     val type: InboxEmailReceivedEventTypeEnum,
-    /** Timestamp when the event was emitted. */
+    /**
+     * Timestamp when the event was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
     /**
      * The data of an `inbox.thread.created`, `inbox.email.received` or `inbox.email.sent` event.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxThreadEmailEventData,
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxThreadEmailEventData
 )
 
-/** Typed representation of the `InboxEmailSentEvent` API schema. */
+/**
+ * Typed representation of the `InboxEmailSentEvent` API schema.
+ */
 data class InboxEmailSentEvent(
-    /** The event type. */
+    /**
+     * The event type.
+     */
     val type: InboxEmailSentEventTypeEnum,
-    /** Timestamp when the event was emitted. */
+    /**
+     * Timestamp when the event was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
     /**
      * The data of an `inbox.thread.created`, `inbox.email.received` or `inbox.email.sent` event.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxThreadEmailEventData,
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: InboxThreadEmailEventData
 )

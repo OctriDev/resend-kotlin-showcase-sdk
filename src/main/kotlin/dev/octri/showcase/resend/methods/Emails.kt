@@ -26,6 +26,7 @@ import dev.octri.showcase.resend.Validation
 
 object Emails {
 
+
     /** Parameters for [emailsSend]. */
     data class EmailsSendRequest(
         val from: String,
@@ -42,78 +43,62 @@ object Emails {
         val scheduledAt: String? = null,
         val attachments: List<Attachment>? = null,
         val tags: List<Tag>? = null,
-        val topicId: String? = null,
+        val topicId: String? = null
     )
 
     /**
-     * Sends an email to one or more recipients. Supply `from`, `to`, and `subject`; use either
-     * message content in `html` or `text`, or a published `template`. A successful response
-     * includes the sent email's identifier.
+     * Sends an email to one or more recipients. Supply `from`, `to`, and `subject`; use either message content in `html` or `text`, or a published `template`. A successful response includes the sent email's identifier.
      *
-     * @param from Sender email address. To include a friendly name, use the format "Your Name
-     *   <sender@domain.com>".
-     * @param to Recipient email address. For multiple addresses, send as an array of strings.
-     *   Max 50.
+     * @param from Sender email address. To include a friendly name, use the format
+     *   "Your Name <sender@domain.com>".
+     * @param to Recipient email address. For multiple addresses, send as an array of
+     *   strings. Max 50.
      * @param subject Email subject.
-     * @param idempotencyKey A unique identifier for the request to ensure emails are only sent
-     *   once. Learn more
-     * @param bcc Bcc recipient email address. For multiple addresses, send as an array of strings.
-     * @param cc Cc recipient email address. For multiple addresses, send as an array of strings.
-     * @param replyTo Reply-to email address. For multiple addresses, send as an array of strings.
+     * @param idempotencyKey A unique identifier for the request to ensure emails are
+     *   only sent once. Learn more
+     * @param bcc Bcc recipient email address. For multiple addresses, send as an
+     *   array of strings.
+     * @param cc Cc recipient email address. For multiple addresses, send as an array
+     *   of strings.
+     * @param replyTo Reply-to email address. For multiple addresses, send as an
+     *   array of strings.
      * @param html The HTML version of the message.
      * @param text The plain text version of the message.
-     * @param template Use a published template to send the email. If provided, do not include html
-     *   or text.
+     * @param template Use a published template to send the email. If provided, do
+     *   not include html or text.
      * @param headers Custom headers to add to the email.
-     * @param scheduledAt Schedule email to be sent later. The date should be in ISO 8601 format.
-     * @param attachments Optional array value serialized in the `attachments` wire field.
+     * @param scheduledAt Schedule email to be sent later. The date should be in ISO
+     *   8601 format.
+     * @param attachments Optional array value serialized in the `attachments` wire
+     *   field.
      * @param tags Optional array value serialized in the `tags` wire field.
-     * @param topicId The topic ID to scope the email to. If the recipient is a contact and opted-in
-     *   to the topic, the email is sent. If opted-out, the email is not sent. If the recipient is
-     *   not a contact, the email is sent if the topic's default subscription is opt_in.
+     * @param topicId The topic ID to scope the email to. If the recipient is a
+     *   contact and opted-in to the topic, the email is sent. If opted-out, the email
+     *   is not sent. If the recipient is not a contact, the email is sent if the
+     *   topic's default subscription is opt_in.
      */
-    fun emailsSend(
-        clientConfig: ClientConfig,
-        request: EmailsSendRequest,
-        options: RequestOptions? = null,
-    ): SendEmailResponse {
+    fun emailsSend(clientConfig: ClientConfig, request: EmailsSendRequest, options: RequestOptions? = null): SendEmailResponse {
         validateEmailsSendRequest(request)
 
-        return SdkClient.request<SendEmailResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/emails",
-                    config = clientConfig,
-                    body = buildEmailsSendBody(request),
-                    operationId = "emailsSend",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Idempotency-Key" to
-                                SdkClient.headerValue(request.idempotencyKey, false)
-                        ),
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<SendEmailResponse>(SdkClient.RequestSpec("POST", "/emails", config = clientConfig, body = buildEmailsSendBody(request), operationId = "emailsSend", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Idempotency-Key" to SdkClient.headerValue(request.idempotencyKey, false)), options = options)).data
     }
+
 
     private fun validateEmailsSendRequest(request: EmailsSendRequest) {
         Validation.validateItems("to", request.to, Validation.LengthOpts(min = 1, max = 50))
 
         if (request.idempotencyKey != null) {
-            Validation.validateLength(
-                "Idempotency-Key",
-                request.idempotencyKey,
-                Validation.LengthOpts(max = 256),
-            )
-        }
+            Validation.validateLength("Idempotency-Key", request.idempotencyKey, Validation.LengthOpts(max = 256))
+}
     }
 
-    private fun buildEmailsSendBody(request: EmailsSendRequest): Map<String, Any?> = buildMap {
-        putAll(buildEmailsSendBodyPart1(request))
-        putAll(buildEmailsSendBodyPart2(request))
-    }
+
+
+    private fun buildEmailsSendBody(request: EmailsSendRequest): Map<String, Any?> =
+        buildMap {
+            putAll(buildEmailsSendBodyPart1(request))
+            putAll(buildEmailsSendBodyPart2(request))
+        }
 
     private fun buildEmailsSendBodyPart1(request: EmailsSendRequest): Map<String, Any?> =
         SdkClient.bodyMap(
@@ -127,7 +112,8 @@ object Emails {
             "text" to (SdkClient.omitIfNull(request.text)),
             "template" to (SdkClient.omitIfNull(request.template)),
             "headers" to (SdkClient.omitIfNull(request.headers)),
-            "scheduled_at" to (SdkClient.omitIfNull(request.scheduledAt)),
+            "scheduled_at" to
+    (SdkClient.omitIfNull(request.scheduledAt)),
             "attachments" to (SdkClient.omitIfNull(request.attachments)),
         )
 
@@ -137,264 +123,161 @@ object Emails {
             "topic_id" to (SdkClient.omitIfNull(request.topicId)),
         )
 
+
+
+
     /**
-     * Lists emails with cursor-based pagination. Use `limit` to control the number of results and
-     * `after` or `before` to choose a pagination cursor.
+     * Lists emails with cursor-based pagination. Use `limit` to control the number of results and `after` or `before` to choose a pagination cursor.
      *
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun emailsList(
-        clientConfig: ClientConfig,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListEmailsResponse {
+    fun emailsList(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListEmailsResponse {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
-        return SdkClient.request<ListEmailsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/emails",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "before" to SdkClient.queryValue(before, "form", true),
-                        ),
-                    operationId = "emailsList",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<ListEmailsResponse>(SdkClient.RequestSpec("GET", "/emails", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "emailsList", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a single email by its identifier. Use `email_id` to select the email whose message
-     * details and latest delivery event you want to inspect.
+     * Retrieves a single email by its identifier. Use `email_id` to select the email whose message details and latest delivery event you want to inspect.
      *
      * @param emailId The ID of the email.
      */
-    fun emailsGet(
-        clientConfig: ClientConfig,
-        emailId: String,
-        options: RequestOptions? = null,
-    ): Email {
-        return SdkClient.request<Email>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/emails/${SdkClient.encodePathSegment(emailId)}",
-                    config = clientConfig,
-                    operationId = "emailsGet",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+    fun emailsGet(clientConfig: ClientConfig, emailId: String, options: RequestOptions? = null): Email {
+        return SdkClient.request<Email>(SdkClient.RequestSpec("GET", "/emails/${SdkClient.encodePathSegment(emailId)}", config = clientConfig, operationId = "emailsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Updates the scheduled send time for a single email. Use `email_id` to identify the email
-     * whose schedule you want to change; the response contains its scheduled time.
+     * Updates the scheduled send time for a single email. Use `email_id` to identify the email whose schedule you want to change; the response contains its scheduled time.
      *
      * @param emailId The ID of the email.
      */
-    fun emailsUpdate(
-        clientConfig: ClientConfig,
-        emailId: String,
-        options: RequestOptions? = null,
-    ): UpdateEmailOptions {
-        return SdkClient.request<UpdateEmailOptions>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/emails/${SdkClient.encodePathSegment(emailId)}",
-                    config = clientConfig,
-                    operationId = "emailsUpdate",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+    fun emailsUpdate(clientConfig: ClientConfig, emailId: String, options: RequestOptions? = null): UpdateEmailOptions {
+        return SdkClient.request<UpdateEmailOptions>(SdkClient.RequestSpec("PATCH", "/emails/${SdkClient.encodePathSegment(emailId)}", config = clientConfig, operationId = "emailsUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Cancels the scheduled send of an email. Use `email_id` to identify the email whose scheduled
-     * delivery you want to cancel; the response includes the email's current details and latest
-     * event.
+     * Cancels the scheduled send of an email. Use `email_id` to identify the email whose scheduled delivery you want to cancel; the response includes the email's current details and latest event.
      *
      * @param emailId The ID of the email.
      */
-    fun emailsCancel(
-        clientConfig: ClientConfig,
-        emailId: String,
-        options: RequestOptions? = null,
-    ): Email {
-        return SdkClient.request<Email>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/emails/${SdkClient.encodePathSegment(emailId)}/cancel",
-                    config = clientConfig,
-                    operationId = "emailsCancel",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+    fun emailsCancel(clientConfig: ClientConfig, emailId: String, options: RequestOptions? = null): Email {
+        return SdkClient.request<Email>(SdkClient.RequestSpec("POST", "/emails/${SdkClient.encodePathSegment(emailId)}/cancel", config = clientConfig, operationId = "emailsCancel", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Creates a shareable link for a sent or received email. Use `email_id` to select the email and
-     * optionally set `expires_in` to a duration of up to 48 hours; the default is 48 hours.
+     * Creates a shareable link for a sent or received email. Use `email_id` to select the email and optionally set `expires_in` to a duration of up to 48 hours; the default is 48 hours.
      *
      * @param emailId The ID of the email.
-     * @param expiresIn How long the link stays valid for, as a duration like `10m`, `2 hours`, or
-     *   `1 day`. Defaults to `48h` and cannot exceed 48 hours.
+     * @param expiresIn How long the link stays valid for, as a duration like `10m`,
+     *   `2 hours`, or `1 day`. Defaults to `48h` and cannot exceed 48 hours.
      */
-    fun emailsShare(
-        clientConfig: ClientConfig,
-        emailId: String,
-        expiresIn: String? = null,
-        options: RequestOptions? = null,
-    ): ShareEmailResponse {
-        return SdkClient.request<ShareEmailResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/emails/${SdkClient.encodePathSegment(emailId)}/share",
-                    config = clientConfig,
-                    body = SdkClient.bodyMap("expires_in" to (SdkClient.omitIfNull(expiresIn))),
-                    operationId = "emailsShare",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+    fun emailsShare(clientConfig: ClientConfig, emailId: String, expiresIn: String? = null, options: RequestOptions? = null): ShareEmailResponse {
+        return SdkClient.request<ShareEmailResponse>(SdkClient.RequestSpec("POST", "/emails/${SdkClient.encodePathSegment(emailId)}/share", config = clientConfig, body = SdkClient.bodyMap("expires_in" to (SdkClient.omitIfNull(expiresIn))), operationId = "emailsShare", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Submits a batch of email messages for sending, with up to 100 emails in the batch. Each
-     * message requires `from`, `to`, and `subject`; the response includes an ID for each submitted
-     * email.
+     * Submits a batch of email messages for sending, with up to 100 emails in the batch. Each message requires `from`, `to`, and `subject`; the response includes an ID for each submitted email.
      *
-     * @param idempotencyKey A unique identifier for the request to ensure emails are only sent
-     *   once. Learn more
+     * @param idempotencyKey A unique identifier for the request to ensure emails are
+     *   only sent once. Learn more
      */
-    fun emailsSendBatch(
-        clientConfig: ClientConfig,
-        idempotencyKey: String? = null,
-        body: List<SendEmailRequest>? = null,
-        options: RequestOptions? = null,
-    ): CreateBatchEmailsResponse {
+    fun emailsSendBatch(clientConfig: ClientConfig, idempotencyKey: String? = null, body: List<SendEmailRequest>? = null, options: RequestOptions? = null): CreateBatchEmailsResponse {
         if (idempotencyKey != null) {
-            Validation.validateLength(
-                "Idempotency-Key",
-                idempotencyKey,
-                Validation.LengthOpts(max = 256),
-            )
-        }
+            Validation.validateLength("Idempotency-Key", idempotencyKey, Validation.LengthOpts(max = 256))
+}
 
-        return SdkClient.request<CreateBatchEmailsResponse>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/emails/batch",
-                    config = clientConfig,
-                    body = body,
-                    operationId = "emailsSendBatch",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Idempotency-Key" to SdkClient.headerValue(idempotencyKey, false)
-                        ),
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<CreateBatchEmailsResponse>(SdkClient.RequestSpec("POST", "/emails/batch", config = clientConfig, body = body, operationId = "emailsSendBatch", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Idempotency-Key" to SdkClient.headerValue(idempotencyKey, false)), options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Lists the attachments for a sent email. Use `email_id` to select the email and `after` or
-     * `before` to paginate through its attachments; these cursor parameters cannot be used
-     * together.
+     * Lists the attachments for a sent email. Use `email_id` to select the email and `after` or `before` to paginate through its attachments; these cursor parameters cannot be used together.
      *
      * @param emailId The ID of the email.
      * @param limit Maximum number of attachments to return.
-     * @param after Pagination cursor to fetch results after this attachment ID. Cannot be used with
-     *   'before'.
-     * @param before Pagination cursor to fetch results before this attachment ID. Cannot be used
-     *   with 'after'.
+     * @param after Pagination cursor to fetch results after this attachment ID.
+     *   Cannot be used with 'before'.
+     * @param before Pagination cursor to fetch results before this attachment ID.
+     *   Cannot be used with 'after'.
      */
-    fun emailsListAttachments(
-        clientConfig: ClientConfig,
-        emailId: String,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListAttachmentsResponse {
+    fun emailsListAttachments(clientConfig: ClientConfig, emailId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListAttachmentsResponse {
         Validation.validateUuid("email_id", emailId)
 
         if (after != null) {
             Validation.validateUuid("after", after)
-        }
+}
 
         if (before != null) {
             Validation.validateUuid("before", before)
-        }
+}
 
-        return SdkClient.request<ListAttachmentsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/emails/${SdkClient.encodePathSegment(emailId)}/attachments",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "before" to SdkClient.queryValue(before, "form", true),
-                        ),
-                    operationId = "emailsListAttachments",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<ListAttachmentsResponse>(SdkClient.RequestSpec("GET", "/emails/${SdkClient.encodePathSegment(emailId)}/attachments", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "emailsListAttachments", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
+
+
+
+
+
+
     /**
-     * Retrieves a single attachment for a sent email. Use `email_id` and `attachment_id` to
-     * identify the email and attachment; the response includes a signed download URL and its
-     * expiration time.
+     * Retrieves a single attachment for a sent email. Use `email_id` and `attachment_id` to identify the email and attachment; the response includes a signed download URL and its expiration time.
      *
      * @param emailId The ID of the email.
      * @param attachmentId The ID of the attachment.
      */
-    fun emailsGetAttachment(
-        clientConfig: ClientConfig,
-        emailId: String,
-        attachmentId: String,
-        options: RequestOptions? = null,
-    ): RetrievedAttachment {
+    fun emailsGetAttachment(clientConfig: ClientConfig, emailId: String, attachmentId: String, options: RequestOptions? = null): RetrievedAttachment {
         Validation.validateUuid("email_id", emailId)
 
         Validation.validateUuid("attachment_id", attachmentId)
 
-        return SdkClient.request<RetrievedAttachment>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/emails/${SdkClient.encodePathSegment(emailId)}/attachments/${SdkClient.encodePathSegment(attachmentId)}",
-                    config = clientConfig,
-                    operationId = "emailsGetAttachment",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<RetrievedAttachment>(SdkClient.RequestSpec("GET", "/emails/${SdkClient.encodePathSegment(emailId)}/attachments/${SdkClient.encodePathSegment(attachmentId)}", config = clientConfig, operationId = "emailsGetAttachment", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
+
+
+
+
+
+
 
     /** Parameters for [getMetrics]. */
     data class GetMetricsRequest(
@@ -406,67 +289,54 @@ object Emails {
         val dimensions: List<GetMetricsParameterItemEnum84a4a9d0>? = null,
         val domainId: List<String>? = null,
         val emailId: List<String>? = null,
-        val broadcastId: List<String>? = null,
+        val broadcastId: List<String>? = null
     )
 
     /**
-     * Retrieves account-level email metrics for a date range, optionally broken down by dimensions.
-     * Use `metrics` and `dimensions` to choose the returned measures and breakdowns, and use the ID
-     * filters to restrict the data.
+     * Retrieves account-level email metrics for a date range, optionally broken down by dimensions. Use `metrics` and `dimensions` to choose the returned measures and breakdowns, and use the ID filters to restrict the data.
      *
-     * @param startDate The start of the date range, as an ISO 8601 date or datetime. Must be on or
-     *   before `end_date`. Defaults to 6 days before `end_date`.
-     * @param endDate The end of the date range, as an ISO 8601 date or datetime. Values in the
-     *   future are clamped to the current time. Defaults to now.
-     * @param timezone The IANA timezone (e.g. `America/New_York`) used to bucket periods when
-     *   `period` is in `dimensions`.
-     * @param granularity The bucket size used when `period` is in `dimensions`. The date range
-     *   can't produce more than 10,000 periods at the chosen granularity.
-     * @param metrics List of metrics to include in the response. Defaults to all metrics. Accepts a
-     *   comma-separated value, the parameter repeated, or a mix of both.
-     * @param dimensions List of dimensions to break the response down by. `email` cannot be
-     *   combined with `broadcast`. Defaults to `[]`, returning a single `totals` row for the whole
-     *   range, with no `data`. Accepts a comma-separated value, the parameter repeated, or a mix of
+     * @param startDate The start of the date range, as an ISO 8601 date or datetime.
+     *   Must be on or before `end_date`. Defaults to 6 days before `end_date`.
+     * @param endDate The end of the date range, as an ISO 8601 date or datetime.
+     *   Values in the future are clamped to the current time. Defaults to now.
+     * @param timezone The IANA timezone (e.g. `America/New_York`) used to bucket
+     *   periods when `period` is in `dimensions`.
+     * @param granularity The bucket size used when `period` is in `dimensions`. The
+     *   date range can't produce more than 10,000 periods at the chosen granularity.
+     * @param metrics List of metrics to include in the response. Defaults to all
+     *   metrics. Accepts a comma-separated value, the parameter repeated, or a mix of
      *   both.
+     * @param dimensions List of dimensions to break the response down by. `email`
+     *   cannot be combined with `broadcast`. Defaults to `[]`, returning a single
+     *   `totals` row for the whole range, with no `data`. Accepts a comma-separated
+     *   value, the parameter repeated, or a mix of both.
      * @param domainId List of sending domain IDs to restrict the response to, up to
-     *     100. Accepts a comma-separated value, the parameter repeated, or a mix of both.
-     *
-     * @param emailId List of email IDs to restrict the response to, up to 100. Cannot be combined
-     *   with the `broadcast` dimension or `broadcast_id`. Accepts a comma-separated value, the
-     *   parameter repeated, or a mix of both.
+     *   100. Accepts a comma-separated value, the parameter repeated, or a mix of
+     *   both.
+     * @param emailId List of email IDs to restrict the response to, up to 100.
+     *   Cannot be combined with the `broadcast` dimension or `broadcast_id`. Accepts a
+     *   comma-separated value, the parameter repeated, or a mix of both.
      * @param broadcastId List of broadcast IDs to restrict the response to, up to
-     *     100. Cannot be combined with the `email` dimension or `email_id`. Accepts a
-     *          comma-separated value, the parameter repeated, or a mix of both.
+     *   100. Cannot be combined with the `email` dimension or `email_id`. Accepts a
+     *   comma-separated value, the parameter repeated, or a mix of both.
      */
-    fun getMetrics(
-        clientConfig: ClientConfig,
-        request: GetMetricsRequest,
-        options: RequestOptions? = null,
-    ): GetEmailsMetricsResponse {
-        return SdkClient.request<GetEmailsMetricsResponse>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/emails/metrics",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "start_date" to SdkClient.queryValue(request.startDate, "form", true),
-                            "end_date" to SdkClient.queryValue(request.endDate, "form", true),
-                            "timezone" to SdkClient.queryValue(request.timezone, "form", true),
-                            "granularity" to
-                                SdkClient.queryValue(request.granularity, "form", true),
-                            "metrics" to SdkClient.queryValue(request.metrics, "form", false),
-                            "dimensions" to SdkClient.queryValue(request.dimensions, "form", false),
-                            "domain_id" to SdkClient.queryValue(request.domainId, "form", false),
-                            "email_id" to SdkClient.queryValue(request.emailId, "form", false),
-                            "broadcast_id" to
-                                SdkClient.queryValue(request.broadcastId, "form", false),
-                        ),
-                    operationId = "getMetrics",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+    fun getMetrics(clientConfig: ClientConfig, request: GetMetricsRequest, options: RequestOptions? = null): GetEmailsMetricsResponse {
+        return SdkClient.request<GetEmailsMetricsResponse>(SdkClient.RequestSpec("GET", "/emails/metrics", config = clientConfig, query = mapOf("start_date" to
+    SdkClient.queryValue(request.startDate, "form", true), "end_date" to
+    SdkClient.queryValue(request.endDate, "form", true), "timezone" to
+    SdkClient.queryValue(request.timezone, "form", true), "granularity" to
+    SdkClient.queryValue(request.granularity, "form", true), "metrics" to
+    SdkClient.queryValue(request.metrics, "form", false), "dimensions" to
+    SdkClient.queryValue(request.dimensions, "form", false), "domain_id" to
+    SdkClient.queryValue(request.domainId, "form", false), "email_id" to
+    SdkClient.queryValue(request.emailId, "form", false), "broadcast_id" to
+    SdkClient.queryValue(request.broadcastId, "form", false)), operationId = "getMetrics", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
+
+
+
+
+
+
+
 }

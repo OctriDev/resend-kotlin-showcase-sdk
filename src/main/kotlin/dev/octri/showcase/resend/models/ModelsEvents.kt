@@ -3,121 +3,182 @@
 
 package dev.octri.showcase.resend.models
 
-/** Typed representation of the `CreateEventRequest` API schema. */
+/**
+ * Typed representation of the `CreateEventRequest` API schema.
+ */
 data class CreateEventRequest(
-    /** The name of the event. Cannot start with the reserved `resend:` prefix. */
+    /**
+     * The name of the event. Cannot start with the reserved `resend:` prefix.
+     */
     val name: String,
     /**
-     * An optional flat key/type map defining the event payload schema. Supported types are
-     * `string`, `number`, `boolean`, and `date`.
+     * An optional flat key/type map defining the event payload schema. Supported types are `string`, `number`, `boolean`, and `date`.
      */
-    val schema: Map<String, Any>? = null,
+    val schema: Map<String, Any>? = null
 )
 
-/** Typed representation of the `CreateEventResponse` API schema. */
+/**
+ * Typed representation of the `CreateEventResponse` API schema.
+ */
 data class CreateEventResponse(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the created event. */
-    val id: String? = null,
+    /**
+     * The ID of the created event.
+     */
+    val id: String? = null
 )
 
-/** Typed representation of the `Event` API schema. */
+/**
+ * Typed representation of the `Event` API schema.
+ */
 data class Event(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The event ID. */
+    /**
+     * The event ID.
+     */
     val id: String? = null,
-    /** The event name. */
+    /**
+     * The event name.
+     */
     val name: String? = null,
     /**
-     * A flat key/type map defining the event payload schema. Supported types are `string`,
-     * `number`, `boolean`, and `date`.
+     * A flat key/type map defining the event payload schema. Supported types are `string`, `number`, `boolean`, and `date`.
      */
     val schema: Map<String, Any>? = null,
-    /** The date and time the event was created. */
+    /**
+     * The date and time the event was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /** The date and time the event was last updated. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null,
+    /**
+     * The date and time the event was last updated.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null
 )
 
-/** Typed representation of the `EventSummary` API schema. */
+/**
+ * Typed representation of the `EventSummary` API schema.
+ */
 data class EventSummary(
-    /** The event ID. */
+    /**
+     * The event ID.
+     */
     val id: String? = null,
-    /** The event name. */
+    /**
+     * The event name.
+     */
     val name: String? = null,
     /**
-     * A flat key/type map defining the event payload schema. Supported types are `string`,
-     * `number`, `boolean`, and `date`.
+     * A flat key/type map defining the event payload schema. Supported types are `string`, `number`, `boolean`, and `date`.
      */
     val schema: Map<String, Any>? = null,
-    /** The date and time the event was created. */
+    /**
+     * The date and time the event was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /** The date and time the event was last updated. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null,
+    /**
+     * The date and time the event was last updated.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null
 )
 
-/** Typed representation of the `ListEventsResponse` API schema. */
+/**
+ * Typed representation of the `ListEventsResponse` API schema.
+ */
 data class ListEventsResponse(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates if there are more results available. */
+    /**
+     * Indicates if there are more results available.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /** Array containing event information. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<EventSummary>? = null,
+    /**
+     * Array containing event information.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<EventSummary>? = null
 )
 
-/** Typed representation of the `RemoveEventResponse` API schema. */
+/**
+ * Typed representation of the `RemoveEventResponse` API schema.
+ */
 data class RemoveEventResponse(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the deleted event. */
+    /**
+     * The ID of the deleted event.
+     */
     val id: String? = null,
-    /** Indicates whether the event was deleted. */
-    val deleted: Boolean? = null,
+    /**
+     * Indicates whether the event was deleted.
+     */
+    val deleted: Boolean? = null
 )
 
-/** Typed representation of the `SendEventRequest` API schema. */
+/**
+ * Typed representation of the `SendEventRequest` API schema.
+ */
 data class SendEventRequest(
-    /** The name of the event to send. */
+    /**
+     * The name of the event to send.
+     */
     val event: String,
     /**
-     * The ID of the contact to associate with this event. Exactly one of `contact_id` or `email`
-     * must be provided.
+     * The ID of the contact to associate with this event. Exactly one of `contact_id` or `email` must be provided.
      */
     @com.fasterxml.jackson.annotation.JsonProperty("contact_id") val contactId: String? = null,
     /**
-     * The email address to associate with this event. Exactly one of `contact_id` or `email` must
-     * be provided.
+     * The email address to associate with this event. Exactly one of `contact_id` or `email` must be provided.
      */
     val email: String? = null,
-    /** An optional payload of key/value pairs to include with the event. */
-    val payload: Map<String, Any>? = null,
+    /**
+     * An optional payload of key/value pairs to include with the event.
+     */
+    val payload: Map<String, Any>? = null
 )
 
-/** Typed representation of the `SendEventResponse` API schema. */
+/**
+ * Typed representation of the `SendEventResponse` API schema.
+ */
 data class SendEventResponse(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The name of the event that was sent. */
-    val event: String? = null,
+    /**
+     * The name of the event that was sent.
+     */
+    val event: String? = null
 )
 
-/** Typed representation of the `UpdateEventRequest` API schema. */
+/**
+ * Typed representation of the `UpdateEventRequest` API schema.
+ */
 data class UpdateEventRequest(
     /**
-     * A flat key/type map defining the event payload schema. Set to `null` to clear the schema.
-     * Supported types are `string`, `number`, `boolean`, and `date`.
+     * A flat key/type map defining the event payload schema. Set to `null` to clear the schema. Supported types are `string`, `number`, `boolean`, and `date`.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("schema", required = true)
-    val schema: Map<String, Any>?
+    @com.fasterxml.jackson.annotation.JsonProperty("schema", required = true) val schema: Map<String, Any>?
 )
 
-/** Typed representation of the `UpdateEventResponse` API schema. */
+/**
+ * Typed representation of the `UpdateEventResponse` API schema.
+ */
 data class UpdateEventResponse(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the updated event. */
-    val id: String? = null,
+    /**
+     * The ID of the updated event.
+     */
+    val id: String? = null
 )

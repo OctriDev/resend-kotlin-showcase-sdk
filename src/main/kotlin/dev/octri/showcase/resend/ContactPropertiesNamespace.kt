@@ -3,84 +3,41 @@
 
 package dev.octri.showcase.resend
 
+
 class ContactPropertiesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a custom property that you can use to store contact data. Supply `key` and `type`;
-     * use `fallback_value` to provide a default that matches the selected type.
+     * Creates a custom property that you can use to store contact data. Supply `key` and `type`; use `fallback_value` to provide a default that matches the selected type.
      */
-    fun create(
-        key: String,
-        type: CreateContactPropertyOptionsTypeEnum,
-        fallbackValue: Any? = null,
-        options: RequestOptions? = null,
-    ): CreateContactPropertyResponseSuccess {
-        return dev.octri.showcase.resend.methods.ContactProperties.contactPropertiesCreate(
-            clientConfig,
-            key,
-            type,
-            fallbackValue,
-            options,
-        )
+    fun create(key: String, type: CreateContactPropertyOptionsTypeEnum, fallbackValue: Any? = null, options: RequestOptions? = null): CreateContactPropertyResponseSuccess {
+        return dev.octri.showcase.resend.methods.ContactProperties.contactPropertiesCreate(clientConfig, key, type, fallbackValue, options)
     }
 
     /**
-     * Lists contact properties with cursor-based pagination. Use `after` or `before` to navigate
-     * results and `limit` to control the number of properties returned.
+     * Lists contact properties with cursor-based pagination. Use `after` or `before` to navigate results and `limit` to control the number of properties returned.
      */
-    fun list(
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListContactPropertiesResponseSuccess {
-        return dev.octri.showcase.resend.methods.ContactProperties.contactPropertiesList(
-            clientConfig,
-            limit,
-            after,
-            before,
-            options,
-        )
+    fun list(limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListContactPropertiesResponseSuccess {
+        return dev.octri.showcase.resend.methods.ContactProperties.contactPropertiesList(clientConfig, limit, after, before, options)
     }
 
     /**
-     * Retrieves a contact property by its identifier. Use the property ID to inspect its key, type,
-     * fallback value, and creation timestamp.
+     * Retrieves a contact property by its identifier. Use the property ID to inspect its key, type, fallback value, and creation timestamp.
      */
     fun get(id: String, options: RequestOptions? = null): GetContactPropertyResponseSuccess {
-        return dev.octri.showcase.resend.methods.ContactProperties.contactPropertiesGet(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.ContactProperties.contactPropertiesGet(clientConfig, id, options)
     }
 
     /**
-     * Updates the fallback value for an existing contact property. Supply a `fallback_value` that
-     * matches the property’s type to change the default used when the property is unset for a
-     * contact.
+     * Updates the fallback value for an existing contact property. Supply a `fallback_value` that matches the property’s type to change the default used when the property is unset for a contact.
      */
-    fun update(
-        id: String,
-        fallbackValue: Any? = null,
-        options: RequestOptions? = null,
-    ): UpdateContactPropertyResponseSuccess {
-        return dev.octri.showcase.resend.methods.ContactProperties.contactPropertiesUpdate(
-            clientConfig,
-            id,
-            fallbackValue,
-            options,
-        )
+    fun update(id: String, fallbackValue: Any? = null, options: RequestOptions? = null): UpdateContactPropertyResponseSuccess {
+        return dev.octri.showcase.resend.methods.ContactProperties.contactPropertiesUpdate(clientConfig, id, fallbackValue, options)
     }
 
     /**
-     * Deletes an existing contact property. Use the property ID to select the property you want to
-     * remove.
+     * Deletes an existing contact property. Use the property ID to select the property you want to remove.
      */
     fun remove(id: String, options: RequestOptions? = null): RemoveContactPropertyResponseSuccess {
-        return dev.octri.showcase.resend.methods.ContactProperties.contactPropertiesRemove(
-            clientConfig,
-            id,
-            options,
-        )
+        return dev.octri.showcase.resend.methods.ContactProperties.contactPropertiesRemove(clientConfig, id, options)
     }
+
 }

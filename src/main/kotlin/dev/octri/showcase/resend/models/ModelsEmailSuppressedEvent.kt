@@ -5,36 +5,66 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `EmailSuppressedEvent` API schema. */
+/**
+ * Typed representation of the `EmailSuppressedEvent` API schema.
+ */
 data class EmailSuppressedEvent(
-    /** The event type. */
+    /**
+     * The event type.
+     */
     val type: EmailSuppressedEventTypeEnum,
-    /** Timestamp when the event was emitted. */
+    /**
+     * Timestamp when the event was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Required API value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: EmailSuppressedEventData,
+    /**
+     * Required API value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: EmailSuppressedEventData
 )
 
-/** Typed representation of the `EmailSuppressedEventData` API schema. */
+/**
+ * Typed representation of the `EmailSuppressedEventData` API schema.
+ */
 data class EmailSuppressedEventData(
-    /** Unique identifier for the email. */
+    /**
+     * Unique identifier for the email.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("email_id") val emailId: String,
-    /** Timestamp when the email was created. */
+    /**
+     * Timestamp when the email was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Sender email address and name in the format `Name <email@domain.com>`. */
+    /**
+     * Sender email address and name in the format `Name <email@domain.com>`.
+     */
     val from: String,
-    /** Array of impacted recipient email addresses. */
+    /**
+     * Array of impacted recipient email addresses.
+     */
     val to: List<String>,
-    /** Email subject line. */
+    /**
+     * Email subject line.
+     */
     val subject: String,
-    /** Required object value serialized in the `suppressed` wire field. */
+    /**
+     * Required object value serialized in the `suppressed` wire field.
+     */
     val suppressed: WebhookEventSuppressed,
-    /** Unique identifier for the broadcast campaign, if applicable. */
+    /**
+     * Unique identifier for the broadcast campaign, if applicable.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("broadcast_id") val broadcastId: String? = null,
-    /** Unique identifier for the template used, if applicable. */
+    /**
+     * Unique identifier for the template used, if applicable.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("template_id") val templateId: String? = null,
-    /** Tag key-value pairs associated with the email. */
+    /**
+     * Tag key-value pairs associated with the email.
+     */
     val tags: Map<String, String>? = null,
-    /** Custom headers included with the email (omitted when no custom headers are set). */
-    val headers: List<OutboundEmailEventDataHeadersItem>? = null,
+    /**
+     * Custom headers included with the email (omitted when no custom headers are set).
+     */
+    val headers: List<OutboundEmailEventDataHeadersItem>? = null
 )

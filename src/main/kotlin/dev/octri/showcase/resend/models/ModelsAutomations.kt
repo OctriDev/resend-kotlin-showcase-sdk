@@ -3,228 +3,376 @@
 
 package dev.octri.showcase.resend.models
 
-/** Typed representation of the `Automation` API schema. */
+/**
+ * Typed representation of the `Automation` API schema.
+ */
 data class Automation(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the automation. */
+    /**
+     * The ID of the automation.
+     */
     val id: String? = null,
-    /** The name of the automation. */
+    /**
+     * The name of the automation.
+     */
     val name: String? = null,
-    /** The current status of the automation. */
+    /**
+     * The current status of the automation.
+     */
     val status: AutomationStatusEnum? = null,
-    /** The date and time the automation was created. */
+    /**
+     * The date and time the automation was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /** The date and time the automation was last updated. */
+    /**
+     * The date and time the automation was last updated.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null,
-    /** The steps in the active version of the automation. */
+    /**
+     * The steps in the active version of the automation.
+     */
     val steps: List<AutomationStepResponse>? = null,
-    /** The connections between steps in the active version of the automation. */
-    val connections: List<AutomationConnection>? = null,
-)
-
-/** A connection between two steps in the automation graph. */
-data class AutomationConnection(
-    /** The `key` of the source step. */
-    val from: String,
-    /** The `key` of the target step. */
-    val to: String,
-    /** The type of connection. Defaults to `default`. */
-    val type: AutomationConnectionTypeEnum? = null,
-)
-
-/** Typed representation of the `AutomationListItem` API schema. */
-data class AutomationListItem(
-    /** The ID of the automation. */
-    val id: String? = null,
-    /** The name of the automation. */
-    val name: String? = null,
-    /** The current status of the automation. */
-    val status: AutomationListItemStatusEnum? = null,
-    /** The date and time the automation was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /** The date and time the automation was last updated. */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null,
-)
-
-/** Typed representation of the `AutomationRun` API schema. */
-data class AutomationRun(
-    /** Type of the response object. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the automation run. */
-    val id: String? = null,
-    /** The current status of the automation run. */
-    val status: AutomationRunStatusEnum? = null,
-    /** The date and time the run started. */
-    @com.fasterxml.jackson.annotation.JsonProperty("started_at") val startedAt: String? = null,
-    /** The date and time the run completed. */
-    @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: String? = null,
-    /** The date and time the run was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /** The steps executed in this run, sorted in graph order. */
-    val steps: List<AutomationRunStep>? = null,
-)
-
-/** Typed representation of the `AutomationRunListItem` API schema. */
-data class AutomationRunListItem(
-    /** The ID of the automation run. */
-    val id: String? = null,
-    /** The current status of the automation run. */
-    val status: AutomationRunListItemStatusEnum? = null,
-    /** The date and time the run started. */
-    @com.fasterxml.jackson.annotation.JsonProperty("started_at") val startedAt: String? = null,
-    /** The date and time the run completed. */
-    @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: String? = null,
-    /** The date and time the run was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-)
-
-/** A step execution within an automation run. */
-data class AutomationRunStep(
-    /** The key of the automation step. */
-    val key: String? = null,
-    /** The type of automation step. */
-    val type: AutomationRunStepTypeEnum? = null,
-    /** The execution status of this step. */
-    val status: String? = null,
-    /** The date and time the step started executing. */
-    @com.fasterxml.jackson.annotation.JsonProperty("started_at") val startedAt: String? = null,
-    /** The date and time the step completed executing. */
-    @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: String? = null,
-    /** The output produced by the step, if any. */
-    val output: Map<String, Any>? = null,
-    /** The error produced by the step, if any. */
-    val error: Map<String, Any>? = null,
-    /** The date and time the step record was created. */
-    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-)
-
-/** A step in an automation workflow. The `config` object varies based on the step `type`. */
-data class AutomationStep(
-    /** A unique key for this step within the automation graph. */
-    val key: String,
-    /** The type of automation step. */
-    val type: AutomationStepTypeEnum,
     /**
-     * Configuration for the step. Shape depends on `type`: - **trigger**: `{ event_name: string
-     * }` - **send_email**: `{ template: { id: string, variables?: object }, subject?: string,
-     * from?: string, reply_to?: string }` - **delay**: `{ duration: string }` — a human-readable
-     * duration (e.g. `"30 minutes"`) - **wait_for_event**: `{ event_name: string, timeout?: string,
-     * filter_rule?: object }` — `timeout` is a human-readable duration (e.g. `"1 hour"`) -
-     * **condition**: A rule tree with…
+     * The connections between steps in the active version of the automation.
      */
-    val config: Map<String, Any>,
-)
-
-/** A step as returned when retrieving an automation. */
-data class AutomationStepResponse(
-    /** The unique key of this step within the automation graph. */
-    val key: String? = null,
-    /** The type of automation step. */
-    val type: AutomationStepResponseTypeEnum? = null,
-    /**
-     * Configuration for the step. Shape depends on `type`. For `delay` steps, config contains `{
-     * duration: string }` with a human-readable duration (e.g. `"30 minutes"`). For
-     * `wait_for_event` steps, config contains `{ event_name: string, timeout?: string,
-     * filter_rule?: object }` where `timeout` is a human-readable duration.
-     */
-    val config: Map<String, Any>? = null,
-)
-
-/** Typed representation of the `CreateAutomationRequest` API schema. */
-data class CreateAutomationRequest(
-    /** The name of the automation. */
-    val name: String,
-    /** The steps that compose the automation workflow. Must include at least one `trigger` step. */
-    val steps: List<AutomationStep>,
-    /** The connections between steps in the automation graph. */
-    val connections: List<AutomationConnection>,
-    /** The initial status of the automation. Defaults to `disabled`. */
-    val status: CreateAutomationRequestStatusEnum? = null,
-)
-
-/** Typed representation of the `CreateAutomationResponse` API schema. */
-data class CreateAutomationResponse(
-    /** Type of the response object. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the created automation. */
-    val id: String? = null,
-)
-
-/** Typed representation of the `DeleteAutomationResponse` API schema. */
-data class DeleteAutomationResponse(
-    /** Type of the response object. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the deleted automation. */
-    val id: String? = null,
-    /** Indicates whether the automation was successfully deleted. */
-    val deleted: Boolean? = null,
-)
-
-/** Typed representation of the `DuplicateAutomationResponse` API schema. */
-data class DuplicateAutomationResponse(
-    /** Type of the response object. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the duplicated automation. */
-    val id: String? = null,
-)
-
-/** Typed representation of the `ListAutomationRunsResponse` API schema. */
-data class ListAutomationRunsResponse(
-    /** Type of the response object. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates if there are more results available. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /** Array of automation runs. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<AutomationRunListItem>? = null,
-)
-
-/** Typed representation of the `ListAutomationsResponse` API schema. */
-data class ListAutomationsResponse(
-    /** Type of the response object. */
-    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** Indicates if there are more results available. */
-    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /** Array of automations. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data")
-    val `data`: List<AutomationListItem>? = null,
+    val connections: List<AutomationConnection>? = null
 )
 
 /**
- * At least one of `name`, `status`, or `steps` and `connections` must be provided. When updating
- * the workflow graph, both `steps` and `connections` must be provided together.
+ * A connection between two steps in the automation graph.
+ */
+data class AutomationConnection(
+    /**
+     * The `key` of the source step.
+     */
+    val from: String,
+    /**
+     * The `key` of the target step.
+     */
+    val to: String,
+    /**
+     * The type of connection. Defaults to `default`.
+     */
+    val type: AutomationConnectionTypeEnum? = null
+)
+
+/**
+ * Typed representation of the `AutomationListItem` API schema.
+ */
+data class AutomationListItem(
+    /**
+     * The ID of the automation.
+     */
+    val id: String? = null,
+    /**
+     * The name of the automation.
+     */
+    val name: String? = null,
+    /**
+     * The current status of the automation.
+     */
+    val status: AutomationListItemStatusEnum? = null,
+    /**
+     * The date and time the automation was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
+    /**
+     * The date and time the automation was last updated.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: String? = null
+)
+
+/**
+ * Typed representation of the `AutomationRun` API schema.
+ */
+data class AutomationRun(
+    /**
+     * Type of the response object.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * The ID of the automation run.
+     */
+    val id: String? = null,
+    /**
+     * The current status of the automation run.
+     */
+    val status: AutomationRunStatusEnum? = null,
+    /**
+     * The date and time the run started.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("started_at") val startedAt: String? = null,
+    /**
+     * The date and time the run completed.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: String? = null,
+    /**
+     * The date and time the run was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
+    /**
+     * The steps executed in this run, sorted in graph order.
+     */
+    val steps: List<AutomationRunStep>? = null
+)
+
+/**
+ * Typed representation of the `AutomationRunListItem` API schema.
+ */
+data class AutomationRunListItem(
+    /**
+     * The ID of the automation run.
+     */
+    val id: String? = null,
+    /**
+     * The current status of the automation run.
+     */
+    val status: AutomationRunListItemStatusEnum? = null,
+    /**
+     * The date and time the run started.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("started_at") val startedAt: String? = null,
+    /**
+     * The date and time the run completed.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: String? = null,
+    /**
+     * The date and time the run was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
+)
+
+/**
+ * A step execution within an automation run.
+ */
+data class AutomationRunStep(
+    /**
+     * The key of the automation step.
+     */
+    val key: String? = null,
+    /**
+     * The type of automation step.
+     */
+    val type: AutomationRunStepTypeEnum? = null,
+    /**
+     * The execution status of this step.
+     */
+    val status: String? = null,
+    /**
+     * The date and time the step started executing.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("started_at") val startedAt: String? = null,
+    /**
+     * The date and time the step completed executing.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("completed_at") val completedAt: String? = null,
+    /**
+     * The output produced by the step, if any.
+     */
+    val output: Map<String, Any>? = null,
+    /**
+     * The error produced by the step, if any.
+     */
+    val error: Map<String, Any>? = null,
+    /**
+     * The date and time the step record was created.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null
+)
+
+/**
+ * A step in an automation workflow. The `config` object varies based on the step `type`.
+ */
+data class AutomationStep(
+    /**
+     * A unique key for this step within the automation graph.
+     */
+    val key: String,
+    /**
+     * The type of automation step.
+     */
+    val type: AutomationStepTypeEnum,
+    /**
+     * Configuration for the step. Shape depends on `type`: - **trigger**: `{ event_name: string }` - **send_email**: `{ template: { id: string, variables?: object }, subject?: string, from?: string, reply_to?: string }` - **delay**: `{ duration: string }` — a human-readable duration (e.g. `"30 minutes"`) - **wait_for_event**: `{ event_name: string, timeout?: string, filter_rule?: object }` — `timeout` is a human-readable duration (e.g. `"1 hour"`) - **condition**: A rule tree with…
+     */
+    val config: Map<String, Any>
+)
+
+/**
+ * A step as returned when retrieving an automation.
+ */
+data class AutomationStepResponse(
+    /**
+     * The unique key of this step within the automation graph.
+     */
+    val key: String? = null,
+    /**
+     * The type of automation step.
+     */
+    val type: AutomationStepResponseTypeEnum? = null,
+    /**
+     * Configuration for the step. Shape depends on `type`. For `delay` steps, config contains `{ duration: string }` with a human-readable duration (e.g. `"30 minutes"`). For `wait_for_event` steps, config contains `{ event_name: string, timeout?: string, filter_rule?: object }` where `timeout` is a human-readable duration.
+     */
+    val config: Map<String, Any>? = null
+)
+
+/**
+ * Typed representation of the `CreateAutomationRequest` API schema.
+ */
+data class CreateAutomationRequest(
+    /**
+     * The name of the automation.
+     */
+    val name: String,
+    /**
+     * The steps that compose the automation workflow. Must include at least one `trigger` step.
+     */
+    val steps: List<AutomationStep>,
+    /**
+     * The connections between steps in the automation graph.
+     */
+    val connections: List<AutomationConnection>,
+    /**
+     * The initial status of the automation. Defaults to `disabled`.
+     */
+    val status: CreateAutomationRequestStatusEnum? = null
+)
+
+/**
+ * Typed representation of the `CreateAutomationResponse` API schema.
+ */
+data class CreateAutomationResponse(
+    /**
+     * Type of the response object.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * The ID of the created automation.
+     */
+    val id: String? = null
+)
+
+/**
+ * Typed representation of the `DeleteAutomationResponse` API schema.
+ */
+data class DeleteAutomationResponse(
+    /**
+     * Type of the response object.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * The ID of the deleted automation.
+     */
+    val id: String? = null,
+    /**
+     * Indicates whether the automation was successfully deleted.
+     */
+    val deleted: Boolean? = null
+)
+
+/**
+ * Typed representation of the `DuplicateAutomationResponse` API schema.
+ */
+data class DuplicateAutomationResponse(
+    /**
+     * Type of the response object.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * The ID of the duplicated automation.
+     */
+    val id: String? = null
+)
+
+/**
+ * Typed representation of the `ListAutomationRunsResponse` API schema.
+ */
+data class ListAutomationRunsResponse(
+    /**
+     * Type of the response object.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * Indicates if there are more results available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
+    /**
+     * Array of automation runs.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<AutomationRunListItem>? = null
+)
+
+/**
+ * Typed representation of the `ListAutomationsResponse` API schema.
+ */
+data class ListAutomationsResponse(
+    /**
+     * Type of the response object.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
+    /**
+     * Indicates if there are more results available.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
+    /**
+     * Array of automations.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<AutomationListItem>? = null
+)
+
+/**
+ * At least one of `name`, `status`, or `steps` and `connections` must be provided. When updating the workflow graph, both `steps` and `connections` must be provided together.
  */
 data class PatchAutomationRequest(
-    /** The name of the automation. */
+    /**
+     * The name of the automation.
+     */
     val name: String? = null,
-    /** The status of the automation. */
+    /**
+     * The status of the automation.
+     */
     val status: PatchAutomationRequestStatusEnum? = null,
     /**
      * The steps that compose the automation workflow. Must be provided together with `connections`.
      */
     val steps: List<AutomationStep>? = null,
     /**
-     * The connections between steps in the automation graph. Must be provided together with
-     * `steps`.
+     * The connections between steps in the automation graph. Must be provided together with `steps`.
      */
-    val connections: List<AutomationConnection>? = null,
+    val connections: List<AutomationConnection>? = null
 )
 
-/** Typed representation of the `PatchAutomationResponse` API schema. */
+/**
+ * Typed representation of the `PatchAutomationResponse` API schema.
+ */
 data class PatchAutomationResponse(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the updated automation. */
-    val id: String? = null,
+    /**
+     * The ID of the updated automation.
+     */
+    val id: String? = null
 )
 
-/** Typed representation of the `StopAutomationResponse` API schema. */
+/**
+ * Typed representation of the `StopAutomationResponse` API schema.
+ */
 data class StopAutomationResponse(
-    /** Type of the response object. */
+    /**
+     * Type of the response object.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /** The ID of the stopped automation. */
+    /**
+     * The ID of the stopped automation.
+     */
     val id: String? = null,
-    /** The status of the automation after stopping. */
-    val status: String? = null,
+    /**
+     * The status of the automation after stopping.
+     */
+    val status: String? = null
 )

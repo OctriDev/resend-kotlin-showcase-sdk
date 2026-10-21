@@ -5,32 +5,58 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/** Required object value serialized in the `headers[]` wire field. */
+/**
+ * Required object value serialized in the `headers[]` wire field.
+ */
 data class OutboundEmailEventDataHeadersItem(
-    /** Required `string` value serialized in the `name` wire field. */
+    /**
+     * Required `string` value serialized in the `name` wire field.
+     */
     val name: String,
-    /** Required `string` value serialized in the `value` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String,
+    /**
+     * Required `string` value serialized in the `value` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("value") val `value`: String
 )
 
-/** Typed representation of the `OutboundEmailEventData` API schema. */
+/**
+ * Typed representation of the `OutboundEmailEventData` API schema.
+ */
 data class OutboundEmailEventData(
-    /** Unique identifier for the email. */
+    /**
+     * Unique identifier for the email.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("email_id") val emailId: String,
-    /** Timestamp when the email was created. */
+    /**
+     * Timestamp when the email was created.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Sender email address and name in the format `Name <email@domain.com>`. */
+    /**
+     * Sender email address and name in the format `Name <email@domain.com>`.
+     */
     val from: String,
-    /** Array of impacted recipient email addresses. */
+    /**
+     * Array of impacted recipient email addresses.
+     */
     val to: List<String>,
-    /** Email subject line. */
+    /**
+     * Email subject line.
+     */
     val subject: String,
-    /** Unique identifier for the broadcast campaign, if applicable. */
+    /**
+     * Unique identifier for the broadcast campaign, if applicable.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("broadcast_id") val broadcastId: String? = null,
-    /** Unique identifier for the template used, if applicable. */
+    /**
+     * Unique identifier for the template used, if applicable.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("template_id") val templateId: String? = null,
-    /** Tag key-value pairs associated with the email. */
+    /**
+     * Tag key-value pairs associated with the email.
+     */
     val tags: Map<String, String>? = null,
-    /** Custom headers included with the email (omitted when no custom headers are set). */
-    val headers: List<OutboundEmailEventDataHeadersItem>? = null,
+    /**
+     * Custom headers included with the email (omitted when no custom headers are set).
+     */
+    val headers: List<OutboundEmailEventDataHeadersItem>? = null
 )

@@ -5,62 +5,110 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/** Typed representation of the `EmailComplainedEvent` API schema. */
+/**
+ * Typed representation of the `EmailComplainedEvent` API schema.
+ */
 data class EmailComplainedEvent(
-    /** The event type. */
+    /**
+     * The event type.
+     */
     val type: EmailComplainedEventTypeEnum,
-    /** Timestamp when the event was emitted. */
+    /**
+     * Timestamp when the event was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Required object value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: OutboundEmailEventData,
+    /**
+     * Required object value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: OutboundEmailEventData
 )
 
-/** Typed representation of the `EmailDeliveredEvent` API schema. */
+/**
+ * Typed representation of the `EmailDeliveredEvent` API schema.
+ */
 data class EmailDeliveredEvent(
-    /** The event type. */
+    /**
+     * The event type.
+     */
     val type: EmailDeliveredEventTypeEnum,
-    /** Timestamp when the event was emitted. */
+    /**
+     * Timestamp when the event was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Required object value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: OutboundEmailEventData,
+    /**
+     * Required object value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: OutboundEmailEventData
 )
 
-/** Typed representation of the `EmailDeliveryDelayedEvent` API schema. */
+/**
+ * Typed representation of the `EmailDeliveryDelayedEvent` API schema.
+ */
 data class EmailDeliveryDelayedEvent(
-    /** The event type. */
+    /**
+     * The event type.
+     */
     val type: EmailDeliveryDelayedEventTypeEnum,
-    /** Timestamp when the event was emitted. */
+    /**
+     * Timestamp when the event was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Required object value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: OutboundEmailEventData,
+    /**
+     * Required object value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: OutboundEmailEventData
 )
 
-/** Typed representation of the `EmailOpenedEvent` API schema. */
+/**
+ * Typed representation of the `EmailOpenedEvent` API schema.
+ */
 data class EmailOpenedEvent(
-    /** The event type. */
+    /**
+     * The event type.
+     */
     val type: EmailOpenedEventTypeEnum,
-    /** Timestamp when the event was emitted. */
+    /**
+     * Timestamp when the event was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Required object value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: OutboundEmailEventData,
+    /**
+     * Required object value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: OutboundEmailEventData
 )
 
-/** Typed representation of the `EmailScheduledEvent` API schema. */
+/**
+ * Typed representation of the `EmailScheduledEvent` API schema.
+ */
 data class EmailScheduledEvent(
-    /** The event type. */
+    /**
+     * The event type.
+     */
     val type: EmailScheduledEventTypeEnum,
-    /** Timestamp when the event was emitted. */
+    /**
+     * Timestamp when the event was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Required object value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: OutboundEmailEventData,
+    /**
+     * Required object value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: OutboundEmailEventData
 )
 
-/** Typed representation of the `EmailSentEvent` API schema. */
+/**
+ * Typed representation of the `EmailSentEvent` API schema.
+ */
 data class EmailSentEvent(
-    /** The event type. */
+    /**
+     * The event type.
+     */
     val type: EmailSentEventTypeEnum,
-    /** Timestamp when the event was emitted. */
+    /**
+     * Timestamp when the event was emitted.
+     */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /** Required object value serialized in the `data` wire field. */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: OutboundEmailEventData,
+    /**
+     * Required object value serialized in the `data` wire field.
+     */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: OutboundEmailEventData
 )

@@ -18,312 +18,220 @@ import dev.octri.showcase.resend.Validation
 
 internal object InboxesListThreadsOperation {
     /**
-     * Lists threads in an inbox, ordered by most recent activity first. Use `folders`, `labels`, or
-     * `read` to filter the results, and use `after` or `before` to navigate by thread ID; you can
-     * pass only one cursor at a time.
+     * Lists threads in an inbox, ordered by most recent activity first. Use `folders`, `labels`, or `read` to filter the results, and use `after` or `before` to navigate by thread ID; you can pass only one cursor at a time.
      *
-     * Returns the threads in an inbox, most recently active first. A thread is a conversation made
-     * up of one or more emails. The `after` and `before` cursors take a thread ID, and only one of
-     * them can be passed. A cursor that is not a UUID, such as a date, returns a 422
-     * validation_error. A cursor thread that is not in the selected folders returns a 404. To find
-     * threads by text, sender, recipient, attachment, or date, use the search threads endpoint.
+     * Returns the threads in an inbox, most recently active first. A thread is a conversation made up of one or more emails. The `after` and `before` cursors take a thread ID, and only one of them can be passed. A cursor that is not a UUID, such as a date, returns a 422 validation_error. A cursor thread that is not in the selected folders returns a 404. To find threads by text, sender, recipient, attachment, or date, use the search threads endpoint.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
-     * @param folders Comma-separated folders to list, for example `inbox,sent`. Repeating the
-     *   parameter returns a 422 validation_error. A thread is returned when any of its emails is in
-     *   one of the folders, so a thread in `inbox` with an email you sent matches both `inbox` and
-     *   `sent`. Defaults to `inbox`, or to `inbox,archive,sent` when `labels` is set. `spam` and
-     *   `trash` are only included when you name them.
-     * @param labels Comma-separated label IDs. Returns threads with any of these labels. Up to 50
-     *   IDs. An ID that does not exist in the inbox returns a 404. Repeating the parameter returns
-     *   a 422 validation_error.
-     * @param read `true` returns threads where every email is read. `false` returns threads with at
-     *   least one unread email. Only the literal values `true` and `false` are accepted.
+     * @param folders Comma-separated folders to list, for example `inbox,sent`.
+     *   Repeating the parameter returns a 422 validation_error. A thread is returned
+     *   when any of its emails is in one of the folders, so a thread in `inbox` with
+     *   an email you sent matches both `inbox` and `sent`. Defaults to `inbox`, or to
+     *   `inbox,archive,sent` when `labels` is set. `spam` and `trash` are only
+     *   included when you name them.
+     * @param labels Comma-separated label IDs. Returns threads with any of these
+     *   labels. Up to 50 IDs. An ID that does not exist in the inbox returns a 404.
+     *   Repeating the parameter returns a 422 validation_error.
+     * @param read `true` returns threads where every email is read. `false` returns
+     *   threads with at least one unread email. Only the literal values `true` and
+     *   `false` are accepted.
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun inboxesListThreads(
-        clientConfig: ClientConfig,
-        request: Inboxes.InboxesListThreadsRequest,
-        options: RequestOptions? = null,
-    ): ListInboxThreadsResponseSuccess {
+    fun inboxesListThreads(clientConfig: ClientConfig, request: Inboxes.InboxesListThreadsRequest, options: RequestOptions? = null): ListInboxThreadsResponseSuccess {
         validateInboxesListThreadsRequest(request)
 
-        return SdkClient.request<ListInboxThreadsResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/threads",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "folders" to SdkClient.queryValue(request.folders, "form", false),
-                            "labels" to SdkClient.queryValue(request.labels, "form", false),
-                            "read" to SdkClient.queryValue(request.read, "form", true),
-                            "limit" to SdkClient.queryValue(request.limit, "form", true),
-                            "after" to SdkClient.queryValue(request.after, "form", true),
-                            "before" to SdkClient.queryValue(request.before, "form", true),
-                        ),
-                    operationId = "inboxesListThreads",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<ListInboxThreadsResponseSuccess>(SdkClient.RequestSpec("GET", "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/threads", config = clientConfig, query = mapOf("folders" to
+    SdkClient.queryValue(request.folders, "form", false), "labels" to
+    SdkClient.queryValue(request.labels, "form", false), "read" to SdkClient.queryValue(request.read, "form", true), "limit" to SdkClient.queryValue(request.limit, "form", true), "after" to SdkClient.queryValue(request.after, "form", true), "before" to
+    SdkClient.queryValue(request.before, "form", true)), operationId = "inboxesListThreads", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
+
 
     private fun validateInboxesListThreadsRequest(request: Inboxes.InboxesListThreadsRequest) {
         Validation.validateUuid("inbox_id", request.inboxId)
 
         if (request.labels != null) {
             Validation.validateItems("labels", request.labels, Validation.LengthOpts(max = 50))
-        }
+}
 
         if (request.limit != null) {
-            Validation.validateRange(
-                "limit",
-                request.limit,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
-        }
+            Validation.validateRange("limit", request.limit, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
     }
 }
 
 internal object InboxesSearchThreadsOperation {
     /**
-     * Searches an inbox’s threads by email text, sender or recipient, attachment presence, and
-     * date. Combine filters to find threads matching all specified criteria; email-level filters
-     * must match the same email, and results may lag new emails by up to about a minute. Search
-     * covers the 10,000 threads with the newest matching email when more than 10,000 threads match.
+     * Searches an inbox’s threads by email text, sender or recipient, attachment presence, and date. Combine filters to find threads matching all specified criteria; email-level filters must match the same email, and results may lag new emails by up to about a minute. Search covers the 10,000 threads with the newest matching email when more than 10,000 threads match.
      *
-     * Finds threads by the text of their emails, who sent or received them, whether they have
-     * attachments, and their dates. Results are ordered by latest activity, newest first, and
-     * paginate like the list threads endpoint, so a cursor that is not a thread ID returns a 422.
-     * Search can be up to about a minute behind new emails. Different parameters combine, so a
-     * thread must match all of them. `folders`, `labels`, and `read` apply to the thread. `query`,
-     * `from`, `to`, `cc`, `bcc`,…
+     * Finds threads by the text of their emails, who sent or received them, whether they have attachments, and their dates. Results are ordered by latest activity, newest first, and paginate like the list threads endpoint, so a cursor that is not a thread ID returns a 422. Search can be up to about a minute behind new emails. Different parameters combine, so a thread must match all of them. `folders`, `labels`, and `read` apply to the thread. `query`, `from`, `to`, `cc`, `bcc`,…
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
-     * @param query Free text to search for in the subject, body, sender, recipients, and attachment
-     *   names. Every word must match. Wrap words in double quotes to match an exact phrase. Start a
-     *   word or quoted phrase with `-` to exclude it. Max 256 characters and 32 words.
-     * @param from Comma-separated senders. Each value matches part of the sender's address or name,
-     *   without case. Returns threads that match any of them. Up to 20 values. Repeating the
-     *   parameter returns a 422 validation_error.
-     * @param to Comma-separated recipients, matched the same way as `from`. Up to 20 values.
-     *   Repeating the parameter returns a 422 validation_error.
-     * @param cc Comma-separated CC recipients, matched the same way as `from`. Up to 20 values.
-     *   Repeating the parameter returns a 422 validation_error.
-     * @param bcc Comma-separated BCC recipients, matched the same way as `from`. Up to 20 values.
-     *   Repeating the parameter returns a 422 validation_error.
-     * @param hasAttachment `true` matches emails with an attachment. `false` matches emails without
-     *   one. Only the literal values `true` and `false` are accepted.
-     * @param startDate Matches emails sent on or after this date. Accepts a date like `2026-09-01`
-     *   or an ISO 8601 timestamp, in UTC unless the timestamp has an offset. An empty value returns
-     *   a 422.
-     * @param endDate Matches emails sent on or before this date. Same formats as `start_date`. A
-     *   date covers that whole day, so `start_date=2026-09-01&end_date=2026-09-30` covers all of
-     *   September. A timestamp is used as given. An `end_date` before `start_date` returns a 422
+     * @param query Free text to search for in the subject, body, sender, recipients,
+     *   and attachment names. Every word must match. Wrap words in double quotes to
+     *   match an exact phrase. Start a word or quoted phrase with `-` to exclude it.
+     *   Max 256 characters and 32 words.
+     * @param from Comma-separated senders. Each value matches part of the sender's
+     *   address or name, without case. Returns threads that match any of them. Up to
+     *   20 values. Repeating the parameter returns a 422 validation_error.
+     * @param to Comma-separated recipients, matched the same way as `from`. Up to 20
+     *   values. Repeating the parameter returns a 422 validation_error.
+     * @param cc Comma-separated CC recipients, matched the same way as `from`. Up to
+     *   20 values. Repeating the parameter returns a 422 validation_error.
+     * @param bcc Comma-separated BCC recipients, matched the same way as `from`. Up
+     *   to 20 values. Repeating the parameter returns a 422 validation_error.
+     * @param hasAttachment `true` matches emails with an attachment. `false` matches
+     *   emails without one. Only the literal values `true` and `false` are accepted.
+     * @param startDate Matches emails sent on or after this date. Accepts a date
+     *   like `2026-09-01` or an ISO 8601 timestamp, in UTC unless the timestamp has an
+     *   offset. An empty value returns a 422.
+     * @param endDate Matches emails sent on or before this date. Same formats as
+     *   `start_date`. A date covers that whole day, so
+     *   `start_date=2026-09-01&end_date=2026-09-30` covers all of September. A
+     *   timestamp is used as given. An `end_date` before `start_date` returns a 422
      *   validation_error. An empty value returns a 422.
-     * @param folders Comma-separated folders to search, for example `inbox,sent`. Repeating the
-     *   parameter returns a 422 validation_error. A thread is returned when any of its emails is in
-     *   one of the folders. Defaults to `inbox`, or to `inbox,archive,sent` when `labels` is set.
-     *   `spam` and `trash` are only included when you name them.
-     * @param labels Comma-separated label IDs. Returns threads with any of these labels. Up to 50
-     *   IDs. An ID that does not exist in the inbox returns a 404. Repeating the parameter returns
-     *   a 422 validation_error.
-     * @param read `true` returns threads where every email is read. `false` returns threads with at
-     *   least one unread email. Only the literal values `true` and `false` are accepted.
+     * @param folders Comma-separated folders to search, for example `inbox,sent`.
+     *   Repeating the parameter returns a 422 validation_error. A thread is returned
+     *   when any of its emails is in one of the folders. Defaults to `inbox`, or to
+     *   `inbox,archive,sent` when `labels` is set. `spam` and `trash` are only
+     *   included when you name them.
+     * @param labels Comma-separated label IDs. Returns threads with any of these
+     *   labels. Up to 50 IDs. An ID that does not exist in the inbox returns a 404.
+     *   Repeating the parameter returns a 422 validation_error.
+     * @param read `true` returns threads where every email is read. `false` returns
+     *   threads with at least one unread email. Only the literal values `true` and
+     *   `false` are accepted.
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun inboxesSearchThreads(
-        clientConfig: ClientConfig,
-        request: Inboxes.InboxesSearchThreadsRequest,
-        options: RequestOptions? = null,
-    ): SearchInboxThreadsResponseSuccess {
+    fun inboxesSearchThreads(clientConfig: ClientConfig, request: Inboxes.InboxesSearchThreadsRequest, options: RequestOptions? = null): SearchInboxThreadsResponseSuccess {
         validateInboxesSearchThreadsRequest(request)
 
-        return SdkClient.request<SearchInboxThreadsResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/threads/search",
-                    config = clientConfig,
-                    query = buildInboxesSearchThreadsQuery(request),
-                    operationId = "inboxesSearchThreads",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<SearchInboxThreadsResponseSuccess>(SdkClient.RequestSpec("GET", "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/threads/search", config = clientConfig, query = buildInboxesSearchThreadsQuery(request), operationId = "inboxesSearchThreads", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
+
 
     private fun validateInboxesSearchThreadsRequest(request: Inboxes.InboxesSearchThreadsRequest) {
         validateInboxesSearchThreadsRequestPart1(request)
         validateInboxesSearchThreadsRequestPart2(request)
     }
 
-    private fun validateInboxesSearchThreadsRequestPart1(
-        request: Inboxes.InboxesSearchThreadsRequest
-    ) {
+    private fun validateInboxesSearchThreadsRequestPart1(request: Inboxes.InboxesSearchThreadsRequest) {
         Validation.validateUuid("inbox_id", request.inboxId)
 
         if (request.query != null) {
             Validation.validateLength("query", request.query, Validation.LengthOpts(max = 256))
-        }
+}
 
         if (request.from != null) {
             Validation.validateItems("from", request.from, Validation.LengthOpts(max = 20))
-        }
+}
 
         if (request.to != null) {
             Validation.validateItems("to", request.to, Validation.LengthOpts(max = 20))
-        }
+}
 
         if (request.cc != null) {
             Validation.validateItems("cc", request.cc, Validation.LengthOpts(max = 20))
-        }
+}
     }
 
-    private fun validateInboxesSearchThreadsRequestPart2(
-        request: Inboxes.InboxesSearchThreadsRequest
-    ) {
+    private fun validateInboxesSearchThreadsRequestPart2(request: Inboxes.InboxesSearchThreadsRequest) {
         if (request.bcc != null) {
             Validation.validateItems("bcc", request.bcc, Validation.LengthOpts(max = 20))
-        }
+}
 
         if (request.labels != null) {
             Validation.validateItems("labels", request.labels, Validation.LengthOpts(max = 50))
-        }
+}
 
         if (request.limit != null) {
-            Validation.validateRange(
-                "limit",
-                request.limit,
-                Validation.RangeOpts(min = 1.0, max = 100.0),
-            )
+            Validation.validateRange("limit", request.limit, Validation.RangeOpts(min = 1.0, max = 100.0))
+}
+    }
+
+
+    private fun buildInboxesSearchThreadsQuery(request: Inboxes.InboxesSearchThreadsRequest): Map<String, Any?> =
+        buildMap {
+            putAll(buildInboxesSearchThreadsQueryPart1(request))
+            putAll(buildInboxesSearchThreadsQueryPart2(request))
         }
-    }
 
-    private fun buildInboxesSearchThreadsQuery(
-        request: Inboxes.InboxesSearchThreadsRequest
-    ): Map<String, Any?> = buildMap {
-        putAll(buildInboxesSearchThreadsQueryPart1(request))
-        putAll(buildInboxesSearchThreadsQueryPart2(request))
-    }
-
-    private fun buildInboxesSearchThreadsQueryPart1(
-        request: Inboxes.InboxesSearchThreadsRequest
-    ): Map<String, Any?> =
+    private fun buildInboxesSearchThreadsQueryPart1(request: Inboxes.InboxesSearchThreadsRequest): Map<String, Any?> =
         mapOf(
             "query" to SdkClient.queryValue(request.query, "form", true),
             "from" to SdkClient.queryValue(request.from, "form", false),
             "to" to SdkClient.queryValue(request.to, "form", false),
             "cc" to SdkClient.queryValue(request.cc, "form", false),
             "bcc" to SdkClient.queryValue(request.bcc, "form", false),
-            "has_attachment" to SdkClient.queryValue(request.hasAttachment, "form", true),
-            "start_date" to SdkClient.queryValue(request.startDate, "form", true),
-            "end_date" to SdkClient.queryValue(request.endDate, "form", true),
-            "folders" to SdkClient.queryValue(request.folders, "form", false),
-            "labels" to SdkClient.queryValue(request.labels, "form", false),
+            "has_attachment" to
+    SdkClient.queryValue(request.hasAttachment, "form", true),
+            "start_date" to
+    SdkClient.queryValue(request.startDate, "form", true),
+            "end_date" to
+    SdkClient.queryValue(request.endDate, "form", true),
+            "folders" to
+    SdkClient.queryValue(request.folders, "form", false),
+            "labels" to
+    SdkClient.queryValue(request.labels, "form", false),
             "read" to SdkClient.queryValue(request.read, "form", true),
             "limit" to SdkClient.queryValue(request.limit, "form", true),
         )
 
-    private fun buildInboxesSearchThreadsQueryPart2(
-        request: Inboxes.InboxesSearchThreadsRequest
-    ): Map<String, Any?> =
+    private fun buildInboxesSearchThreadsQueryPart2(request: Inboxes.InboxesSearchThreadsRequest): Map<String, Any?> =
         mapOf(
             "after" to SdkClient.queryValue(request.after, "form", true),
-            "before" to SdkClient.queryValue(request.before, "form", true),
+            "before" to
+    SdkClient.queryValue(request.before, "form", true),
         )
 }
 
 internal object InboxesGetThreadOperation {
     /**
-     * Retrieves the summary of a single inbox thread. Use the list thread emails endpoint to
-     * retrieve the messages that make up the thread.
+     * Retrieves the summary of a single inbox thread. Use the list thread emails endpoint to retrieve the messages that make up the thread.
      *
-     * Returns the thread summary. The emails in the thread are listed with the list thread emails
-     * endpoint.
+     * Returns the thread summary. The emails in the thread are listed with the list thread emails endpoint.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      * @param threadId The Thread ID.
      */
-    fun inboxesGetThread(
-        clientConfig: ClientConfig,
-        inboxId: String,
-        threadId: String,
-        options: RequestOptions? = null,
-    ): InboxThreadSummary {
+    fun inboxesGetThread(clientConfig: ClientConfig, inboxId: String, threadId: String, options: RequestOptions? = null): InboxThreadSummary {
         Validation.validateUuid("inbox_id", inboxId)
 
         Validation.validateUuid("thread_id", threadId)
 
-        return SdkClient.request<InboxThreadSummary>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/inboxes/${SdkClient.encodePathSegment(inboxId)}/threads/${SdkClient.encodePathSegment(threadId)}",
-                    config = clientConfig,
-                    operationId = "inboxesGetThread",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<InboxThreadSummary>(SdkClient.RequestSpec("GET", "/inboxes/${SdkClient.encodePathSegment(inboxId)}/threads/${SdkClient.encodePathSegment(threadId)}", config = clientConfig, operationId = "inboxesGetThread", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 }
 
 internal object InboxesUpdateThreadOperation {
     /**
-     * Updates a thread’s read state, folder, or labels. Supply at least one of `read`, `folder`,
-     * `add_label_ids`, or `remove_label_ids`; changes apply in that order and are not atomic, so
-     * earlier changes may remain applied if a later label operation fails.
+     * Updates a thread’s read state, folder, or labels. Supply at least one of `read`, `folder`, `add_label_ids`, or `remove_label_ids`; changes apply in that order and are not atomic, so earlier changes may remain applied if a later label operation fails.
      *
-     * Marks a thread read or unread, moves it to a folder, or adds and removes labels. At least one
-     * of `read`, `folder`, `add_label_ids`, or `remove_label_ids` is required. A label ID cannot be
-     * both added and removed in the same request. Removing a label from a thread keeps the label
-     * itself. Moving a thread out of `trash` restores it and clears its deletion deadline. The
-     * changes apply in this order: `read`, `folder`, added labels, removed labels. They are not
-     * atomic, so a 404 for…
+     * Marks a thread read or unread, moves it to a folder, or adds and removes labels. At least one of `read`, `folder`, `add_label_ids`, or `remove_label_ids` is required. A label ID cannot be both added and removed in the same request. Removing a label from a thread keeps the label itself. Moving a thread out of `trash` restores it and clears its deletion deadline. The changes apply in this order: `read`, `folder`, added labels, removed labels. They are not atomic, so a 404 for…
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      * @param threadId The Thread ID.
      * @param read Marks every email in the thread read or unread.
-     * @param folder Moves the thread to this folder. `sent` is assigned automatically and cannot be
-     *   set.
-     * @param addLabelIds Label IDs to apply to the thread. Between 1 and 10 IDs. A label ID that
-     *   does not exist in the inbox returns a 404.
-     * @param removeLabelIds Label IDs to remove from the thread. Between 1 and 10 IDs. The labels
-     *   themselves are kept. A label ID that does not exist in the inbox returns a 404.
+     * @param folder Moves the thread to this folder. `sent` is assigned
+     *   automatically and cannot be set.
+     * @param addLabelIds Label IDs to apply to the thread. Between 1 and 10 IDs. A
+     *   label ID that does not exist in the inbox returns a 404.
+     * @param removeLabelIds Label IDs to remove from the thread. Between 1 and 10
+     *   IDs. The labels themselves are kept. A label ID that does not exist in the
+     *   inbox returns a 404.
      */
-    fun inboxesUpdateThread(
-        clientConfig: ClientConfig,
-        request: Inboxes.InboxesUpdateThreadRequest,
-        options: RequestOptions? = null,
-    ): InboxThreadSummary {
+    fun inboxesUpdateThread(clientConfig: ClientConfig, request: Inboxes.InboxesUpdateThreadRequest, options: RequestOptions? = null): InboxThreadSummary {
         validateInboxesUpdateThreadRequest(request)
 
-        return SdkClient.request<InboxThreadSummary>(
-                SdkClient.RequestSpec(
-                    "PATCH",
-                    "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/threads/${SdkClient.encodePathSegment(request.threadId)}",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "read" to (SdkClient.omitIfNull(request.read)),
-                            "folder" to (SdkClient.omitIfNull(request.folder)),
-                            "add_label_ids" to (SdkClient.omitIfNull(request.addLabelIds)),
-                            "remove_label_ids" to (SdkClient.omitIfNull(request.removeLabelIds)),
-                        ),
-                    operationId = "inboxesUpdateThread",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<InboxThreadSummary>(SdkClient.RequestSpec("PATCH", "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/threads/${SdkClient.encodePathSegment(request.threadId)}", config = clientConfig, body = SdkClient.bodyMap("read" to (SdkClient.omitIfNull(request.read)), "folder" to (SdkClient.omitIfNull(request.folder)), "add_label_ids" to
+    (SdkClient.omitIfNull(request.addLabelIds)), "remove_label_ids" to
+    (SdkClient.omitIfNull(request.removeLabelIds))), operationId = "inboxesUpdateThread", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
+
 
     private fun validateInboxesUpdateThreadRequest(request: Inboxes.InboxesUpdateThreadRequest) {
         Validation.validateUuid("inbox_id", request.inboxId)
@@ -331,70 +239,38 @@ internal object InboxesUpdateThreadOperation {
         Validation.validateUuid("thread_id", request.threadId)
 
         if (request.addLabelIds != null) {
-            Validation.validateItems(
-                "add_label_ids",
-                request.addLabelIds,
-                Validation.LengthOpts(min = 1, max = 10),
-            )
-        }
+            Validation.validateItems("add_label_ids", request.addLabelIds, Validation.LengthOpts(min = 1, max = 10))
+}
 
         if (request.removeLabelIds != null) {
-            Validation.validateItems(
-                "remove_label_ids",
-                request.removeLabelIds,
-                Validation.LengthOpts(min = 1, max = 10),
-            )
-        }
+            Validation.validateItems("remove_label_ids", request.removeLabelIds, Validation.LengthOpts(min = 1, max = 10))
+}
     }
 }
 
 internal object InboxesRemoveThreadOperation {
     /**
-     * Moves a thread to the `trash` folder and schedules it for deletion in 30 days. The move is
-     * reversible; update the thread’s `folder` to `inbox`, `archive`, or `spam` to restore it and
-     * clear the deletion deadline.
+     * Moves a thread to the `trash` folder and schedules it for deletion in 30 days. The move is reversible; update the thread’s `folder` to `inbox`, `archive`, or `spam` to restore it and clear the deletion deadline.
      *
-     * Moves the thread to `trash` and schedules it for deletion in 30 days. This is reversible. To
-     * restore the thread, update its `folder` to `inbox`, `archive`, or `spam`, which also clears
-     * the deletion deadline.
+     * Moves the thread to `trash` and schedules it for deletion in 30 days. This is reversible. To restore the thread, update its `folder` to `inbox`, `archive`, or `spam`, which also clears the deletion deadline.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      * @param threadId The Thread ID.
      */
-    fun inboxesRemoveThread(
-        clientConfig: ClientConfig,
-        inboxId: String,
-        threadId: String,
-        options: RequestOptions? = null,
-    ): RemoveInboxThreadResponseSuccess {
+    fun inboxesRemoveThread(clientConfig: ClientConfig, inboxId: String, threadId: String, options: RequestOptions? = null): RemoveInboxThreadResponseSuccess {
         Validation.validateUuid("inbox_id", inboxId)
 
         Validation.validateUuid("thread_id", threadId)
 
-        return SdkClient.request<RemoveInboxThreadResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "DELETE",
-                    "/inboxes/${SdkClient.encodePathSegment(inboxId)}/threads/${SdkClient.encodePathSegment(threadId)}",
-                    config = clientConfig,
-                    operationId = "inboxesRemoveThread",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<RemoveInboxThreadResponseSuccess>(SdkClient.RequestSpec("DELETE", "/inboxes/${SdkClient.encodePathSegment(inboxId)}/threads/${SdkClient.encodePathSegment(threadId)}", config = clientConfig, operationId = "inboxesRemoveThread", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 }
 
 internal object InboxesListThreadEmailsOperation {
     /**
-     * Lists the messages in a thread, ordered from oldest to newest. Use `after` with the last
-     * message ID to retrieve a newer page, or `before` with the first message ID to retrieve an
-     * older page; pass only one cursor at a time.
+     * Lists the messages in a thread, ordered from oldest to newest. Use `after` with the last message ID to retrieve a newer page, or `before` with the first message ID to retrieve an older page; pass only one cursor at a time.
      *
-     * Returns the messages of a thread, oldest first. Pass the `id` of the last message as `after`
-     * to get the next, newer page. Pass the `id` of the first message as `before` to get the
-     * previous, older page. Passing both `after` and `before`, or a cursor that is not a UUID,
-     * returns a 422. A cursor that is not a message of the thread returns a 404.
+     * Returns the messages of a thread, oldest first. Pass the `id` of the last message as `after` to get the next, newer page. Pass the `id` of the first message as `before` to get the previous, older page. Passing both `after` and `before`, or a cursor that is not a UUID, returns a 422. A cursor that is not a message of the thread returns a 404.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      * @param threadId The Thread ID.
@@ -402,182 +278,107 @@ internal object InboxesListThreadEmailsOperation {
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun inboxesListThreadEmails(
-        clientConfig: ClientConfig,
-        inboxId: String,
-        threadId: String,
-        limit: Long? = null,
-        after: String? = null,
-        before: String? = null,
-        options: RequestOptions? = null,
-    ): ListInboxThreadEmailsResponseSuccess {
+    fun inboxesListThreadEmails(clientConfig: ClientConfig, inboxId: String, threadId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListInboxThreadEmailsResponseSuccess {
         Validation.validateUuid("inbox_id", inboxId)
 
         Validation.validateUuid("thread_id", threadId)
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-        }
+}
 
-        return SdkClient.request<ListInboxThreadEmailsResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/inboxes/${SdkClient.encodePathSegment(inboxId)}/threads/${SdkClient.encodePathSegment(threadId)}/emails",
-                    config = clientConfig,
-                    query =
-                        mapOf(
-                            "limit" to SdkClient.queryValue(limit, "form", true),
-                            "after" to SdkClient.queryValue(after, "form", true),
-                            "before" to SdkClient.queryValue(before, "form", true),
-                        ),
-                    operationId = "inboxesListThreadEmails",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<ListInboxThreadEmailsResponseSuccess>(SdkClient.RequestSpec("GET", "/inboxes/${SdkClient.encodePathSegment(inboxId)}/threads/${SdkClient.encodePathSegment(threadId)}/emails", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "inboxesListThreadEmails", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 }
 
 internal object InboxesGetThreadEmailOperation {
     /**
-     * Retrieves a specific email from an inbox thread. Use the inbox, thread, and email identifiers
-     * to select the message whose details you need.
+     * Retrieves a specific email from an inbox thread. Use the inbox, thread, and email identifiers to select the message whose details you need.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      * @param threadId The Thread ID.
-     * @param emailId The Email ID, as returned in `data[].id` by the list thread emails endpoint.
+     * @param emailId The Email ID, as returned in `data[].id` by the list thread
+     *   emails endpoint.
      */
-    fun inboxesGetThreadEmail(
-        clientConfig: ClientConfig,
-        inboxId: String,
-        threadId: String,
-        emailId: String,
-        options: RequestOptions? = null,
-    ): InboxThreadEmail {
+    fun inboxesGetThreadEmail(clientConfig: ClientConfig, inboxId: String, threadId: String, emailId: String, options: RequestOptions? = null): InboxThreadEmail {
         Validation.validateUuid("inbox_id", inboxId)
 
         Validation.validateUuid("thread_id", threadId)
 
         Validation.validateUuid("email_id", emailId)
 
-        return SdkClient.request<InboxThreadEmail>(
-                SdkClient.RequestSpec(
-                    "GET",
-                    "/inboxes/${SdkClient.encodePathSegment(inboxId)}/threads/${SdkClient.encodePathSegment(threadId)}/emails/${SdkClient.encodePathSegment(emailId)}",
-                    config = clientConfig,
-                    operationId = "inboxesGetThreadEmail",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<InboxThreadEmail>(SdkClient.RequestSpec("GET", "/inboxes/${SdkClient.encodePathSegment(inboxId)}/threads/${SdkClient.encodePathSegment(threadId)}/emails/${SdkClient.encodePathSegment(emailId)}", config = clientConfig, operationId = "inboxesGetThreadEmail", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 }
 
 internal object InboxesReplyThreadEmailOperation {
     /**
-     * Submits a reply to a message in an inbox thread directly from the inbox address, without
-     * storing a draft. Use `html` or `text` for the reply body; recipients are derived from the
-     * message, with `reply_all` controlling whether other recipients are copied. The reply is
-     * threaded under the original message.
+     * Submits a reply to a message in an inbox thread directly from the inbox address, without storing a draft. Use `html` or `text` for the reply body; recipients are derived from the message, with `reply_all` controlling whether other recipients are copied. The reply is threaded under the original message.
      *
-     * Sends a reply from the inbox address right away, with no stored draft. The `to` recipients
-     * come from the message you reply to. For a message the inbox received, the reply goes to its
-     * `Reply-To` addresses, or to its sender when it has no `Reply-To`. For a message the inbox
-     * sent, the reply goes to that message's `to` recipients. Set `reply_all` to also copy the
-     * other recipients of the message. The reply threads under the message through the
-     * `In-Reply-To` and `References`…
+     * Sends a reply from the inbox address right away, with no stored draft. The `to` recipients come from the message you reply to. For a message the inbox received, the reply goes to its `Reply-To` addresses, or to its sender when it has no `Reply-To`. For a message the inbox sent, the reply goes to that message's `to` recipients. Set `reply_all` to also copy the other recipients of the message. The reply threads under the message through the `In-Reply-To` and `References`…
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      * @param threadId The Thread ID.
-     * @param emailId The Email ID of the message to reply to, as returned in `data[].id` by the
-     *   list thread emails endpoint.
-     * @param idempotencyKey A unique key for the request, so the reply is sent only once. A retry
-     *   with the same key within 24 hours returns the first successful (2xx) response, with the
-     *   `idempotent-replayed: true` header. A failed request is not stored, so it can be retried
-     *   with the same key. Reusing the key with a different body, or while the first request is
-     *   still running, returns a 409. An empty key, or one longer than 256 characters, returns a
-     *   400 `invalid_idempotency_key`. Learn more
-     * @param cc CC recipient email address. For multiple addresses, send as an array of strings.
-     *   Without `reply_all`, the reply copies only these addresses. With `reply_all`, these
-     *   addresses are merged with the copied recipients, without duplicates. `cc` and `bcc`
-     *   combined must be fewer than 50 addresses. After the `to` recipients are added, the reply
-     *   cannot exceed 50 recipients. Each address is `email@example.com` or `Name
-     *   <email@example.com>`. An address that is not valid returns a 422.
-     * @param bcc BCC recipient email address. For multiple addresses, send as an array of strings.
-     *   BCC recipients of the original message are never copied. Each address is
-     *   `email@example.com` or `Name <email@example.com>`. An address that is not valid returns
-     *   a 422.
+     * @param emailId The Email ID of the message to reply to, as returned in
+     *   `data[].id` by the list thread emails endpoint.
+     * @param idempotencyKey A unique key for the request, so the reply is sent only
+     *   once. A retry with the same key within 24 hours returns the first successful
+     *   (2xx) response, with the `idempotent-replayed: true` header. A failed request
+     *   is not stored, so it can be retried with the same key. Reusing the key with a
+     *   different body, or while the first request is still running, returns a 409. An
+     *   empty key, or one longer than 256 characters, returns a 400
+     *   `invalid_idempotency_key`. Learn more
+     * @param cc CC recipient email address. For multiple addresses, send as an array
+     *   of strings. Without `reply_all`, the reply copies only these addresses. With
+     *   `reply_all`, these addresses are merged with the copied recipients, without
+     *   duplicates. `cc` and `bcc` combined must be fewer than 50 addresses. After the
+     *   `to` recipients are added, the reply cannot exceed 50 recipients. Each address
+     *   is `email@example.com` or `Name <email@example.com>`. An address that is not
+     *   valid returns a 422.
+     * @param bcc BCC recipient email address. For multiple addresses, send as an
+     *   array of strings. BCC recipients of the original message are never copied.
+     *   Each address is `email@example.com` or `Name <email@example.com>`. An address
+     *   that is not valid returns a 422.
      * @param html The HTML body of the reply.
      * @param text The plain-text body of the reply.
-     * @param subject The subject of the reply. Cannot be only whitespace or contain a line break.
-     *   When omitted, the thread subject is used, prefixed with `Re:` if it does not already start
-     *   with it.
-     * @param replyAll Reply to everyone on the original message. For a message the inbox received,
-     *   the reply goes to its `Reply-To` addresses, or to its sender when it has none, and copies
-     *   the other addresses of its `To` header and its `cc` recipients in `cc`. For a message the
-     *   inbox sent, the reply goes to that message's `Reply-To` addresses when they are not the
-     *   inbox address, otherwise to its `to` recipients, and copies its `cc` recipients. The inbox
-     *   address is always excluded, and duplicates…
-     * @param attachments Files to attach, as on `POST /emails`. Each one needs `content` or `path`.
-     *   Up to 10 files. The `content` of all files can total at most 25 MB. A `path` file counts
-     *   toward the 10 files only, because it is fetched when the email is sent. An empty file, a
-     *   blocked file type, a `path` that is not an `http` or `https` URL or that points to
-     *   `localhost`, `127.0.0.1` or `0.0.0.0`, or a `content_type` that is not a valid MIME type
+     * @param subject The subject of the reply. Cannot be only whitespace or contain
+     *   a line break. When omitted, the thread subject is used, prefixed with `Re:` if
+     *   it does not already start with it.
+     * @param replyAll Reply to everyone on the original message. For a message the
+     *   inbox received, the reply goes to its `Reply-To` addresses, or to its sender
+     *   when it has none, and copies the other addresses of its `To` header and its
+     *   `cc` recipients in `cc`. For a message the inbox sent, the reply goes to that
+     *   message's `Reply-To` addresses when they are not the inbox address, otherwise
+     *   to its `to` recipients, and copies its `cc` recipients. The inbox address is
+     *   always excluded, and duplicates…
+     * @param attachments Files to attach, as on `POST /emails`. Each one needs
+     *   `content` or `path`. Up to 10 files. The `content` of all files can total at
+     *   most 25 MB. A `path` file counts toward the 10 files only, because it is
+     *   fetched when the email is sent. An empty file, a blocked file type, a `path`
+     *   that is not an `http` or `https` URL or that points to `localhost`,
+     *   `127.0.0.1` or `0.0.0.0`, or a `content_type` that is not a valid MIME type
      *   returns a 422.
-     * @param headers Custom headers to add to the email. The `In-Reply-To`, `References` and
-     *   `Reply-To` headers are set by Resend and cannot be set here. Sending one of them, in any
-     *   letter case, returns a 422. Header names cannot be empty, and names and values cannot
-     *   contain line breaks or null characters, or the request returns a 422. `null` means no
-     *   custom headers.
+     * @param headers Custom headers to add to the email. The `In-Reply-To`,
+     *   `References` and `Reply-To` headers are set by Resend and cannot be set here.
+     *   Sending one of them, in any letter case, returns a 422. Header names cannot be
+     *   empty, and names and values cannot contain line breaks or null characters, or
+     *   the request returns a 422. `null` means no custom headers.
      */
-    fun inboxesReplyThreadEmail(
-        clientConfig: ClientConfig,
-        request: Inboxes.InboxesReplyThreadEmailRequest,
-        options: RequestOptions? = null,
-    ): ReplyInboxThreadEmailResponseSuccess {
+    fun inboxesReplyThreadEmail(clientConfig: ClientConfig, request: Inboxes.InboxesReplyThreadEmailRequest, options: RequestOptions? = null): ReplyInboxThreadEmailResponseSuccess {
         validateInboxesReplyThreadEmailRequest(request)
 
-        return SdkClient.request<ReplyInboxThreadEmailResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/threads/${SdkClient.encodePathSegment(request.threadId)}/emails/${SdkClient.encodePathSegment(request.emailId)}/reply",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "cc" to (request.cc ?: SdkClient.SdkOptional.Omitted),
-                            "bcc" to (request.bcc ?: SdkClient.SdkOptional.Omitted),
-                            "html" to (SdkClient.omitIfNull(request.html)),
-                            "text" to (SdkClient.omitIfNull(request.text)),
-                            "subject" to (SdkClient.omitIfNull(request.subject)),
-                            "reply_all" to (SdkClient.omitIfNull(request.replyAll)),
-                            "attachments" to (request.attachments ?: SdkClient.SdkOptional.Omitted),
-                            "headers" to (request.headers ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "inboxesReplyThreadEmail",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Idempotency-Key" to
-                                SdkClient.headerValue(request.idempotencyKey, false)
-                        ),
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<ReplyInboxThreadEmailResponseSuccess>(SdkClient.RequestSpec("POST", "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/threads/${SdkClient.encodePathSegment(request.threadId)}/emails/${SdkClient.encodePathSegment(request.emailId)}/reply", config = clientConfig, body = SdkClient.bodyMap("cc" to (request.cc ?: SdkClient.SdkOptional.Omitted), "bcc" to (request.bcc ?: SdkClient.SdkOptional.Omitted), "html" to (SdkClient.omitIfNull(request.html)), "text" to (SdkClient.omitIfNull(request.text)), "subject" to (SdkClient.omitIfNull(request.subject)), "reply_all" to (SdkClient.omitIfNull(request.replyAll)), "attachments" to
+    (request.attachments ?: SdkClient.SdkOptional.Omitted), "headers" to
+    (request.headers ?: SdkClient.SdkOptional.Omitted)), operationId = "inboxesReplyThreadEmail", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Idempotency-Key" to SdkClient.headerValue(request.idempotencyKey, false)), options = options)).data
     }
 
-    private fun validateInboxesReplyThreadEmailRequest(
-        request: Inboxes.InboxesReplyThreadEmailRequest
-    ) {
+
+    private fun validateInboxesReplyThreadEmailRequest(request: Inboxes.InboxesReplyThreadEmailRequest) {
         validateInboxesReplyThreadEmailRequestPart1(request)
         validateInboxesReplyThreadEmailRequestPart2(request)
     }
 
-    private fun validateInboxesReplyThreadEmailRequestPart1(
-        request: Inboxes.InboxesReplyThreadEmailRequest
-    ) {
+    private fun validateInboxesReplyThreadEmailRequestPart1(request: Inboxes.InboxesReplyThreadEmailRequest) {
         Validation.validateUuid("inbox_id", request.inboxId)
 
         Validation.validateUuid("thread_id", request.threadId)
@@ -585,134 +386,89 @@ internal object InboxesReplyThreadEmailOperation {
         Validation.validateUuid("email_id", request.emailId)
 
         if (request.idempotencyKey != null) {
-            Validation.validateLength(
-                "Idempotency-Key",
-                request.idempotencyKey,
-                Validation.LengthOpts(min = 1, max = 256),
-            )
-        }
+            Validation.validateLength("Idempotency-Key", request.idempotencyKey, Validation.LengthOpts(min = 1, max = 256))
+}
 
         val ccValue = request.cc?.getOrNull()
-        if (ccValue != null) {
+if (ccValue != null) {
             Validation.validateItems("cc", ccValue, Validation.LengthOpts(max = 49))
-        }
+}
     }
 
-    private fun validateInboxesReplyThreadEmailRequestPart2(
-        request: Inboxes.InboxesReplyThreadEmailRequest
-    ) {
+    private fun validateInboxesReplyThreadEmailRequestPart2(request: Inboxes.InboxesReplyThreadEmailRequest) {
         val bccValue = request.bcc?.getOrNull()
-        if (bccValue != null) {
+if (bccValue != null) {
             Validation.validateItems("bcc", bccValue, Validation.LengthOpts(max = 49))
-        }
+}
 
         if (request.subject != null) {
-            Validation.validateLength(
-                "subject",
-                request.subject,
-                Validation.LengthOpts(min = 1, max = 2000),
-            )
-        }
+            Validation.validateLength("subject", request.subject, Validation.LengthOpts(min = 1, max = 2000))
+}
     }
 }
 
 internal object InboxesForwardThreadEmailOperation {
     /**
-     * Submits a forward of a message from the inbox address directly, without storing a draft.
-     * Supply `to` recipients and optionally add a note with `html` or `text`; the original message
-     * is quoted and its attachments are included. Added attachments share the original message's
-     * limit of 10 files and 25 MB of content.
+     * Submits a forward of a message from the inbox address directly, without storing a draft. Supply `to` recipients and optionally add a note with `html` or `text`; the original message is quoted and its attachments are included. Added attachments share the original message's limit of 10 files and 25 MB of content.
      *
-     * Forwards a message from the inbox address right away, with no stored draft. The original
-     * message is quoted under a forwarded-message banner, below the optional `html` or `text` note.
-     * The attachments of the original message are sent with the forward, together with any
-     * `attachments` you add. The request fails when they exceed 10 files or 25 MB of `content` in
-     * total. An original attachment that was sent from a URL (`path`) cannot be forwarded, and the
-     * request returns a 422. The…
+     * Forwards a message from the inbox address right away, with no stored draft. The original message is quoted under a forwarded-message banner, below the optional `html` or `text` note. The attachments of the original message are sent with the forward, together with any `attachments` you add. The request fails when they exceed 10 files or 25 MB of `content` in total. An original attachment that was sent from a URL (`path`) cannot be forwarded, and the request returns a 422. The…
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      * @param threadId The Thread ID.
-     * @param emailId The Email ID of the message to forward, as returned in `data[].id` by the list
-     *   thread emails endpoint.
-     * @param to Recipient email address. For multiple addresses, send as an array of strings. Must
-     *   name at least one address. `to`, `cc` and `bcc` combined cannot exceed 50 recipients. Each
-     *   address is `email@example.com` or `Name <email@example.com>`. An address that is not valid
-     *   returns a 422.
-     * @param idempotencyKey A unique key for the request, so the forward is sent only once. A retry
-     *   with the same key within 24 hours returns the first successful (2xx) response, with the
-     *   `idempotent-replayed: true` header. A failed request is not stored, so it can be retried
-     *   with the same key. Reusing the key with a different body, or while the first request is
-     *   still running, returns a 409. An empty key, or one longer than 256 characters, returns a
-     *   400 `invalid_idempotency_key`. Learn more
-     * @param cc CC recipient email address. For multiple addresses, send as an array of strings.
-     *   Counts toward the 50-recipient limit. Each address is `email@example.com` or `Name
+     * @param emailId The Email ID of the message to forward, as returned in
+     *   `data[].id` by the list thread emails endpoint.
+     * @param to Recipient email address. For multiple addresses, send as an array of
+     *   strings. Must name at least one address. `to`, `cc` and `bcc` combined cannot
+     *   exceed 50 recipients. Each address is `email@example.com` or `Name
      *   <email@example.com>`. An address that is not valid returns a 422.
-     * @param bcc BCC recipient email address. For multiple addresses, send as an array of strings.
-     *   Counts toward the 50-recipient limit. Each address is `email@example.com` or `Name
-     *   <email@example.com>`. An address that is not valid returns a 422.
+     * @param idempotencyKey A unique key for the request, so the forward is sent
+     *   only once. A retry with the same key within 24 hours returns the first
+     *   successful (2xx) response, with the `idempotent-replayed: true` header. A
+     *   failed request is not stored, so it can be retried with the same key. Reusing
+     *   the key with a different body, or while the first request is still running,
+     *   returns a 409. An empty key, or one longer than 256 characters, returns a 400
+     *   `invalid_idempotency_key`. Learn more
+     * @param cc CC recipient email address. For multiple addresses, send as an array
+     *   of strings. Counts toward the 50-recipient limit. Each address is
+     *   `email@example.com` or `Name <email@example.com>`. An address that is not
+     *   valid returns a 422.
+     * @param bcc BCC recipient email address. For multiple addresses, send as an
+     *   array of strings. Counts toward the 50-recipient limit. Each address is
+     *   `email@example.com` or `Name <email@example.com>`. An address that is not
+     *   valid returns a 422.
      * @param html An HTML note sent above the quoted original.
      * @param text A plain-text note sent above the quoted original.
-     * @param subject The subject of the forward. Cannot be only whitespace or contain a line break.
-     *   When omitted, the thread subject is used, prefixed with `Fwd:` if it does not already start
-     *   with it.
-     * @param attachments Files to attach, as on `POST /emails`. Each one needs `content` or `path`.
-     *   They share one limit with the attachments of the original message, which the forward also
-     *   sends. Together they can have up to 10 files and at most 25 MB of `content`. A `path` file
-     *   counts toward the 10 files only, because it is fetched when the email is sent. An empty
-     *   file, a blocked file type, a `path` that is not an `http` or `https` URL or that points to
+     * @param subject The subject of the forward. Cannot be only whitespace or
+     *   contain a line break. When omitted, the thread subject is used, prefixed with
+     *   `Fwd:` if it does not already start with it.
+     * @param attachments Files to attach, as on `POST /emails`. Each one needs
+     *   `content` or `path`. They share one limit with the attachments of the original
+     *   message, which the forward also sends. Together they can have up to 10 files
+     *   and at most 25 MB of `content`. A `path` file counts toward the 10 files only,
+     *   because it is fetched when the email is sent. An empty file, a blocked file
+     *   type, a `path` that is not an `http` or `https` URL or that points to
      *   `localhost`, `127.0.0.1` or `0.0.0.0`, or a…
-     * @param headers Custom headers to add to the email. The `In-Reply-To`, `References` and
-     *   `Reply-To` headers are set by Resend and cannot be set here. Sending one of them, in any
-     *   letter case, returns a 422. Header names cannot be empty, and names and values cannot
-     *   contain line breaks or null characters, or the request returns a 422. `null` means no
-     *   custom headers.
+     * @param headers Custom headers to add to the email. The `In-Reply-To`,
+     *   `References` and `Reply-To` headers are set by Resend and cannot be set here.
+     *   Sending one of them, in any letter case, returns a 422. Header names cannot be
+     *   empty, and names and values cannot contain line breaks or null characters, or
+     *   the request returns a 422. `null` means no custom headers.
      */
-    fun inboxesForwardThreadEmail(
-        clientConfig: ClientConfig,
-        request: Inboxes.InboxesForwardThreadEmailRequest,
-        options: RequestOptions? = null,
-    ): ForwardInboxThreadEmailResponseSuccess {
+    fun inboxesForwardThreadEmail(clientConfig: ClientConfig, request: Inboxes.InboxesForwardThreadEmailRequest, options: RequestOptions? = null): ForwardInboxThreadEmailResponseSuccess {
         validateInboxesForwardThreadEmailRequest(request)
 
-        return SdkClient.request<ForwardInboxThreadEmailResponseSuccess>(
-                SdkClient.RequestSpec(
-                    "POST",
-                    "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/threads/${SdkClient.encodePathSegment(request.threadId)}/emails/${SdkClient.encodePathSegment(request.emailId)}/forward",
-                    config = clientConfig,
-                    body =
-                        SdkClient.bodyMap(
-                            "to" to (request.to),
-                            "cc" to (request.cc ?: SdkClient.SdkOptional.Omitted),
-                            "bcc" to (request.bcc ?: SdkClient.SdkOptional.Omitted),
-                            "html" to (SdkClient.omitIfNull(request.html)),
-                            "text" to (SdkClient.omitIfNull(request.text)),
-                            "subject" to (SdkClient.omitIfNull(request.subject)),
-                            "attachments" to (request.attachments ?: SdkClient.SdkOptional.Omitted),
-                            "headers" to (request.headers ?: SdkClient.SdkOptional.Omitted),
-                        ),
-                    operationId = "inboxesForwardThreadEmail",
-                    decoder = SdkClient.ResponseDecoder.JSON,
-                    extraHeaders =
-                        SdkClient.headers(
-                            "Idempotency-Key" to
-                                SdkClient.headerValue(request.idempotencyKey, false)
-                        ),
-                    options = options,
-                )
-            )
-            .data
+        return SdkClient.request<ForwardInboxThreadEmailResponseSuccess>(SdkClient.RequestSpec("POST", "/inboxes/${SdkClient.encodePathSegment(request.inboxId)}/threads/${SdkClient.encodePathSegment(request.threadId)}/emails/${SdkClient.encodePathSegment(request.emailId)}/forward", config = clientConfig, body = SdkClient.bodyMap("to" to (request.to), "cc" to (request.cc ?: SdkClient.SdkOptional.Omitted), "bcc" to (request.bcc ?: SdkClient.SdkOptional.Omitted), "html" to (SdkClient.omitIfNull(request.html)), "text" to (SdkClient.omitIfNull(request.text)), "subject" to (SdkClient.omitIfNull(request.subject)), "attachments" to
+    (request.attachments ?: SdkClient.SdkOptional.Omitted), "headers" to
+    (request.headers ?: SdkClient.SdkOptional.Omitted)), operationId = "inboxesForwardThreadEmail", decoder = SdkClient.ResponseDecoder.JSON, extraHeaders = SdkClient.headers("Idempotency-Key" to SdkClient.headerValue(request.idempotencyKey, false)), options = options)).data
     }
 
-    private fun validateInboxesForwardThreadEmailRequest(
-        request: Inboxes.InboxesForwardThreadEmailRequest
-    ) {
+
+    private fun validateInboxesForwardThreadEmailRequest(request: Inboxes.InboxesForwardThreadEmailRequest) {
         validateInboxesForwardThreadEmailRequestPart1(request)
         validateInboxesForwardThreadEmailRequestPart2(request)
     }
 
-    private fun validateInboxesForwardThreadEmailRequestPart1(
-        request: Inboxes.InboxesForwardThreadEmailRequest
-    ) {
+    private fun validateInboxesForwardThreadEmailRequestPart1(request: Inboxes.InboxesForwardThreadEmailRequest) {
         Validation.validateUuid("inbox_id", request.inboxId)
 
         Validation.validateUuid("thread_id", request.threadId)
@@ -722,33 +478,23 @@ internal object InboxesForwardThreadEmailOperation {
         Validation.validateItems("to", request.to, Validation.LengthOpts(min = 1, max = 50))
 
         if (request.idempotencyKey != null) {
-            Validation.validateLength(
-                "Idempotency-Key",
-                request.idempotencyKey,
-                Validation.LengthOpts(min = 1, max = 256),
-            )
-        }
+            Validation.validateLength("Idempotency-Key", request.idempotencyKey, Validation.LengthOpts(min = 1, max = 256))
+}
     }
 
-    private fun validateInboxesForwardThreadEmailRequestPart2(
-        request: Inboxes.InboxesForwardThreadEmailRequest
-    ) {
+    private fun validateInboxesForwardThreadEmailRequestPart2(request: Inboxes.InboxesForwardThreadEmailRequest) {
         val ccValue = request.cc?.getOrNull()
-        if (ccValue != null) {
+if (ccValue != null) {
             Validation.validateItems("cc", ccValue, Validation.LengthOpts(max = 50))
-        }
+}
 
         val bccValue = request.bcc?.getOrNull()
-        if (bccValue != null) {
+if (bccValue != null) {
             Validation.validateItems("bcc", bccValue, Validation.LengthOpts(max = 50))
-        }
+}
 
         if (request.subject != null) {
-            Validation.validateLength(
-                "subject",
-                request.subject,
-                Validation.LengthOpts(min = 1, max = 2000),
-            )
-        }
+            Validation.validateLength("subject", request.subject, Validation.LengthOpts(min = 1, max = 2000))
+}
     }
 }
