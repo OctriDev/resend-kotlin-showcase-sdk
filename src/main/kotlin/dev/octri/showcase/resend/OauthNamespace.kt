@@ -16,7 +16,7 @@ class OauthNamespace(private val clientConfig: ClientConfig) {
      * Revokes an OAuth grant, removing the authorization associated with it. Supply the grant's ID to identify which authorization to revoke. The response includes the revocation time and reason.
      */
     fun revokeGrant(oauthGrantId: String, options: RequestOptions? = null): RevokeOAuthGrantResponse {
-        return dev.octri.showcase.resend.methods.Oauth.revokeGrant(clientConfig, oauthGrantId, options)
+        return dev.octri.showcase.resend.methods.Oauth.revokeOauthGrant(clientConfig, oauthGrantId, options)
     }
 
 }

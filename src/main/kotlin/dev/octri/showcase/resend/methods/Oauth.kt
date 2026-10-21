@@ -39,8 +39,8 @@ object Oauth {
      *
      * @param oauthGrantId The OAuth grant ID.
      */
-    fun revokeGrant(clientConfig: ClientConfig, oauthGrantId: String, options: RequestOptions? = null): RevokeOAuthGrantResponse {
-        return SdkClient.request<RevokeOAuthGrantResponse>(SdkClient.RequestSpec("DELETE", "/oauth/grants/${SdkClient.encodePathSegment(oauthGrantId)}", config = clientConfig, operationId = "revokeGrant", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun revokeOauthGrant(clientConfig: ClientConfig, oauthGrantId: String, options: RequestOptions? = null): RevokeOAuthGrantResponse {
+        return SdkClient.request<RevokeOAuthGrantResponse>(SdkClient.RequestSpec("DELETE", "/oauth/grants/${SdkClient.encodePathSegment(oauthGrantId)}", config = clientConfig, operationId = "revokeOauthGrant", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
     }
 
 
