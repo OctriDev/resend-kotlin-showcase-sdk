@@ -13,42 +13,87 @@ import dev.octri.showcase.resend.Validation
 
 internal object InboxesGetAgentOperation {
     /**
-     * Retrieves the agent settings for an inbox. An inbox without a configured agent has null `instructions` and `tone` values and an empty `enabled_actions` array.
+     * Retrieves the agent settings for an inbox. An inbox without a configured agent has null
+     * `instructions` and `tone` values and an empty `enabled_actions` array.
      *
-     * Returns the agent settings of the inbox. An inbox without a configured agent returns empty settings: `instructions` and `tone` are null and `enabled_actions` is an empty array.
+     * Returns the agent settings of the inbox. An inbox without a configured agent returns empty
+     * settings: `instructions` and `tone` are null and `enabled_actions` is an empty array.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      */
-    fun inboxesGetAgent(clientConfig: ClientConfig, inboxId: String, options: RequestOptions? = null): InboxAgent {
+    fun inboxesGetAgent(
+        clientConfig: ClientConfig,
+        inboxId: String,
+        options: RequestOptions? = null,
+    ): InboxAgent {
         Validation.validateUuid("inbox_id", inboxId)
 
-        return SdkClient.request<InboxAgent>(SdkClient.RequestSpec("GET", "/inboxes/${SdkClient.encodePathSegment(inboxId)}/agent", config = clientConfig, operationId = "inboxesGetAgent", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+        return SdkClient.request<InboxAgent>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/inboxes/${SdkClient.encodePathSegment(inboxId)}/agent",
+                    config = clientConfig,
+                    operationId = "inboxesGetAgent",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 }
 
 internal object InboxesUpdateAgentOperation {
     /**
-     * Updates the agent settings for an inbox, creating an agent if one is not configured. Provide at least one of `instructions`, `tone`, or `enabled_actions`; omitted fields keep their current values.
+     * Updates the agent settings for an inbox, creating an agent if one is not configured. Provide
+     * at least one of `instructions`, `tone`, or `enabled_actions`; omitted fields keep their
+     * current values.
      *
-     * Updates the agent settings of the inbox. The agent is created when the inbox has none. Omitted fields keep their current value.
+     * Updates the agent settings of the inbox. The agent is created when the inbox has none.
+     * Omitted fields keep their current value.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
-     * @param instructions Instructions the agent follows when it handles the threads
-     *   of the inbox. Max 4000 characters. Leading and trailing whitespace is trimmed,
-     *   and the trimmed value must not be empty. Send null to clear the instructions.
+     * @param instructions Instructions the agent follows when it handles the threads of the inbox.
+     *   Max 4000 characters. Leading and trailing whitespace is trimmed, and the trimmed value must
+     *   not be empty. Send null to clear the instructions.
      * @param tone The tone the agent writes in. Send null to clear the tone.
-     * @param enabledActions The actions the agent can take. Replaces the whole set.
-     *   Duplicates are removed. Send an empty array to disable all actions.
+     * @param enabledActions The actions the agent can take. Replaces the whole set. Duplicates are
+     *   removed. Send an empty array to disable all actions.
      */
-    fun inboxesUpdateAgent(clientConfig: ClientConfig, inboxId: String, instructions: SdkClient.SdkOptional<String?>? = null, tone: SdkClient.SdkOptional<String?>? = null, enabledActions: List<UpdateInboxAgentOptionsEnabledActionsItemEnum>? = null, options: RequestOptions? = null): UpdateInboxAgentResponseSuccess {
+    fun inboxesUpdateAgent(
+        clientConfig: ClientConfig,
+        inboxId: String,
+        instructions: SdkClient.SdkOptional<String?>? = null,
+        tone: SdkClient.SdkOptional<String?>? = null,
+        enabledActions: List<UpdateInboxAgentOptionsEnabledActionsItemEnum>? = null,
+        options: RequestOptions? = null,
+    ): UpdateInboxAgentResponseSuccess {
         Validation.validateUuid("inbox_id", inboxId)
 
         val instructionsValue = instructions?.getOrNull()
-if (instructionsValue != null) {
-            Validation.validateLength("instructions", instructionsValue, Validation.LengthOpts(min = 1, max = 4000))
-}
+        if (instructionsValue != null) {
+            Validation.validateLength(
+                "instructions",
+                instructionsValue,
+                Validation.LengthOpts(min = 1, max = 4000),
+            )
+        }
 
-        return SdkClient.request<UpdateInboxAgentResponseSuccess>(SdkClient.RequestSpec("PATCH", "/inboxes/${SdkClient.encodePathSegment(inboxId)}/agent", config = clientConfig, body = SdkClient.bodyMap("instructions" to
-    (instructions ?: SdkClient.SdkOptional.Omitted), "tone" to (tone ?: SdkClient.SdkOptional.Omitted), "enabled_actions" to (SdkClient.omitIfNull(enabledActions))), operationId = "inboxesUpdateAgent", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+        return SdkClient.request<UpdateInboxAgentResponseSuccess>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/inboxes/${SdkClient.encodePathSegment(inboxId)}/agent",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "instructions" to (instructions ?: SdkClient.SdkOptional.Omitted),
+                            "tone" to (tone ?: SdkClient.SdkOptional.Omitted),
+                            "enabled_actions" to (SdkClient.omitIfNull(enabledActions)),
+                        ),
+                    operationId = "inboxesUpdateAgent",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 }

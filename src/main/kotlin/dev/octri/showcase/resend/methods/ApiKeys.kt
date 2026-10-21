@@ -15,77 +15,130 @@ import dev.octri.showcase.resend.Validation
 
 object ApiKeys {
 
-
     /**
-     * Creates a new API key. Supply a `name` and choose whether the key has full access or is restricted to sending emails; a sending-only key can be limited to a specific domain. The response includes the key token, so store it securely when you create the key.
+     * Creates a new API key. Supply a `name` and choose whether the key has full access or is
+     * restricted to sending emails; a sending-only key can be limited to a specific domain. The
+     * response includes the key token, so store it securely when you create the key.
      *
      * @param name The API key name.
-     * @param permission The API key can have full access to Resend’s API or be only
-     *   restricted to send emails. * full_access - Can create, delete, get, and update
-     *   any resource. * sending_access - Can only send emails.
-     * @param domainId Restrict an API key to send emails only from a specific
-     *   domain. Only used when the permission is sending_access.
+     * @param permission The API key can have full access to Resend’s API or be only restricted to
+     *   send emails. * full_access - Can create, delete, get, and update any resource. *
+     *   sending_access - Can only send emails.
+     * @param domainId Restrict an API key to send emails only from a specific domain. Only used
+     *   when the permission is sending_access.
      */
-    fun apiKeysCreate(clientConfig: ClientConfig, name: String, permission: CreateApiKeyRequestPermissionEnum? = null, domainId: String? = null, options: RequestOptions? = null): CreateApiKeyResponse {
-        return SdkClient.request<CreateApiKeyResponse>(SdkClient.RequestSpec("POST", "/api-keys", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "permission" to (SdkClient.omitIfNull(permission)), "domain_id" to (SdkClient.omitIfNull(domainId))), operationId = "apiKeysCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun apiKeysCreate(
+        clientConfig: ClientConfig,
+        name: String,
+        permission: CreateApiKeyRequestPermissionEnum? = null,
+        domainId: String? = null,
+        options: RequestOptions? = null,
+    ): CreateApiKeyResponse {
+        return SdkClient.request<CreateApiKeyResponse>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/api-keys",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (name),
+                            "permission" to (SdkClient.omitIfNull(permission)),
+                            "domain_id" to (SdkClient.omitIfNull(domainId)),
+                        ),
+                    operationId = "apiKeysCreate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Lists API keys available to the authenticated user. Use `after` or `before` to navigate the results with a cursor, and `limit` to control the number of items returned.
+     * Lists API keys available to the authenticated user. Use `after` or `before` to navigate the
+     * results with a cursor, and `limit` to control the number of items returned.
      *
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun apiKeysList(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListApiKeysResponse {
+    fun apiKeysList(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListApiKeysResponse {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
-        return SdkClient.request<ListApiKeysResponse>(SdkClient.RequestSpec("GET", "/api-keys", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "apiKeysList", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+        return SdkClient.request<ListApiKeysResponse>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/api-keys",
+                    config = clientConfig,
+                    query =
+                        mapOf(
+                            "limit" to SdkClient.queryValue(limit, "form", true),
+                            "after" to SdkClient.queryValue(after, "form", true),
+                            "before" to SdkClient.queryValue(before, "form", true),
+                        ),
+                    operationId = "apiKeysList",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Updates the name of an existing API key. Supply the new `name` in the request body and the key's ID in the path. The response identifies the updated API key.
+     * Updates the name of an existing API key. Supply the new `name` in the request body and the
+     * key's ID in the path. The response identifies the updated API key.
      *
      * @param apiKeyId The API key ID.
      * @param name The API key name.
      */
-    fun apiKeysUpdate(clientConfig: ClientConfig, apiKeyId: String, name: String, options: RequestOptions? = null): UpdateApiKeyResponse {
-        return SdkClient.request<UpdateApiKeyResponse>(SdkClient.RequestSpec("PATCH", "/api-keys/${SdkClient.encodePathSegment(apiKeyId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (name)), operationId = "apiKeysUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun apiKeysUpdate(
+        clientConfig: ClientConfig,
+        apiKeyId: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): UpdateApiKeyResponse {
+        return SdkClient.request<UpdateApiKeyResponse>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/api-keys/${SdkClient.encodePathSegment(apiKeyId)}",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("name" to (name)),
+                    operationId = "apiKeysUpdate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes an existing API key. Supply the key's ID to identify the API key to remove. The response indicates whether the key was deleted.
+     * Deletes an existing API key. Supply the key's ID to identify the API key to remove. The
+     * response indicates whether the key was deleted.
      *
      * @param apiKeyId The API key ID.
      */
-    fun apiKeysRemove(clientConfig: ClientConfig, apiKeyId: String, options: RequestOptions? = null): DeleteApiKeyResponse {
-        return SdkClient.request<DeleteApiKeyResponse>(SdkClient.RequestSpec("DELETE", "/api-keys/${SdkClient.encodePathSegment(apiKeyId)}", config = clientConfig, operationId = "apiKeysRemove", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun apiKeysRemove(
+        clientConfig: ClientConfig,
+        apiKeyId: String,
+        options: RequestOptions? = null,
+    ): DeleteApiKeyResponse {
+        return SdkClient.request<DeleteApiKeyResponse>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/api-keys/${SdkClient.encodePathSegment(apiKeyId)}",
+                    config = clientConfig,
+                    operationId = "apiKeysRemove",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

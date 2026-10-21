@@ -14,90 +14,169 @@ import dev.octri.showcase.resend.Validation
 
 internal object InboxesListLabelsOperation {
     /**
-     * Lists the labels attached to an inbox, ordered from oldest to newest. Use this endpoint to retrieve the inbox’s labels; the complete list is returned without pagination.
+     * Lists the labels attached to an inbox, ordered from oldest to newest. Use this endpoint to
+     * retrieve the inbox’s labels; the complete list is returned without pagination.
      *
      * Returns every label on the inbox, oldest first. The list is not paginated.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      */
-    fun inboxesListLabels(clientConfig: ClientConfig, inboxId: String, options: RequestOptions? = null): ListInboxLabelsResponseSuccess {
+    fun inboxesListLabels(
+        clientConfig: ClientConfig,
+        inboxId: String,
+        options: RequestOptions? = null,
+    ): ListInboxLabelsResponseSuccess {
         Validation.validateUuid("inbox_id", inboxId)
 
-        return SdkClient.request<ListInboxLabelsResponseSuccess>(SdkClient.RequestSpec("GET", "/inboxes/${SdkClient.encodePathSegment(inboxId)}/labels", config = clientConfig, operationId = "inboxesListLabels", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+        return SdkClient.request<ListInboxLabelsResponseSuccess>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/inboxes/${SdkClient.encodePathSegment(inboxId)}/labels",
+                    config = clientConfig,
+                    operationId = "inboxesListLabels",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 }
 
 internal object InboxesCreateLabelOperation {
     /**
-     * Creates a named, colored label on an inbox. Supply a `name` between 1 and 64 characters; names are unique per inbox, without regard to case, and `color` defaults to a random dashboard palette color when omitted.
+     * Creates a named, colored label on an inbox. Supply a `name` between 1 and 64 characters;
+     * names are unique per inbox, without regard to case, and `color` defaults to a random
+     * dashboard palette color when omitted.
      *
-     * A label is a named, colored tag that belongs to one inbox. An inbox can have at most 100 labels. Label names are unique per inbox, compared without case. A duplicate name or a full inbox returns a 422 validation_error.
+     * A label is a named, colored tag that belongs to one inbox. An inbox can have at most 100
+     * labels. Label names are unique per inbox, compared without case. A duplicate name or a full
+     * inbox returns a 422 validation_error.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
-     * @param name The name of the label. Max 64 characters. Leading and trailing
-     *   whitespace is trimmed. Must not match another label on the inbox, compared
-     *   without case.
-     * @param color The color of the label, as a `#RRGGBB` hex color. It is stored in
-     *   uppercase. When omitted, a random color from the dashboard palette is used.
+     * @param name The name of the label. Max 64 characters. Leading and trailing whitespace is
+     *   trimmed. Must not match another label on the inbox, compared without case.
+     * @param color The color of the label, as a `#RRGGBB` hex color. It is stored in uppercase.
+     *   When omitted, a random color from the dashboard palette is used.
      */
-    fun inboxesCreateLabel(clientConfig: ClientConfig, inboxId: String, name: String, color: String? = null, options: RequestOptions? = null): CreateInboxLabelResponseSuccess {
+    fun inboxesCreateLabel(
+        clientConfig: ClientConfig,
+        inboxId: String,
+        name: String,
+        color: String? = null,
+        options: RequestOptions? = null,
+    ): CreateInboxLabelResponseSuccess {
         Validation.validateUuid("inbox_id", inboxId)
 
         Validation.validateLength("name", name, Validation.LengthOpts(min = 1, max = 64))
 
         if (color != null) {
             Validation.validatePattern("color", color, "^#[0-9A-Fa-f]{6}$")
-}
+        }
 
-        return SdkClient.request<CreateInboxLabelResponseSuccess>(SdkClient.RequestSpec("POST", "/inboxes/${SdkClient.encodePathSegment(inboxId)}/labels", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "color" to (SdkClient.omitIfNull(color))), operationId = "inboxesCreateLabel", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+        return SdkClient.request<CreateInboxLabelResponseSuccess>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/inboxes/${SdkClient.encodePathSegment(inboxId)}/labels",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (name),
+                            "color" to (SdkClient.omitIfNull(color)),
+                        ),
+                    operationId = "inboxesCreateLabel",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 }
 
 internal object InboxesUpdateLabelOperation {
     /**
-     * Updates the name or color of an inbox label. Supply only the fields you want to change; omitted fields keep their current values, and a new name must remain unique on the inbox without regard to case.
+     * Updates the name or color of an inbox label. Supply only the fields you want to change;
+     * omitted fields keep their current values, and a new name must remain unique on the inbox
+     * without regard to case.
      *
-     * Renames or recolors a label. Omitted fields keep their current value. A new name must not match another label on the inbox, compared without case, or the request returns a 422 validation_error.
+     * Renames or recolors a label. Omitted fields keep their current value. A new name must not
+     * match another label on the inbox, compared without case, or the request returns a 422
+     * validation_error.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      * @param labelId The Label ID.
-     * @param name A new name for the label. Max 64 characters. Leading and trailing
-     *   whitespace is trimmed. Must not match another label on the inbox, compared
-     *   without case.
-     * @param color A new color for the label, as a `#RRGGBB` hex color. It is stored
-     *   in uppercase.
+     * @param name A new name for the label. Max 64 characters. Leading and trailing whitespace is
+     *   trimmed. Must not match another label on the inbox, compared without case.
+     * @param color A new color for the label, as a `#RRGGBB` hex color. It is stored in uppercase.
      */
-    fun inboxesUpdateLabel(clientConfig: ClientConfig, inboxId: String, labelId: String, name: String? = null, color: String? = null, options: RequestOptions? = null): UpdateInboxLabelResponseSuccess {
+    fun inboxesUpdateLabel(
+        clientConfig: ClientConfig,
+        inboxId: String,
+        labelId: String,
+        name: String? = null,
+        color: String? = null,
+        options: RequestOptions? = null,
+    ): UpdateInboxLabelResponseSuccess {
         Validation.validateUuid("inbox_id", inboxId)
 
         Validation.validateUuid("label_id", labelId)
 
         if (name != null) {
             Validation.validateLength("name", name, Validation.LengthOpts(min = 1, max = 64))
-}
+        }
 
         if (color != null) {
             Validation.validatePattern("color", color, "^#[0-9A-Fa-f]{6}$")
-}
+        }
 
-        return SdkClient.request<UpdateInboxLabelResponseSuccess>(SdkClient.RequestSpec("PATCH", "/inboxes/${SdkClient.encodePathSegment(inboxId)}/labels/${SdkClient.encodePathSegment(labelId)}", config = clientConfig, body = SdkClient.bodyMap("name" to (SdkClient.omitIfNull(name)), "color" to (SdkClient.omitIfNull(color))), operationId = "inboxesUpdateLabel", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+        return SdkClient.request<UpdateInboxLabelResponseSuccess>(
+                SdkClient.RequestSpec(
+                    "PATCH",
+                    "/inboxes/${SdkClient.encodePathSegment(inboxId)}/labels/${SdkClient.encodePathSegment(labelId)}",
+                    config = clientConfig,
+                    body =
+                        SdkClient.bodyMap(
+                            "name" to (SdkClient.omitIfNull(name)),
+                            "color" to (SdkClient.omitIfNull(color)),
+                        ),
+                    operationId = "inboxesUpdateLabel",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 }
 
 internal object InboxesRemoveLabelOperation {
     /**
-     * Deletes a label from an inbox and removes it from every thread that carries it. Use this endpoint when you want to remove the label itself as well as its associations with threads.
+     * Deletes a label from an inbox and removes it from every thread that carries it. Use this
+     * endpoint when you want to remove the label itself as well as its associations with threads.
      *
      * Deletes the label and removes it from every thread that carries it.
      *
      * @param inboxId The Inbox ID. An email address is not accepted.
      * @param labelId The Label ID.
      */
-    fun inboxesRemoveLabel(clientConfig: ClientConfig, inboxId: String, labelId: String, options: RequestOptions? = null): RemoveInboxLabelResponseSuccess {
+    fun inboxesRemoveLabel(
+        clientConfig: ClientConfig,
+        inboxId: String,
+        labelId: String,
+        options: RequestOptions? = null,
+    ): RemoveInboxLabelResponseSuccess {
         Validation.validateUuid("inbox_id", inboxId)
 
         Validation.validateUuid("label_id", labelId)
 
-        return SdkClient.request<RemoveInboxLabelResponseSuccess>(SdkClient.RequestSpec("DELETE", "/inboxes/${SdkClient.encodePathSegment(inboxId)}/labels/${SdkClient.encodePathSegment(labelId)}", config = clientConfig, operationId = "inboxesRemoveLabel", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+        return SdkClient.request<RemoveInboxLabelResponseSuccess>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/inboxes/${SdkClient.encodePathSegment(inboxId)}/labels/${SdkClient.encodePathSegment(labelId)}",
+                    config = clientConfig,
+                    operationId = "inboxesRemoveLabel",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 }

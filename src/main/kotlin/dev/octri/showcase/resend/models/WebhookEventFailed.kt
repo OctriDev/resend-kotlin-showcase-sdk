@@ -3,12 +3,8 @@
 
 package dev.octri.showcase.resend.models
 
-/**
- * Typed representation of the `WebhookEventFailed` API schema.
- */
+/** Typed representation of the `WebhookEventFailed` API schema. */
 data class WebhookEventFailed(
-    /**
-     * Reason for the email failure (e.g., `reached_daily_quota`).
-     */
+    /** Reason for the email failure (e.g., `reached_daily_quota`). */
     val reason: String
 )

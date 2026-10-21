@@ -13,80 +13,118 @@ import dev.octri.showcase.resend.SdkClient
 
 object Audiences {
 
-
     /**
-     * Creates an audience with the name you provide. Use the Segments endpoints instead, because this audience operation is deprecated. This operation is closing down and will be removed on a date not specified in the API definition.
+     * Creates an audience with the name you provide. Use the Segments endpoints instead, because
+     * this audience operation is deprecated. This operation is closing down and will be removed on
+     * a date not specified in the API definition.
      *
-     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the future.
+     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the
+     * future.
      *
      * @param name The name of the audience you want to create.
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun audiencesCreate(clientConfig: ClientConfig, name: String, options: RequestOptions? = null): CreateAudienceResponseSuccess {
-        return SdkClient.request<CreateAudienceResponseSuccess>(SdkClient.RequestSpec("POST", "/audiences", config = clientConfig, body = SdkClient.bodyMap("name" to (name)), operationId = "audiencesCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun audiencesCreate(
+        clientConfig: ClientConfig,
+        name: String,
+        options: RequestOptions? = null,
+    ): CreateAudienceResponseSuccess {
+        return SdkClient.request<CreateAudienceResponseSuccess>(
+                SdkClient.RequestSpec(
+                    "POST",
+                    "/audiences",
+                    config = clientConfig,
+                    body = SdkClient.bodyMap("name" to (name)),
+                    operationId = "audiencesCreate",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Lists audiences with their identifiers, names, and creation timestamps. Use the Segments endpoints instead, because this audience operation is deprecated. This operation is closing down and will be removed on a date not specified in the API definition.
+     * Lists audiences with their identifiers, names, and creation timestamps. Use the Segments
+     * endpoints instead, because this audience operation is deprecated. This operation is closing
+     * down and will be removed on a date not specified in the API definition.
      *
-     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the future.
+     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the
+     * future.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun audiencesList(clientConfig: ClientConfig, options: RequestOptions? = null): ListAudiencesResponseSuccess {
-        return SdkClient.request<ListAudiencesResponseSuccess>(SdkClient.RequestSpec("GET", "/audiences", config = clientConfig, operationId = "audiencesList", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun audiencesList(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): ListAudiencesResponseSuccess {
+        return SdkClient.request<ListAudiencesResponseSuccess>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/audiences",
+                    config = clientConfig,
+                    operationId = "audiencesList",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
 
-
-
-
-
-
-
     /**
-     * Deletes an audience selected by its ID. Use the Segments endpoints instead, because this audience operation is deprecated. This operation is closing down and will be removed on a date not specified in the API definition.
+     * Deletes an audience selected by its ID. Use the Segments endpoints instead, because this
+     * audience operation is deprecated. This operation is closing down and will be removed on a
+     * date not specified in the API definition.
      *
-     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the future.
+     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the
+     * future.
      *
      * @param id The Audience ID.
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun audiencesRemove(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): RemoveAudienceResponseSuccess {
-        return SdkClient.request<RemoveAudienceResponseSuccess>(SdkClient.RequestSpec("DELETE", "/audiences/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "audiencesRemove", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun audiencesRemove(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): RemoveAudienceResponseSuccess {
+        return SdkClient.request<RemoveAudienceResponseSuccess>(
+                SdkClient.RequestSpec(
+                    "DELETE",
+                    "/audiences/${SdkClient.encodePathSegment(id)}",
+                    config = clientConfig,
+                    operationId = "audiencesRemove",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
-
-
-
-
-
-
 
     /**
-     * Retrieves an audience by its ID. Use the Segments endpoints instead, because this audience operation is deprecated. This operation is closing down and will be removed on a date not specified in the API definition.
+     * Retrieves an audience by its ID. Use the Segments endpoints instead, because this audience
+     * operation is deprecated. This operation is closing down and will be removed on a date not
+     * specified in the API definition.
      *
-     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the future.
+     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the
+     * future.
      *
      * @param id The Audience ID.
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
-    fun audiencesGet(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): GetAudienceResponseSuccess {
-        return SdkClient.request<GetAudienceResponseSuccess>(SdkClient.RequestSpec("GET", "/audiences/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "audiencesGet", decoder = SdkClient.ResponseDecoder.JSON, options = options)).data
+    fun audiencesGet(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): GetAudienceResponseSuccess {
+        return SdkClient.request<GetAudienceResponseSuccess>(
+                SdkClient.RequestSpec(
+                    "GET",
+                    "/audiences/${SdkClient.encodePathSegment(id)}",
+                    config = clientConfig,
+                    operationId = "audiencesGet",
+                    decoder = SdkClient.ResponseDecoder.JSON,
+                    options = options,
+                )
+            )
+            .data
     }
-
-
-
-
-
-
-
 }

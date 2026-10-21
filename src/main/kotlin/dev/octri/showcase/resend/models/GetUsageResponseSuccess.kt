@@ -3,216 +3,126 @@
 
 package dev.octri.showcase.resend.models
 
-/**
- * Optional object value serialized in the `daily` wire field.
- */
+/** Optional object value serialized in the `daily` wire field. */
 data class GetUsageResponseSuccessEmailsDaily(
-    /**
-     * Emails sent and received in the current day.
-     */
+    /** Emails sent and received in the current day. */
     val used: Long? = null,
-    /**
-     * The daily plan limit, or `null` when the account has a monthly sending subscription.
-     */
+    /** The daily plan limit, or `null` when the account has a monthly sending subscription. */
     val limit: Long? = null,
-    /**
-     * Emails sent today.
-     */
+    /** Emails sent today. */
     val sent: Long? = null,
-    /**
-     * Emails received today.
-     */
+    /** Emails received today. */
     val received: Long? = null,
-    /**
-     * When the daily counter resets, as an ISO 8601 datetime.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("resets_at") val resetsAt: String? = null
+    /** When the daily counter resets, as an ISO 8601 datetime. */
+    @com.fasterxml.jackson.annotation.JsonProperty("resets_at") val resetsAt: String? = null,
 )
 
-/**
- * Optional object value serialized in the `monthly` wire field.
- */
+/** Optional object value serialized in the `monthly` wire field. */
 data class GetUsageResponseSuccessEmailsMonthly(
-    /**
-     * Emails sent and received in the current billing period.
-     */
+    /** Emails sent and received in the current billing period. */
     val used: Long? = null,
-    /**
-     * The monthly plan limit.
-     */
+    /** The monthly plan limit. */
     val limit: Long? = null,
-    /**
-     * Emails sent this billing period.
-     */
+    /** Emails sent this billing period. */
     val sent: Long? = null,
-    /**
-     * Emails received this billing period.
-     */
+    /** Emails received this billing period. */
     val received: Long? = null,
-    /**
-     * When the monthly counter resets, as an ISO 8601 datetime.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("resets_at") val resetsAt: String? = null
+    /** When the monthly counter resets, as an ISO 8601 datetime. */
+    @com.fasterxml.jackson.annotation.JsonProperty("resets_at") val resetsAt: String? = null,
 )
 
-/**
- * Optional object value serialized in the `emails` wire field.
- */
+/** Optional object value serialized in the `emails` wire field. */
 data class GetUsageResponseSuccessEmails(
-    /**
-     * Optional object value serialized in the `daily` wire field.
-     */
+    /** Optional object value serialized in the `daily` wire field. */
     val daily: GetUsageResponseSuccessEmailsDaily? = null,
-    /**
-     * Optional object value serialized in the `monthly` wire field.
-     */
-    val monthly: GetUsageResponseSuccessEmailsMonthly? = null
+    /** Optional object value serialized in the `monthly` wire field. */
+    val monthly: GetUsageResponseSuccessEmailsMonthly? = null,
 )
 
-/**
- * Optional object value serialized in the `contacts` wire field.
- */
+/** Optional object value serialized in the `contacts` wire field. */
 data class GetUsageResponseSuccessContacts(
-    /**
-     * Contacts currently stored.
-     */
+    /** Contacts currently stored. */
     val used: Long? = null,
-    /**
-     * The plan limit.
-     */
-    val limit: Long? = null
+    /** The plan limit. */
+    val limit: Long? = null,
 )
 
-/**
- * Optional object value serialized in the `segments` wire field.
- */
+/** Optional object value serialized in the `segments` wire field. */
 data class GetUsageResponseSuccessSegments(
-    /**
-     * Segments currently created.
-     */
+    /** Segments currently created. */
     val used: Long? = null,
-    /**
-     * The plan limit, or `null` when the account has a contacts subscription.
-     */
-    val limit: Long? = null
+    /** The plan limit, or `null` when the account has a contacts subscription. */
+    val limit: Long? = null,
 )
 
-/**
- * Optional object value serialized in the `broadcasts` wire field.
- */
+/** Optional object value serialized in the `broadcasts` wire field. */
 data class GetUsageResponseSuccessBroadcasts(
-    /**
-     * Broadcasts sent.
-     */
+    /** Broadcasts sent. */
     val used: Long? = null,
-    /**
-     * Always `null`; broadcasts aren't limited.
-     */
-    val limit: Any? = null
+    /** Always `null`; broadcasts aren't limited. */
+    val limit: Any? = null,
 )
 
-/**
- * Optional object value serialized in the `ai_credits` wire field.
- */
+/** Optional object value serialized in the `ai_credits` wire field. */
 data class GetUsageResponseSuccessAiCredits(
-    /**
-     * AI credits consumed in the current period.
-     */
+    /** AI credits consumed in the current period. */
     val used: Long? = null,
-    /**
-     * The plan limit, or `null` when unlimited.
-     */
+    /** The plan limit, or `null` when unlimited. */
     val limit: Long? = null,
     /**
      * When the AI credit balance next increases, as an ISO 8601 datetime, or `null` when unknown.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("next_increase_at") val nextIncreaseAt: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("next_increase_at")
+    val nextIncreaseAt: String? = null,
 )
 
-/**
- * Optional object value serialized in the `automation_runs` wire field.
- */
+/** Optional object value serialized in the `automation_runs` wire field. */
 data class GetUsageResponseSuccessAutomationRuns(
-    /**
-     * Automation runs in the current billing period.
-     */
+    /** Automation runs in the current billing period. */
     val used: Long? = null,
-    /**
-     * The plan limit.
-     */
+    /** The plan limit. */
     val limit: Long? = null,
-    /**
-     * When the counter resets, as an ISO 8601 datetime.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("resets_at") val resetsAt: String? = null
+    /** When the counter resets, as an ISO 8601 datetime. */
+    @com.fasterxml.jackson.annotation.JsonProperty("resets_at") val resetsAt: String? = null,
 )
 
-/**
- * Optional object value serialized in the `domains` wire field.
- */
+/** Optional object value serialized in the `domains` wire field. */
 data class GetUsageResponseSuccessDomains(
-    /**
-     * Domains currently added.
-     */
+    /** Domains currently added. */
     val used: Long? = null,
-    /**
-     * The plan limit, or `null` when unlimited.
-     */
-    val limit: Long? = null
-)
-
-/**
- * Optional object value serialized in the `rate_limit` wire field.
- */
-data class GetUsageResponseSuccessRateLimit(
-    /**
-     * The number of requests allowed per `duration`.
-     */
+    /** The plan limit, or `null` when unlimited. */
     val limit: Long? = null,
-    /**
-     * The rate-limit window, e.g. `'1000ms'`.
-     */
-    val duration: String? = null
 )
 
-/**
- * Typed representation of the `GetUsageResponseSuccess` API schema.
- */
+/** Optional object value serialized in the `rate_limit` wire field. */
+data class GetUsageResponseSuccessRateLimit(
+    /** The number of requests allowed per `duration`. */
+    val limit: Long? = null,
+    /** The rate-limit window, e.g. `'1000ms'`. */
+    val duration: String? = null,
+)
+
+/** Typed representation of the `GetUsageResponseSuccess` API schema. */
 data class GetUsageResponseSuccess(
-    /**
-     * The type of object.
-     */
+    /** The type of object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * Optional object value serialized in the `emails` wire field.
-     */
+    /** Optional object value serialized in the `emails` wire field. */
     val emails: GetUsageResponseSuccessEmails? = null,
-    /**
-     * Optional object value serialized in the `contacts` wire field.
-     */
+    /** Optional object value serialized in the `contacts` wire field. */
     val contacts: GetUsageResponseSuccessContacts? = null,
-    /**
-     * Optional object value serialized in the `segments` wire field.
-     */
+    /** Optional object value serialized in the `segments` wire field. */
     val segments: GetUsageResponseSuccessSegments? = null,
-    /**
-     * Optional object value serialized in the `broadcasts` wire field.
-     */
+    /** Optional object value serialized in the `broadcasts` wire field. */
     val broadcasts: GetUsageResponseSuccessBroadcasts? = null,
-    /**
-     * Optional object value serialized in the `ai_credits` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("ai_credits") val aiCredits: GetUsageResponseSuccessAiCredits? = null,
-    /**
-     * Optional object value serialized in the `automation_runs` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("automation_runs") val automationRuns: GetUsageResponseSuccessAutomationRuns? = null,
-    /**
-     * Optional object value serialized in the `domains` wire field.
-     */
+    /** Optional object value serialized in the `ai_credits` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("ai_credits")
+    val aiCredits: GetUsageResponseSuccessAiCredits? = null,
+    /** Optional object value serialized in the `automation_runs` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("automation_runs")
+    val automationRuns: GetUsageResponseSuccessAutomationRuns? = null,
+    /** Optional object value serialized in the `domains` wire field. */
     val domains: GetUsageResponseSuccessDomains? = null,
-    /**
-     * Optional object value serialized in the `rate_limit` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("rate_limit") val rateLimit: GetUsageResponseSuccessRateLimit? = null
+    /** Optional object value serialized in the `rate_limit` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("rate_limit")
+    val rateLimit: GetUsageResponseSuccessRateLimit? = null,
 )

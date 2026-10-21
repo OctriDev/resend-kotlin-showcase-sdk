@@ -3,50 +3,56 @@
 
 package dev.octri.showcase.resend.models
 
-/**
- * Typed representation of the `ForwardInboxThreadEmailOptions` API schema.
- */
+/** Typed representation of the `ForwardInboxThreadEmailOptions` API schema. */
 data class ForwardInboxThreadEmailOptions(
     /**
-     * Recipient email address. For multiple addresses, send as an array of strings. Must name at least one address. `to`, `cc` and `bcc` combined cannot exceed 50 recipients. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
+     * Recipient email address. For multiple addresses, send as an array of strings. Must name at
+     * least one address. `to`, `cc` and `bcc` combined cannot exceed 50 recipients. Each address is
+     * `email@example.com` or `Name <email@example.com>`. An address that is not valid returns
+     * a 422.
      */
     val to: List<String>,
     /**
-     * CC recipient email address. For multiple addresses, send as an array of strings. Counts toward the 50-recipient limit. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
+     * CC recipient email address. For multiple addresses, send as an array of strings. Counts
+     * toward the 50-recipient limit. Each address is `email@example.com` or `Name
+     * <email@example.com>`. An address that is not valid returns a 422.
      */
     val cc: List<String>? = null,
     /**
-     * BCC recipient email address. For multiple addresses, send as an array of strings. Counts toward the 50-recipient limit. Each address is `email@example.com` or `Name <email@example.com>`. An address that is not valid returns a 422.
+     * BCC recipient email address. For multiple addresses, send as an array of strings. Counts
+     * toward the 50-recipient limit. Each address is `email@example.com` or `Name
+     * <email@example.com>`. An address that is not valid returns a 422.
      */
     val bcc: List<String>? = null,
-    /**
-     * An HTML note sent above the quoted original.
-     */
+    /** An HTML note sent above the quoted original. */
     val html: String? = null,
-    /**
-     * A plain-text note sent above the quoted original.
-     */
+    /** A plain-text note sent above the quoted original. */
     val text: String? = null,
     /**
-     * The subject of the forward. Cannot be only whitespace or contain a line break. When omitted, the thread subject is used, prefixed with `Fwd:` if it does not already start with it.
+     * The subject of the forward. Cannot be only whitespace or contain a line break. When omitted,
+     * the thread subject is used, prefixed with `Fwd:` if it does not already start with it.
      */
     val subject: String? = null,
     /**
-     * Files to attach, as on `POST /emails`. Each one needs `content` or `path`. They share one limit with the attachments of the original message, which the forward also sends. Together they can have up to 10 files and at most 25 MB of `content`. A `path` file counts toward the 10 files only, because it is fetched when the email is sent. An empty file, a blocked file type, a `path` that is not an `http` or `https` URL or that points to `localhost`, `127.0.0.1` or `0.0.0.0`, or a…
+     * Files to attach, as on `POST /emails`. Each one needs `content` or `path`. They share one
+     * limit with the attachments of the original message, which the forward also sends. Together
+     * they can have up to 10 files and at most 25 MB of `content`. A `path` file counts toward the
+     * 10 files only, because it is fetched when the email is sent. An empty file, a blocked file
+     * type, a `path` that is not an `http` or `https` URL or that points to `localhost`,
+     * `127.0.0.1` or `0.0.0.0`, or a…
      */
     val attachments: List<Attachment>? = null,
     /**
-     * Custom headers to add to the email. The `In-Reply-To`, `References` and `Reply-To` headers are set by Resend and cannot be set here. Sending one of them, in any letter case, returns a 422. Header names cannot be empty, and names and values cannot contain line breaks or null characters, or the request returns a 422. `null` means no custom headers.
+     * Custom headers to add to the email. The `In-Reply-To`, `References` and `Reply-To` headers
+     * are set by Resend and cannot be set here. Sending one of them, in any letter case, returns
+     * a 422. Header names cannot be empty, and names and values cannot contain line breaks or null
+     * characters, or the request returns a 422. `null` means no custom headers.
      */
-    val headers: Map<String, String>? = null
+    val headers: Map<String, String>? = null,
 )
 
-/**
- * Typed representation of the `ForwardInboxThreadEmailResponseSuccess` API schema.
- */
+/** Typed representation of the `ForwardInboxThreadEmailResponseSuccess` API schema. */
 data class ForwardInboxThreadEmailResponseSuccess(
-    /**
-     * The ID of the sent email. Use it with the emails endpoints.
-     */
+    /** The ID of the sent email. Use it with the emails endpoints. */
     val id: String
 )

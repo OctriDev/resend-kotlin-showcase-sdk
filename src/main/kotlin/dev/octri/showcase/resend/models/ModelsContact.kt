@@ -5,98 +5,55 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `ContactCreatedEvent` API schema.
- */
+/** Typed representation of the `ContactCreatedEvent` API schema. */
 data class ContactCreatedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: ContactCreatedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Required object value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: ContactEventData
+    /** Required object value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: ContactEventData,
 )
 
-/**
- * Typed representation of the `ContactDeletedEvent` API schema.
- */
+/** Typed representation of the `ContactDeletedEvent` API schema. */
 data class ContactDeletedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: ContactDeletedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Required object value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: ContactEventData
+    /** Required object value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: ContactEventData,
 )
 
-/**
- * Typed representation of the `ContactEventData` API schema.
- */
+/** Typed representation of the `ContactEventData` API schema. */
 data class ContactEventData(
-    /**
-     * Unique identifier for the contact.
-     */
+    /** Unique identifier for the contact. */
     val id: String,
-    /**
-     * Timestamp when the contact was created.
-     */
+    /** Timestamp when the contact was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Timestamp when the contact was last updated.
-     */
+    /** Timestamp when the contact was last updated. */
     @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
-    /**
-     * Contact's email address.
-     */
+    /** Contact's email address. */
     val email: String,
-    /**
-     * Whether the contact has unsubscribed from all emails sent from your team.
-     */
+    /** Whether the contact has unsubscribed from all emails sent from your team. */
     val unsubscribed: Boolean,
-    /**
-     * Unique identifier for the audience this contact belongs to.
-     */
+    /** Unique identifier for the audience this contact belongs to. */
     @com.fasterxml.jackson.annotation.JsonProperty("audience_id") val audienceId: String? = null,
-    /**
-     * Array of segment IDs the contact belongs to.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("segment_ids") val segmentIds: List<String>? = null,
-    /**
-     * Contact's first name.
-     */
+    /** Array of segment IDs the contact belongs to. */
+    @com.fasterxml.jackson.annotation.JsonProperty("segment_ids")
+    val segmentIds: List<String>? = null,
+    /** Contact's first name. */
     @com.fasterxml.jackson.annotation.JsonProperty("first_name") val firstName: String? = null,
-    /**
-     * Contact's last name.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String? = null
+    /** Contact's last name. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_name") val lastName: String? = null,
 )
 
-/**
- * Typed representation of the `ContactUpdatedEvent` API schema.
- */
+/** Typed representation of the `ContactUpdatedEvent` API schema. */
 data class ContactUpdatedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: ContactUpdatedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Required object value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: ContactEventData
+    /** Required object value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: ContactEventData,
 )

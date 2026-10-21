@@ -3,24 +3,14 @@
 
 package dev.octri.showcase.resend.models
 
-/**
- * Typed representation of the `WebhookEventSuppressed` API schema.
- */
+/** Typed representation of the `WebhookEventSuppressed` API schema. */
 data class WebhookEventSuppressed(
-    /**
-     * Array of SMTP diagnostic responses from the receiving server, one entry per recipient.
-     */
+    /** Array of SMTP diagnostic responses from the receiving server, one entry per recipient. */
     val diagnosticCode: List<String>,
-    /**
-     * Detailed suppression message describing why the email was suppressed.
-     */
+    /** Detailed suppression message describing why the email was suppressed. */
     val message: String,
-    /**
-     * Reason the address is suppressed.
-     */
+    /** Reason the address is suppressed. */
     val reason: WebhookEventSuppressedReasonEnum,
-    /**
-     * Suppression type.
-     */
-    val type: WebhookEventSuppressedTypeEnum
+    /** Suppression type. */
+    val type: WebhookEventSuppressedTypeEnum,
 )

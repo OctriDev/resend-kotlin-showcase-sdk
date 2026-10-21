@@ -3,20 +3,39 @@
 
 package dev.octri.showcase.resend
 
-
 class OauthNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Lists OAuth grants available to the authenticated user. Use `after` or `before` to navigate the results with a cursor, and `limit` to control the number of grants returned.
+     * Lists OAuth grants available to the authenticated user. Use `after` or `before` to navigate
+     * the results with a cursor, and `limit` to control the number of grants returned.
      */
-    fun listGrants(limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListOAuthGrantsResponse {
-        return dev.octri.showcase.resend.methods.Oauth.listGrants(clientConfig, limit, after, before, options)
+    fun listGrants(
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListOAuthGrantsResponse {
+        return dev.octri.showcase.resend.methods.Oauth.listGrants(
+            clientConfig,
+            limit,
+            after,
+            before,
+            options,
+        )
     }
 
     /**
-     * Revokes an OAuth grant, removing the authorization associated with it. Supply the grant's ID to identify which authorization to revoke. The response includes the revocation time and reason.
+     * Revokes an OAuth grant, removing the authorization associated with it. Supply the grant's ID
+     * to identify which authorization to revoke. The response includes the revocation time and
+     * reason.
      */
-    fun revokeGrant(oauthGrantId: String, options: RequestOptions? = null): RevokeOAuthGrantResponse {
-        return dev.octri.showcase.resend.methods.Oauth.revokeOauthGrant(clientConfig, oauthGrantId, options)
+    fun revokeGrant(
+        oauthGrantId: String,
+        options: RequestOptions? = null,
+    ): RevokeOAuthGrantResponse {
+        return dev.octri.showcase.resend.methods.Oauth.revokeOauthGrant(
+            clientConfig,
+            oauthGrantId,
+            options,
+        )
     }
-
 }

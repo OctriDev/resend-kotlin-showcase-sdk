@@ -3,48 +3,93 @@
 
 package dev.octri.showcase.resend
 
-
 class SegmentsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a segment. Provide a `name` and optionally specify the audience and filter conditions for the segment.
+     * Creates a segment. Provide a `name` and optionally specify the audience and filter conditions
+     * for the segment.
      */
-    fun create(name: String, audienceId: String? = null, filter: Map<String, Any>? = null, options: RequestOptions? = null): CreateSegmentResponseSuccess {
-        return dev.octri.showcase.resend.methods.Segments.segmentsCreate(clientConfig, name, audienceId, filter, options)
+    fun create(
+        name: String,
+        audienceId: String? = null,
+        filter: Map<String, Any>? = null,
+        options: RequestOptions? = null,
+    ): CreateSegmentResponseSuccess {
+        return dev.octri.showcase.resend.methods.Segments.segmentsCreate(
+            clientConfig,
+            name,
+            audienceId,
+            filter,
+            options,
+        )
     }
 
     /**
-     * Lists segments. Use `limit` to control the number of results and `after` or `before` to navigate the results with cursors.
+     * Lists segments. Use `limit` to control the number of results and `after` or `before` to
+     * navigate the results with cursors.
      */
-    fun list(limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListSegmentsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Segments.segmentsList(clientConfig, limit, after, before, options)
+    fun list(
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListSegmentsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Segments.segmentsList(
+            clientConfig,
+            limit,
+            after,
+            before,
+            options,
+        )
     }
 
     /**
-     * Retrieves a segment by its identifier. Use the segment ID to look up a specific segment and its filter conditions.
+     * Retrieves a segment by its identifier. Use the segment ID to look up a specific segment and
+     * its filter conditions.
      */
     fun get(id: String, options: RequestOptions? = null): GetSegmentResponseSuccess {
         return dev.octri.showcase.resend.methods.Segments.segmentsGet(clientConfig, id, options)
     }
 
     /**
-     * Updates the name of an existing segment. Supply `name` in the request body to set the segment's name.
+     * Updates the name of an existing segment. Supply `name` in the request body to set the
+     * segment's name.
      */
-    fun update(id: String, name: String, options: RequestOptions? = null): UpdateSegmentResponseSuccess {
-        return dev.octri.showcase.resend.methods.Segments.segmentsUpdate(clientConfig, id, name, options)
+    fun update(
+        id: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): UpdateSegmentResponseSuccess {
+        return dev.octri.showcase.resend.methods.Segments.segmentsUpdate(
+            clientConfig,
+            id,
+            name,
+            options,
+        )
     }
 
-    /**
-     * Deletes an existing segment. Use the segment ID to select the segment to remove.
-     */
+    /** Deletes an existing segment. Use the segment ID to select the segment to remove. */
     fun remove(id: String, options: RequestOptions? = null): RemoveSegmentResponseSuccess {
         return dev.octri.showcase.resend.methods.Segments.segmentsRemove(clientConfig, id, options)
     }
 
     /**
-     * Lists the contacts in a segment. Use `after` or `before` to navigate results with cursors, and `limit` to control the number of contacts returned.
+     * Lists the contacts in a segment. Use `after` or `before` to navigate results with cursors,
+     * and `limit` to control the number of contacts returned.
      */
-    fun listContacts(id: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListContactsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Segments.segmentsListContacts(clientConfig, id, limit, after, before, options)
+    fun listContacts(
+        id: String,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListContactsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Segments.segmentsListContacts(
+            clientConfig,
+            id,
+            limit,
+            after,
+            before,
+            options,
+        )
     }
-
 }

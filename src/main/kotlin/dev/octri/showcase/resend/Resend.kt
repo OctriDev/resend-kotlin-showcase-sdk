@@ -3,7 +3,6 @@
 
 package dev.octri.showcase.resend
 
-
 class Resend(private val clientConfig: ClientConfig) {
     val emails: EmailsNamespace
     val receivingEmails: ReceivingEmailsNamespace
@@ -24,6 +23,7 @@ class Resend(private val clientConfig: ClientConfig) {
     val suppressions: SuppressionsNamespace
     val usage: UsageNamespace
     val inboxes: InboxesNamespace
+
     init {
         emails = EmailsNamespace(clientConfig)
         receivingEmails = ReceivingEmailsNamespace(clientConfig)
@@ -45,17 +45,16 @@ class Resend(private val clientConfig: ClientConfig) {
         usage = UsageNamespace(clientConfig)
         inboxes = InboxesNamespace(clientConfig)
     }
+
     /**
-     * Turns SDK logging on and configures it. Logging is OFF by default — this
-     * SDK reports nothing until you call this (or construct the client with
-     * logging enabled). Reports go to the endpoint this build was generated with,
-     * or to the endpoint you set; with neither, nothing is sent. Set
-     * enabled = false in the block to turn it off.
+     * Turns SDK logging on and configures it. Logging is OFF by default — this SDK reports nothing
+     * until you call this (or construct the client with logging enabled). Reports go to the
+     * endpoint this build was generated with, or to the endpoint you set; with neither, nothing is
+     * sent. Set enabled = false in the block to turn it off.
      */
     fun setLoggingConfig(block: LoggingConfig.() -> Unit = {}): LoggingConfig {
         clientConfig.logging.enabled = true
         clientConfig.logging.block()
         return clientConfig.logging
     }
-
 }

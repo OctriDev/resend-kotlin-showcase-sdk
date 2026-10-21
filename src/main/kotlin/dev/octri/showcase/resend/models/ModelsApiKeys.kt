@@ -3,116 +3,73 @@
 
 package dev.octri.showcase.resend.models
 
-/**
- * Typed representation of the `ApiKey` API schema.
- */
+/** Typed representation of the `ApiKey` API schema. */
 data class ApiKey(
-    /**
-     * The ID of the API key.
-     */
+    /** The ID of the API key. */
     val id: String? = null,
-    /**
-     * The name of the API key.
-     */
+    /** The name of the API key. */
     val name: String? = null,
-    /**
-     * The date and time the API key was created.
-     */
+    /** The date and time the API key was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: String? = null,
-    /**
-     * The date and time the API key was last used.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at") val lastUsedAt: String? = null
+    /** The date and time the API key was last used. */
+    @com.fasterxml.jackson.annotation.JsonProperty("last_used_at") val lastUsedAt: String? = null,
 )
 
-/**
- * Typed representation of the `CreateApiKeyRequest` API schema.
- */
+/** Typed representation of the `CreateApiKeyRequest` API schema. */
 data class CreateApiKeyRequest(
-    /**
-     * The API key name.
-     */
+    /** The API key name. */
     val name: String,
     /**
-     * The API key can have full access to Resend’s API or be only restricted to send emails. * full_access - Can create, delete, get, and update any resource. * sending_access - Can only send emails.
+     * The API key can have full access to Resend’s API or be only restricted to send emails. *
+     * full_access - Can create, delete, get, and update any resource. * sending_access - Can only
+     * send emails.
      */
     val permission: CreateApiKeyRequestPermissionEnum? = null,
     /**
-     * Restrict an API key to send emails only from a specific domain. Only used when the permission is sending_access.
+     * Restrict an API key to send emails only from a specific domain. Only used when the permission
+     * is sending_access.
      */
-    @com.fasterxml.jackson.annotation.JsonProperty("domain_id") val domainId: String? = null
+    @com.fasterxml.jackson.annotation.JsonProperty("domain_id") val domainId: String? = null,
 )
 
-/**
- * Typed representation of the `CreateApiKeyResponse` API schema.
- */
+/** Typed representation of the `CreateApiKeyResponse` API schema. */
 data class CreateApiKeyResponse(
-    /**
-     * The ID of the API key.
-     */
+    /** The ID of the API key. */
     val id: String? = null,
-    /**
-     * The token of the API key.
-     */
-    val token: String? = null
+    /** The token of the API key. */
+    val token: String? = null,
 )
 
-/**
- * Typed representation of the `DeleteApiKeyResponse` API schema.
- */
+/** Typed representation of the `DeleteApiKeyResponse` API schema. */
 data class DeleteApiKeyResponse(
-    /**
-     * The type of object.
-     */
+    /** The type of object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * The ID of the API key.
-     */
+    /** The ID of the API key. */
     val id: String? = null,
-    /**
-     * Indicates whether the API key was successfully deleted.
-     */
-    val deleted: Boolean? = null
+    /** Indicates whether the API key was successfully deleted. */
+    val deleted: Boolean? = null,
 )
 
-/**
- * Typed representation of the `ListApiKeysResponse` API schema.
- */
+/** Typed representation of the `ListApiKeysResponse` API schema. */
 data class ListApiKeysResponse(
-    /**
-     * Type of the response object.
-     */
+    /** Type of the response object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * Indicates if there are more results available.
-     */
+    /** Indicates if there are more results available. */
     @com.fasterxml.jackson.annotation.JsonProperty("has_more") val hasMore: Boolean? = null,
-    /**
-     * Optional array value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ApiKey>? = null
+    /** Optional array value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: List<ApiKey>? = null,
 )
 
-/**
- * Typed representation of the `UpdateApiKeyRequest` API schema.
- */
+/** Typed representation of the `UpdateApiKeyRequest` API schema. */
 data class UpdateApiKeyRequest(
-    /**
-     * The API key name.
-     */
+    /** The API key name. */
     val name: String
 )
 
-/**
- * Typed representation of the `UpdateApiKeyResponse` API schema.
- */
+/** Typed representation of the `UpdateApiKeyResponse` API schema. */
 data class UpdateApiKeyResponse(
-    /**
-     * The type of object.
-     */
+    /** The type of object. */
     @com.fasterxml.jackson.annotation.JsonProperty("object") val `object`: String? = null,
-    /**
-     * The ID of the API key.
-     */
-    val id: String? = null
+    /** The ID of the API key. */
+    val id: String? = null,
 )

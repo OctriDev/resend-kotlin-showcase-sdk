@@ -5,86 +5,48 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `DomainCreatedEvent` API schema.
- */
+/** Typed representation of the `DomainCreatedEvent` API schema. */
 data class DomainCreatedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: DomainCreatedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Required object value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: DomainEventData
+    /** Required object value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: DomainEventData,
 )
 
-/**
- * Typed representation of the `DomainDeletedEvent` API schema.
- */
+/** Typed representation of the `DomainDeletedEvent` API schema. */
 data class DomainDeletedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: DomainDeletedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Required object value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: DomainEventData
+    /** Required object value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: DomainEventData,
 )
 
-/**
- * Typed representation of the `DomainEventData` API schema.
- */
+/** Typed representation of the `DomainEventData` API schema. */
 data class DomainEventData(
-    /**
-     * Unique identifier for the domain.
-     */
+    /** Unique identifier for the domain. */
     val id: String,
-    /**
-     * The domain name (e.g., `example.com`).
-     */
+    /** The domain name (e.g., `example.com`). */
     val name: String,
-    /**
-     * Aggregated verification status of the domain.
-     */
+    /** Aggregated verification status of the domain. */
     val status: DomainEventDataStatusEnum,
-    /**
-     * Timestamp when the domain was created.
-     */
+    /** Timestamp when the domain was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * AWS region where the domain is configured.
-     */
+    /** AWS region where the domain is configured. */
     val region: DomainEventDataRegionEnum,
-    /**
-     * DNS records required for domain verification.
-     */
-    val records: List<WebhookDomainRecord>
+    /** DNS records required for domain verification. */
+    val records: List<WebhookDomainRecord>,
 )
 
-/**
- * Typed representation of the `DomainUpdatedEvent` API schema.
- */
+/** Typed representation of the `DomainUpdatedEvent` API schema. */
 data class DomainUpdatedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: DomainUpdatedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Required object value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: DomainEventData
+    /** Required object value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: DomainEventData,
 )

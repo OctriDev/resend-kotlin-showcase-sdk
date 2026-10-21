@@ -3,48 +3,100 @@
 
 package dev.octri.showcase.resend
 
-
 class EventsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a new event with a name and an optional payload schema. The `name` cannot start with the reserved `resend:` prefix, and schema fields support the types `string`, `number`, `boolean`, and `date`.
+     * Creates a new event with a name and an optional payload schema. The `name` cannot start with
+     * the reserved `resend:` prefix, and schema fields support the types `string`, `number`,
+     * `boolean`, and `date`.
      */
-    fun create(name: String, schema: SdkClient.SdkOptional<Map<String, Any>?>? = null, options: RequestOptions? = null): CreateEventResponse {
-        return dev.octri.showcase.resend.methods.Events.eventsCreate(clientConfig, name, schema, options)
+    fun create(
+        name: String,
+        schema: SdkClient.SdkOptional<Map<String, Any>?>? = null,
+        options: RequestOptions? = null,
+    ): CreateEventResponse {
+        return dev.octri.showcase.resend.methods.Events.eventsCreate(
+            clientConfig,
+            name,
+            schema,
+            options,
+        )
     }
 
     /**
-     * Lists events available to your account. Use `after` or `before` to navigate results, and `limit` to control the number of items returned per request.
+     * Lists events available to your account. Use `after` or `before` to navigate results, and
+     * `limit` to control the number of items returned per request.
      */
-    fun list(limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListEventsResponse {
-        return dev.octri.showcase.resend.methods.Events.eventsList(clientConfig, limit, after, before, options)
+    fun list(
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListEventsResponse {
+        return dev.octri.showcase.resend.methods.Events.eventsList(
+            clientConfig,
+            limit,
+            after,
+            before,
+            options,
+        )
     }
 
     /**
-     * Sends an event and associates it with a contact or an email address. Supply the required `event` name and exactly one of `contact_id` or `email`; include `payload` to attach additional key/value data.
+     * Sends an event and associates it with a contact or an email address. Supply the required
+     * `event` name and exactly one of `contact_id` or `email`; include `payload` to attach
+     * additional key/value data.
      */
-    fun send(event: String, contactId: String? = null, email: String? = null, payload: Map<String, Any>? = null, options: RequestOptions? = null): SendEventResponse {
-        return dev.octri.showcase.resend.methods.Events.eventsSend(clientConfig, event, contactId, email, payload, options)
+    fun send(
+        event: String,
+        contactId: String? = null,
+        email: String? = null,
+        payload: Map<String, Any>? = null,
+        options: RequestOptions? = null,
+    ): SendEventResponse {
+        return dev.octri.showcase.resend.methods.Events.eventsSend(
+            clientConfig,
+            event,
+            contactId,
+            email,
+            payload,
+            options,
+        )
     }
 
     /**
-     * Retrieves an event by its UUID or event name. Use the `identifier` path parameter to select the event whose name, payload schema, and timestamps you need.
+     * Retrieves an event by its UUID or event name. Use the `identifier` path parameter to select
+     * the event whose name, payload schema, and timestamps you need.
      */
     fun get(identifier: String, options: RequestOptions? = null): Event {
         return dev.octri.showcase.resend.methods.Events.eventsGet(clientConfig, identifier, options)
     }
 
     /**
-     * Updates the payload schema for an existing event. Supply `schema` as a flat key/type map using `string`, `number`, `boolean`, or `date`, or set it to `null` to clear the schema.
+     * Updates the payload schema for an existing event. Supply `schema` as a flat key/type map
+     * using `string`, `number`, `boolean`, or `date`, or set it to `null` to clear the schema.
      */
-    fun update(identifier: String, schema: Map<String, Any>?, options: RequestOptions? = null): UpdateEventResponse {
-        return dev.octri.showcase.resend.methods.Events.eventsUpdate(clientConfig, identifier, schema, options)
+    fun update(
+        identifier: String,
+        schema: Map<String, Any>?,
+        options: RequestOptions? = null,
+    ): UpdateEventResponse {
+        return dev.octri.showcase.resend.methods.Events.eventsUpdate(
+            clientConfig,
+            identifier,
+            schema,
+            options,
+        )
     }
 
     /**
-     * Deletes an event identified by its UUID or name. Use the `identifier` path parameter to specify which event to remove; the response indicates whether the event was deleted.
+     * Deletes an event identified by its UUID or name. Use the `identifier` path parameter to
+     * specify which event to remove; the response indicates whether the event was deleted.
      */
     fun remove(identifier: String, options: RequestOptions? = null): RemoveEventResponse {
-        return dev.octri.showcase.resend.methods.Events.eventsRemove(clientConfig, identifier, options)
+        return dev.octri.showcase.resend.methods.Events.eventsRemove(
+            clientConfig,
+            identifier,
+            options,
+        )
     }
-
 }
