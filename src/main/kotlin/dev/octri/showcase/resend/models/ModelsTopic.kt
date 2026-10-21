@@ -5,90 +5,52 @@ package dev.octri.showcase.resend.models
 
 import java.time.OffsetDateTime
 
-/**
- * Typed representation of the `TopicCreatedEvent` API schema.
- */
+/** Typed representation of the `TopicCreatedEvent` API schema. */
 data class TopicCreatedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: TopicCreatedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Required object value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: TopicEventData
+    /** Required object value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: TopicEventData,
 )
 
-/**
- * Typed representation of the `TopicDeletedEvent` API schema.
- */
+/** Typed representation of the `TopicDeletedEvent` API schema. */
 data class TopicDeletedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: TopicDeletedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Required object value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: TopicEventData
+    /** Required object value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: TopicEventData,
 )
 
-/**
- * Typed representation of the `TopicEventData` API schema.
- */
+/** Typed representation of the `TopicEventData` API schema. */
 data class TopicEventData(
-    /**
-     * Unique identifier for the topic.
-     */
+    /** Unique identifier for the topic. */
     val id: String,
-    /**
-     * The name of the topic.
-     */
+    /** The name of the topic. */
     val name: String,
-    /**
-     * A description of the topic.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("description", required = true) val description: String?,
-    /**
-     * The default subscription status for the topic.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("default_subscription") val defaultSubscription: TopicEventDataDefaultSubscriptionEnum,
-    /**
-     * Whether the topic has been deleted.
-     */
+    /** A description of the topic. */
+    @com.fasterxml.jackson.annotation.JsonProperty("description", required = true)
+    val description: String?,
+    /** The default subscription status for the topic. */
+    @com.fasterxml.jackson.annotation.JsonProperty("default_subscription")
+    val defaultSubscription: TopicEventDataDefaultSubscriptionEnum,
+    /** Whether the topic has been deleted. */
     val deleted: Boolean,
-    /**
-     * Timestamp when the topic was created.
-     */
+    /** Timestamp when the topic was created. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Timestamp when the topic was last updated.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime
+    /** Timestamp when the topic was last updated. */
+    @com.fasterxml.jackson.annotation.JsonProperty("updated_at") val updatedAt: OffsetDateTime,
 )
 
-/**
- * Typed representation of the `TopicUpdatedEvent` API schema.
- */
+/** Typed representation of the `TopicUpdatedEvent` API schema. */
 data class TopicUpdatedEvent(
-    /**
-     * The event type.
-     */
+    /** The event type. */
     val type: TopicUpdatedEventTypeEnum,
-    /**
-     * Timestamp when the event was emitted.
-     */
+    /** Timestamp when the event was emitted. */
     @com.fasterxml.jackson.annotation.JsonProperty("created_at") val createdAt: OffsetDateTime,
-    /**
-     * Required object value serialized in the `data` wire field.
-     */
-    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: TopicEventData
+    /** Required object value serialized in the `data` wire field. */
+    @com.fasterxml.jackson.annotation.JsonProperty("data") val `data`: TopicEventData,
 )
