@@ -57,7 +57,7 @@ object Oauth {
      *
      * @param oauthGrantId The OAuth grant ID.
      */
-    fun revokeGrant(
+    fun revokeOauthGrant(
         clientConfig: ClientConfig,
         oauthGrantId: String,
         options: RequestOptions? = null,
@@ -67,7 +67,7 @@ object Oauth {
                     "DELETE",
                     "/oauth/grants/${SdkClient.encodePathSegment(oauthGrantId)}",
                     config = clientConfig,
-                    operationId = "revokeGrant",
+                    operationId = "revokeOauthGrant",
                     decoder = SdkClient.ResponseDecoder.JSON,
                     options = options,
                 )

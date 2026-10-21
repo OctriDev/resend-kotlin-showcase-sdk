@@ -32,7 +32,7 @@ class OauthNamespace(private val clientConfig: ClientConfig) {
         oauthGrantId: String,
         options: RequestOptions? = null,
     ): RevokeOAuthGrantResponse {
-        return dev.octri.showcase.resend.methods.Oauth.revokeGrant(
+        return dev.octri.showcase.resend.methods.Oauth.revokeOauthGrant(
             clientConfig,
             oauthGrantId,
             options,
