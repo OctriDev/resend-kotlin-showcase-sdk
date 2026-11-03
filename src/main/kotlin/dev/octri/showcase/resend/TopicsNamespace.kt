@@ -3,82 +3,176 @@
 
 package dev.octri.showcase.resend
 
-
 class TopicsNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates a topic for organizing contact subscriptions. Supply `name` and `default_subscription`, and optionally set a description and visibility; visibility defaults to private when omitted.
+     * Creates a topic for organizing contact subscriptions. Supply `name` and
+     * `default_subscription`, and optionally set a description and visibility; visibility defaults
+     * to private when omitted.
      */
-    fun create(name: String, defaultSubscription: CreateTopicOptionsDefaultSubscriptionEnum, description: String? = null, visibility: CreateTopicOptionsVisibilityEnum? = null, options: RequestOptions? = null): CreateTopicResponseSuccess {
-        return dev.octri.showcase.resend.methods.Topics.topicsCreate(clientConfig, name, defaultSubscription, description, visibility, options)
+    fun create(
+        name: String,
+        defaultSubscription: CreateTopicOptionsDefaultSubscriptionEnum,
+        description: String? = null,
+        visibility: CreateTopicOptionsVisibilityEnum? = null,
+        options: RequestOptions? = null,
+    ): CreateTopicResponseSuccess {
+        return dev.octri.showcase.resend.methods.Topics.topicsCreate(
+            clientConfig,
+            name,
+            defaultSubscription,
+            description,
+            visibility,
+            options,
+        )
     }
 
     /**
-     * Lists topics with cursor-based pagination. Use `after` or `before` to navigate results and `limit` to control the number of topics returned.
+     * Lists topics with cursor-based pagination. Use `after` or `before` to navigate results and
+     * `limit` to control the number of topics returned.
      */
-    fun list(limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListTopicsResponseSuccess {
-        return dev.octri.showcase.resend.methods.Topics.topicsList(clientConfig, limit, after, before, options)
+    fun list(
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListTopicsResponseSuccess {
+        return dev.octri.showcase.resend.methods.Topics.topicsList(
+            clientConfig,
+            limit,
+            after,
+            before,
+            options,
+        )
     }
 
     /**
-     * Retrieves a topic by its identifier. Use the topic ID to look up its name, subscription default, visibility, and other details.
+     * Retrieves a topic by its identifier. Use the topic ID to look up its name, subscription
+     * default, visibility, and other details.
      */
     fun get(id: String, options: RequestOptions? = null): GetTopicResponseSuccess {
         return dev.octri.showcase.resend.methods.Topics.topicsGet(clientConfig, id, options)
     }
 
     /**
-     * Updates the name, description, or visibility of an existing topic. Supply only the fields you want to change; `visibility` must be `public` or `private`.
+     * Updates the name, description, or visibility of an existing topic. Supply only the fields you
+     * want to change; `visibility` must be `public` or `private`.
      */
-    fun update(id: String, name: String? = null, description: String? = null, visibility: UpdateTopicOptionsVisibilityEnum? = null, options: RequestOptions? = null): UpdateTopicResponseSuccess {
-        return dev.octri.showcase.resend.methods.Topics.topicsUpdate(clientConfig, id, name, description, visibility, options)
+    fun update(
+        id: String,
+        name: String? = null,
+        description: String? = null,
+        visibility: UpdateTopicOptionsVisibilityEnum? = null,
+        options: RequestOptions? = null,
+    ): UpdateTopicResponseSuccess {
+        return dev.octri.showcase.resend.methods.Topics.topicsUpdate(
+            clientConfig,
+            id,
+            name,
+            description,
+            visibility,
+            options,
+        )
     }
 
-    /**
-     * Deletes an existing topic. Use the topic ID to select the topic to remove.
-     */
+    /** Deletes an existing topic. Use the topic ID to select the topic to remove. */
     fun remove(id: String, options: RequestOptions? = null): RemoveTopicResponseSuccess {
         return dev.octri.showcase.resend.methods.Topics.topicsRemove(clientConfig, id, options)
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [TopicsNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [TopicsNamespace], returning the [SdkResponse] envelope around each result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Creates a topic for organizing contact subscriptions. Supply `name` and `default_subscription`, and optionally set a description and visibility; visibility defaults to private when omitted.
+         * Creates a topic for organizing contact subscriptions. Supply `name` and
+         * `default_subscription`, and optionally set a description and visibility; visibility
+         * defaults to private when omitted.
          */
-        fun create(name: String, defaultSubscription: CreateTopicOptionsDefaultSubscriptionEnum, description: String? = null, visibility: CreateTopicOptionsVisibilityEnum? = null, options: RequestOptions? = null): SdkResponse<CreateTopicResponseSuccess> {
-            return dev.octri.showcase.resend.methods.Topics.topicsCreateWithRawResponse(clientConfig, name, defaultSubscription, description, visibility, options)
+        fun create(
+            name: String,
+            defaultSubscription: CreateTopicOptionsDefaultSubscriptionEnum,
+            description: String? = null,
+            visibility: CreateTopicOptionsVisibilityEnum? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<CreateTopicResponseSuccess> {
+            return dev.octri.showcase.resend.methods.Topics.topicsCreateWithRawResponse(
+                clientConfig,
+                name,
+                defaultSubscription,
+                description,
+                visibility,
+                options,
+            )
         }
 
         /**
-         * Lists topics with cursor-based pagination. Use `after` or `before` to navigate results and `limit` to control the number of topics returned.
+         * Lists topics with cursor-based pagination. Use `after` or `before` to navigate results
+         * and `limit` to control the number of topics returned.
          */
-        fun list(limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): SdkResponse<ListTopicsResponseSuccess> {
-            return dev.octri.showcase.resend.methods.Topics.topicsListWithRawResponse(clientConfig, limit, after, before, options)
+        fun list(
+            limit: Long? = null,
+            after: String? = null,
+            before: String? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<ListTopicsResponseSuccess> {
+            return dev.octri.showcase.resend.methods.Topics.topicsListWithRawResponse(
+                clientConfig,
+                limit,
+                after,
+                before,
+                options,
+            )
         }
 
         /**
-         * Retrieves a topic by its identifier. Use the topic ID to look up its name, subscription default, visibility, and other details.
+         * Retrieves a topic by its identifier. Use the topic ID to look up its name, subscription
+         * default, visibility, and other details.
          */
         fun get(id: String, options: RequestOptions? = null): SdkResponse<GetTopicResponseSuccess> {
-            return dev.octri.showcase.resend.methods.Topics.topicsGetWithRawResponse(clientConfig, id, options)
+            return dev.octri.showcase.resend.methods.Topics.topicsGetWithRawResponse(
+                clientConfig,
+                id,
+                options,
+            )
         }
 
         /**
-         * Updates the name, description, or visibility of an existing topic. Supply only the fields you want to change; `visibility` must be `public` or `private`.
+         * Updates the name, description, or visibility of an existing topic. Supply only the fields
+         * you want to change; `visibility` must be `public` or `private`.
          */
-        fun update(id: String, name: String? = null, description: String? = null, visibility: UpdateTopicOptionsVisibilityEnum? = null, options: RequestOptions? = null): SdkResponse<UpdateTopicResponseSuccess> {
-            return dev.octri.showcase.resend.methods.Topics.topicsUpdateWithRawResponse(clientConfig, id, name, description, visibility, options)
+        fun update(
+            id: String,
+            name: String? = null,
+            description: String? = null,
+            visibility: UpdateTopicOptionsVisibilityEnum? = null,
+            options: RequestOptions? = null,
+        ): SdkResponse<UpdateTopicResponseSuccess> {
+            return dev.octri.showcase.resend.methods.Topics.topicsUpdateWithRawResponse(
+                clientConfig,
+                id,
+                name,
+                description,
+                visibility,
+                options,
+            )
         }
 
-        /**
-         * Deletes an existing topic. Use the topic ID to select the topic to remove.
-         */
-        fun remove(id: String, options: RequestOptions? = null): SdkResponse<RemoveTopicResponseSuccess> {
-            return dev.octri.showcase.resend.methods.Topics.topicsRemoveWithRawResponse(clientConfig, id, options)
+        /** Deletes an existing topic. Use the topic ID to select the topic to remove. */
+        fun remove(
+            id: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<RemoveTopicResponseSuccess> {
+            return dev.octri.showcase.resend.methods.Topics.topicsRemoveWithRawResponse(
+                clientConfig,
+                id,
+                options,
+            )
         }
-
     }
 }

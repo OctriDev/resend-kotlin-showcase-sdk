@@ -3,10 +3,11 @@
 
 package dev.octri.showcase.resend
 
-
 class UsageNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Retrieves current account usage and plan limits. Use the response to review consumption and limits across email, contacts, segments, broadcasts, AI credits, automation runs, domains, and rate limits.
+     * Retrieves current account usage and plan limits. Use the response to review consumption and
+     * limits across email, contacts, segments, broadcasts, AI credits, automation runs, domains,
+     * and rate limits.
      *
      * Retrieve your account's current usage and plan limits.
      */
@@ -14,19 +15,28 @@ class UsageNamespace(private val clientConfig: ClientConfig) {
         return dev.octri.showcase.resend.methods.Usage.usageGet(clientConfig, options)
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [UsageNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [UsageNamespace], returning the [SdkResponse] envelope around each result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Retrieves current account usage and plan limits. Use the response to review consumption and limits across email, contacts, segments, broadcasts, AI credits, automation runs, domains, and rate limits.
+         * Retrieves current account usage and plan limits. Use the response to review consumption
+         * and limits across email, contacts, segments, broadcasts, AI credits, automation runs,
+         * domains, and rate limits.
          *
          * Retrieve your account's current usage and plan limits.
          */
         fun get(options: RequestOptions? = null): SdkResponse<GetUsageResponseSuccess> {
-            return dev.octri.showcase.resend.methods.Usage.usageGetWithRawResponse(clientConfig, options)
+            return dev.octri.showcase.resend.methods.Usage.usageGetWithRawResponse(
+                clientConfig,
+                options,
+            )
         }
-
     }
 }

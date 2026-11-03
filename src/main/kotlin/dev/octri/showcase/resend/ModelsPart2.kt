@@ -19,19 +19,23 @@ typealias InboxDraftTypeEnum = dev.octri.showcase.resend.models.InboxDraftTypeEn
 
 typealias InboxDraftUpdatedEvent = dev.octri.showcase.resend.models.InboxDraftUpdatedEvent
 
-typealias InboxDraftUpdatedEventTypeEnum = dev.octri.showcase.resend.models.InboxDraftUpdatedEventTypeEnum
+typealias InboxDraftUpdatedEventTypeEnum =
+    dev.octri.showcase.resend.models.InboxDraftUpdatedEventTypeEnum
 
 typealias InboxEmailReceivedEvent = dev.octri.showcase.resend.models.InboxEmailReceivedEvent
 
-typealias InboxEmailReceivedEventTypeEnum = dev.octri.showcase.resend.models.InboxEmailReceivedEventTypeEnum
+typealias InboxEmailReceivedEventTypeEnum =
+    dev.octri.showcase.resend.models.InboxEmailReceivedEventTypeEnum
 
 typealias InboxEmailSentEvent = dev.octri.showcase.resend.models.InboxEmailSentEvent
 
 typealias InboxEmailSentEventTypeEnum = dev.octri.showcase.resend.models.InboxEmailSentEventTypeEnum
 
-typealias InboxesListThreadsParameterItemEnum = dev.octri.showcase.resend.models.InboxesListThreadsParameterItemEnum
+typealias InboxesListThreadsParameterItemEnum =
+    dev.octri.showcase.resend.models.InboxesListThreadsParameterItemEnum
 
-typealias InboxesSearchThreadsParameterItemEnum = dev.octri.showcase.resend.models.InboxesSearchThreadsParameterItemEnum
+typealias InboxesSearchThreadsParameterItemEnum =
+    dev.octri.showcase.resend.models.InboxesSearchThreadsParameterItemEnum
 
 typealias InboxEventData = dev.octri.showcase.resend.models.InboxEventData
 
@@ -43,7 +47,8 @@ typealias InboxEventEmail = dev.octri.showcase.resend.models.InboxEventEmail
 
 typealias InboxEventEmailAttachment = dev.octri.showcase.resend.models.InboxEventEmailAttachment
 
-typealias InboxEventEmailDirectionEnum = dev.octri.showcase.resend.models.InboxEventEmailDirectionEnum
+typealias InboxEventEmailDirectionEnum =
+    dev.octri.showcase.resend.models.InboxEventEmailDirectionEnum
 
 typealias InboxEventSource = dev.octri.showcase.resend.models.InboxEventSource
 
@@ -53,55 +58,71 @@ typealias InboxThread = dev.octri.showcase.resend.models.InboxThread
 
 typealias InboxThreadAssignedEvent = dev.octri.showcase.resend.models.InboxThreadAssignedEvent
 
-typealias InboxThreadAssignedEventData = dev.octri.showcase.resend.models.InboxThreadAssignedEventData
+typealias InboxThreadAssignedEventData =
+    dev.octri.showcase.resend.models.InboxThreadAssignedEventData
 
-typealias InboxThreadAssignedEventTypeEnum = dev.octri.showcase.resend.models.InboxThreadAssignedEventTypeEnum
+typealias InboxThreadAssignedEventTypeEnum =
+    dev.octri.showcase.resend.models.InboxThreadAssignedEventTypeEnum
 
 typealias InboxThreadCreatedEvent = dev.octri.showcase.resend.models.InboxThreadCreatedEvent
 
-typealias InboxThreadCreatedEventTypeEnum = dev.octri.showcase.resend.models.InboxThreadCreatedEventTypeEnum
+typealias InboxThreadCreatedEventTypeEnum =
+    dev.octri.showcase.resend.models.InboxThreadCreatedEventTypeEnum
 
 typealias InboxThreadEmail = dev.octri.showcase.resend.models.InboxThreadEmail
 
 typealias InboxThreadEmailAttachment = dev.octri.showcase.resend.models.InboxThreadEmailAttachment
 
-typealias InboxThreadEmailDirectionEnum = dev.octri.showcase.resend.models.InboxThreadEmailDirectionEnum
+typealias InboxThreadEmailDirectionEnum =
+    dev.octri.showcase.resend.models.InboxThreadEmailDirectionEnum
 
 typealias InboxThreadEmailEventData = dev.octri.showcase.resend.models.InboxThreadEmailEventData
 
 typealias InboxThreadFolderEnum = dev.octri.showcase.resend.models.InboxThreadFolderEnum
 
-typealias InboxThreadFolderUpdatedEvent = dev.octri.showcase.resend.models.InboxThreadFolderUpdatedEvent
+typealias InboxThreadFolderUpdatedEvent =
+    dev.octri.showcase.resend.models.InboxThreadFolderUpdatedEvent
 
-typealias InboxThreadFolderUpdatedEventData = dev.octri.showcase.resend.models.InboxThreadFolderUpdatedEventData
+typealias InboxThreadFolderUpdatedEventData =
+    dev.octri.showcase.resend.models.InboxThreadFolderUpdatedEventData
 
-typealias InboxThreadFolderUpdatedEventDataFromEnum = dev.octri.showcase.resend.models.InboxThreadFolderUpdatedEventDataFromEnum
+typealias InboxThreadFolderUpdatedEventDataFromEnum =
+    dev.octri.showcase.resend.models.InboxThreadFolderUpdatedEventDataFromEnum
 
-typealias InboxThreadFolderUpdatedEventDataToEnum = dev.octri.showcase.resend.models.InboxThreadFolderUpdatedEventDataToEnum
+typealias InboxThreadFolderUpdatedEventDataToEnum =
+    dev.octri.showcase.resend.models.InboxThreadFolderUpdatedEventDataToEnum
 
-typealias InboxThreadFolderUpdatedEventTypeEnum = dev.octri.showcase.resend.models.InboxThreadFolderUpdatedEventTypeEnum
+typealias InboxThreadFolderUpdatedEventTypeEnum =
+    dev.octri.showcase.resend.models.InboxThreadFolderUpdatedEventTypeEnum
 
 typealias InboxThreadLabel = dev.octri.showcase.resend.models.InboxThreadLabel
 
-typealias InboxThreadLabelsUpdatedEvent = dev.octri.showcase.resend.models.InboxThreadLabelsUpdatedEvent
+typealias InboxThreadLabelsUpdatedEvent =
+    dev.octri.showcase.resend.models.InboxThreadLabelsUpdatedEvent
 
-typealias InboxThreadLabelsUpdatedEventData = dev.octri.showcase.resend.models.InboxThreadLabelsUpdatedEventData
+typealias InboxThreadLabelsUpdatedEventData =
+    dev.octri.showcase.resend.models.InboxThreadLabelsUpdatedEventData
 
-typealias InboxThreadLabelsUpdatedEventTypeEnum = dev.octri.showcase.resend.models.InboxThreadLabelsUpdatedEventTypeEnum
+typealias InboxThreadLabelsUpdatedEventTypeEnum =
+    dev.octri.showcase.resend.models.InboxThreadLabelsUpdatedEventTypeEnum
 
 typealias InboxThreadSearchResult = dev.octri.showcase.resend.models.InboxThreadSearchResult
 
-typealias InboxThreadSearchResultVariant1Highlights = dev.octri.showcase.resend.models.InboxThreadSearchResultVariant1Highlights
+typealias InboxThreadSearchResultVariant1Highlights =
+    dev.octri.showcase.resend.models.InboxThreadSearchResultVariant1Highlights
 
 typealias InboxThreadSummary = dev.octri.showcase.resend.models.InboxThreadSummary
 
-typealias InboxThreadSummaryFolderEnum = dev.octri.showcase.resend.models.InboxThreadSummaryFolderEnum
+typealias InboxThreadSummaryFolderEnum =
+    dev.octri.showcase.resend.models.InboxThreadSummaryFolderEnum
 
 typealias InboxThreadUnassignedEvent = dev.octri.showcase.resend.models.InboxThreadUnassignedEvent
 
-typealias InboxThreadUnassignedEventData = dev.octri.showcase.resend.models.InboxThreadUnassignedEventData
+typealias InboxThreadUnassignedEventData =
+    dev.octri.showcase.resend.models.InboxThreadUnassignedEventData
 
-typealias InboxThreadUnassignedEventTypeEnum = dev.octri.showcase.resend.models.InboxThreadUnassignedEventTypeEnum
+typealias InboxThreadUnassignedEventTypeEnum =
+    dev.octri.showcase.resend.models.InboxThreadUnassignedEventTypeEnum
 
 typealias InboxUpdatedEvent = dev.octri.showcase.resend.models.InboxUpdatedEvent
 
@@ -111,47 +132,65 @@ typealias ListApiKeysResponse = dev.octri.showcase.resend.models.ListApiKeysResp
 
 typealias ListAttachmentsResponse = dev.octri.showcase.resend.models.ListAttachmentsResponse
 
-typealias ListAttachmentsResponseDataItem = dev.octri.showcase.resend.models.ListAttachmentsResponseDataItem
+typealias ListAttachmentsResponseDataItem =
+    dev.octri.showcase.resend.models.ListAttachmentsResponseDataItem
 
-typealias ListAttachmentsResponseDataItemContentDispositionEnum = dev.octri.showcase.resend.models.ListAttachmentsResponseDataItemContentDispositionEnum
+typealias ListAttachmentsResponseDataItemContentDispositionEnum =
+    dev.octri.showcase.resend.models.ListAttachmentsResponseDataItemContentDispositionEnum
 
-typealias ListAudiencesResponseSuccess = dev.octri.showcase.resend.models.ListAudiencesResponseSuccess
+typealias ListAudiencesResponseSuccess =
+    dev.octri.showcase.resend.models.ListAudiencesResponseSuccess
 
-typealias ListAudiencesResponseSuccessDataItem = dev.octri.showcase.resend.models.ListAudiencesResponseSuccessDataItem
+typealias ListAudiencesResponseSuccessDataItem =
+    dev.octri.showcase.resend.models.ListAudiencesResponseSuccessDataItem
 
 typealias ListAutomationRunsResponse = dev.octri.showcase.resend.models.ListAutomationRunsResponse
 
 typealias ListAutomationsResponse = dev.octri.showcase.resend.models.ListAutomationsResponse
 
-typealias ListBroadcastClickedLinksResponseSuccess = dev.octri.showcase.resend.models.ListBroadcastClickedLinksResponseSuccess
+typealias ListBroadcastClickedLinksResponseSuccess =
+    dev.octri.showcase.resend.models.ListBroadcastClickedLinksResponseSuccess
 
-typealias ListBroadcastClickedLinksResponseSuccessDataItem = dev.octri.showcase.resend.models.ListBroadcastClickedLinksResponseSuccessDataItem
+typealias ListBroadcastClickedLinksResponseSuccessDataItem =
+    dev.octri.showcase.resend.models.ListBroadcastClickedLinksResponseSuccessDataItem
 
-typealias ListBroadcastRecipientsResponseSuccess = dev.octri.showcase.resend.models.ListBroadcastRecipientsResponseSuccess
+typealias ListBroadcastRecipientsResponseSuccess =
+    dev.octri.showcase.resend.models.ListBroadcastRecipientsResponseSuccess
 
-typealias ListBroadcastRecipientsResponseSuccessDataItem = dev.octri.showcase.resend.models.ListBroadcastRecipientsResponseSuccessDataItem
+typealias ListBroadcastRecipientsResponseSuccessDataItem =
+    dev.octri.showcase.resend.models.ListBroadcastRecipientsResponseSuccessDataItem
 
-typealias ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum = dev.octri.showcase.resend.models.ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum
+typealias ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum =
+    dev.octri.showcase.resend.models.ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum
 
-typealias ListBroadcastRecipientsResponseSuccessDataItemClickedLinksItem = dev.octri.showcase.resend.models.ListBroadcastRecipientsResponseSuccessDataItemClickedLinksItem
+typealias ListBroadcastRecipientsResponseSuccessDataItemClickedLinksItem =
+    dev.octri.showcase.resend.models.ListBroadcastRecipientsResponseSuccessDataItemClickedLinksItem
 
-typealias ListBroadcastsResponseSuccess = dev.octri.showcase.resend.models.ListBroadcastsResponseSuccess
+typealias ListBroadcastsResponseSuccess =
+    dev.octri.showcase.resend.models.ListBroadcastsResponseSuccess
 
-typealias ListBroadcastsResponseSuccessDataItem = dev.octri.showcase.resend.models.ListBroadcastsResponseSuccessDataItem
+typealias ListBroadcastsResponseSuccessDataItem =
+    dev.octri.showcase.resend.models.ListBroadcastsResponseSuccessDataItem
 
-typealias ListContactImportsResponseSuccess = dev.octri.showcase.resend.models.ListContactImportsResponseSuccess
+typealias ListContactImportsResponseSuccess =
+    dev.octri.showcase.resend.models.ListContactImportsResponseSuccess
 
-typealias ListContactPropertiesResponseSuccess = dev.octri.showcase.resend.models.ListContactPropertiesResponseSuccess
+typealias ListContactPropertiesResponseSuccess =
+    dev.octri.showcase.resend.models.ListContactPropertiesResponseSuccess
 
-typealias ListContactPropertiesResponseSuccessDataItem = dev.octri.showcase.resend.models.ListContactPropertiesResponseSuccessDataItem
+typealias ListContactPropertiesResponseSuccessDataItem =
+    dev.octri.showcase.resend.models.ListContactPropertiesResponseSuccessDataItem
 
-typealias ListContactSegmentsResponseSuccess = dev.octri.showcase.resend.models.ListContactSegmentsResponseSuccess
+typealias ListContactSegmentsResponseSuccess =
+    dev.octri.showcase.resend.models.ListContactSegmentsResponseSuccess
 
-typealias ListContactSegmentsResponseSuccessDataItem = dev.octri.showcase.resend.models.ListContactSegmentsResponseSuccessDataItem
+typealias ListContactSegmentsResponseSuccessDataItem =
+    dev.octri.showcase.resend.models.ListContactSegmentsResponseSuccessDataItem
 
 typealias ListContactsResponseSuccess = dev.octri.showcase.resend.models.ListContactsResponseSuccess
 
-typealias ListContactsResponseSuccessDataItem = dev.octri.showcase.resend.models.ListContactsResponseSuccessDataItem
+typealias ListContactsResponseSuccessDataItem =
+    dev.octri.showcase.resend.models.ListContactsResponseSuccessDataItem
 
 typealias ListDomainsItem = dev.octri.showcase.resend.models.ListDomainsItem
 
@@ -163,17 +202,22 @@ typealias ListEmailsResponse = dev.octri.showcase.resend.models.ListEmailsRespon
 
 typealias ListEventsResponse = dev.octri.showcase.resend.models.ListEventsResponse
 
-typealias ListInboxDraftsResponseSuccess = dev.octri.showcase.resend.models.ListInboxDraftsResponseSuccess
+typealias ListInboxDraftsResponseSuccess =
+    dev.octri.showcase.resend.models.ListInboxDraftsResponseSuccess
 
 typealias ListInboxesResponseSuccess = dev.octri.showcase.resend.models.ListInboxesResponseSuccess
 
-typealias ListInboxesResponseSuccessDataItem = dev.octri.showcase.resend.models.ListInboxesResponseSuccessDataItem
+typealias ListInboxesResponseSuccessDataItem =
+    dev.octri.showcase.resend.models.ListInboxesResponseSuccessDataItem
 
-typealias ListInboxLabelsResponseSuccess = dev.octri.showcase.resend.models.ListInboxLabelsResponseSuccess
+typealias ListInboxLabelsResponseSuccess =
+    dev.octri.showcase.resend.models.ListInboxLabelsResponseSuccess
 
-typealias ListInboxThreadEmailsResponseSuccess = dev.octri.showcase.resend.models.ListInboxThreadEmailsResponseSuccess
+typealias ListInboxThreadEmailsResponseSuccess =
+    dev.octri.showcase.resend.models.ListInboxThreadEmailsResponseSuccess
 
-typealias ListInboxThreadsResponseSuccess = dev.octri.showcase.resend.models.ListInboxThreadsResponseSuccess
+typealias ListInboxThreadsResponseSuccess =
+    dev.octri.showcase.resend.models.ListInboxThreadsResponseSuccess
 
 typealias ListLogsResponse = dev.octri.showcase.resend.models.ListLogsResponse
 
@@ -181,49 +225,66 @@ typealias ListOAuthGrantsResponse = dev.octri.showcase.resend.models.ListOAuthGr
 
 typealias ListReceivedEmailsResponse = dev.octri.showcase.resend.models.ListReceivedEmailsResponse
 
-typealias ListReceivedEmailsResponseDataItem = dev.octri.showcase.resend.models.ListReceivedEmailsResponseDataItem
+typealias ListReceivedEmailsResponseDataItem =
+    dev.octri.showcase.resend.models.ListReceivedEmailsResponseDataItem
 
-typealias ListReceivedEmailsResponseDataItemAttachmentsItem = dev.octri.showcase.resend.models.ListReceivedEmailsResponseDataItemAttachmentsItem
+typealias ListReceivedEmailsResponseDataItemAttachmentsItem =
+    dev.octri.showcase.resend.models.ListReceivedEmailsResponseDataItemAttachmentsItem
 
-typealias ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum = dev.octri.showcase.resend.models.ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum
+typealias ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum =
+    dev.octri.showcase.resend.models.ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum
 
 typealias ListRecipientsParameterEnum = dev.octri.showcase.resend.models.ListRecipientsParameterEnum
 
-typealias ListRecipientsParameterEnume6c5d649 = dev.octri.showcase.resend.models.ListRecipientsParameterEnume6c5d649
+typealias ListRecipientsParameterEnume6c5d649 =
+    dev.octri.showcase.resend.models.ListRecipientsParameterEnume6c5d649
 
 typealias ListSegmentsResponseSuccess = dev.octri.showcase.resend.models.ListSegmentsResponseSuccess
 
-typealias ListSegmentsResponseSuccessDataItem = dev.octri.showcase.resend.models.ListSegmentsResponseSuccessDataItem
+typealias ListSegmentsResponseSuccessDataItem =
+    dev.octri.showcase.resend.models.ListSegmentsResponseSuccessDataItem
 
-typealias ListSuppressionsResponseSuccess = dev.octri.showcase.resend.models.ListSuppressionsResponseSuccess
+typealias ListSuppressionsResponseSuccess =
+    dev.octri.showcase.resend.models.ListSuppressionsResponseSuccess
 
-typealias ListSuppressionsResponseSuccessDataItem = dev.octri.showcase.resend.models.ListSuppressionsResponseSuccessDataItem
+typealias ListSuppressionsResponseSuccessDataItem =
+    dev.octri.showcase.resend.models.ListSuppressionsResponseSuccessDataItem
 
-typealias ListSuppressionsResponseSuccessDataItemOriginEnum = dev.octri.showcase.resend.models.ListSuppressionsResponseSuccessDataItemOriginEnum
+typealias ListSuppressionsResponseSuccessDataItemOriginEnum =
+    dev.octri.showcase.resend.models.ListSuppressionsResponseSuccessDataItemOriginEnum
 
-typealias ListTemplatesResponseSuccess = dev.octri.showcase.resend.models.ListTemplatesResponseSuccess
+typealias ListTemplatesResponseSuccess =
+    dev.octri.showcase.resend.models.ListTemplatesResponseSuccess
 
 typealias ListTopicsResponseSuccess = dev.octri.showcase.resend.models.ListTopicsResponseSuccess
 
-typealias ListTopicsResponseSuccessDataItem = dev.octri.showcase.resend.models.ListTopicsResponseSuccessDataItem
+typealias ListTopicsResponseSuccessDataItem =
+    dev.octri.showcase.resend.models.ListTopicsResponseSuccessDataItem
 
-typealias ListTopicsResponseSuccessDataItemDefaultSubscriptionEnum = dev.octri.showcase.resend.models.ListTopicsResponseSuccessDataItemDefaultSubscriptionEnum
+typealias ListTopicsResponseSuccessDataItemDefaultSubscriptionEnum =
+    dev.octri.showcase.resend.models.ListTopicsResponseSuccessDataItemDefaultSubscriptionEnum
 
-typealias ListTopicsResponseSuccessDataItemVisibilityEnum = dev.octri.showcase.resend.models.ListTopicsResponseSuccessDataItemVisibilityEnum
+typealias ListTopicsResponseSuccessDataItemVisibilityEnum =
+    dev.octri.showcase.resend.models.ListTopicsResponseSuccessDataItemVisibilityEnum
 
-typealias ListWebhookEventAttemptsResponse = dev.octri.showcase.resend.models.ListWebhookEventAttemptsResponse
+typealias ListWebhookEventAttemptsResponse =
+    dev.octri.showcase.resend.models.ListWebhookEventAttemptsResponse
 
-typealias ListWebhookEventAttemptsResponseDataItem = dev.octri.showcase.resend.models.ListWebhookEventAttemptsResponseDataItem
+typealias ListWebhookEventAttemptsResponseDataItem =
+    dev.octri.showcase.resend.models.ListWebhookEventAttemptsResponseDataItem
 
 typealias ListWebhookEventsResponse = dev.octri.showcase.resend.models.ListWebhookEventsResponse
 
-typealias ListWebhookEventsResponseDataItem = dev.octri.showcase.resend.models.ListWebhookEventsResponseDataItem
+typealias ListWebhookEventsResponseDataItem =
+    dev.octri.showcase.resend.models.ListWebhookEventsResponseDataItem
 
-typealias ListWebhookEventsResponseDataItemStatusEnum = dev.octri.showcase.resend.models.ListWebhookEventsResponseDataItemStatusEnum
+typealias ListWebhookEventsResponseDataItemStatusEnum =
+    dev.octri.showcase.resend.models.ListWebhookEventsResponseDataItemStatusEnum
 
 typealias ListWebhooksResponse = dev.octri.showcase.resend.models.ListWebhooksResponse
 
-typealias ListWebhooksResponseDataItem = dev.octri.showcase.resend.models.ListWebhooksResponseDataItem
+typealias ListWebhooksResponseDataItem =
+    dev.octri.showcase.resend.models.ListWebhooksResponseDataItem
 
 typealias Log = dev.octri.showcase.resend.models.Log
 
@@ -239,65 +300,86 @@ typealias OAuthGrantClient = dev.octri.showcase.resend.models.OAuthGrantClient
 
 typealias OutboundEmailEventData = dev.octri.showcase.resend.models.OutboundEmailEventData
 
-typealias OutboundEmailEventDataHeadersItem = dev.octri.showcase.resend.models.OutboundEmailEventDataHeadersItem
+typealias OutboundEmailEventDataHeadersItem =
+    dev.octri.showcase.resend.models.OutboundEmailEventDataHeadersItem
 
 typealias PatchAutomationRequest = dev.octri.showcase.resend.models.PatchAutomationRequest
 
-typealias PatchAutomationRequestStatusEnum = dev.octri.showcase.resend.models.PatchAutomationRequestStatusEnum
+typealias PatchAutomationRequestStatusEnum =
+    dev.octri.showcase.resend.models.PatchAutomationRequestStatusEnum
 
 typealias PatchAutomationResponse = dev.octri.showcase.resend.models.PatchAutomationResponse
 
-typealias PublishTemplateResponseSuccess = dev.octri.showcase.resend.models.PublishTemplateResponseSuccess
+typealias PublishTemplateResponseSuccess =
+    dev.octri.showcase.resend.models.PublishTemplateResponseSuccess
 
-typealias RemoveAudienceResponseSuccess = dev.octri.showcase.resend.models.RemoveAudienceResponseSuccess
+typealias RemoveAudienceResponseSuccess =
+    dev.octri.showcase.resend.models.RemoveAudienceResponseSuccess
 
-typealias RemoveBroadcastResponseSuccess = dev.octri.showcase.resend.models.RemoveBroadcastResponseSuccess
+typealias RemoveBroadcastResponseSuccess =
+    dev.octri.showcase.resend.models.RemoveBroadcastResponseSuccess
 
-typealias RemoveContactFromSegmentResponseSuccess = dev.octri.showcase.resend.models.RemoveContactFromSegmentResponseSuccess
+typealias RemoveContactFromSegmentResponseSuccess =
+    dev.octri.showcase.resend.models.RemoveContactFromSegmentResponseSuccess
 
-typealias RemoveContactPropertyResponseSuccess = dev.octri.showcase.resend.models.RemoveContactPropertyResponseSuccess
+typealias RemoveContactPropertyResponseSuccess =
+    dev.octri.showcase.resend.models.RemoveContactPropertyResponseSuccess
 
-typealias RemoveContactResponseSuccess = dev.octri.showcase.resend.models.RemoveContactResponseSuccess
+typealias RemoveContactResponseSuccess =
+    dev.octri.showcase.resend.models.RemoveContactResponseSuccess
 
 typealias RemoveEventResponse = dev.octri.showcase.resend.models.RemoveEventResponse
 
-typealias RemoveInboxDraftResponseSuccess = dev.octri.showcase.resend.models.RemoveInboxDraftResponseSuccess
+typealias RemoveInboxDraftResponseSuccess =
+    dev.octri.showcase.resend.models.RemoveInboxDraftResponseSuccess
 
-typealias RemoveInboxDraftResponseSuccessDeletedEnum = dev.octri.showcase.resend.models.RemoveInboxDraftResponseSuccessDeletedEnum
+typealias RemoveInboxDraftResponseSuccessDeletedEnum =
+    dev.octri.showcase.resend.models.RemoveInboxDraftResponseSuccessDeletedEnum
 
-typealias RemoveInboxLabelResponseSuccess = dev.octri.showcase.resend.models.RemoveInboxLabelResponseSuccess
+typealias RemoveInboxLabelResponseSuccess =
+    dev.octri.showcase.resend.models.RemoveInboxLabelResponseSuccess
 
 typealias RemoveInboxResponseSuccess = dev.octri.showcase.resend.models.RemoveInboxResponseSuccess
 
-typealias RemoveInboxThreadResponseSuccess = dev.octri.showcase.resend.models.RemoveInboxThreadResponseSuccess
+typealias RemoveInboxThreadResponseSuccess =
+    dev.octri.showcase.resend.models.RemoveInboxThreadResponseSuccess
 
-typealias RemoveSegmentResponseSuccess = dev.octri.showcase.resend.models.RemoveSegmentResponseSuccess
+typealias RemoveSegmentResponseSuccess =
+    dev.octri.showcase.resend.models.RemoveSegmentResponseSuccess
 
-typealias RemoveSuppressionResponseSuccess = dev.octri.showcase.resend.models.RemoveSuppressionResponseSuccess
+typealias RemoveSuppressionResponseSuccess =
+    dev.octri.showcase.resend.models.RemoveSuppressionResponseSuccess
 
-typealias RemoveTemplateResponseSuccess = dev.octri.showcase.resend.models.RemoveTemplateResponseSuccess
+typealias RemoveTemplateResponseSuccess =
+    dev.octri.showcase.resend.models.RemoveTemplateResponseSuccess
 
 typealias RemoveTopicResponseSuccess = dev.octri.showcase.resend.models.RemoveTopicResponseSuccess
 
 typealias ReplayWebhookEventResponse = dev.octri.showcase.resend.models.ReplayWebhookEventResponse
 
-typealias ReplyInboxThreadEmailOptions = dev.octri.showcase.resend.models.ReplyInboxThreadEmailOptions
+typealias ReplyInboxThreadEmailOptions =
+    dev.octri.showcase.resend.models.ReplyInboxThreadEmailOptions
 
-typealias ReplyInboxThreadEmailResponseSuccess = dev.octri.showcase.resend.models.ReplyInboxThreadEmailResponseSuccess
+typealias ReplyInboxThreadEmailResponseSuccess =
+    dev.octri.showcase.resend.models.ReplyInboxThreadEmailResponseSuccess
 
 typealias RetrievedAttachment = dev.octri.showcase.resend.models.RetrievedAttachment
 
-typealias RetrievedAttachmentContentDispositionEnum = dev.octri.showcase.resend.models.RetrievedAttachmentContentDispositionEnum
+typealias RetrievedAttachmentContentDispositionEnum =
+    dev.octri.showcase.resend.models.RetrievedAttachmentContentDispositionEnum
 
 typealias RevokeOAuthGrantResponse = dev.octri.showcase.resend.models.RevokeOAuthGrantResponse
 
-typealias RotateWebhookSigningSecretResponse = dev.octri.showcase.resend.models.RotateWebhookSigningSecretResponse
+typealias RotateWebhookSigningSecretResponse =
+    dev.octri.showcase.resend.models.RotateWebhookSigningSecretResponse
 
-typealias SearchInboxThreadsResponseSuccess = dev.octri.showcase.resend.models.SearchInboxThreadsResponseSuccess
+typealias SearchInboxThreadsResponseSuccess =
+    dev.octri.showcase.resend.models.SearchInboxThreadsResponseSuccess
 
 typealias SendBroadcastOptions = dev.octri.showcase.resend.models.SendBroadcastOptions
 
-typealias SendBroadcastResponseSuccess = dev.octri.showcase.resend.models.SendBroadcastResponseSuccess
+typealias SendBroadcastResponseSuccess =
+    dev.octri.showcase.resend.models.SendBroadcastResponseSuccess
 
 typealias SendEmailRequest = dev.octri.showcase.resend.models.SendEmailRequest
 
@@ -309,7 +391,8 @@ typealias SendEventResponse = dev.octri.showcase.resend.models.SendEventResponse
 
 typealias SendInboxDraftOptions = dev.octri.showcase.resend.models.SendInboxDraftOptions
 
-typealias SendInboxDraftResponseSuccess = dev.octri.showcase.resend.models.SendInboxDraftResponseSuccess
+typealias SendInboxDraftResponseSuccess =
+    dev.octri.showcase.resend.models.SendInboxDraftResponseSuccess
 
 typealias ShareEmailOptions = dev.octri.showcase.resend.models.ShareEmailOptions
 
@@ -319,17 +402,21 @@ typealias StopAutomationResponse = dev.octri.showcase.resend.models.StopAutomati
 
 typealias SuppressionAddedEvent = dev.octri.showcase.resend.models.SuppressionAddedEvent
 
-typealias SuppressionAddedEventTypeEnum = dev.octri.showcase.resend.models.SuppressionAddedEventTypeEnum
+typealias SuppressionAddedEventTypeEnum =
+    dev.octri.showcase.resend.models.SuppressionAddedEventTypeEnum
 
 typealias SuppressionEventData = dev.octri.showcase.resend.models.SuppressionEventData
 
-typealias SuppressionEventDataOriginEnum = dev.octri.showcase.resend.models.SuppressionEventDataOriginEnum
+typealias SuppressionEventDataOriginEnum =
+    dev.octri.showcase.resend.models.SuppressionEventDataOriginEnum
 
 typealias SuppressionRemovedEvent = dev.octri.showcase.resend.models.SuppressionRemovedEvent
 
-typealias SuppressionRemovedEventTypeEnum = dev.octri.showcase.resend.models.SuppressionRemovedEventTypeEnum
+typealias SuppressionRemovedEventTypeEnum =
+    dev.octri.showcase.resend.models.SuppressionRemovedEventTypeEnum
 
-typealias SuppressionsListParameterEnum = dev.octri.showcase.resend.models.SuppressionsListParameterEnum
+typealias SuppressionsListParameterEnum =
+    dev.octri.showcase.resend.models.SuppressionsListParameterEnum
 
 typealias Tag = dev.octri.showcase.resend.models.Tag
 
@@ -345,7 +432,8 @@ typealias TemplateVariable = dev.octri.showcase.resend.models.TemplateVariable
 
 typealias TemplateVariableInput = dev.octri.showcase.resend.models.TemplateVariableInput
 
-typealias TemplateVariableInputTypeEnum = dev.octri.showcase.resend.models.TemplateVariableInputTypeEnum
+typealias TemplateVariableInputTypeEnum =
+    dev.octri.showcase.resend.models.TemplateVariableInputTypeEnum
 
 typealias TemplateVariableTypeEnum = dev.octri.showcase.resend.models.TemplateVariableTypeEnum
 
@@ -359,7 +447,8 @@ typealias TopicDeletedEventTypeEnum = dev.octri.showcase.resend.models.TopicDele
 
 typealias TopicEventData = dev.octri.showcase.resend.models.TopicEventData
 
-typealias TopicEventDataDefaultSubscriptionEnum = dev.octri.showcase.resend.models.TopicEventDataDefaultSubscriptionEnum
+typealias TopicEventDataDefaultSubscriptionEnum =
+    dev.octri.showcase.resend.models.TopicEventDataDefaultSubscriptionEnum
 
 typealias TopicUpdatedEvent = dev.octri.showcase.resend.models.TopicUpdatedEvent
 
@@ -371,27 +460,36 @@ typealias UpdateApiKeyResponse = dev.octri.showcase.resend.models.UpdateApiKeyRe
 
 typealias UpdateBroadcastOptions = dev.octri.showcase.resend.models.UpdateBroadcastOptions
 
-typealias UpdateBroadcastResponseSuccess = dev.octri.showcase.resend.models.UpdateBroadcastResponseSuccess
+typealias UpdateBroadcastResponseSuccess =
+    dev.octri.showcase.resend.models.UpdateBroadcastResponseSuccess
 
 typealias UpdateContactOptions = dev.octri.showcase.resend.models.UpdateContactOptions
 
-typealias UpdateContactPropertyOptions = dev.octri.showcase.resend.models.UpdateContactPropertyOptions
+typealias UpdateContactPropertyOptions =
+    dev.octri.showcase.resend.models.UpdateContactPropertyOptions
 
-typealias UpdateContactPropertyResponseSuccess = dev.octri.showcase.resend.models.UpdateContactPropertyResponseSuccess
+typealias UpdateContactPropertyResponseSuccess =
+    dev.octri.showcase.resend.models.UpdateContactPropertyResponseSuccess
 
-typealias UpdateContactResponseSuccess = dev.octri.showcase.resend.models.UpdateContactResponseSuccess
+typealias UpdateContactResponseSuccess =
+    dev.octri.showcase.resend.models.UpdateContactResponseSuccess
 
 typealias UpdateContactTopicsOptions = dev.octri.showcase.resend.models.UpdateContactTopicsOptions
 
-typealias UpdateContactTopicsOptionsTopicsItem = dev.octri.showcase.resend.models.UpdateContactTopicsOptionsTopicsItem
+typealias UpdateContactTopicsOptionsTopicsItem =
+    dev.octri.showcase.resend.models.UpdateContactTopicsOptionsTopicsItem
 
-typealias UpdateContactTopicsOptionsTopicsItemSubscriptionEnum = dev.octri.showcase.resend.models.UpdateContactTopicsOptionsTopicsItemSubscriptionEnum
+typealias UpdateContactTopicsOptionsTopicsItemSubscriptionEnum =
+    dev.octri.showcase.resend.models.UpdateContactTopicsOptionsTopicsItemSubscriptionEnum
 
-typealias UpdateContactTopicsResponseSuccess = dev.octri.showcase.resend.models.UpdateContactTopicsResponseSuccess
+typealias UpdateContactTopicsResponseSuccess =
+    dev.octri.showcase.resend.models.UpdateContactTopicsResponseSuccess
 
-typealias UpdateContactTopicsResponseSuccessTopicsItem = dev.octri.showcase.resend.models.UpdateContactTopicsResponseSuccessTopicsItem
+typealias UpdateContactTopicsResponseSuccessTopicsItem =
+    dev.octri.showcase.resend.models.UpdateContactTopicsResponseSuccessTopicsItem
 
-typealias UpdateContactTopicsResponseSuccessTopicsItemSubscriptionEnum = dev.octri.showcase.resend.models.UpdateContactTopicsResponseSuccessTopicsItemSubscriptionEnum
+typealias UpdateContactTopicsResponseSuccessTopicsItemSubscriptionEnum =
+    dev.octri.showcase.resend.models.UpdateContactTopicsResponseSuccessTopicsItemSubscriptionEnum
 
 typealias UpdateDomainOptions = dev.octri.showcase.resend.models.UpdateDomainOptions
 
@@ -407,19 +505,24 @@ typealias UpdateEventResponse = dev.octri.showcase.resend.models.UpdateEventResp
 
 typealias UpdateInboxAgentOptions = dev.octri.showcase.resend.models.UpdateInboxAgentOptions
 
-typealias UpdateInboxAgentOptionsEnabledActionsItemEnum = dev.octri.showcase.resend.models.UpdateInboxAgentOptionsEnabledActionsItemEnum
+typealias UpdateInboxAgentOptionsEnabledActionsItemEnum =
+    dev.octri.showcase.resend.models.UpdateInboxAgentOptionsEnabledActionsItemEnum
 
-typealias UpdateInboxAgentOptionsToneEnum = dev.octri.showcase.resend.models.UpdateInboxAgentOptionsToneEnum
+typealias UpdateInboxAgentOptionsToneEnum =
+    dev.octri.showcase.resend.models.UpdateInboxAgentOptionsToneEnum
 
-typealias UpdateInboxAgentResponseSuccess = dev.octri.showcase.resend.models.UpdateInboxAgentResponseSuccess
+typealias UpdateInboxAgentResponseSuccess =
+    dev.octri.showcase.resend.models.UpdateInboxAgentResponseSuccess
 
 typealias UpdateInboxDraftOptions = dev.octri.showcase.resend.models.UpdateInboxDraftOptions
 
-typealias UpdateInboxDraftResponseSuccess = dev.octri.showcase.resend.models.UpdateInboxDraftResponseSuccess
+typealias UpdateInboxDraftResponseSuccess =
+    dev.octri.showcase.resend.models.UpdateInboxDraftResponseSuccess
 
 typealias UpdateInboxLabelOptions = dev.octri.showcase.resend.models.UpdateInboxLabelOptions
 
-typealias UpdateInboxLabelResponseSuccess = dev.octri.showcase.resend.models.UpdateInboxLabelResponseSuccess
+typealias UpdateInboxLabelResponseSuccess =
+    dev.octri.showcase.resend.models.UpdateInboxLabelResponseSuccess
 
 typealias UpdateInboxOptions = dev.octri.showcase.resend.models.UpdateInboxOptions
 
@@ -427,12 +530,15 @@ typealias UpdateInboxResponseSuccess = dev.octri.showcase.resend.models.UpdateIn
 
 typealias UpdateInboxThreadOptions = dev.octri.showcase.resend.models.UpdateInboxThreadOptions
 
-typealias UpdateInboxThreadOptionsFolderEnum = dev.octri.showcase.resend.models.UpdateInboxThreadOptionsFolderEnum
+typealias UpdateInboxThreadOptionsFolderEnum =
+    dev.octri.showcase.resend.models.UpdateInboxThreadOptionsFolderEnum
 
-typealias UpdateInboxThreadResponseSuccess = dev.octri.showcase.resend.models.UpdateInboxThreadResponseSuccess
+typealias UpdateInboxThreadResponseSuccess =
+    dev.octri.showcase.resend.models.UpdateInboxThreadResponseSuccess
 
 typealias UpdateSegmentOptions = dev.octri.showcase.resend.models.UpdateSegmentOptions
 
-typealias UpdateSegmentResponseSuccess = dev.octri.showcase.resend.models.UpdateSegmentResponseSuccess
+typealias UpdateSegmentResponseSuccess =
+    dev.octri.showcase.resend.models.UpdateSegmentResponseSuccess
 
 typealias UpdateTemplateOptions = dev.octri.showcase.resend.models.UpdateTemplateOptions

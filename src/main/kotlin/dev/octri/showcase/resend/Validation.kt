@@ -5,9 +5,7 @@ package dev.octri.showcase.resend
 
 import java.util.UUID
 
-/**
- * Canonical validation helpers. Each throws [SdkValidationError] on failure.
- */
+/** Canonical validation helpers. Each throws [SdkValidationError] on failure. */
 object Validation {
 
     private const val MULTIPLE_OF_TOLERANCE = 1e-9
@@ -42,46 +40,94 @@ object Validation {
 
     fun validateLength(field: String, value: String, opts: LengthOpts) {
         val n = value.length
-        opts.min?.let { if (n < it) throw SdkValidationError(field, "length",
-            "Validation failed for '$field': length must be >= $it") }
-        opts.max?.let { if (n > it) throw SdkValidationError(field, "length",
-            "Validation failed for '$field': length must be <= $it") }
+        opts.min?.let {
+            if (n < it)
+                throw SdkValidationError(
+                    field,
+                    "length",
+                    "Validation failed for '$field': length must be >= $it",
+                )
+        }
+        opts.max?.let {
+            if (n > it)
+                throw SdkValidationError(
+                    field,
+                    "length",
+                    "Validation failed for '$field': length must be <= $it",
+                )
+        }
     }
 
     fun validateLength(field: String, value: ByteArray, opts: LengthOpts) {
         val n = value.size
-        opts.min?.let { if (n < it) throw SdkValidationError(field, "length",
-            "Validation failed for '$field': length must be >= $it") }
-        opts.max?.let { if (n > it) throw SdkValidationError(field, "length",
-            "Validation failed for '$field': length must be <= $it") }
+        opts.min?.let {
+            if (n < it)
+                throw SdkValidationError(
+                    field,
+                    "length",
+                    "Validation failed for '$field': length must be >= $it",
+                )
+        }
+        opts.max?.let {
+            if (n > it)
+                throw SdkValidationError(
+                    field,
+                    "length",
+                    "Validation failed for '$field': length must be <= $it",
+                )
+        }
     }
 
     fun validateItems(field: String, value: Collection<*>, opts: LengthOpts) {
         val n = value.size
-        opts.min?.let { if (n < it) throw SdkValidationError(field, "items",
-            "Validation failed for '$field': must have at least $it items") }
-        opts.max?.let { if (n > it) throw SdkValidationError(field, "items",
-            "Validation failed for '$field': must have at most $it items") }
+        opts.min?.let {
+            if (n < it)
+                throw SdkValidationError(
+                    field,
+                    "items",
+                    "Validation failed for '$field': must have at least $it items",
+                )
+        }
+        opts.max?.let {
+            if (n > it)
+                throw SdkValidationError(
+                    field,
+                    "items",
+                    "Validation failed for '$field': must have at most $it items",
+                )
+        }
     }
 
     fun validatePattern(field: String, value: String, pattern: String) {
         if (!Regex(pattern).containsMatchIn(value)) {
-            throw SdkValidationError(field, "pattern",
-                "Validation failed for '$field': must match pattern $pattern")
+            throw SdkValidationError(
+                field,
+                "pattern",
+                "Validation failed for '$field': must match pattern $pattern",
+            )
         }
     }
 
     private val EMAIL_RE = Regex("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")
+
     fun validateEmail(field: String, value: String) {
-        if (!EMAIL_RE.matches(value)) throw SdkValidationError(field, "format:email",
-            "Validation failed for '$field': must be a valid email address")
+        if (!EMAIL_RE.matches(value))
+            throw SdkValidationError(
+                field,
+                "format:email",
+                "Validation failed for '$field': must be a valid email address",
+            )
     }
 
     fun validateUuid(field: String, value: String) {
-        try { UUID.fromString(value) } catch (_: IllegalArgumentException) {
-            throw SdkValidationError(field, "format:uuid",
-                "Validation failed for '$field': must be a valid UUID")
+        try {
+            UUID.fromString(value)
+        } catch (_: IllegalArgumentException) {
+            throw SdkValidationError(
+                field,
+                "format:uuid",
+                "Validation failed for '$field': must be a valid UUID",
+            )
         }
     }
-
 }

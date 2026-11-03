@@ -23,261 +23,483 @@ import dev.octri.showcase.resend.Validation
 object Webhooks {
 
     /**
-     * Creates a webhook subscription that delivers selected event types to a specified endpoint. Provide an `endpoint` URL and at least one event type in `events` to configure the subscription.
+     * Creates a webhook subscription that delivers selected event types to a specified endpoint.
+     * Provide an `endpoint` URL and at least one event type in `events` to configure the
+     * subscription.
      *
      * @param endpoint The URL where webhook events will be sent.
      * @param events Array of event types to subscribe to.
      */
-    fun webhooksCreate(clientConfig: ClientConfig, endpoint: String, events: List<String>, options: RequestOptions? = null): CreateWebhookResponse {
+    fun webhooksCreate(
+        clientConfig: ClientConfig,
+        endpoint: String,
+        events: List<String>,
+        options: RequestOptions? = null,
+    ): CreateWebhookResponse {
         return webhooksCreateWithRawResponse(clientConfig, endpoint, events, options).data
     }
 
-
-    /** [webhooksCreate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun webhooksCreateWithRawResponse(clientConfig: ClientConfig, endpoint: String, events: List<String>, options: RequestOptions? = null): SdkResponse<CreateWebhookResponse> {
+    /**
+     * [webhooksCreate], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun webhooksCreateWithRawResponse(
+        clientConfig: ClientConfig,
+        endpoint: String,
+        events: List<String>,
+        options: RequestOptions? = null,
+    ): SdkResponse<CreateWebhookResponse> {
         Validation.validateItems("events", events, Validation.LengthOpts(min = 1))
 
-        return SdkClient.request<CreateWebhookResponse>(SdkClient.RequestSpec("POST", "/webhooks", config = clientConfig, body = SdkClient.bodyMap("endpoint" to (endpoint), "events" to (events)), operationId = "webhooksCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<CreateWebhookResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/webhooks",
+                config = clientConfig,
+                body = SdkClient.bodyMap("endpoint" to (endpoint), "events" to (events)),
+                operationId = "webhooksCreate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists webhooks configured for your account. Use the pagination cursors to retrieve results before or after a webhook in the list; provide no more than one cursor at a time.
+     * Lists webhooks configured for your account. Use the pagination cursors to retrieve results
+     * before or after a webhook in the list; provide no more than one cursor at a time.
      *
      * @param limit Maximum number of webhooks to return.
-     * @param after Pagination cursor to fetch results after this webhook ID. Cannot
-     *   be used with 'before'.
-     * @param before Pagination cursor to fetch results before this webhook ID.
-     *   Cannot be used with 'after'.
+     * @param after Pagination cursor to fetch results after this webhook ID. Cannot be used with
+     *   'before'.
+     * @param before Pagination cursor to fetch results before this webhook ID. Cannot be used with
+     *   'after'.
      */
-    fun webhooksList(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListWebhooksResponse {
+    fun webhooksList(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListWebhooksResponse {
         return webhooksListWithRawResponse(clientConfig, limit, after, before, options).data
     }
 
-
-    /** [webhooksList], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun webhooksListWithRawResponse(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): SdkResponse<ListWebhooksResponse> {
+    /**
+     * [webhooksList], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun webhooksListWithRawResponse(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListWebhooksResponse> {
         if (after != null) {
             Validation.validateUuid("after", after)
-}
+        }
 
         if (before != null) {
             Validation.validateUuid("before", before)
-}
+        }
 
-        return SdkClient.request<ListWebhooksResponse>(SdkClient.RequestSpec("GET", "/webhooks", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "webhooksList", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<ListWebhooksResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/webhooks",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                        "before" to SdkClient.queryValue(before, "form", true),
+                    ),
+                operationId = "webhooksList",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Retrieves a webhook by its identifier. Use this endpoint to inspect the webhook's endpoint URL, subscribed event types, status, creation timestamp, and signing secret.
+     * Retrieves a webhook by its identifier. Use this endpoint to inspect the webhook's endpoint
+     * URL, subscribed event types, status, creation timestamp, and signing secret.
      *
      * @param webhookId The Webhook ID.
      */
-    fun webhooksGet(clientConfig: ClientConfig, webhookId: String, options: RequestOptions? = null): GetWebhookResponse {
+    fun webhooksGet(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        options: RequestOptions? = null,
+    ): GetWebhookResponse {
         return webhooksGetWithRawResponse(clientConfig, webhookId, options).data
     }
 
-
-    /** [webhooksGet], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun webhooksGetWithRawResponse(clientConfig: ClientConfig, webhookId: String, options: RequestOptions? = null): SdkResponse<GetWebhookResponse> {
+    /**
+     * [webhooksGet], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun webhooksGetWithRawResponse(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetWebhookResponse> {
         Validation.validateUuid("webhook_id", webhookId)
 
-        return SdkClient.request<GetWebhookResponse>(SdkClient.RequestSpec("GET", "/webhooks/${SdkClient.encodePathSegment(webhookId)}", config = clientConfig, operationId = "webhooksGet", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<GetWebhookResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/webhooks/${SdkClient.encodePathSegment(webhookId)}",
+                config = clientConfig,
+                operationId = "webhooksGet",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Updates the endpoint URL, subscribed event types, or status of a webhook. Supply only the fields you want to change; `status` must be enabled or disabled, and `events` must contain at least one event type.
+     * Updates the endpoint URL, subscribed event types, or status of a webhook. Supply only the
+     * fields you want to change; `status` must be enabled or disabled, and `events` must contain at
+     * least one event type.
      *
      * @param webhookId The Webhook ID.
      * @param endpoint The URL where webhook events will be sent.
      * @param events Array of event types to subscribe to.
      * @param status The status of the webhook.
      */
-    fun webhooksUpdate(clientConfig: ClientConfig, webhookId: String, endpoint: String? = null, events: List<String>? = null, status: UpdateWebhookRequestStatusEnum? = null, options: RequestOptions? = null): UpdateWebhookResponse {
-        return webhooksUpdateWithRawResponse(clientConfig, webhookId, endpoint, events, status, options).data
+    fun webhooksUpdate(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        endpoint: String? = null,
+        events: List<String>? = null,
+        status: UpdateWebhookRequestStatusEnum? = null,
+        options: RequestOptions? = null,
+    ): UpdateWebhookResponse {
+        return webhooksUpdateWithRawResponse(
+                clientConfig,
+                webhookId,
+                endpoint,
+                events,
+                status,
+                options,
+            )
+            .data
     }
 
-
-    /** [webhooksUpdate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun webhooksUpdateWithRawResponse(clientConfig: ClientConfig, webhookId: String, endpoint: String? = null, events: List<String>? = null, status: UpdateWebhookRequestStatusEnum? = null, options: RequestOptions? = null): SdkResponse<UpdateWebhookResponse> {
+    /**
+     * [webhooksUpdate], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun webhooksUpdateWithRawResponse(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        endpoint: String? = null,
+        events: List<String>? = null,
+        status: UpdateWebhookRequestStatusEnum? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<UpdateWebhookResponse> {
         Validation.validateUuid("webhook_id", webhookId)
 
         if (events != null) {
             Validation.validateItems("events", events, Validation.LengthOpts(min = 1))
-}
+        }
 
-        return SdkClient.request<UpdateWebhookResponse>(SdkClient.RequestSpec("PATCH", "/webhooks/${SdkClient.encodePathSegment(webhookId)}", config = clientConfig, body = SdkClient.bodyMap("endpoint" to (SdkClient.omitIfNull(endpoint)), "events" to (SdkClient.omitIfNull(events)), "status" to (SdkClient.omitIfNull(status))), operationId = "webhooksUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<UpdateWebhookResponse>(
+            SdkClient.RequestSpec(
+                "PATCH",
+                "/webhooks/${SdkClient.encodePathSegment(webhookId)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "endpoint" to (SdkClient.omitIfNull(endpoint)),
+                        "events" to (SdkClient.omitIfNull(events)),
+                        "status" to (SdkClient.omitIfNull(status)),
+                    ),
+                operationId = "webhooksUpdate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Deletes a webhook. Use this endpoint when you no longer want the webhook to receive event deliveries; the response indicates whether deletion succeeded.
+     * Deletes a webhook. Use this endpoint when you no longer want the webhook to receive event
+     * deliveries; the response indicates whether deletion succeeded.
      *
      * @param webhookId The Webhook ID.
      */
-    fun webhooksRemove(clientConfig: ClientConfig, webhookId: String, options: RequestOptions? = null): DeleteWebhookResponse {
+    fun webhooksRemove(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        options: RequestOptions? = null,
+    ): DeleteWebhookResponse {
         return webhooksRemoveWithRawResponse(clientConfig, webhookId, options).data
     }
 
-
-    /** [webhooksRemove], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun webhooksRemoveWithRawResponse(clientConfig: ClientConfig, webhookId: String, options: RequestOptions? = null): SdkResponse<DeleteWebhookResponse> {
+    /**
+     * [webhooksRemove], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun webhooksRemoveWithRawResponse(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<DeleteWebhookResponse> {
         Validation.validateUuid("webhook_id", webhookId)
 
-        return SdkClient.request<DeleteWebhookResponse>(SdkClient.RequestSpec("DELETE", "/webhooks/${SdkClient.encodePathSegment(webhookId)}", config = clientConfig, operationId = "webhooksRemove", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<DeleteWebhookResponse>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/webhooks/${SdkClient.encodePathSegment(webhookId)}",
+                config = clientConfig,
+                operationId = "webhooksRemove",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Rotates the signing secret for a webhook and returns the new secret. Payloads delivered after rotation use the new secret, while the previous secret remains valid for verifying payloads for 24 hours.
+     * Rotates the signing secret for a webhook and returns the new secret. Payloads delivered after
+     * rotation use the new secret, while the previous secret remains valid for verifying payloads
+     * for 24 hours.
      *
-     * Generates a new signing secret for the webhook and returns it. Payloads delivered after the rotation are signed with the new secret. The previous secret keeps verifying payloads for 24 hours, so both secrets are accepted during that window. A webhook that does not exist or was removed returns a 404 not_found.
+     * Generates a new signing secret for the webhook and returns it. Payloads delivered after the
+     * rotation are signed with the new secret. The previous secret keeps verifying payloads for 24
+     * hours, so both secrets are accepted during that window. A webhook that does not exist or was
+     * removed returns a 404 not_found.
      *
      * @param webhookId The Webhook ID.
      */
-    fun webhooksRotateSigningSecret(clientConfig: ClientConfig, webhookId: String, options: RequestOptions? = null): RotateWebhookSigningSecretResponse {
+    fun webhooksRotateSigningSecret(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        options: RequestOptions? = null,
+    ): RotateWebhookSigningSecretResponse {
         return webhooksRotateSigningSecretWithRawResponse(clientConfig, webhookId, options).data
     }
 
-
-    /** [webhooksRotateSigningSecret], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun webhooksRotateSigningSecretWithRawResponse(clientConfig: ClientConfig, webhookId: String, options: RequestOptions? = null): SdkResponse<RotateWebhookSigningSecretResponse> {
+    /**
+     * [webhooksRotateSigningSecret], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun webhooksRotateSigningSecretWithRawResponse(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<RotateWebhookSigningSecretResponse> {
         Validation.validateUuid("webhook_id", webhookId)
 
-        return SdkClient.request<RotateWebhookSigningSecretResponse>(SdkClient.RequestSpec("POST", "/webhooks/${SdkClient.encodePathSegment(webhookId)}/signing-secret/rotate", config = clientConfig, operationId = "webhooksRotateSigningSecret", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<RotateWebhookSigningSecretResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/webhooks/${SdkClient.encodePathSegment(webhookId)}/signing-secret/rotate",
+                config = clientConfig,
+                operationId = "webhooksRotateSigningSecret",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists events associated with a webhook. Use `after` to continue from a cursor and `limit` to control the number of results; the response indicates whether more results are available.
+     * Lists events associated with a webhook. Use `after` to continue from a cursor and `limit` to
+     * control the number of results; the response indicates whether more results are available.
      *
      * @param webhookId The Webhook ID.
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      */
-    fun webhooksListEvents(clientConfig: ClientConfig, webhookId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): ListWebhookEventsResponse {
-        return webhooksListEventsWithRawResponse(clientConfig, webhookId, limit, after, options).data
+    fun webhooksListEvents(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): ListWebhookEventsResponse {
+        return webhooksListEventsWithRawResponse(clientConfig, webhookId, limit, after, options)
+            .data
     }
 
-
-    /** [webhooksListEvents], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun webhooksListEventsWithRawResponse(clientConfig: ClientConfig, webhookId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<ListWebhookEventsResponse> {
+    /**
+     * [webhooksListEvents], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun webhooksListEventsWithRawResponse(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListWebhookEventsResponse> {
         Validation.validateUuid("webhook_id", webhookId)
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
-        return SdkClient.request<ListWebhookEventsResponse>(SdkClient.RequestSpec("GET", "/webhooks/${SdkClient.encodePathSegment(webhookId)}/events", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "webhooksListEvents", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<ListWebhookEventsResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/webhooks/${SdkClient.encodePathSegment(webhookId)}/events",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                    ),
+                operationId = "webhooksListEvents",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Retrieves a specific event associated with a webhook. Use the event details to inspect its delivery status, payload, and any scheduled next delivery attempt.
+     * Retrieves a specific event associated with a webhook. Use the event details to inspect its
+     * delivery status, payload, and any scheduled next delivery attempt.
      *
      * @param webhookId The Webhook ID.
      * @param eventId The Webhook Event ID.
      */
-    fun webhooksGetEvent(clientConfig: ClientConfig, webhookId: String, eventId: String, options: RequestOptions? = null): GetWebhookEventResponse {
+    fun webhooksGetEvent(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        eventId: String,
+        options: RequestOptions? = null,
+    ): GetWebhookEventResponse {
         return webhooksGetEventWithRawResponse(clientConfig, webhookId, eventId, options).data
     }
 
-
-    /** [webhooksGetEvent], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun webhooksGetEventWithRawResponse(clientConfig: ClientConfig, webhookId: String, eventId: String, options: RequestOptions? = null): SdkResponse<GetWebhookEventResponse> {
+    /**
+     * [webhooksGetEvent], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun webhooksGetEventWithRawResponse(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        eventId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetWebhookEventResponse> {
         Validation.validateUuid("webhook_id", webhookId)
 
-        return SdkClient.request<GetWebhookEventResponse>(SdkClient.RequestSpec("GET", "/webhooks/${SdkClient.encodePathSegment(webhookId)}/events/${SdkClient.encodePathSegment(eventId)}", config = clientConfig, operationId = "webhooksGetEvent", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<GetWebhookEventResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/webhooks/${SdkClient.encodePathSegment(webhookId)}/events/${SdkClient.encodePathSegment(eventId)}",
+                config = clientConfig,
+                operationId = "webhooksGetEvent",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Triggers one additional delivery of a webhook event. The webhook must be enabled, and a manual replay does not schedule automatic retries.
+     * Triggers one additional delivery of a webhook event. The webhook must be enabled, and a
+     * manual replay does not schedule automatic retries.
      *
-     * Queues one more delivery of the event to the webhook. The event must be retrievable through the get event endpoint and the webhook must be enabled; a disabled webhook returns a 422 validation_error. A manual replay does not schedule automatic retries.
+     * Queues one more delivery of the event to the webhook. The event must be retrievable through
+     * the get event endpoint and the webhook must be enabled; a disabled webhook returns a 422
+     * validation_error. A manual replay does not schedule automatic retries.
      *
      * @param webhookId The Webhook ID.
      * @param eventId The Webhook Event ID.
      */
-    fun webhooksReplayEvent(clientConfig: ClientConfig, webhookId: String, eventId: String, options: RequestOptions? = null): ReplayWebhookEventResponse {
+    fun webhooksReplayEvent(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        eventId: String,
+        options: RequestOptions? = null,
+    ): ReplayWebhookEventResponse {
         return webhooksReplayEventWithRawResponse(clientConfig, webhookId, eventId, options).data
     }
 
-
-    /** [webhooksReplayEvent], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun webhooksReplayEventWithRawResponse(clientConfig: ClientConfig, webhookId: String, eventId: String, options: RequestOptions? = null): SdkResponse<ReplayWebhookEventResponse> {
+    /**
+     * [webhooksReplayEvent], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun webhooksReplayEventWithRawResponse(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        eventId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<ReplayWebhookEventResponse> {
         Validation.validateUuid("webhook_id", webhookId)
 
-        return SdkClient.request<ReplayWebhookEventResponse>(SdkClient.RequestSpec("POST", "/webhooks/${SdkClient.encodePathSegment(webhookId)}/events/${SdkClient.encodePathSegment(eventId)}/replay", config = clientConfig, operationId = "webhooksReplayEvent", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<ReplayWebhookEventResponse>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/webhooks/${SdkClient.encodePathSegment(webhookId)}/events/${SdkClient.encodePathSegment(eventId)}/replay",
+                config = clientConfig,
+                operationId = "webhooksReplayEvent",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists delivery attempts for a specific event associated with a webhook. Use `after` to continue from a cursor and `limit` to control the number of attempts returned.
+     * Lists delivery attempts for a specific event associated with a webhook. Use `after` to
+     * continue from a cursor and `limit` to control the number of attempts returned.
      *
      * @param webhookId The Webhook ID.
      * @param eventId The Webhook Event ID.
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      */
-    fun webhooksListEventAttempts(clientConfig: ClientConfig, webhookId: String, eventId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): ListWebhookEventAttemptsResponse {
-        return webhooksListEventAttemptsWithRawResponse(clientConfig, webhookId, eventId, limit, after, options).data
+    fun webhooksListEventAttempts(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        eventId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): ListWebhookEventAttemptsResponse {
+        return webhooksListEventAttemptsWithRawResponse(
+                clientConfig,
+                webhookId,
+                eventId,
+                limit,
+                after,
+                options,
+            )
+            .data
     }
 
-
-    /** [webhooksListEventAttempts], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun webhooksListEventAttemptsWithRawResponse(clientConfig: ClientConfig, webhookId: String, eventId: String, limit: Long? = null, after: String? = null, options: RequestOptions? = null): SdkResponse<ListWebhookEventAttemptsResponse> {
+    /**
+     * [webhooksListEventAttempts], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun webhooksListEventAttemptsWithRawResponse(
+        clientConfig: ClientConfig,
+        webhookId: String,
+        eventId: String,
+        limit: Long? = null,
+        after: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListWebhookEventAttemptsResponse> {
         Validation.validateUuid("webhook_id", webhookId)
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
-        return SdkClient.request<ListWebhookEventAttemptsResponse>(SdkClient.RequestSpec("GET", "/webhooks/${SdkClient.encodePathSegment(webhookId)}/events/${SdkClient.encodePathSegment(eventId)}/attempts", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true)), operationId = "webhooksListEventAttempts", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<ListWebhookEventAttemptsResponse>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/webhooks/${SdkClient.encodePathSegment(webhookId)}/events/${SdkClient.encodePathSegment(eventId)}/attempts",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                    ),
+                operationId = "webhooksListEventAttempts",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
-
-
-
-
-
-
-
 }

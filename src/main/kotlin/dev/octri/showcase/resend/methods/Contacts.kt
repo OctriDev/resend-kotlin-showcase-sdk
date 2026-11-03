@@ -29,62 +29,50 @@ import dev.octri.showcase.resend.Validation
 
 object Contacts {
 
-/**
- * Required object value serialized in the `segments[]` wire field.
- */
-data class CreateContactOptionsSegmentsItem(
-    /**
-     * The segment ID
-     */
-    val id: String? = null
-) : SdkResource()
+    /** Required object value serialized in the `segments[]` wire field. */
+    data class CreateContactOptionsSegmentsItem(
+        /** The segment ID */
+        val id: String? = null
+    ) : SdkResource()
 
-/**
- * Required object value serialized in the `topics[]` wire field.
- */
-data class CreateContactOptionsTopicsItem(
-    /**
-     * The topic ID.
-     */
-    val id: String? = null,
-    /**
-     * The subscription status for this topic.
-     */
-    val subscription: CreateContactOptionsTopicsItemSubscriptionEnum? = null
-) : SdkResource()
+    /** Required object value serialized in the `topics[]` wire field. */
+    data class CreateContactOptionsTopicsItem(
+        /** The topic ID. */
+        val id: String? = null,
+        /** The subscription status for this topic. */
+        val subscription: CreateContactOptionsTopicsItemSubscriptionEnum? = null,
+    ) : SdkResource()
 
-/**
- * Required object value serialized in the `topics[]` wire field.
- */
-data class UpdateContactTopicsOptionsTopicsItem(
-    /**
-     * The ID of the topic.
-     */
-    val id: String? = null,
-    /**
-     * The subscription status (opt_in or opt_out).
-     */
-    val subscription: UpdateContactTopicsOptionsTopicsItemSubscriptionEnum? = null
-) : SdkResource()
+    /** Required object value serialized in the `topics[]` wire field. */
+    data class UpdateContactTopicsOptionsTopicsItem(
+        /** The ID of the topic. */
+        val id: String? = null,
+        /** The subscription status (opt_in or opt_out). */
+        val subscription: UpdateContactTopicsOptionsTopicsItemSubscriptionEnum? = null,
+    ) : SdkResource()
 
     /**
-     * Creates a contact with an email address and optional profile, subscription, and grouping details. Include `email`; you can also set custom `properties`, add `segments`, or configure `topics`.
+     * Creates a contact with an email address and optional profile, subscription, and grouping
+     * details. Include `email`; you can also set custom `properties`, add `segments`, or configure
+     * `topics`.
      *
      * @param email Email address of the contact.
      * @param firstName First name of the contact.
      * @param lastName Last name of the contact.
-     * @param unsubscribed The Contact's global subscription status. If set to true,
-     *   the contact will be unsubscribed from all Broadcasts.
+     * @param unsubscribed The Contact's global subscription status. If set to true, the contact
+     *   will be unsubscribed from all Broadcasts.
      * @param properties A map of custom property keys and values to create.
      * @param segments Array of segment IDs to add the contact to.
      * @param topics Array of topic subscriptions for the contact.
-     * @param audienceId Unique identifier of the audience to which the contact
-     *   belongs.
+     * @param audienceId Unique identifier of the audience to which the contact belongs.
      */
-    fun contactsCreate(clientConfig: ClientConfig, request: ContactsCreateRequest, options: RequestOptions? = null): CreateContactResponseSuccess {
+    fun contactsCreate(
+        clientConfig: ClientConfig,
+        request: ContactsCreateRequest,
+        options: RequestOptions? = null,
+    ): CreateContactResponseSuccess {
         return contactsCreateWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [contactsCreate]. */
     data class ContactsCreateRequest(
@@ -95,158 +83,315 @@ data class UpdateContactTopicsOptionsTopicsItem(
         val properties: Map<String, Any>? = null,
         val segments: List<CreateContactOptionsSegmentsItem>? = null,
         val topics: List<CreateContactOptionsTopicsItem>? = null,
-        val audienceId: String? = null
+        val audienceId: String? = null,
     )
 
-    /** [contactsCreate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun contactsCreateWithRawResponse(clientConfig: ClientConfig, request: ContactsCreateRequest, options: RequestOptions? = null): SdkResponse<CreateContactResponseSuccess> {
-        return SdkClient.request<CreateContactResponseSuccess>(SdkClient.RequestSpec("POST", "/contacts", config = clientConfig, body = SdkClient.bodyMap("email" to (request.email), "first_name" to (SdkClient.omitIfNull(request.firstName)), "last_name" to (SdkClient.omitIfNull(request.lastName)), "unsubscribed" to
-    (SdkClient.omitIfNull(request.unsubscribed)), "properties" to (SdkClient.omitIfNull(request.properties)), "segments" to (SdkClient.omitIfNull(request.segments)), "topics" to (SdkClient.omitIfNull(request.topics)), "audience_id" to (SdkClient.omitIfNull(request.audienceId))), operationId = "contactsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [contactsCreate], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun contactsCreateWithRawResponse(
+        clientConfig: ClientConfig,
+        request: ContactsCreateRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<CreateContactResponseSuccess> {
+        return SdkClient.request<CreateContactResponseSuccess>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/contacts",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "email" to (request.email),
+                        "first_name" to (SdkClient.omitIfNull(request.firstName)),
+                        "last_name" to (SdkClient.omitIfNull(request.lastName)),
+                        "unsubscribed" to (SdkClient.omitIfNull(request.unsubscribed)),
+                        "properties" to (SdkClient.omitIfNull(request.properties)),
+                        "segments" to (SdkClient.omitIfNull(request.segments)),
+                        "topics" to (SdkClient.omitIfNull(request.topics)),
+                        "audience_id" to (SdkClient.omitIfNull(request.audienceId)),
+                    ),
+                operationId = "contactsCreate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists contacts, with each result including contact information. Use `after` or `before` to navigate results by cursor, and `limit` to control the number of items returned.
+     * Lists contacts, with each result including contact information. Use `after` or `before` to
+     * navigate results by cursor, and `limit` to control the number of items returned.
      *
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun contactsList(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListContactsResponseSuccess {
+    fun contactsList(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListContactsResponseSuccess {
         return contactsListWithRawResponse(clientConfig, limit, after, before, options).data
     }
 
-
-    /** [contactsList], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun contactsListWithRawResponse(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): SdkResponse<ListContactsResponseSuccess> {
+    /**
+     * [contactsList], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun contactsListWithRawResponse(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListContactsResponseSuccess> {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
-        return SdkClient.request<ListContactsResponseSuccess>(SdkClient.RequestSpec("GET", "/contacts", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "contactsList", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<ListContactsResponseSuccess>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/contacts",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                        "before" to SdkClient.queryValue(before, "form", true),
+                    ),
+                operationId = "contactsList",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Creates a contact import from a CSV file. Include the file and optionally provide a column mapping, conflict strategy, segments, or topic subscriptions for imported contacts.
+     * Creates a contact import from a CSV file. Include the file and optionally provide a column
+     * mapping, conflict strategy, segments, or topic subscriptions for imported contacts.
      *
      * @param file CSV file to import. Maximum size is 50MB.
-     * @param columnMap JSON-encoded object mapping contact fields and custom
-     *   property keys to CSV column names. Supports `email`, `first_name`,
-     *   `last_name`, `unsubscribed`, and `properties`. Custom property mappings can
-     *   include `type` as `string`, `number`, or `boolean`; defaults to `string`.
+     * @param columnMap JSON-encoded object mapping contact fields and custom property keys to CSV
+     *   column names. Supports `email`, `first_name`, `last_name`, `unsubscribed`, and
+     *   `properties`. Custom property mappings can include `type` as `string`, `number`, or
+     *   `boolean`; defaults to `string`.
      * @param onConflict Strategy to use when an imported contact already exists.
      * @param segments JSON-encoded array of segments to add imported contacts to.
-     * @param topics JSON-encoded array of topic subscriptions to apply to imported
-     *   contacts. Each `subscription` must be `opt_in` or `opt_out`.
+     * @param topics JSON-encoded array of topic subscriptions to apply to imported contacts. Each
+     *   `subscription` must be `opt_in` or `opt_out`.
      */
-    fun contactsCreateImport(clientConfig: ClientConfig, file: SdkClient.UploadFile, columnMap: String? = null, onConflict: CreateContactImportOptionsOnConflictEnum? = null, segments: String? = null, topics: String? = null, options: RequestOptions? = null): CreateContactImportResponseSuccess {
-        return contactsCreateImportWithRawResponse(clientConfig, file, columnMap, onConflict, segments, topics, options).data
+    fun contactsCreateImport(
+        clientConfig: ClientConfig,
+        file: SdkClient.UploadFile,
+        columnMap: String? = null,
+        onConflict: CreateContactImportOptionsOnConflictEnum? = null,
+        segments: String? = null,
+        topics: String? = null,
+        options: RequestOptions? = null,
+    ): CreateContactImportResponseSuccess {
+        return contactsCreateImportWithRawResponse(
+                clientConfig,
+                file,
+                columnMap,
+                onConflict,
+                segments,
+                topics,
+                options,
+            )
+            .data
     }
-
-
-    /** [contactsCreateImport], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun contactsCreateImportWithRawResponse(clientConfig: ClientConfig, file: SdkClient.UploadFile, columnMap: String? = null, onConflict: CreateContactImportOptionsOnConflictEnum? = null, segments: String? = null, topics: String? = null, options: RequestOptions? = null): SdkResponse<CreateContactImportResponseSuccess> {
-        return SdkClient.request<CreateContactImportResponseSuccess>(SdkClient.RequestSpec("POST", "/contacts/imports", config = clientConfig, body = SdkClient.bodyMap("file" to (file), "column_map" to (SdkClient.omitIfNull(columnMap)), "on_conflict" to (SdkClient.omitIfNull(onConflict)), "segments" to (SdkClient.omitIfNull(segments)), "topics" to (SdkClient.omitIfNull(topics))), contentType = "multipart/form-data", operationId = "contactsCreateImport", decoder = SdkClient.ResponseDecoder.JSON, options = options))
-    }
-
-
-
-
-
 
     /**
-     * Lists contact imports and their processing information. Use `status` to filter by import state, and `after` or `before` to navigate results by cursor.
+     * [contactsCreateImport], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun contactsCreateImportWithRawResponse(
+        clientConfig: ClientConfig,
+        file: SdkClient.UploadFile,
+        columnMap: String? = null,
+        onConflict: CreateContactImportOptionsOnConflictEnum? = null,
+        segments: String? = null,
+        topics: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<CreateContactImportResponseSuccess> {
+        return SdkClient.request<CreateContactImportResponseSuccess>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/contacts/imports",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "file" to (file),
+                        "column_map" to (SdkClient.omitIfNull(columnMap)),
+                        "on_conflict" to (SdkClient.omitIfNull(onConflict)),
+                        "segments" to (SdkClient.omitIfNull(segments)),
+                        "topics" to (SdkClient.omitIfNull(topics)),
+                    ),
+                contentType = "multipart/form-data",
+                operationId = "contactsCreateImport",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
+    }
+
+    /**
+     * Lists contact imports and their processing information. Use `status` to filter by import
+     * state, and `after` or `before` to navigate results by cursor.
      *
      * @param status Filter contact imports by status.
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun contactsListImports(clientConfig: ClientConfig, status: ContactsListImportsParameterEnum? = null, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListContactImportsResponseSuccess {
-        return contactsListImportsWithRawResponse(clientConfig, status, limit, after, before, options).data
+    fun contactsListImports(
+        clientConfig: ClientConfig,
+        status: ContactsListImportsParameterEnum? = null,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListContactImportsResponseSuccess {
+        return contactsListImportsWithRawResponse(
+                clientConfig,
+                status,
+                limit,
+                after,
+                before,
+                options,
+            )
+            .data
     }
-
-
-    /** [contactsListImports], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun contactsListImportsWithRawResponse(clientConfig: ClientConfig, status: ContactsListImportsParameterEnum? = null, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): SdkResponse<ListContactImportsResponseSuccess> {
-        if (limit != null) {
-            Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
-
-        return SdkClient.request<ListContactImportsResponseSuccess>(SdkClient.RequestSpec("GET", "/contacts/imports", config = clientConfig, query = mapOf("status" to SdkClient.queryValue(status, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "contactsListImports", decoder = SdkClient.ResponseDecoder.JSON, options = options))
-    }
-
-
-
-
-
 
     /**
-     * Retrieves a contact import by its identifier. Use the import record to review its status, timestamps, and processing counts.
+     * [contactsListImports], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun contactsListImportsWithRawResponse(
+        clientConfig: ClientConfig,
+        status: ContactsListImportsParameterEnum? = null,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListContactImportsResponseSuccess> {
+        if (limit != null) {
+            Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
+        }
+
+        return SdkClient.request<ListContactImportsResponseSuccess>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/contacts/imports",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "status" to SdkClient.queryValue(status, "form", true),
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                        "before" to SdkClient.queryValue(before, "form", true),
+                    ),
+                operationId = "contactsListImports",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
+    }
+
+    /**
+     * Retrieves a contact import by its identifier. Use the import record to review its status,
+     * timestamps, and processing counts.
      *
      * @param id The Contact Import ID.
      */
-    fun contactsGetImport(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): GetContactImportResponseSuccess {
+    fun contactsGetImport(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): GetContactImportResponseSuccess {
         return contactsGetImportWithRawResponse(clientConfig, id, options).data
     }
 
-
-    /** [contactsGetImport], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun contactsGetImportWithRawResponse(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): SdkResponse<GetContactImportResponseSuccess> {
+    /**
+     * [contactsGetImport], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun contactsGetImportWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetContactImportResponseSuccess> {
         Validation.validateUuid("id", id)
 
-        return SdkClient.request<GetContactImportResponseSuccess>(SdkClient.RequestSpec("GET", "/contacts/imports/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "contactsGetImport", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<GetContactImportResponseSuccess>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/contacts/imports/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "contactsGetImport",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Retrieves a contact by its ID or email address. Use this operation to inspect the contact's profile, subscription status, and custom properties.
+     * Retrieves a contact by its ID or email address. Use this operation to inspect the contact's
+     * profile, subscription status, and custom properties.
      *
      * @param id The Contact ID or email address.
      */
-    fun contactsGet(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): GetContactResponseSuccess {
+    fun contactsGet(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): GetContactResponseSuccess {
         return contactsGetWithRawResponse(clientConfig, id, options).data
     }
 
-
-    /** [contactsGet], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun contactsGetWithRawResponse(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): SdkResponse<GetContactResponseSuccess> {
-        return SdkClient.request<GetContactResponseSuccess>(SdkClient.RequestSpec("GET", "/contacts/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "contactsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [contactsGet], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun contactsGetWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetContactResponseSuccess> {
+        return SdkClient.request<GetContactResponseSuccess>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/contacts/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "contactsGet",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Updates a contact identified by its ID or email address. Include only the profile, subscription, or custom property fields you want to change.
+     * Updates a contact identified by its ID or email address. Include only the profile,
+     * subscription, or custom property fields you want to change.
      *
      * @param id The Contact ID or email address.
      * @param email Email address of the contact.
      * @param firstName First name of the contact.
      * @param lastName Last name of the contact.
-     * @param unsubscribed The Contact's global subscription status. If set to true,
-     *   the contact will be unsubscribed from all Broadcasts.
+     * @param unsubscribed The Contact's global subscription status. If set to true, the contact
+     *   will be unsubscribed from all Broadcasts.
      * @param properties A map of custom property keys and values to update.
      */
-    fun contactsUpdate(clientConfig: ClientConfig, request: ContactsUpdateRequest, options: RequestOptions? = null): UpdateContactResponseSuccess {
+    fun contactsUpdate(
+        clientConfig: ClientConfig,
+        request: ContactsUpdateRequest,
+        options: RequestOptions? = null,
+    ): UpdateContactResponseSuccess {
         return contactsUpdateWithRawResponse(clientConfig, request, options).data
     }
-
 
     /** Parameters for [contactsUpdate]. */
     data class ContactsUpdateRequest(
@@ -255,156 +400,310 @@ data class UpdateContactTopicsOptionsTopicsItem(
         val firstName: String? = null,
         val lastName: String? = null,
         val unsubscribed: Boolean? = null,
-        val properties: Map<String, Any>? = null
+        val properties: Map<String, Any>? = null,
     )
 
-    /** [contactsUpdate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun contactsUpdateWithRawResponse(clientConfig: ClientConfig, request: ContactsUpdateRequest, options: RequestOptions? = null): SdkResponse<UpdateContactResponseSuccess> {
-        return SdkClient.request<UpdateContactResponseSuccess>(SdkClient.RequestSpec("PATCH", "/contacts/${SdkClient.encodePathSegment(request.id)}", config = clientConfig, body = SdkClient.bodyMap("email" to (SdkClient.omitIfNull(request.email)), "first_name" to (SdkClient.omitIfNull(request.firstName)), "last_name" to (SdkClient.omitIfNull(request.lastName)), "unsubscribed" to
-    (SdkClient.omitIfNull(request.unsubscribed)), "properties" to (SdkClient.omitIfNull(request.properties))), operationId = "contactsUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [contactsUpdate], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun contactsUpdateWithRawResponse(
+        clientConfig: ClientConfig,
+        request: ContactsUpdateRequest,
+        options: RequestOptions? = null,
+    ): SdkResponse<UpdateContactResponseSuccess> {
+        return SdkClient.request<UpdateContactResponseSuccess>(
+            SdkClient.RequestSpec(
+                "PATCH",
+                "/contacts/${SdkClient.encodePathSegment(request.id)}",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "email" to (SdkClient.omitIfNull(request.email)),
+                        "first_name" to (SdkClient.omitIfNull(request.firstName)),
+                        "last_name" to (SdkClient.omitIfNull(request.lastName)),
+                        "unsubscribed" to (SdkClient.omitIfNull(request.unsubscribed)),
+                        "properties" to (SdkClient.omitIfNull(request.properties)),
+                    ),
+                operationId = "contactsUpdate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Deletes a contact identified by its ID or email address. Use this operation to remove the contact from the contacts resource.
+     * Deletes a contact identified by its ID or email address. Use this operation to remove the
+     * contact from the contacts resource.
      *
      * @param id The Contact ID or email address.
      */
-    fun contactsRemove(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): RemoveContactResponseSuccess {
+    fun contactsRemove(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): RemoveContactResponseSuccess {
         return contactsRemoveWithRawResponse(clientConfig, id, options).data
     }
 
-
-    /** [contactsRemove], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun contactsRemoveWithRawResponse(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): SdkResponse<RemoveContactResponseSuccess> {
-        return SdkClient.request<RemoveContactResponseSuccess>(SdkClient.RequestSpec("DELETE", "/contacts/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "contactsRemove", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [contactsRemove], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun contactsRemoveWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<RemoveContactResponseSuccess> {
+        return SdkClient.request<RemoveContactResponseSuccess>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/contacts/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "contactsRemove",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists the segments associated with a contact. Use `contact_id` to select the contact and `after` or `before` to position results relative to a cursor.
+     * Lists the segments associated with a contact. Use `contact_id` to select the contact and
+     * `after` or `before` to position results relative to a cursor.
      *
      * @param contactId The Contact ID or email address.
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun contactsListSegments(clientConfig: ClientConfig, contactId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListContactSegmentsResponseSuccess {
-        return contactsListSegmentsWithRawResponse(clientConfig, contactId, limit, after, before, options).data
+    fun contactsListSegments(
+        clientConfig: ClientConfig,
+        contactId: String,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListContactSegmentsResponseSuccess {
+        return contactsListSegmentsWithRawResponse(
+                clientConfig,
+                contactId,
+                limit,
+                after,
+                before,
+                options,
+            )
+            .data
     }
-
-
-    /** [contactsListSegments], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun contactsListSegmentsWithRawResponse(clientConfig: ClientConfig, contactId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): SdkResponse<ListContactSegmentsResponseSuccess> {
-        if (limit != null) {
-            Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
-
-        return SdkClient.request<ListContactSegmentsResponseSuccess>(SdkClient.RequestSpec("GET", "/contacts/${SdkClient.encodePathSegment(contactId)}/segments", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "contactsListSegments", decoder = SdkClient.ResponseDecoder.JSON, options = options))
-    }
-
-
-
-
-
 
     /**
-     * Adds a contact to a segment. Supply the contact’s ID or email address and the segment ID to select the membership to create.
+     * [contactsListSegments], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun contactsListSegmentsWithRawResponse(
+        clientConfig: ClientConfig,
+        contactId: String,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListContactSegmentsResponseSuccess> {
+        if (limit != null) {
+            Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
+        }
+
+        return SdkClient.request<ListContactSegmentsResponseSuccess>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/contacts/${SdkClient.encodePathSegment(contactId)}/segments",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                        "before" to SdkClient.queryValue(before, "form", true),
+                    ),
+                operationId = "contactsListSegments",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
+    }
+
+    /**
+     * Adds a contact to a segment. Supply the contact’s ID or email address and the segment ID to
+     * select the membership to create.
      *
      * @param contactId The Contact ID or email address.
      * @param segmentId The Segment ID.
      */
-    fun contactsAddSegment(clientConfig: ClientConfig, contactId: String, segmentId: String, options: RequestOptions? = null): AddContactToSegmentResponseSuccess {
+    fun contactsAddSegment(
+        clientConfig: ClientConfig,
+        contactId: String,
+        segmentId: String,
+        options: RequestOptions? = null,
+    ): AddContactToSegmentResponseSuccess {
         return contactsAddSegmentWithRawResponse(clientConfig, contactId, segmentId, options).data
     }
 
-
-    /** [contactsAddSegment], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun contactsAddSegmentWithRawResponse(clientConfig: ClientConfig, contactId: String, segmentId: String, options: RequestOptions? = null): SdkResponse<AddContactToSegmentResponseSuccess> {
-        return SdkClient.request<AddContactToSegmentResponseSuccess>(SdkClient.RequestSpec("POST", "/contacts/${SdkClient.encodePathSegment(contactId)}/segments/${SdkClient.encodePathSegment(segmentId)}", config = clientConfig, operationId = "contactsAddSegment", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [contactsAddSegment], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun contactsAddSegmentWithRawResponse(
+        clientConfig: ClientConfig,
+        contactId: String,
+        segmentId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<AddContactToSegmentResponseSuccess> {
+        return SdkClient.request<AddContactToSegmentResponseSuccess>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/contacts/${SdkClient.encodePathSegment(contactId)}/segments/${SdkClient.encodePathSegment(segmentId)}",
+                config = clientConfig,
+                operationId = "contactsAddSegment",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Removes a contact from a segment. Supply the contact’s ID or email address and the segment ID to select the membership to remove.
+     * Removes a contact from a segment. Supply the contact’s ID or email address and the segment ID
+     * to select the membership to remove.
      *
      * @param contactId The Contact ID or email address.
      * @param segmentId The Segment ID.
      */
-    fun contactsRemoveSegment(clientConfig: ClientConfig, contactId: String, segmentId: String, options: RequestOptions? = null): RemoveContactFromSegmentResponseSuccess {
-        return contactsRemoveSegmentWithRawResponse(clientConfig, contactId, segmentId, options).data
+    fun contactsRemoveSegment(
+        clientConfig: ClientConfig,
+        contactId: String,
+        segmentId: String,
+        options: RequestOptions? = null,
+    ): RemoveContactFromSegmentResponseSuccess {
+        return contactsRemoveSegmentWithRawResponse(clientConfig, contactId, segmentId, options)
+            .data
     }
-
-
-    /** [contactsRemoveSegment], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun contactsRemoveSegmentWithRawResponse(clientConfig: ClientConfig, contactId: String, segmentId: String, options: RequestOptions? = null): SdkResponse<RemoveContactFromSegmentResponseSuccess> {
-        return SdkClient.request<RemoveContactFromSegmentResponseSuccess>(SdkClient.RequestSpec("DELETE", "/contacts/${SdkClient.encodePathSegment(contactId)}/segments/${SdkClient.encodePathSegment(segmentId)}", config = clientConfig, operationId = "contactsRemoveSegment", decoder = SdkClient.ResponseDecoder.JSON, options = options))
-    }
-
-
-
-
-
 
     /**
-     * Lists the topics and subscription statuses associated with a contact. Use `contact_id` to select the contact and `after` or `before` to position results relative to a cursor.
+     * [contactsRemoveSegment], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun contactsRemoveSegmentWithRawResponse(
+        clientConfig: ClientConfig,
+        contactId: String,
+        segmentId: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<RemoveContactFromSegmentResponseSuccess> {
+        return SdkClient.request<RemoveContactFromSegmentResponseSuccess>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/contacts/${SdkClient.encodePathSegment(contactId)}/segments/${SdkClient.encodePathSegment(segmentId)}",
+                config = clientConfig,
+                operationId = "contactsRemoveSegment",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
+    }
+
+    /**
+     * Lists the topics and subscription statuses associated with a contact. Use `contact_id` to
+     * select the contact and `after` or `before` to position results relative to a cursor.
      *
      * @param contactId The Contact ID or email address.
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun contactsListTopics(clientConfig: ClientConfig, contactId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): GetContactTopicsResponseSuccess {
-        return contactsListTopicsWithRawResponse(clientConfig, contactId, limit, after, before, options).data
+    fun contactsListTopics(
+        clientConfig: ClientConfig,
+        contactId: String,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): GetContactTopicsResponseSuccess {
+        return contactsListTopicsWithRawResponse(
+                clientConfig,
+                contactId,
+                limit,
+                after,
+                before,
+                options,
+            )
+            .data
     }
-
-
-    /** [contactsListTopics], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun contactsListTopicsWithRawResponse(clientConfig: ClientConfig, contactId: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): SdkResponse<GetContactTopicsResponseSuccess> {
-        if (limit != null) {
-            Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
-
-        return SdkClient.request<GetContactTopicsResponseSuccess>(SdkClient.RequestSpec("GET", "/contacts/${SdkClient.encodePathSegment(contactId)}/topics", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "contactsListTopics", decoder = SdkClient.ResponseDecoder.JSON, options = options))
-    }
-
-
-
-
-
 
     /**
-     * Updates a contact’s subscriptions to topics. Supply the required `topics` array with each topic ID and its subscription status.
+     * [contactsListTopics], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun contactsListTopicsWithRawResponse(
+        clientConfig: ClientConfig,
+        contactId: String,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetContactTopicsResponseSuccess> {
+        if (limit != null) {
+            Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
+        }
+
+        return SdkClient.request<GetContactTopicsResponseSuccess>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/contacts/${SdkClient.encodePathSegment(contactId)}/topics",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                        "before" to SdkClient.queryValue(before, "form", true),
+                    ),
+                operationId = "contactsListTopics",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
+    }
+
+    /**
+     * Updates a contact’s subscriptions to topics. Supply the required `topics` array with each
+     * topic ID and its subscription status.
      *
      * @param contactId The Contact ID or email address.
      * @param topics Required array value serialized in the `topics` wire field.
      */
-    fun contactsUpdateTopics(clientConfig: ClientConfig, contactId: String, topics: List<UpdateContactTopicsOptionsTopicsItem>, options: RequestOptions? = null): UpdateContactTopicsResponseSuccess {
+    fun contactsUpdateTopics(
+        clientConfig: ClientConfig,
+        contactId: String,
+        topics: List<UpdateContactTopicsOptionsTopicsItem>,
+        options: RequestOptions? = null,
+    ): UpdateContactTopicsResponseSuccess {
         return contactsUpdateTopicsWithRawResponse(clientConfig, contactId, topics, options).data
     }
 
-
-    /** [contactsUpdateTopics], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun contactsUpdateTopicsWithRawResponse(clientConfig: ClientConfig, contactId: String, topics: List<UpdateContactTopicsOptionsTopicsItem>, options: RequestOptions? = null): SdkResponse<UpdateContactTopicsResponseSuccess> {
-        return SdkClient.request<UpdateContactTopicsResponseSuccess>(SdkClient.RequestSpec("PATCH", "/contacts/${SdkClient.encodePathSegment(contactId)}/topics", config = clientConfig, body = SdkClient.bodyMap("topics" to (topics)), operationId = "contactsUpdateTopics", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [contactsUpdateTopics], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun contactsUpdateTopicsWithRawResponse(
+        clientConfig: ClientConfig,
+        contactId: String,
+        topics: List<UpdateContactTopicsOptionsTopicsItem>,
+        options: RequestOptions? = null,
+    ): SdkResponse<UpdateContactTopicsResponseSuccess> {
+        return SdkClient.request<UpdateContactTopicsResponseSuccess>(
+            SdkClient.RequestSpec(
+                "PATCH",
+                "/contacts/${SdkClient.encodePathSegment(contactId)}/topics",
+                config = clientConfig,
+                body = SdkClient.bodyMap("topics" to (topics)),
+                operationId = "contactsUpdateTopics",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
-
-
-
-
-
-
-
 }

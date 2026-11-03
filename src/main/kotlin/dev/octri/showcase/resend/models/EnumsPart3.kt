@@ -3,14 +3,14 @@
 
 package dev.octri.showcase.resend.models
 
-/**
- * The delivery status of the event for this webhook.
- */
-class GetWebhookEventResponseStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is GetWebhookEventResponseStatusEnum && value == other.value
+/** The delivery status of the event for this webhook. */
+class GetWebhookEventResponseStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is GetWebhookEventResponseStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -20,19 +20,22 @@ class GetWebhookEventResponseStatusEnum private constructor(
         @JvmField val SUCCESS = GetWebhookEventResponseStatusEnum("success")
         @JvmField val FAILED = GetWebhookEventResponseStatusEnum("failed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = GetWebhookEventResponseStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = GetWebhookEventResponseStatusEnum(value)
     }
 }
 
-/**
- * Required enumerated value serialized in the `enabled_actions[]` wire field.
- */
-class InboxAgentEnabledActionsItemEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InboxAgentEnabledActionsItemEnum && value == other.value
+/** Required enumerated value serialized in the `enabled_actions[]` wire field. */
+class InboxAgentEnabledActionsItemEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InboxAgentEnabledActionsItemEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -45,19 +48,21 @@ class InboxAgentEnabledActionsItemEnum private constructor(
         @JvmField val ARCHIVE_THREAD = InboxAgentEnabledActionsItemEnum("archive_thread")
         @JvmField val DELETE_THREAD = InboxAgentEnabledActionsItemEnum("delete_thread")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InboxAgentEnabledActionsItemEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InboxAgentEnabledActionsItemEnum(value)
     }
 }
 
-/**
- * The tone the agent writes in. Null when no tone is set.
- */
-class InboxAgentToneEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** The tone the agent writes in. Null when no tone is set. */
+class InboxAgentToneEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is InboxAgentToneEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -67,15 +72,18 @@ class InboxAgentToneEnum private constructor(
         @JvmField val EXPANDED_PROFESSIONAL = InboxAgentToneEnum("expanded_professional")
         @JvmField val EXPANDED_CASUAL = InboxAgentToneEnum("expanded_casual")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InboxAgentToneEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InboxAgentToneEnum(value)
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxCreatedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxCreatedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_CREATED("inbox.created");
 
     override fun toString() = value
@@ -83,15 +91,16 @@ enum class InboxCreatedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxDeletedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxDeletedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_DELETED("inbox.deleted");
 
     override fun toString() = value
@@ -99,19 +108,22 @@ enum class InboxDeletedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * `reply` when the draft replies to an email in an existing thread. `standalone` when the draft starts a new thread.
+ * `reply` when the draft replies to an email in an existing thread. `standalone` when the draft
+ * starts a new thread.
  */
-class InboxDraftTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+class InboxDraftTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is InboxDraftTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -119,15 +131,18 @@ class InboxDraftTypeEnum private constructor(
         @JvmField val STANDALONE = InboxDraftTypeEnum("standalone")
         @JvmField val REPLY = InboxDraftTypeEnum("reply")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InboxDraftTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InboxDraftTypeEnum(value)
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxDraftCreatedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxDraftCreatedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_DRAFT_CREATED("inbox.draft.created");
 
     override fun toString() = value
@@ -135,15 +150,16 @@ enum class InboxDraftCreatedEventTypeEnum(@com.fasterxml.jackson.annotation.Json
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxDraftDeletedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxDraftDeletedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_DRAFT_DELETED("inbox.draft.deleted");
 
     override fun toString() = value
@@ -151,19 +167,23 @@ enum class InboxDraftDeletedEventTypeEnum(@com.fasterxml.jackson.annotation.Json
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * `reply` when the draft replies to an email in an existing thread. `standalone` when the draft starts a new thread.
+ * `reply` when the draft replies to an email in an existing thread. `standalone` when the draft
+ * starts a new thread.
  */
-class InboxDraftListItemTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InboxDraftListItemTypeEnum && value == other.value
+class InboxDraftListItemTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InboxDraftListItemTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -171,15 +191,18 @@ class InboxDraftListItemTypeEnum private constructor(
         @JvmField val STANDALONE = InboxDraftListItemTypeEnum("standalone")
         @JvmField val REPLY = InboxDraftListItemTypeEnum("reply")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InboxDraftListItemTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InboxDraftListItemTypeEnum(value)
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxDraftSentEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxDraftSentEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_DRAFT_SENT("inbox.draft.sent");
 
     override fun toString() = value
@@ -187,15 +210,16 @@ enum class InboxDraftSentEventTypeEnum(@com.fasterxml.jackson.annotation.JsonVal
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxDraftUpdatedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxDraftUpdatedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_DRAFT_UPDATED("inbox.draft.updated");
 
     override fun toString() = value
@@ -203,15 +227,16 @@ enum class InboxDraftUpdatedEventTypeEnum(@com.fasterxml.jackson.annotation.Json
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxEmailReceivedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxEmailReceivedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_EMAIL_RECEIVED("inbox.email.received");
 
     override fun toString() = value
@@ -219,15 +244,16 @@ enum class InboxEmailReceivedEventTypeEnum(@com.fasterxml.jackson.annotation.Jso
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxEmailSentEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxEmailSentEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_EMAIL_SENT("inbox.email.sent");
 
     override fun toString() = value
@@ -235,19 +261,20 @@ enum class InboxEmailSentEventTypeEnum(@com.fasterxml.jackson.annotation.JsonVal
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * `standalone` for a new conversation, or `reply`.
- */
-class InboxEventDraftTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InboxEventDraftTypeEnum && value == other.value
+/** `standalone` for a new conversation, or `reply`. */
+class InboxEventDraftTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InboxEventDraftTypeEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -255,19 +282,22 @@ class InboxEventDraftTypeEnum private constructor(
         @JvmField val STANDALONE = InboxEventDraftTypeEnum("standalone")
         @JvmField val REPLY = InboxEventDraftTypeEnum("reply")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InboxEventDraftTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InboxEventDraftTypeEnum(value)
     }
 }
 
-/**
- * Whether the email was received by the inbox or sent from it.
- */
-class InboxEventEmailDirectionEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InboxEventEmailDirectionEnum && value == other.value
+/** Whether the email was received by the inbox or sent from it. */
+class InboxEventEmailDirectionEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InboxEventEmailDirectionEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -275,19 +305,21 @@ class InboxEventEmailDirectionEnum private constructor(
         @JvmField val INBOUND = InboxEventEmailDirectionEnum("inbound")
         @JvmField val OUTBOUND = InboxEventEmailDirectionEnum("outbound")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InboxEventEmailDirectionEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InboxEventEmailDirectionEnum(value)
     }
 }
 
-/**
- * What made the change.
- */
-class InboxEventSource private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
+/** What made the change. */
+class InboxEventSource
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
     override fun equals(other: Any?): Boolean = other is InboxEventSource && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -297,19 +329,27 @@ class InboxEventSource private constructor(
         @JvmField val AGENT = InboxEventSource("agent")
         @JvmField val SYSTEM = InboxEventSource("system")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InboxEventSource(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InboxEventSource(value)
     }
 }
 
 /**
- * The folder the thread is in. Every thread is in exactly one folder. `inbox` holds threads with at least one received email. `archive` and `spam` hold threads moved there. `trash` holds threads scheduled for deletion in 30 days. `sent` holds threads whose emails are all outbound, and is assigned automatically.
+ * The folder the thread is in. Every thread is in exactly one folder. `inbox` holds threads with at
+ * least one received email. `archive` and `spam` hold threads moved there. `trash` holds threads
+ * scheduled for deletion in 30 days. `sent` holds threads whose emails are all outbound, and is
+ * assigned automatically.
  */
-class InboxThreadFolderEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InboxThreadFolderEnum && value == other.value
+class InboxThreadFolderEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InboxThreadFolderEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -320,15 +360,18 @@ class InboxThreadFolderEnum private constructor(
         @JvmField val SENT = InboxThreadFolderEnum("sent")
         @JvmField val TRASH = InboxThreadFolderEnum("trash")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InboxThreadFolderEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InboxThreadFolderEnum(value)
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxThreadAssignedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxThreadAssignedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_THREAD_ASSIGNED("inbox.thread.assigned");
 
     override fun toString() = value
@@ -336,15 +379,16 @@ enum class InboxThreadAssignedEventTypeEnum(@com.fasterxml.jackson.annotation.Js
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxThreadCreatedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxThreadCreatedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_THREAD_CREATED("inbox.thread.created");
 
     override fun toString() = value
@@ -352,19 +396,23 @@ enum class InboxThreadCreatedEventTypeEnum(@com.fasterxml.jackson.annotation.Jso
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
 /**
- * Whether the inbox received the message (`inbound`) or sent it (`outbound`). A message the inbox sent to itself is `inbound`, so a reply to it goes to its sender.
+ * Whether the inbox received the message (`inbound`) or sent it (`outbound`). A message the inbox
+ * sent to itself is `inbound`, so a reply to it goes to its sender.
  */
-class InboxThreadEmailDirectionEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InboxThreadEmailDirectionEnum && value == other.value
+class InboxThreadEmailDirectionEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InboxThreadEmailDirectionEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -372,15 +420,18 @@ class InboxThreadEmailDirectionEnum private constructor(
         @JvmField val INBOUND = InboxThreadEmailDirectionEnum("inbound")
         @JvmField val OUTBOUND = InboxThreadEmailDirectionEnum("outbound")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InboxThreadEmailDirectionEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InboxThreadEmailDirectionEnum(value)
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxThreadFolderUpdatedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxThreadFolderUpdatedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_THREAD_FOLDER_UPDATED("inbox.thread.folder.updated");
 
     override fun toString() = value
@@ -388,19 +439,20 @@ enum class InboxThreadFolderUpdatedEventTypeEnum(@com.fasterxml.jackson.annotati
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The folder the thread was in.
- */
-class InboxThreadFolderUpdatedEventDataFromEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InboxThreadFolderUpdatedEventDataFromEnum && value == other.value
+/** The folder the thread was in. */
+class InboxThreadFolderUpdatedEventDataFromEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InboxThreadFolderUpdatedEventDataFromEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -410,19 +462,22 @@ class InboxThreadFolderUpdatedEventDataFromEnum private constructor(
         @JvmField val SPAM = InboxThreadFolderUpdatedEventDataFromEnum("spam")
         @JvmField val TRASH = InboxThreadFolderUpdatedEventDataFromEnum("trash")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InboxThreadFolderUpdatedEventDataFromEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InboxThreadFolderUpdatedEventDataFromEnum(value)
     }
 }
 
-/**
- * The folder the thread moved to.
- */
-class InboxThreadFolderUpdatedEventDataToEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InboxThreadFolderUpdatedEventDataToEnum && value == other.value
+/** The folder the thread moved to. */
+class InboxThreadFolderUpdatedEventDataToEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InboxThreadFolderUpdatedEventDataToEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -432,15 +487,18 @@ class InboxThreadFolderUpdatedEventDataToEnum private constructor(
         @JvmField val SPAM = InboxThreadFolderUpdatedEventDataToEnum("spam")
         @JvmField val TRASH = InboxThreadFolderUpdatedEventDataToEnum("trash")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InboxThreadFolderUpdatedEventDataToEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InboxThreadFolderUpdatedEventDataToEnum(value)
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxThreadLabelsUpdatedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxThreadLabelsUpdatedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_THREAD_LABELS_UPDATED("inbox.thread.labels.updated");
 
     override fun toString() = value
@@ -448,19 +506,20 @@ enum class InboxThreadLabelsUpdatedEventTypeEnum(@com.fasterxml.jackson.annotati
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The folder the thread is in.
- */
-class InboxThreadSummaryFolderEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is InboxThreadSummaryFolderEnum && value == other.value
+/** The folder the thread is in. */
+class InboxThreadSummaryFolderEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is InboxThreadSummaryFolderEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -471,15 +530,18 @@ class InboxThreadSummaryFolderEnum private constructor(
         @JvmField val SENT = InboxThreadSummaryFolderEnum("sent")
         @JvmField val TRASH = InboxThreadSummaryFolderEnum("trash")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = InboxThreadSummaryFolderEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = InboxThreadSummaryFolderEnum(value)
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxThreadUnassignedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxThreadUnassignedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_THREAD_UNASSIGNED("inbox.thread.unassigned");
 
     override fun toString() = value
@@ -487,15 +549,16 @@ enum class InboxThreadUnassignedEventTypeEnum(@com.fasterxml.jackson.annotation.
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * The event type.
- */
-enum class InboxUpdatedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue val value: String) {
+/** The event type. */
+enum class InboxUpdatedEventTypeEnum(
+    @com.fasterxml.jackson.annotation.JsonValue val value: String
+) {
     INBOX_UPDATED("inbox.updated");
 
     override fun toString() = value
@@ -503,60 +566,74 @@ enum class InboxUpdatedEventTypeEnum(@com.fasterxml.jackson.annotation.JsonValue
     companion object {
         @com.fasterxml.jackson.annotation.JsonCreator
         @JvmStatic
-        fun fromValue(v: String) = values().find { it.value == v }
-            ?: throw IllegalArgumentException("Unknown enum value: $v")
+        fun fromValue(v: String) =
+            values().find { it.value == v }
+                ?: throw IllegalArgumentException("Unknown enum value: $v")
     }
 }
 
-/**
- * How the attachment should be displayed.
- */
-class ListAttachmentsResponseDataItemContentDispositionEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ListAttachmentsResponseDataItemContentDispositionEnum && value == other.value
+/** How the attachment should be displayed. */
+class ListAttachmentsResponseDataItemContentDispositionEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ListAttachmentsResponseDataItemContentDispositionEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
         @JvmField val INLINE = ListAttachmentsResponseDataItemContentDispositionEnum("inline")
-        @JvmField val ATTACHMENT = ListAttachmentsResponseDataItemContentDispositionEnum("attachment")
+        @JvmField
+        val ATTACHMENT = ListAttachmentsResponseDataItemContentDispositionEnum("attachment")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ListAttachmentsResponseDataItemContentDispositionEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ListAttachmentsResponseDataItemContentDispositionEnum(value)
     }
 }
 
-/**
- * The type of bounce. Only present when `type` is `bounced`.
- */
-class ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum && value == other.value
+/** The type of bounce. Only present when `type` is `bounced`. */
+class ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val PERMANENT = ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum("permanent")
-        @JvmField val TRANSIENT = ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum("transient")
-        @JvmField val UNDETERMINED = ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum("undetermined")
+        @JvmField
+        val PERMANENT = ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum("permanent")
+        @JvmField
+        val TRANSIENT = ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum("transient")
+        @JvmField
+        val UNDETERMINED =
+            ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum("undetermined")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            ListBroadcastRecipientsResponseSuccessDataItemBounceTypeEnum(value)
     }
 }
 
-/**
- * The status of the domain.
- */
-class ListDomainsItemStatusEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ListDomainsItemStatusEnum && value == other.value
+/** The status of the domain. */
+class ListDomainsItemStatusEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ListDomainsItemStatusEnum && value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
@@ -568,27 +645,39 @@ class ListDomainsItemStatusEnum private constructor(
         @JvmField val PARTIALLY_VERIFIED = ListDomainsItemStatusEnum("partially_verified")
         @JvmField val PARTIALLY_FAILED = ListDomainsItemStatusEnum("partially_failed")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ListDomainsItemStatusEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) = ListDomainsItemStatusEnum(value)
     }
 }
 
-/**
- * How the attachment should be displayed.
- */
-class ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum private constructor(
-    @get:com.fasterxml.jackson.annotation.JsonValue val value: String,
-) {
-    override fun equals(other: Any?): Boolean = other is ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum && value == other.value
+/** How the attachment should be displayed. */
+class ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum
+private constructor(@get:com.fasterxml.jackson.annotation.JsonValue val value: String) {
+    override fun equals(other: Any?): Boolean =
+        other is ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum &&
+            value == other.value
+
     override fun hashCode(): Int = value.hashCode()
+
     override fun toString(): String = value
 
     companion object {
 
-        @JvmField val INLINE = ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum("inline")
-        @JvmField val ATTACHMENT = ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum("attachment")
+        @JvmField
+        val INLINE =
+            ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum("inline")
+        @JvmField
+        val ATTACHMENT =
+            ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum("attachment")
 
-        @com.fasterxml.jackson.annotation.JsonCreator(mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING)
-        @JvmStatic fun fromValue(value: String) = ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum(value)
+        @com.fasterxml.jackson.annotation.JsonCreator(
+            mode = com.fasterxml.jackson.annotation.JsonCreator.Mode.DELEGATING
+        )
+        @JvmStatic
+        fun fromValue(value: String) =
+            ListReceivedEmailsResponseDataItemAttachmentsItemContentDispositionEnum(value)
     }
 }

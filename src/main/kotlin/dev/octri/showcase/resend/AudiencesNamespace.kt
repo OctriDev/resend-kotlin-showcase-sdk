@@ -3,108 +3,160 @@
 
 package dev.octri.showcase.resend
 
-
 class AudiencesNamespace(private val clientConfig: ClientConfig) {
     /**
-     * Creates an audience with the name you provide. Use the Segments endpoints instead, because this audience operation is deprecated. This operation is closing down and will be removed on a date not specified in the API definition.
+     * Creates an audience with the name you provide. Use the Segments endpoints instead, because
+     * this audience operation is deprecated. This operation is closing down and will be removed on
+     * a date not specified in the API definition.
      *
-     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the future.
+     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the
+     * future.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
     fun create(name: String, options: RequestOptions? = null): CreateAudienceResponseSuccess {
-        return dev.octri.showcase.resend.methods.Audiences.audiencesCreate(clientConfig, name, options)
+        return dev.octri.showcase.resend.methods.Audiences.audiencesCreate(
+            clientConfig,
+            name,
+            options,
+        )
     }
 
     /**
-     * Lists audiences with their identifiers, names, and creation timestamps. Use the Segments endpoints instead, because this audience operation is deprecated. This operation is closing down and will be removed on a date not specified in the API definition.
+     * Lists audiences with their identifiers, names, and creation timestamps. Use the Segments
+     * endpoints instead, because this audience operation is deprecated. This operation is closing
+     * down and will be removed on a date not specified in the API definition.
      *
-     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the future.
+     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the
+     * future.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
     fun list(options: RequestOptions? = null): ListAudiencesResponseSuccess {
         return dev.octri.showcase.resend.methods.Audiences.audiencesList(clientConfig, options)
     }
 
     /**
-     * Deletes an audience selected by its ID. Use the Segments endpoints instead, because this audience operation is deprecated. This operation is closing down and will be removed on a date not specified in the API definition.
+     * Deletes an audience selected by its ID. Use the Segments endpoints instead, because this
+     * audience operation is deprecated. This operation is closing down and will be removed on a
+     * date not specified in the API definition.
      *
-     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the future.
+     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the
+     * future.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
     fun remove(id: String, options: RequestOptions? = null): RemoveAudienceResponseSuccess {
-        return dev.octri.showcase.resend.methods.Audiences.audiencesRemove(clientConfig, id, options)
+        return dev.octri.showcase.resend.methods.Audiences.audiencesRemove(
+            clientConfig,
+            id,
+            options,
+        )
     }
 
     /**
-     * Retrieves an audience by its ID. Use the Segments endpoints instead, because this audience operation is deprecated. This operation is closing down and will be removed on a date not specified in the API definition.
+     * Retrieves an audience by its ID. Use the Segments endpoints instead, because this audience
+     * operation is deprecated. This operation is closing down and will be removed on a date not
+     * specified in the API definition.
      *
-     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the future.
+     * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the
+     * future.
      *
-     * @deprecated This operation is deprecated and may be removed in a future
-     *   release.
+     * @deprecated This operation is deprecated and may be removed in a future release.
      */
     fun get(id: String, options: RequestOptions? = null): GetAudienceResponseSuccess {
         return dev.octri.showcase.resend.methods.Audiences.audiencesGet(clientConfig, id, options)
     }
 
-    /** These operations, each returning its [SdkResponse] envelope: status code, headers, request ID and latency. */
+    /**
+     * These operations, each returning its [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
     fun withRawResponse(): WithRawResponse = WithRawResponse(clientConfig)
 
-    /** The operations of [AudiencesNamespace], returning the [SdkResponse] envelope around each result. */
+    /**
+     * The operations of [AudiencesNamespace], returning the [SdkResponse] envelope around each
+     * result.
+     */
     class WithRawResponse internal constructor(private val clientConfig: ClientConfig) {
         /**
-         * Creates an audience with the name you provide. Use the Segments endpoints instead, because this audience operation is deprecated. This operation is closing down and will be removed on a date not specified in the API definition.
+         * Creates an audience with the name you provide. Use the Segments endpoints instead,
+         * because this audience operation is deprecated. This operation is closing down and will be
+         * removed on a date not specified in the API definition.
          *
-         * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the future.
+         * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the
+         * future.
          *
-         * @deprecated This operation is deprecated and may be removed in a future
-         *   release.
+         * @deprecated This operation is deprecated and may be removed in a future release.
          */
-        fun create(name: String, options: RequestOptions? = null): SdkResponse<CreateAudienceResponseSuccess> {
-            return dev.octri.showcase.resend.methods.Audiences.audiencesCreateWithRawResponse(clientConfig, name, options)
+        fun create(
+            name: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<CreateAudienceResponseSuccess> {
+            return dev.octri.showcase.resend.methods.Audiences.audiencesCreateWithRawResponse(
+                clientConfig,
+                name,
+                options,
+            )
         }
 
         /**
-         * Lists audiences with their identifiers, names, and creation timestamps. Use the Segments endpoints instead, because this audience operation is deprecated. This operation is closing down and will be removed on a date not specified in the API definition.
+         * Lists audiences with their identifiers, names, and creation timestamps. Use the Segments
+         * endpoints instead, because this audience operation is deprecated. This operation is
+         * closing down and will be removed on a date not specified in the API definition.
          *
-         * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the future.
+         * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the
+         * future.
          *
-         * @deprecated This operation is deprecated and may be removed in a future
-         *   release.
+         * @deprecated This operation is deprecated and may be removed in a future release.
          */
         fun list(options: RequestOptions? = null): SdkResponse<ListAudiencesResponseSuccess> {
-            return dev.octri.showcase.resend.methods.Audiences.audiencesListWithRawResponse(clientConfig, options)
+            return dev.octri.showcase.resend.methods.Audiences.audiencesListWithRawResponse(
+                clientConfig,
+                options,
+            )
         }
 
         /**
-         * Deletes an audience selected by its ID. Use the Segments endpoints instead, because this audience operation is deprecated. This operation is closing down and will be removed on a date not specified in the API definition.
+         * Deletes an audience selected by its ID. Use the Segments endpoints instead, because this
+         * audience operation is deprecated. This operation is closing down and will be removed on a
+         * date not specified in the API definition.
          *
-         * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the future.
+         * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the
+         * future.
          *
-         * @deprecated This operation is deprecated and may be removed in a future
-         *   release.
+         * @deprecated This operation is deprecated and may be removed in a future release.
          */
-        fun remove(id: String, options: RequestOptions? = null): SdkResponse<RemoveAudienceResponseSuccess> {
-            return dev.octri.showcase.resend.methods.Audiences.audiencesRemoveWithRawResponse(clientConfig, id, options)
+        fun remove(
+            id: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<RemoveAudienceResponseSuccess> {
+            return dev.octri.showcase.resend.methods.Audiences.audiencesRemoveWithRawResponse(
+                clientConfig,
+                id,
+                options,
+            )
         }
 
         /**
-         * Retrieves an audience by its ID. Use the Segments endpoints instead, because this audience operation is deprecated. This operation is closing down and will be removed on a date not specified in the API definition.
+         * Retrieves an audience by its ID. Use the Segments endpoints instead, because this
+         * audience operation is deprecated. This operation is closing down and will be removed on a
+         * date not specified in the API definition.
          *
-         * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the future.
+         * Deprecated: Use Segments instead. These endpoints still work, but will be removed in the
+         * future.
          *
-         * @deprecated This operation is deprecated and may be removed in a future
-         *   release.
+         * @deprecated This operation is deprecated and may be removed in a future release.
          */
-        fun get(id: String, options: RequestOptions? = null): SdkResponse<GetAudienceResponseSuccess> {
-            return dev.octri.showcase.resend.methods.Audiences.audiencesGetWithRawResponse(clientConfig, id, options)
+        fun get(
+            id: String,
+            options: RequestOptions? = null,
+        ): SdkResponse<GetAudienceResponseSuccess> {
+            return dev.octri.showcase.resend.methods.Audiences.audiencesGetWithRawResponse(
+                clientConfig,
+                id,
+                options,
+            )
         }
-
     }
 }

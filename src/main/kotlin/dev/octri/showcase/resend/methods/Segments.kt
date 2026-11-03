@@ -18,142 +18,265 @@ import dev.octri.showcase.resend.Validation
 object Segments {
 
     /**
-     * Creates a segment. Provide a `name` and optionally specify the audience and filter conditions for the segment.
+     * Creates a segment. Provide a `name` and optionally specify the audience and filter conditions
+     * for the segment.
      *
      * @param name The name of the segment.
      * @param audienceId The ID of the audience this segment belongs to.
      * @param filter Filter conditions for the segment.
      */
-    fun segmentsCreate(clientConfig: ClientConfig, name: String, audienceId: String? = null, filter: Map<String, Any>? = null, options: RequestOptions? = null): CreateSegmentResponseSuccess {
+    fun segmentsCreate(
+        clientConfig: ClientConfig,
+        name: String,
+        audienceId: String? = null,
+        filter: Map<String, Any>? = null,
+        options: RequestOptions? = null,
+    ): CreateSegmentResponseSuccess {
         return segmentsCreateWithRawResponse(clientConfig, name, audienceId, filter, options).data
     }
 
-
-    /** [segmentsCreate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun segmentsCreateWithRawResponse(clientConfig: ClientConfig, name: String, audienceId: String? = null, filter: Map<String, Any>? = null, options: RequestOptions? = null): SdkResponse<CreateSegmentResponseSuccess> {
-        return SdkClient.request<CreateSegmentResponseSuccess>(SdkClient.RequestSpec("POST", "/segments", config = clientConfig, body = SdkClient.bodyMap("name" to (name), "audience_id" to (SdkClient.omitIfNull(audienceId)), "filter" to (SdkClient.omitIfNull(filter))), operationId = "segmentsCreate", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [segmentsCreate], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun segmentsCreateWithRawResponse(
+        clientConfig: ClientConfig,
+        name: String,
+        audienceId: String? = null,
+        filter: Map<String, Any>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<CreateSegmentResponseSuccess> {
+        return SdkClient.request<CreateSegmentResponseSuccess>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/segments",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "name" to (name),
+                        "audience_id" to (SdkClient.omitIfNull(audienceId)),
+                        "filter" to (SdkClient.omitIfNull(filter)),
+                    ),
+                operationId = "segmentsCreate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists segments. Use `limit` to control the number of results and `after` or `before` to navigate the results with cursors.
+     * Lists segments. Use `limit` to control the number of results and `after` or `before` to
+     * navigate the results with cursors.
      *
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun segmentsList(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListSegmentsResponseSuccess {
+    fun segmentsList(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListSegmentsResponseSuccess {
         return segmentsListWithRawResponse(clientConfig, limit, after, before, options).data
     }
 
-
-    /** [segmentsList], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun segmentsListWithRawResponse(clientConfig: ClientConfig, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): SdkResponse<ListSegmentsResponseSuccess> {
+    /**
+     * [segmentsList], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun segmentsListWithRawResponse(
+        clientConfig: ClientConfig,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListSegmentsResponseSuccess> {
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
-        return SdkClient.request<ListSegmentsResponseSuccess>(SdkClient.RequestSpec("GET", "/segments", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "segmentsList", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<ListSegmentsResponseSuccess>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/segments",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                        "before" to SdkClient.queryValue(before, "form", true),
+                    ),
+                operationId = "segmentsList",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Retrieves a segment by its identifier. Use the segment ID to look up a specific segment and its filter conditions.
+     * Retrieves a segment by its identifier. Use the segment ID to look up a specific segment and
+     * its filter conditions.
      *
      * @param id The Segment ID.
      */
-    fun segmentsGet(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): GetSegmentResponseSuccess {
+    fun segmentsGet(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): GetSegmentResponseSuccess {
         return segmentsGetWithRawResponse(clientConfig, id, options).data
     }
 
-
-    /** [segmentsGet], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun segmentsGetWithRawResponse(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): SdkResponse<GetSegmentResponseSuccess> {
-        return SdkClient.request<GetSegmentResponseSuccess>(SdkClient.RequestSpec("GET", "/segments/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "segmentsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [segmentsGet], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun segmentsGetWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetSegmentResponseSuccess> {
+        return SdkClient.request<GetSegmentResponseSuccess>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/segments/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "segmentsGet",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Updates the name of an existing segment. Supply `name` in the request body to set the segment's name.
+     * Updates the name of an existing segment. Supply `name` in the request body to set the
+     * segment's name.
      *
      * @param id The Segment ID.
      * @param name The name of the segment.
      */
-    fun segmentsUpdate(clientConfig: ClientConfig, id: String, name: String, options: RequestOptions? = null): UpdateSegmentResponseSuccess {
+    fun segmentsUpdate(
+        clientConfig: ClientConfig,
+        id: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): UpdateSegmentResponseSuccess {
         return segmentsUpdateWithRawResponse(clientConfig, id, name, options).data
     }
 
-
-    /** [segmentsUpdate], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun segmentsUpdateWithRawResponse(clientConfig: ClientConfig, id: String, name: String, options: RequestOptions? = null): SdkResponse<UpdateSegmentResponseSuccess> {
-        return SdkClient.request<UpdateSegmentResponseSuccess>(SdkClient.RequestSpec("PATCH", "/segments/${SdkClient.encodePathSegment(id)}", config = clientConfig, body = SdkClient.bodyMap("name" to (name)), operationId = "segmentsUpdate", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [segmentsUpdate], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun segmentsUpdateWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        name: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<UpdateSegmentResponseSuccess> {
+        return SdkClient.request<UpdateSegmentResponseSuccess>(
+            SdkClient.RequestSpec(
+                "PATCH",
+                "/segments/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                body = SdkClient.bodyMap("name" to (name)),
+                operationId = "segmentsUpdate",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
-
-
-
-
-
 
     /**
      * Deletes an existing segment. Use the segment ID to select the segment to remove.
      *
      * @param id The Segment ID.
      */
-    fun segmentsRemove(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): RemoveSegmentResponseSuccess {
+    fun segmentsRemove(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): RemoveSegmentResponseSuccess {
         return segmentsRemoveWithRawResponse(clientConfig, id, options).data
     }
 
-
-    /** [segmentsRemove], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun segmentsRemoveWithRawResponse(clientConfig: ClientConfig, id: String, options: RequestOptions? = null): SdkResponse<RemoveSegmentResponseSuccess> {
-        return SdkClient.request<RemoveSegmentResponseSuccess>(SdkClient.RequestSpec("DELETE", "/segments/${SdkClient.encodePathSegment(id)}", config = clientConfig, operationId = "segmentsRemove", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [segmentsRemove], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun segmentsRemoveWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<RemoveSegmentResponseSuccess> {
+        return SdkClient.request<RemoveSegmentResponseSuccess>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/segments/${SdkClient.encodePathSegment(id)}",
+                config = clientConfig,
+                operationId = "segmentsRemove",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists the contacts in a segment. Use `after` or `before` to navigate results with cursors, and `limit` to control the number of contacts returned.
+     * Lists the contacts in a segment. Use `after` or `before` to navigate results with cursors,
+     * and `limit` to control the number of contacts returned.
      *
      * @param id The Segment ID.
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun segmentsListContacts(clientConfig: ClientConfig, id: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListContactsResponseSuccess {
-        return segmentsListContactsWithRawResponse(clientConfig, id, limit, after, before, options).data
+    fun segmentsListContacts(
+        clientConfig: ClientConfig,
+        id: String,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListContactsResponseSuccess {
+        return segmentsListContactsWithRawResponse(clientConfig, id, limit, after, before, options)
+            .data
     }
 
-
-    /** [segmentsListContacts], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun segmentsListContactsWithRawResponse(clientConfig: ClientConfig, id: String, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): SdkResponse<ListContactsResponseSuccess> {
+    /**
+     * [segmentsListContacts], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun segmentsListContactsWithRawResponse(
+        clientConfig: ClientConfig,
+        id: String,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListContactsResponseSuccess> {
         Validation.validateUuid("id", id)
 
         if (limit != null) {
             Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
+        }
 
-        return SdkClient.request<ListContactsResponseSuccess>(SdkClient.RequestSpec("GET", "/segments/${SdkClient.encodePathSegment(id)}/contacts", config = clientConfig, query = mapOf("limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "segmentsListContacts", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<ListContactsResponseSuccess>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/segments/${SdkClient.encodePathSegment(id)}/contacts",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                        "before" to SdkClient.queryValue(before, "form", true),
+                    ),
+                operationId = "segmentsListContacts",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
-
-
-
-
-
-
-
 }

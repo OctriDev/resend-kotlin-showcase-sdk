@@ -19,142 +19,254 @@ import dev.octri.showcase.resend.Validation
 object Suppressions {
 
     /**
-     * Creates a suppression for an email address. Supply the required `email` value to add that address to the suppression list.
+     * Creates a suppression for an email address. Supply the required `email` value to add that
+     * address to the suppression list.
      *
      * @param email Email address to suppress.
      */
-    fun suppressionsAdd(clientConfig: ClientConfig, email: String, options: RequestOptions? = null): CreateSuppressionResponseSuccess {
+    fun suppressionsAdd(
+        clientConfig: ClientConfig,
+        email: String,
+        options: RequestOptions? = null,
+    ): CreateSuppressionResponseSuccess {
         return suppressionsAddWithRawResponse(clientConfig, email, options).data
     }
 
-
-    /** [suppressionsAdd], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun suppressionsAddWithRawResponse(clientConfig: ClientConfig, email: String, options: RequestOptions? = null): SdkResponse<CreateSuppressionResponseSuccess> {
-        return SdkClient.request<CreateSuppressionResponseSuccess>(SdkClient.RequestSpec("POST", "/suppressions", config = clientConfig, body = SdkClient.bodyMap("email" to (email)), operationId = "suppressionsAdd", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [suppressionsAdd], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun suppressionsAddWithRawResponse(
+        clientConfig: ClientConfig,
+        email: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<CreateSuppressionResponseSuccess> {
+        return SdkClient.request<CreateSuppressionResponseSuccess>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/suppressions",
+                config = clientConfig,
+                body = SdkClient.bodyMap("email" to (email)),
+                operationId = "suppressionsAdd",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Lists suppressions, with an optional filter for their origin. Use `after` or `before` to navigate results and `limit` to control the number of suppressions returned per request.
+     * Lists suppressions, with an optional filter for their origin. Use `after` or `before` to
+     * navigate results and `limit` to control the number of suppressions returned per request.
      *
      * @param origin Filter suppressions by origin.
      * @param limit Number of items to return.
      * @param after Return items after this cursor.
      * @param before Return items before this cursor.
      */
-    fun suppressionsList(clientConfig: ClientConfig, origin: SuppressionsListParameterEnum? = null, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): ListSuppressionsResponseSuccess {
-        return suppressionsListWithRawResponse(clientConfig, origin, limit, after, before, options).data
+    fun suppressionsList(
+        clientConfig: ClientConfig,
+        origin: SuppressionsListParameterEnum? = null,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): ListSuppressionsResponseSuccess {
+        return suppressionsListWithRawResponse(clientConfig, origin, limit, after, before, options)
+            .data
     }
-
-
-    /** [suppressionsList], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun suppressionsListWithRawResponse(clientConfig: ClientConfig, origin: SuppressionsListParameterEnum? = null, limit: Long? = null, after: String? = null, before: String? = null, options: RequestOptions? = null): SdkResponse<ListSuppressionsResponseSuccess> {
-        if (limit != null) {
-            Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
-}
-
-        return SdkClient.request<ListSuppressionsResponseSuccess>(SdkClient.RequestSpec("GET", "/suppressions", config = clientConfig, query = mapOf("origin" to SdkClient.queryValue(origin, "form", true), "limit" to SdkClient.queryValue(limit, "form", true), "after" to SdkClient.queryValue(after, "form", true), "before" to SdkClient.queryValue(before, "form", true)), operationId = "suppressionsList", decoder = SdkClient.ResponseDecoder.JSON, options = options))
-    }
-
-
-
-
-
 
     /**
-     * Adds multiple email addresses to the suppression list in one request. Supply an `emails` array containing between 1 and 100 addresses.
+     * [suppressionsList], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun suppressionsListWithRawResponse(
+        clientConfig: ClientConfig,
+        origin: SuppressionsListParameterEnum? = null,
+        limit: Long? = null,
+        after: String? = null,
+        before: String? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<ListSuppressionsResponseSuccess> {
+        if (limit != null) {
+            Validation.validateRange("limit", limit, Validation.RangeOpts(min = 1.0, max = 100.0))
+        }
+
+        return SdkClient.request<ListSuppressionsResponseSuccess>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/suppressions",
+                config = clientConfig,
+                query =
+                    mapOf(
+                        "origin" to SdkClient.queryValue(origin, "form", true),
+                        "limit" to SdkClient.queryValue(limit, "form", true),
+                        "after" to SdkClient.queryValue(after, "form", true),
+                        "before" to SdkClient.queryValue(before, "form", true),
+                    ),
+                operationId = "suppressionsList",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
+    }
+
+    /**
+     * Adds multiple email addresses to the suppression list in one request. Supply an `emails`
+     * array containing between 1 and 100 addresses.
      *
      * @param emails Email addresses to suppress.
      */
-    fun suppressionsBatchAdd(clientConfig: ClientConfig, emails: List<String>, options: RequestOptions? = null): BatchAddSuppressionsResponseSuccess {
+    fun suppressionsBatchAdd(
+        clientConfig: ClientConfig,
+        emails: List<String>,
+        options: RequestOptions? = null,
+    ): BatchAddSuppressionsResponseSuccess {
         return suppressionsBatchAddWithRawResponse(clientConfig, emails, options).data
     }
 
-
-    /** [suppressionsBatchAdd], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun suppressionsBatchAddWithRawResponse(clientConfig: ClientConfig, emails: List<String>, options: RequestOptions? = null): SdkResponse<BatchAddSuppressionsResponseSuccess> {
+    /**
+     * [suppressionsBatchAdd], returning the [SdkResponse] envelope: status code, headers, request
+     * ID and latency.
+     */
+    fun suppressionsBatchAddWithRawResponse(
+        clientConfig: ClientConfig,
+        emails: List<String>,
+        options: RequestOptions? = null,
+    ): SdkResponse<BatchAddSuppressionsResponseSuccess> {
         Validation.validateItems("emails", emails, Validation.LengthOpts(min = 1, max = 100))
 
-        return SdkClient.request<BatchAddSuppressionsResponseSuccess>(SdkClient.RequestSpec("POST", "/suppressions/batch/add", config = clientConfig, body = SdkClient.bodyMap("emails" to (emails)), operationId = "suppressionsBatchAdd", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<BatchAddSuppressionsResponseSuccess>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/suppressions/batch/add",
+                config = clientConfig,
+                body = SdkClient.bodyMap("emails" to (emails)),
+                operationId = "suppressionsBatchAdd",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Removes multiple suppressions from the suppression list in one request. Provide either an `emails` array or an `ids` array, but not both, with between 1 and 100 values in the selected array.
+     * Removes multiple suppressions from the suppression list in one request. Provide either an
+     * `emails` array or an `ids` array, but not both, with between 1 and 100 values in the selected
+     * array.
      *
      * @param emails Email addresses to remove from the suppression list.
      * @param ids Suppression IDs to remove from the suppression list.
      */
-    fun suppressionsBatchRemove(clientConfig: ClientConfig, emails: List<String>? = null, ids: List<String>? = null, options: RequestOptions? = null): BatchRemoveSuppressionsResponseSuccess {
+    fun suppressionsBatchRemove(
+        clientConfig: ClientConfig,
+        emails: List<String>? = null,
+        ids: List<String>? = null,
+        options: RequestOptions? = null,
+    ): BatchRemoveSuppressionsResponseSuccess {
         return suppressionsBatchRemoveWithRawResponse(clientConfig, emails, ids, options).data
     }
 
-
-    /** [suppressionsBatchRemove], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun suppressionsBatchRemoveWithRawResponse(clientConfig: ClientConfig, emails: List<String>? = null, ids: List<String>? = null, options: RequestOptions? = null): SdkResponse<BatchRemoveSuppressionsResponseSuccess> {
+    /**
+     * [suppressionsBatchRemove], returning the [SdkResponse] envelope: status code, headers,
+     * request ID and latency.
+     */
+    fun suppressionsBatchRemoveWithRawResponse(
+        clientConfig: ClientConfig,
+        emails: List<String>? = null,
+        ids: List<String>? = null,
+        options: RequestOptions? = null,
+    ): SdkResponse<BatchRemoveSuppressionsResponseSuccess> {
         if (emails != null) {
             Validation.validateItems("emails", emails, Validation.LengthOpts(min = 1, max = 100))
-}
+        }
 
         if (ids != null) {
             Validation.validateItems("ids", ids, Validation.LengthOpts(min = 1, max = 100))
-}
+        }
 
-        return SdkClient.request<BatchRemoveSuppressionsResponseSuccess>(SdkClient.RequestSpec("POST", "/suppressions/batch/remove", config = clientConfig, body = SdkClient.bodyMap("emails" to (SdkClient.omitIfNull(emails)), "ids" to (SdkClient.omitIfNull(ids))), operationId = "suppressionsBatchRemove", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+        return SdkClient.request<BatchRemoveSuppressionsResponseSuccess>(
+            SdkClient.RequestSpec(
+                "POST",
+                "/suppressions/batch/remove",
+                config = clientConfig,
+                body =
+                    SdkClient.bodyMap(
+                        "emails" to (SdkClient.omitIfNull(emails)),
+                        "ids" to (SdkClient.omitIfNull(ids)),
+                    ),
+                operationId = "suppressionsBatchRemove",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Retrieves a single suppression by its identifier or email address. Use `suppression` to look up the matching suppression record.
+     * Retrieves a single suppression by its identifier or email address. Use `suppression` to look
+     * up the matching suppression record.
      *
      * @param suppression The Suppression ID or email address.
      */
-    fun suppressionsGet(clientConfig: ClientConfig, suppression: String, options: RequestOptions? = null): GetSuppressionResponseSuccess {
+    fun suppressionsGet(
+        clientConfig: ClientConfig,
+        suppression: String,
+        options: RequestOptions? = null,
+    ): GetSuppressionResponseSuccess {
         return suppressionsGetWithRawResponse(clientConfig, suppression, options).data
     }
 
-
-    /** [suppressionsGet], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun suppressionsGetWithRawResponse(clientConfig: ClientConfig, suppression: String, options: RequestOptions? = null): SdkResponse<GetSuppressionResponseSuccess> {
-        return SdkClient.request<GetSuppressionResponseSuccess>(SdkClient.RequestSpec("GET", "/suppressions/${SdkClient.encodePathSegment(suppression)}", config = clientConfig, operationId = "suppressionsGet", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [suppressionsGet], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun suppressionsGetWithRawResponse(
+        clientConfig: ClientConfig,
+        suppression: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetSuppressionResponseSuccess> {
+        return SdkClient.request<GetSuppressionResponseSuccess>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/suppressions/${SdkClient.encodePathSegment(suppression)}",
+                config = clientConfig,
+                operationId = "suppressionsGet",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
 
-
-
-
-
-
     /**
-     * Deletes a single suppression by its identifier or email address. Use `suppression` to select the suppression to remove.
+     * Deletes a single suppression by its identifier or email address. Use `suppression` to select
+     * the suppression to remove.
      *
      * @param suppression The Suppression ID or email address.
      */
-    fun suppressionsRemove(clientConfig: ClientConfig, suppression: String, options: RequestOptions? = null): RemoveSuppressionResponseSuccess {
+    fun suppressionsRemove(
+        clientConfig: ClientConfig,
+        suppression: String,
+        options: RequestOptions? = null,
+    ): RemoveSuppressionResponseSuccess {
         return suppressionsRemoveWithRawResponse(clientConfig, suppression, options).data
     }
 
-
-    /** [suppressionsRemove], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun suppressionsRemoveWithRawResponse(clientConfig: ClientConfig, suppression: String, options: RequestOptions? = null): SdkResponse<RemoveSuppressionResponseSuccess> {
-        return SdkClient.request<RemoveSuppressionResponseSuccess>(SdkClient.RequestSpec("DELETE", "/suppressions/${SdkClient.encodePathSegment(suppression)}", config = clientConfig, operationId = "suppressionsRemove", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [suppressionsRemove], returning the [SdkResponse] envelope: status code, headers, request ID
+     * and latency.
+     */
+    fun suppressionsRemoveWithRawResponse(
+        clientConfig: ClientConfig,
+        suppression: String,
+        options: RequestOptions? = null,
+    ): SdkResponse<RemoveSuppressionResponseSuccess> {
+        return SdkClient.request<RemoveSuppressionResponseSuccess>(
+            SdkClient.RequestSpec(
+                "DELETE",
+                "/suppressions/${SdkClient.encodePathSegment(suppression)}",
+                config = clientConfig,
+                operationId = "suppressionsRemove",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
-
-
-
-
-
-
-
 }

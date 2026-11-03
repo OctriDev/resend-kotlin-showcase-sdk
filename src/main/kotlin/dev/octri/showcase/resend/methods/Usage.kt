@@ -12,24 +12,36 @@ import dev.octri.showcase.resend.SdkResponse
 object Usage {
 
     /**
-     * Retrieves current account usage and plan limits. Use the response to review consumption and limits across email, contacts, segments, broadcasts, AI credits, automation runs, domains, and rate limits.
+     * Retrieves current account usage and plan limits. Use the response to review consumption and
+     * limits across email, contacts, segments, broadcasts, AI credits, automation runs, domains,
+     * and rate limits.
      *
      * Retrieve your account's current usage and plan limits.
      */
-    fun usageGet(clientConfig: ClientConfig, options: RequestOptions? = null): GetUsageResponseSuccess {
+    fun usageGet(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): GetUsageResponseSuccess {
         return usageGetWithRawResponse(clientConfig, options).data
     }
 
-
-    /** [usageGet], returning the [SdkResponse] envelope: status code, headers, request ID and latency. */
-    fun usageGetWithRawResponse(clientConfig: ClientConfig, options: RequestOptions? = null): SdkResponse<GetUsageResponseSuccess> {
-        return SdkClient.request<GetUsageResponseSuccess>(SdkClient.RequestSpec("GET", "/usage", config = clientConfig, operationId = "usageGet", decoder = SdkClient.ResponseDecoder.JSON, options = options))
+    /**
+     * [usageGet], returning the [SdkResponse] envelope: status code, headers, request ID and
+     * latency.
+     */
+    fun usageGetWithRawResponse(
+        clientConfig: ClientConfig,
+        options: RequestOptions? = null,
+    ): SdkResponse<GetUsageResponseSuccess> {
+        return SdkClient.request<GetUsageResponseSuccess>(
+            SdkClient.RequestSpec(
+                "GET",
+                "/usage",
+                config = clientConfig,
+                operationId = "usageGet",
+                decoder = SdkClient.ResponseDecoder.JSON,
+                options = options,
+            )
+        )
     }
-
-
-
-
-
-
-
 }
